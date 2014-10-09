@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	
-	<display-name>CollegeLife Activity Feeds</display-name>
+	<display-name>Friend Activity Feed JSON</display-name>
 	
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
@@ -18,7 +18,8 @@
 	
 	<!-- Processes application requests -->
 	<servlet>
-		<servlet-name>appServlet</servlet-name>
+		<!-- <servlet-name>appServlet</servlet-name> -->
+		<servlet-name>activity</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -28,20 +29,12 @@
 	</servlet>
 		
 	<servlet-mapping>
-		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<!-- <servlet-name>appServlet</servlet-name> -->
+		<servlet-name>activity</servlet-name>
+    	<url-pattern>/activity/*</url-pattern>
+		<!-- <url-pattern>/</url-pattern> -->
 	</servlet-mapping>
 	
-	<servlet>
-		<servlet-name>activity</servlet-name>
-    	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-  	</servlet>
-	
-  	<servlet-mapping>
-    	<servlet-name>activity</servlet-name>
-    	<url-pattern>/activity/*</url-pattern>
-    </servlet-mapping>
-    
     <welcome-file-list>
     	<welcome-file>index.jsp</welcome-file>
     	<welcome-file>index.htm</welcome-file>

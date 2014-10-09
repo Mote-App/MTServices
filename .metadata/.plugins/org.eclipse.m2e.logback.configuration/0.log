@@ -86,3 +86,7 @@
 2014-10-08 22:18:10,425 [Worker-41] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2014-10-08 22:18:10,427 [Worker-41] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
 2014-10-08 22:18:10,428 [Worker-41] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-08 22:26:58,057 [Worker-42] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-08 22:26:58,058 [Worker-42] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-08 22:26:58,060 [Worker-42] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-08 22:26:58,060 [Worker-42] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource

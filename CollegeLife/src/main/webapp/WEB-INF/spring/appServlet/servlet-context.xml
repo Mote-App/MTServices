@@ -66,6 +66,12 @@
 	</beans:bean> -->
 	
 	<!-- Create DataSource Bean using JEE namespace for lookup -->
-	<jee:jndi-lookup id="dbDataSource" jndi-name="jdbc/cl_local_db" expected-type="javax.sql.DataSource"/>
+	<!-- <jee:jndi-lookup id="dbDataSource" jndi-name="jdbc/cl_local_db" expected-type="javax.sql.DataSource"/> -->
+	
+	<!-- Session factory creation -->
+	<beans:bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<beans:property name="dbDataSource" ref="clSessionFactory" />
+		<beans:property name="configLocation" value="/WEB-INF/classes/hibernate.cfg.xml"></beans:property>
+	</beans:bean>
 	
 </beans:beans>

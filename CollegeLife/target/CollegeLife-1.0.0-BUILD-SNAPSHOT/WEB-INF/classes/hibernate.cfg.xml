@@ -1,21 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
- "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
- "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-	<session-factory>
-		<!-- SQL Dialect -->
-		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-		
-		<!-- Disable 2nd level cache -->
-		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
-		
-		<!-- Echo all sql to sdtout -->
-		<property name="show_sql">true</property>
-		
-		<!-- List all the Java classes we have mapped here.  package com.cl.feeds.pojos -->
-		<mapping class="com.cl.feeds.pojos.Post"/>
-		<mapping class="com.cl.feeds.pojos.FriendActivityFeed"/>
-	</session-factory>
+    <session-factory name="clSessionFactory">
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">C0lleges</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cldatabase</property>
+        <property name="hibernate.connection.username">clusers</property>
+        <property name="hibernate.default_catalog">cl_db_catalog</property>
+        <property name="hibernate.default_schema">cl_db_schema</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    </session-factory>
 </hibernate-configuration>

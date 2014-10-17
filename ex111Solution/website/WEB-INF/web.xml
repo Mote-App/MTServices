@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+
+	<display-name>Course 517 RainForest App</display-name>
+	<description>Basic web application for 517 students</description>
+
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>WEB-INF/classes/applicationContext.xml</param-value>
+	</context-param>
+	
+	
+	<!-- ============================ -->
+ 	<!-- LISTENERS    				  -->
+	<!-- ============================ -->
+
+	<listener>
+	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>rain.RainAppListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>rain.ShoppingCartSessionListener</listener-class>
+	</listener>
+	
+	<!-- ==================== -->
+ 	<!-- SERVLET DECLARATIONS -->
+	<!-- ==================== -->
+
+	<servlet>
+		 <servlet-name>VideoCatalogServlet</servlet-name>
+		 <servlet-class>rain.VideoCatalogServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		 <servlet-name>VideoDetailsServlet</servlet-name>
+		 <servlet-class>rain.VideoDetailsServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		 <servlet-name>ShoppingCartServlet</servlet-name>
+		 <servlet-class>rain.ShoppingCartServlet</servlet-class>
+	</servlet>
+
+
+
+
+
+	<!-- ================ -->
+ 	<!-- SERVLET MAPPINGS -->
+	<!-- ================ -->
+
+
+	<servlet-mapping>
+		 <servlet-name>VideoCatalogServlet</servlet-name>
+		 <url-pattern>/VideoCatalogServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		 <servlet-name>VideoDetailsServlet</servlet-name>
+		 <url-pattern>/VideoDetailsServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		 <servlet-name>ShoppingCartServlet</servlet-name>
+		 <url-pattern>/ShoppingCartServlet</url-pattern>
+	</servlet-mapping>
+
+
+	
+
+	
+	<!-- ===================== -->
+ 	<!-- SESSION CONFIGURATION -->
+	<!-- ===================== -->
+	
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+
+	<mime-mapping>
+		<extension>xml</extension>
+		<mime-type>text/xml</mime-type>
+	</mime-mapping>
+ 
+	<!-- ============= -->
+ 	<!-- WELCOME FILES -->
+	<!-- ============= -->
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- =============== -->
+ 	<!-- TAGLIB MAPPINGS -->
+	<!-- =============== -->
+
+
+
+	<!-- =========================== -->
+	<!--  RESOURCE REFERENCES		 -->
+	<!-- =========================== -->
+	<!-- The resource-ref element contains a declaration of a web 
+	     application's reference to an external resource. It consists of an
+	     option description, the resource manager connection factory
+	     reference name, the indications of the resource manager connection
+	     factory type expected by the web application code, the type of 
+	     authentication (Application or Container).
+	 -->
+	<resource-ref>
+		<description>RainForest DB Connection</description>
+		<res-ref-name>jdbc/RainForestDB</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
+
+	<!-- =========================== -->
+	<!--  SECURITY CONSTRAINTS 		 -->
+	<!-- =========================== -->
+	
+
+	<!-- =========================== -->
+	<!--  LOGIN CONFIGS 			 -->
+	<!-- =========================== -->
+
+
+
+	<!-- =========================== -->
+	<!--  SECURITY ROLES             -->
+	<!-- =========================== -->
+
+	
+</web-app>

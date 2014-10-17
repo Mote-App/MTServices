@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+		"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="rain.VideoRecording" table="video_recordings">
+		<id name="recordingId" column="recording_id">
+			<generator class="native"/>
+		</id>			
+		<property name="director" column="director"/>
+		<property name="title" column="title"/>
+		<property name="category" column="category"/>
+		<property name="imageName" column="image_name"/>
+		<property name="duration" column="duration"/>
+		<property name="rating" column="rating"/>
+		<property name="yearReleased" column="year_released"/>
+		<property name="price" column="price"/>
+		<property name="stockCount" column="stock_count"/>
+	</class>
+	
+	<query name="VideoRecording.byCategory">
+		<![CDATA[ from VideoRecording where category=:theCategory ]]>
+	</query>
+
+	<query name="VideoRecording.Recording">
+		<![CDATA[ from VideoRecording where recordingId=:theRecordingId ]]>
+	</query>
+	
+</hibernate-mapping>

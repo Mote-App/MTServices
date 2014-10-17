@@ -27,11 +27,27 @@
 	<!-- The configuration of the Spring factory to scan the package com.cl.feeds.controllers, looking for, and processing annotated controllers. -->
 	<context:component-scan base-package="com.cl.feeds.controllers" />
 	
-	<beans:bean id="jacksonJsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+	<!-- Configure bean to convert JSON to POJO and vice versa -->
+	<!-- Jackson-JSON:  org.codehaus.jackson -->
+	<!-- <beans:bean id="jacksonJsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
 	     <beans:property name="supportedMediaTypes" value="application/json"/>
+	</beans:bean> -->
+	
+	<!-- Configure to plugin JSON as request and response in method handler -->
+	<!-- <beans:bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<beans:property name="messageConverters">
+			<beans:list>
+				<beans:ref bean="jacksonJsonConverter"/>
+			</beans:list>
+		</beans:property>
+	</beans:bean> -->
+	
+	<!-- Jackson-JSON:  com.fasterxml.jackson.core -->
+	<beans:bean id="jacksonJsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 	</beans:bean>
 	
-	<beans:bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	<!-- Configure to plugin JSON as request and response in method handler -->
+	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<beans:property name="messageConverters">
 			<beans:list>
 				<beans:ref bean="jacksonJsonConverter"/>

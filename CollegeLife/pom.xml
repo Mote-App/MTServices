@@ -9,13 +9,15 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.springframework-version>4.0.5.RELEASE</org.springframework-version>
-		<org.codehaus.jackson-version>1.9.10</org.codehaus.jackson-version>
-		<org.aspectj-version>1.8.0</org.aspectj-version>
+		<org.springframework-version>4.1.1.RELEASE</org.springframework-version>
+		<!-- <gson-version>2.3</gson-version> -->
+		<jackson.databind-version>2.4.3</jackson.databind-version>
+		<!-- <org.codehaus.jackson-version>1.9.10</org.codehaus.jackson-version> -->
+		<org.aspectj-version>1.8.2</org.aspectj-version>
 		<org.slf4j-version>1.7.7</org.slf4j-version>
 	</properties>
 	<dependencies>
-		<!-- Spring -->
+		<!-- Spring Core Dependency -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -28,13 +30,33 @@
 				 </exclusion>
 			</exclusions>
 		</dependency>
+		
+		<!-- Spring for MVC support -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
-		<!-- Jackson-JSON -->
+		<!-- JSON to Java and vice versa converter -->
+		<!-- Gson:  Google's open source, uses Java Reflection API to provide simple methods to convert json to java and vice versa -->
+		<!-- <dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson-version}</version>
+		</dependency> -->
+		
+		<!-- Jackson-JSON:  You need to write a lot of code that is tightly couple with the JSON structure -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.databind-version}</version>
+		</dependency>
+		<!-- <dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>${org.codehaus.jackson-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-core-asl</artifactId>
@@ -44,9 +66,9 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>${org.codehaus.jackson-version}</version>
-		</dependency>
+		</dependency> -->
 			
-		<!-- AspectJ -->
+		<!-- AspectJ API Reference -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
@@ -54,6 +76,7 @@
 		</dependency>	
 		
 		<!-- Logging -->
+		<!-- SLF4J & Log4J: For logging purposes, Spring is very easy to configure for log4j or Java Logging APi because of SLF4J integration -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -96,7 +119,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- @Inject -->
+		<!-- @Inject - JSR330 API for dependency injection -->
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
@@ -104,21 +127,6 @@
 		</dependency>
 				
 		<!-- Servlet -->
-		<!-- <dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>el-api</artifactId>
-			<version>8.0.12</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>jasper</artifactId>
-			<version>8.0.12</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>jasper-el</artifactId>
-			<version>8.0.12</version>
-		</dependency> -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -127,8 +135,7 @@
 		<!-- <dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
-			<version>2.2</version>
-			<scope>provided</scope>
+			<version>2.0.public_draft</version>
 		</dependency> -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -140,7 +147,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.12-beta-2</version>
 			<scope>test</scope>
 		</dependency>        
 	</dependencies>

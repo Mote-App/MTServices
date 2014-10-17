@@ -35,6 +35,14 @@ public class Post {
 		this.postId = postId;
 	}
 	
+	/**
+	 * 
+	 * Uses @JsonSerialize annotation to use DateSerializer class for Date conversion from
+	 * Java to JSON format and vice versa.  Using Jackson-JSON com.fasterxml.jackson.core
+	 *  
+	 * @return
+	 */
+	//@JsonSerialize(using=DateSerializer.class)
 	public String getPostingDate() {
 		return postingDate;
 	}

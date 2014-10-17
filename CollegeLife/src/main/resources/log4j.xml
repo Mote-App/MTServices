@@ -33,6 +33,7 @@
 	</logger>
 
 	<!-- Root Logger -->
+	<!-- Notice that it's printing everything to console, we can easily add appenders to redirect logging to files -->
 	<root>
 		<priority value="warn" />
 		<appender-ref ref="console" />

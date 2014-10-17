@@ -10,6 +10,7 @@
 	<properties>
 		<java-version>1.6</java-version>
 		<org.springframework-version>4.1.1.RELEASE</org.springframework-version>
+		<mysql-version>5.1.32</mysql-version>
 		<!-- <gson-version>2.3</gson-version> -->
 		<jackson.databind-version>2.4.3</jackson.databind-version>
 		<!-- <org.codehaus.jackson-version>1.9.10</org.codehaus.jackson-version> -->
@@ -38,6 +39,20 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
+		<!-- Spring for JDBC support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- MySQL Driver -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-version}</version>
+		</dependency>
+		
 		<!-- JSON to Java and vice versa converter -->
 		<!-- Gson:  Google's open source, uses Java Reflection API to provide simple methods to convert json to java and vice versa -->
 		<!-- <dependency>
@@ -52,21 +67,6 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.databind-version}</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<version>${org.codehaus.jackson-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<version>${org.codehaus.jackson-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>${org.codehaus.jackson-version}</version>
-		</dependency> -->
 			
 		<!-- AspectJ API Reference -->
 		<dependency>

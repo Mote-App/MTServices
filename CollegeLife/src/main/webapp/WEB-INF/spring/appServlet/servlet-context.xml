@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns:mvc="http://www.springframework.org/schema/mvc"
+			 xmlns:jee="http://www.springframework.org/schema/jee"
 			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			 xmlns:beans="http://www.springframework.org/schema/beans"
 			 xmlns:context="http://www.springframework.org/schema/context"
 			 xsi:schemaLocation="http://www.springframework.org/schema/mvc
 						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/jee
+						http://www.springframework.org/schema/jee/spring-jee.xsd
 						http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/context
@@ -54,5 +57,15 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
+	
+	<!-- Note that Gson does not require nor needs configuration here -->
+	
+	<!-- Create DataSource Bean using using Spring Bean for lookup -->
+	<!-- <beans:bean id="dbDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<beans:property name="jndiName" value="java:comp/env/jdbc/cl_local_db"/>
+	</beans:bean> -->
+	
+	<!-- Create DataSource Bean using JEE namespace for lookup -->
+	<jee:jndi-lookup id="dbDataSource" jndi-name="jdbc/cl_local_db" expected-type="javax.sql.DataSource"/>
 	
 </beans:beans>

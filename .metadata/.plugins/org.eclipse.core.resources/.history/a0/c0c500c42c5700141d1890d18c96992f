@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:mvc="http://www.springframework.org/schema/mvc"
+			 xmlns:jee="http://www.springframework.org/schema/jee"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:beans="http://www.springframework.org/schema/beans"
+			 xmlns:context="http://www.springframework.org/schema/context"
+			 xmlns:tx="http://www.springframework.org/schema/tx"
+			 xsi:schemaLocation="http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/jee
+						http://www.springframework.org/schema/jee/spring-jee.xsd
+						http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+	
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<mvc:annotation-driven />
+	
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<!-- The configuration of the Spring factory to scan the package com.cl.feeds.controllers, looking for, and processing annotated controllers. -->
+	<context:component-scan base-package="com.cl.feeds.controllers" />
+	
+	<!-- Configure bean to convert JSON to POJO and vice versa -->
+	<!-- Jackson-JSON:  org.codehaus.jackson -->
+	<!-- <beans:bean id="jacksonJsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+	     <beans:property name="supportedMediaTypes" value="application/json"/>
+	</beans:bean> -->
+	
+	<!-- Configure to plugin JSON as request and response in method handler -->
+	<!-- <beans:bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<beans:property name="messageConverters">
+			<beans:list>
+				<beans:ref bean="jacksonJsonConverter"/>
+			</beans:list>
+		</beans:property>
+	</beans:bean> -->
+	
+	<!-- Jackson-JSON:  com.fasterxml.jackson.core -->
+	<beans:bean id="jacksonJsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	</beans:bean>
+	
+	<!-- Configure to plugin JSON as request and response in method handler -->
+	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<beans:property name="messageConverters">
+			<beans:list>
+				<beans:ref bean="jacksonJsonConverter"/>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	
+	<!-- Note that Gson does not require nor needs configuration here -->
+	
+	<!-- Create DataSource Bean using using Spring Bean for lookup -->
+	<!-- <beans:bean id="dbDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<beans:property name="jndiName" value="java:comp/env/jdbc/cl_local_db"/>
+	</beans:bean> -->
+	
+	<!-- Create DataSource Bean using JEE namespace for lookup -->
+	<!-- <jee:jndi-lookup id="dbDataSource" jndi-name="jdbc/cl_local_db" expected-type="javax.sql.DataSource"/> -->
+	
+	<!-- Session factory creation -->
+	<beans:bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<beans:property name="dbDataSource" ref="clSessionFactory" />
+		<beans:property name="configLocation" value="/WEB-INF/classes/hibernate.cfg.xml"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="collegeLifeDao" class="com.cl.feeds.dao.HibernateSpringCollegeLifeDao">
+		<beans:property name="sessionFactory" ref="sessionFactory"/>
+	</beans:bean>
+	
+	<beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<beans:property name="sessionFactory" ref="sessionFactory"/>
+	</beans:bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<beans:bean id="collegeLifeService" class="com.cl.feeds.services.CollegeLifeServiceImpl">
+	    <property name="collegeLifeDao" ref="collegeLifeDao"/>
+	</beans:bean>
+	
+</beans:beans>

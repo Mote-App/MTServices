@@ -5,11 +5,29 @@
 <hibernate-configuration>
     <session-factory name="clSessionFactory">
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.password">C0lleges</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cldatabase</property>
         <property name="hibernate.connection.username">clusers</property>
+        <property name="hibernate.connection.password">C0lleges</property>
         <property name="hibernate.default_catalog">cl_db_catalog</property>
         <property name="hibernate.default_schema">cl_db_schema</property>
+        
+        <!-- Number of Hibernate Sessions to be available in the Hiernate Factory Pool -->
+        <property name="hibernate.connection.pool_size">5</property>
+        
+        <!-- Only use this if using Java Transaction API (JTA) -->
+        <property name="hibernate.current_session_context_class">thread</property>
+        
+        <!-- SQL Dialect.  Supports different database SQL dialects for optimization -->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        
+        <!-- Disable 2nd level cache (L2 is internal to Hibernate) -->
+		<property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+		
+		<!-- Echo all SQL to sdtout -->
+		<property name="hibernate.show_sql">true</property>
+		
+		<!-- List all the Java classes we have mapped here.  package com.cl.feeds.pojos -->
+		<mapping class="com.cl.feeds.pojos.Post"/>
+		<mapping class="com.cl.feeds.pojos.FriendActivityFeed"/>
     </session-factory>
 </hibernate-configuration>

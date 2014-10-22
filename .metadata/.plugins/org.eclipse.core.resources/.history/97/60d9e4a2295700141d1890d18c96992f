@@ -1,0 +1,5 @@
+package com.cl.feeds.dao;
+
+public interface CollegeLifeDao {
+
+}

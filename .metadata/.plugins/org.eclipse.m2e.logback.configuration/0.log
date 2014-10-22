@@ -354,3 +354,310 @@
 2014-10-17 01:21:56,721 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
 2014-10-17 01:21:56,723 [Worker-4] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
 2014-10-17 01:21:56,723 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 01:27:45,533 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 01:27:45,533 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 01:27:45,535 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 01:27:45,535 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 11:35:22,538 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 11:35:22,679 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2014-10-17 11:35:22,693 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 11:35:22,701 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2014-10-17 11:40:29,735 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 11:40:29,743 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2014-10-17 11:40:29,747 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 11:40:29,748 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 11:40:30,937 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 11:40:30,944 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2014-10-17 11:40:30,958 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 11:40:30,960 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 11:52:22,426 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 11:52:22,427 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2014-10-17 11:52:22,431 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 11:52:22,432 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 11:54:39,758 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 11:54:39,758 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 11:54:39,760 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 11:54:39,761 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 11:54:45,310 [Worker-13] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 11:54:45,311 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 11:54:45,313 [Worker-13] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 11:54:45,314 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 16:24:59,029 [Worker-0] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.cl:CollegeLife:1.0.0-BUILD-SNAPSHOT @ /Users/gibranecastillo/Mobility/CollegeLife/CLServices/CollegeLife/pom.xml.
+2014-10-17 16:25:02,746 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/hibernate/hibernate/3.1rc2/hibernate-3.1rc2.pom
+2014-10-17 16:25:04,525 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/hibernate/hibernate/3.1rc2/hibernate-3.1rc2.pom
+2014-10-17 16:25:05,446 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/org/hibernate/hibernate/3.1rc2/hibernate-3.1rc2.pom
+2014-10-17 16:25:06,984 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/hibernate/hibernate/3.1rc2/hibernate-3.1rc2.pom
+2014-10-17 16:25:07,903 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/asm/asm/1.5.3/asm-1.5.3.pom
+2014-10-17 16:25:09,767 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/asm/asm/1.5.3/asm-1.5.3.pom
+2014-10-17 16:25:10,671 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/cglib/cglib/2.1_2/cglib-2.1_2.pom
+2014-10-17 16:25:12,515 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/cglib/cglib/2.1_2/cglib-2.1_2.pom
+2014-10-17 16:25:13,434 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/commons-collections/commons-collections/2.1.1/commons-collections-2.1.1.pom
+2014-10-17 16:25:14,971 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/commons-collections/commons-collections/2.1.1/commons-collections-2.1.1.pom
+2014-10-17 16:25:15,894 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.pom
+2014-10-17 16:25:17,126 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.pom
+2014-10-17 16:25:17,736 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/ehcache/ehcache/1.1/ehcache-1.1.pom
+2014-10-17 16:25:18,965 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/ehcache/ehcache/1.1/ehcache-1.1.pom
+2014-10-17 16:25:19,578 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/org/hibernate/antlr/2.7.5H3/antlr-2.7.5H3.pom
+2014-10-17 16:25:20,744 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/hibernate/antlr/2.7.5H3/antlr-2.7.5H3.pom
+2014-10-17 16:25:20,814 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 16:25:21,494 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/org/hibernate/hibernate/3.1rc2/hibernate-3.1rc2.jar
+2014-10-17 16:25:46,271 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/hibernate/hibernate/3.1rc2/hibernate-3.1rc2.jar
+2014-10-17 16:25:46,615 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/asm/asm/1.5.3/asm-1.5.3.jar
+2014-10-17 16:25:47,227 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/asm/asm/1.5.3/asm-1.5.3.jar
+2014-10-17 16:25:47,534 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/cglib/cglib/2.1_2/cglib-2.1_2.jar
+2014-10-17 16:25:49,434 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/cglib/cglib/2.1_2/cglib-2.1_2.jar
+2014-10-17 16:25:49,992 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/commons-collections/commons-collections/2.1.1/commons-collections-2.1.1.jar
+2014-10-17 16:25:51,006 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/commons-collections/commons-collections/2.1.1/commons-collections-2.1.1.jar
+2014-10-17 16:25:51,528 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar
+2014-10-17 16:25:52,144 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar
+2014-10-17 16:25:52,757 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/ehcache/ehcache/1.1/ehcache-1.1.jar
+2014-10-17 16:25:53,695 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/ehcache/ehcache/1.1/ehcache-1.1.jar
+2014-10-17 16:25:54,293 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/org/hibernate/antlr/2.7.5H3/antlr-2.7.5H3.jar
+2014-10-17 16:25:56,308 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/hibernate/antlr/2.7.5H3/antlr-2.7.5H3.jar
+2014-10-17 16:25:56,479 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/javax/transaction/jta/1.0.1B/jta-1.0.1B.jar
+2014-10-17 16:25:56,951 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 16:25:56,952 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 16:25:56,955 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 16:25:56,956 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 16:25:58,159 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 16:25:58,240 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 16:25:58,241 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 16:25:58,243 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 16:25:58,243 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 16:26:19,214 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 16:26:19,215 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 16:26:19,217 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 16:26:19,218 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 16:30:07,193 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 16:30:07,194 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 16:30:07,196 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 16:30:07,201 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 16:33:27,217 [Worker-0] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.cl:CollegeLife:1.0.0-BUILD-SNAPSHOT @ /Users/gibranecastillo/Mobility/CollegeLife/CLServices/CollegeLife/pom.xml.
+2014-10-17 16:33:29,936 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/javax/transaction/jta/1.1/jta-1.1.pom
+2014-10-17 16:33:32,965 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/javax/transaction/jta/1.1/jta-1.1.pom
+2014-10-17 16:33:33,027 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 16:33:33,578 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/javax/transaction/jta/1.1/jta-1.1.jar
+2014-10-17 16:33:35,422 [Worker-0] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/javax/transaction/jta/1.1/jta-1.1.jar
+2014-10-17 16:33:35,498 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 16:33:35,505 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 16:33:35,507 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 16:33:35,515 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 16:33:36,847 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 16:33:36,874 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 16:33:36,895 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2014-10-17 16:33:36,899 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 16:33:36,900 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2014-10-17 16:36:03,127 [Worker-25] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 16:36:03,128 [Worker-25] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 16:36:03,130 [Worker-25] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 16:36:03,130 [Worker-25] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:14:56,358 [Worker-0] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.cl:CollegeLife:1.0.0-BUILD-SNAPSHOT @ /Users/gibranecastillo/Mobility/CollegeLife/CLServices/CollegeLife/pom.xml.
+2014-10-17 17:14:56,581 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 17:14:56,636 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:14:56,637 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:14:56,640 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:14:56,641 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:15:40,737 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 17:15:41,311 [Worker-28] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.cl:CollegeLife:1.0.0-BUILD-SNAPSHOT @ /Users/gibranecastillo/Mobility/CollegeLife/CLServices/CollegeLife/pom.xml.
+2014-10-17 17:15:41,514 [Worker-28] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 17:15:41,612 [Worker-28] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:15:41,613 [Worker-28] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:15:41,634 [Worker-28] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:15:41,635 [Worker-28] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:15:41,918 [Worker-27] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 17:15:41,949 [Worker-27] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:15:41,950 [Worker-27] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:15:41,953 [Worker-27] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:15:41,953 [Worker-27] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:15:43,430 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:15:43,431 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:15:43,433 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:15:43,434 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:16:18,926 [Worker-18] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.cl:CollegeLife:1.0.0-BUILD-SNAPSHOT @ /Users/gibranecastillo/Mobility/CollegeLife/CLServices/CollegeLife/pom.xml.
+2014-10-17 17:16:19,025 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 17:16:19,077 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:16:19,078 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:16:19,079 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:16:19,080 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:16:55,049 [Worker-28] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 17:16:56,228 [Worker-18] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.cl:CollegeLife:1.0.0-BUILD-SNAPSHOT @ /Users/gibranecastillo/Mobility/CollegeLife/CLServices/CollegeLife/pom.xml.
+2014-10-17 17:16:56,405 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 17:16:56,479 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:16:56,480 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:16:56,481 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:16:56,482 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:46:50,421 [Worker-27] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 17:46:50,507 [Worker-21] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.cl:CollegeLife:1.0.0-BUILD-SNAPSHOT @ /Users/gibranecastillo/Mobility/CollegeLife/CLServices/CollegeLife/pom.xml.
+2014-10-17 17:46:50,629 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 17:46:50,686 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:46:50,686 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:46:50,688 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:46:50,688 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:47:08,348 [Worker-26] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 17:47:08,920 [Worker-0] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.cl:CollegeLife:1.0.0-BUILD-SNAPSHOT @ /Users/gibranecastillo/Mobility/CollegeLife/CLServices/CollegeLife/pom.xml.
+2014-10-17 17:47:09,125 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 17:47:09,200 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:47:09,201 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:47:09,203 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:47:09,204 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:47:13,092 [Worker-26] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact hibernate:hibernate:jar:3.1rc2 has been relocated to org.hibernate:hibernate:jar:3.1rc2
+2014-10-17 17:47:13,125 [Worker-26] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:47:13,126 [Worker-26] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:47:13,128 [Worker-26] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:47:13,129 [Worker-26] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:55:44,035 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:55:44,042 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-17 17:55:44,044 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-17 17:55:44,052 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:22:44,201 [Worker-50] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:22:44,221 [Worker-50] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2014-10-18 20:22:44,223 [Worker-50] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:22:44,224 [Worker-50] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:35:31,650 [Worker-55] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:35:31,651 [Worker-55] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2014-10-18 20:35:31,654 [Worker-55] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:35:31,655 [Worker-55] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:37:23,086 [Worker-50] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:37:23,092 [Worker-50] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:37:23,093 [Worker-50] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:37:23,094 [Worker-50] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:38:39,207 [Worker-52] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:38:39,208 [Worker-52] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:38:39,209 [Worker-52] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:38:39,215 [Worker-52] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:41:01,611 [Worker-57] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:41:01,612 [Worker-57] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:41:01,614 [Worker-57] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:41:01,614 [Worker-57] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:46:22,962 [Worker-54] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:46:22,963 [Worker-54] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:46:22,964 [Worker-54] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:46:22,965 [Worker-54] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:48:19,424 [Worker-54] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:48:19,425 [Worker-54] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:48:19,426 [Worker-54] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:48:19,427 [Worker-54] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:48:27,176 [Worker-57] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:48:27,177 [Worker-57] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:48:27,178 [Worker-57] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:48:27,179 [Worker-57] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:49:28,841 [Worker-55] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:49:28,842 [Worker-55] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:49:28,844 [Worker-55] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:49:28,844 [Worker-55] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:55:11,507 [Worker-52] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:55:11,508 [Worker-52] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:55:11,510 [Worker-52] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:55:11,510 [Worker-52] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:55:34,408 [Worker-55] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:55:34,409 [Worker-55] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:55:34,411 [Worker-55] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:55:34,411 [Worker-55] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:55:58,030 [Worker-54] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:55:58,031 [Worker-54] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 20:55:58,032 [Worker-54] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 20:55:58,033 [Worker-54] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:03:17,062 [Worker-56] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:03:17,063 [Worker-56] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:03:17,064 [Worker-56] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:03:17,065 [Worker-56] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:03:39,132 [Worker-54] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:03:39,133 [Worker-54] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:03:39,134 [Worker-54] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:03:39,135 [Worker-54] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:06:49,187 [Worker-50] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:06:49,202 [Worker-50] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:06:49,204 [Worker-50] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:06:49,205 [Worker-50] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:10:14,131 [Worker-55] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:10:14,134 [Worker-55] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:10:14,135 [Worker-55] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:10:14,137 [Worker-55] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:10:28,277 [Worker-50] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:10:28,278 [Worker-50] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:10:28,280 [Worker-50] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:10:28,280 [Worker-50] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:10:38,077 [Worker-52] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:10:38,078 [Worker-52] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:10:38,079 [Worker-52] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:10:38,080 [Worker-52] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:10:50,946 [Worker-52] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:10:50,947 [Worker-52] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:10:50,949 [Worker-52] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:10:50,953 [Worker-52] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:11:07,447 [Worker-50] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:11:07,450 [Worker-50] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-18 21:11:07,451 [Worker-50] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-18 21:11:07,452 [Worker-50] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:19:31,263 [Worker-74] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:19:31,282 [Worker-74] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:19:31,284 [Worker-74] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:19:31,284 [Worker-74] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:31:23,741 [Worker-88] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.cl:CollegeLife:1.0.0-BUILD-SNAPSHOT @ /Users/gibranecastillo/Mobility/CollegeLife/CLServices/CollegeLife/pom.xml.
+2014-10-20 22:31:24,277 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/springframework/spring-tx/${spring-framework.version}/spring-tx-${spring-framework.version}.pom
+2014-10-20 22:31:24,537 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/springframework/spring-orm/${spring-framework.version}/spring-orm-${spring-framework.version}.pom
+2014-10-20 22:31:27,097 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/org/hibernate/hibernate-entitymanager/4.3.5.Final/hibernate-entitymanager-4.3.5.Final.pom
+2014-10-20 22:31:28,394 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/hibernate/hibernate-entitymanager/4.3.5.Final/hibernate-entitymanager-4.3.5.Final.pom
+2014-10-20 22:31:28,989 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/org/hibernate/hibernate-core/4.3.5.Final/hibernate-core-4.3.5.Final.pom
+2014-10-20 22:31:29,938 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/hibernate/hibernate-core/4.3.5.Final/hibernate-core-4.3.5.Final.pom
+2014-10-20 22:31:30,483 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/org/hibernate/common/hibernate-commons-annotations/4.0.4.Final/hibernate-commons-annotations-4.0.4.Final.pom
+2014-10-20 22:31:31,378 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/hibernate/common/hibernate-commons-annotations/4.0.4.Final/hibernate-commons-annotations-4.0.4.Final.pom
+2014-10-20 22:31:32,135 [Worker-88] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:31:32,154 [Worker-88] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:31:32,155 [Worker-88] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:31:32,156 [Worker-88] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:31:48,934 [Worker-89] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:31:48,935 [Worker-89] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:31:48,937 [Worker-89] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:31:49,068 [Worker-89] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:33:35,228 [Worker-88] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.cl:CollegeLife:1.0.0-BUILD-SNAPSHOT @ /Users/gibranecastillo/Mobility/CollegeLife/CLServices/CollegeLife/pom.xml.
+2014-10-20 22:33:36,743 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/org/springframework/spring-orm/4.1.1.RELEASE/spring-orm-4.1.1.RELEASE.pom
+2014-10-20 22:33:37,463 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/springframework/spring-orm/4.1.1.RELEASE/spring-orm-4.1.1.RELEASE.pom
+2014-10-20 22:33:37,998 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/org/springframework/spring-orm/4.1.1.RELEASE/spring-orm-4.1.1.RELEASE.jar
+2014-10-20 22:33:44,784 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/springframework/spring-orm/4.1.1.RELEASE/spring-orm-4.1.1.RELEASE.jar
+2014-10-20 22:33:45,260 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/org/hibernate/hibernate-entitymanager/4.3.5.Final/hibernate-entitymanager-4.3.5.Final.jar
+2014-10-20 22:33:55,306 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/hibernate/hibernate-entitymanager/4.3.5.Final/hibernate-entitymanager-4.3.5.Final.jar
+2014-10-20 22:33:55,830 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/org/hibernate/common/hibernate-commons-annotations/4.0.4.Final/hibernate-commons-annotations-4.0.4.Final.jar
+2014-10-20 22:33:57,974 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/hibernate/common/hibernate-commons-annotations/4.0.4.Final/hibernate-commons-annotations-4.0.4.Final.jar
+2014-10-20 22:33:58,441 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/org/hibernate/hibernate-core/4.3.5.Final/hibernate-core-4.3.5.Final.jar
+2014-10-20 22:34:52,425 [Worker-88] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/hibernate/hibernate-core/4.3.5.Final/hibernate-core-4.3.5.Final.jar
+2014-10-20 22:34:52,643 [Worker-88] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:34:52,661 [Worker-88] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:34:52,663 [Worker-88] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:34:52,664 [Worker-88] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:34:58,851 [Worker-93] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:34:58,853 [Worker-93] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2014-10-20 22:34:58,855 [Worker-93] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:34:58,856 [Worker-93] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2014-10-20 22:35:00,163 [Worker-95] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:35:00,165 [Worker-95] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2014-10-20 22:35:00,169 [Worker-95] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:35:00,170 [Worker-95] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2014-10-20 22:39:20,464 [Worker-94] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:39:20,471 [Worker-94] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:39:20,473 [Worker-94] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:39:20,474 [Worker-94] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:43:32,420 [Worker-82] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:43:32,422 [Worker-82] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:43:32,424 [Worker-82] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:43:32,424 [Worker-82] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:51:18,711 [Worker-95] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:51:18,711 [Worker-95] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:51:18,713 [Worker-95] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:51:18,714 [Worker-95] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:51:53,932 [Worker-96] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:51:53,933 [Worker-96] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:51:53,935 [Worker-96] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:51:53,936 [Worker-96] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:52:49,106 [Worker-86] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:52:49,112 [Worker-86] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:52:49,114 [Worker-86] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:52:49,115 [Worker-86] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:53:08,163 [Worker-81] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:53:08,164 [Worker-81] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:53:08,166 [Worker-81] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:53:08,167 [Worker-81] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:53:24,794 [Worker-95] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:53:24,804 [Worker-95] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2014-10-20 22:53:24,807 [Worker-95] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+2014-10-20 22:53:24,808 [Worker-95] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource

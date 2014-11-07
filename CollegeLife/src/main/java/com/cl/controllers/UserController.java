@@ -34,8 +34,8 @@ public class UserController {
   @ResponseBody
   public String create(String email, String name) {
     try {
-      User user = new User(email, name);
-      _userDao.create(user);
+      //User user = new User(email, name);
+      //_userDao.create(user);
     }
     catch (Exception ex) {
       return "Error creating the user: " + ex.toString();
@@ -84,8 +84,8 @@ public class UserController {
   public String updateName(long id, String email, String name) {
     try {
       User user = _userDao.getById(id);
-      user.setEmail(email);
-      user.setName(name);
+      //user.setEmail(email);
+      //user.setName(name);
       _userDao.update(user);
     }
     catch (Exception ex) {
@@ -103,8 +103,8 @@ public class UserController {
     
 	User user = new User();
 	user.setId(1);
-	user.setName("Testing");
-	user.setEmail("t@t.com");
+	//user.setName("Testing");
+	//user.setEmail("t@t.com");
 	
     return user;
   }

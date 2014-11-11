@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cl.models.User;
-import com.cl.models.UserDao;
+import com.cl.models.dao.UserDao;
 
 /**
  * Class UserController

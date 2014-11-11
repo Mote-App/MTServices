@@ -1,4 +1,4 @@
-package com.cl.models;
+package com.cl.models.dao;
 
 import java.util.List;
 
@@ -7,6 +7,8 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
+
+import com.cl.models.User;
 
 /**
  * Class UserDao

@@ -2,6 +2,7 @@ package com.cl.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import views.FriendFeeds;
@@ -16,7 +17,7 @@ public class FeedController {
 	   * Create a new user with an auto-generated id and email and name as passed 
 	   * values.
 	   */
-	  @RequestMapping(value="/friend_feeds", headers="accept=application/json")
+	  @RequestMapping(value="/friend_feeds", method = RequestMethod.GET, produces="application/json")
 	  @ResponseBody
 	  public FriendFeeds create(String userId) {
 		  

@@ -18,15 +18,49 @@ public class UserFriends {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@OneToOne(optional=false)
-	@JoinColumn(name="id")
-	private User user;
+	@Column(name="user_id")
+	private long userId;
 	
-	@OneToOne(optional=false)
-	@JoinColumn(name="id")
-	private User friend;
+	@Column(name="friend_id")
+	private long friendId;
 
 	@Column(name="are_friends")
-	private String isFriend;
+	private boolean isFriend;
+
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
+	public long getFriendId() {
+		return friendId;
+	}
+
+	public void setFriendId(long friendId) {
+		this.friendId = friendId;
+	}
+
+	public boolean isFriend() {
+		return isFriend;
+	}
+
+	public void setFriend(boolean isFriend) {
+		this.isFriend = isFriend;
+	}
+	
+	
+	
 }
 

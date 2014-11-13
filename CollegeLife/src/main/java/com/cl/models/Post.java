@@ -1,6 +1,8 @@
 package com.cl.models;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,10 +21,9 @@ public class Post {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@OneToOne(optional=false)
-	@JoinColumn(name="id")
-	private User user;
+
+	@Column(name="user_id")
+	private long userId;
 	
 	@Column(name="post_image_path")
 	private String postImgPath;
@@ -35,6 +37,13 @@ public class Post {
 	@Column(name="likes")
 	private long likes;
 
+	@OneToMany(mappedBy="clpost")
+	private List<PostTags> lstPostTags;
+	
+	
+	public Post(){
+		lstPostTags = new ArrayList<PostTags>();
+	}
 	
 	public long getId() {
 		return id;
@@ -44,12 +53,21 @@ public class Post {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+
+	public long getUserId() {
+		return userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
+	public List<PostTags> getLstPostTags() {
+		return lstPostTags;
+	}
+
+	public void setLstPostTags(List<PostTags> lstPostTags) {
+		this.lstPostTags = lstPostTags;
 	}
 
 	public String getPostImgPath() {

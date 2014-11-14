@@ -6757,3 +6757,375 @@ java.lang.NullPointerException
 	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
 	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
 	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2014-10-20 23:03:52.880
+!MESSAGE Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2014-10-20 23:03:52.903
+!MESSAGE Using platform encoding (MacRoman actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2014-10-20 23:04:17.690
+!MESSAGE null
+!STACK 0
+java.lang.NullPointerException
+	at org.springframework.ide.eclipse.core.model.validation.AbstractValidationContext.get(AbstractValidationContext.java:74)
+	at org.springframework.ide.eclipse.beans.core.model.validation.AbstractNonInfrastructureBeanValidationRule.getTypeHierarchyEngine(AbstractNonInfrastructureBeanValidationRule.java:89)
+	at org.springframework.ide.eclipse.beans.core.internal.model.validation.rules.BeanPropertyRule.validate(BeanPropertyRule.java:60)
+	at org.springframework.ide.eclipse.quickfix.validator.PropertyValidator.validateAttributeWithConfig(PropertyValidator.java:69)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidator.validateAttributeWithConfig(BeanValidator.java:158)
+	at org.springframework.ide.eclipse.quickfix.QuickfixUtils.validateAttribute(QuickfixUtils.java:526)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitAttributes(BeanValidatorVisitor.java:63)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:85)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validateNode(BeansEditorValidator.java:485)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validate(BeansEditorValidator.java:465)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:381)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:259)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:95)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2014-10-20 23:04:17.706
+!MESSAGE null
+!STACK 0
+java.lang.NullPointerException
+	at org.springframework.ide.eclipse.core.model.validation.AbstractValidationContext.get(AbstractValidationContext.java:74)
+	at org.springframework.ide.eclipse.beans.core.model.validation.AbstractNonInfrastructureBeanValidationRule.getTypeHierarchyEngine(AbstractNonInfrastructureBeanValidationRule.java:89)
+	at org.springframework.ide.eclipse.beans.core.internal.model.validation.rules.BeanPropertyRule.validate(BeanPropertyRule.java:60)
+	at org.springframework.ide.eclipse.quickfix.validator.PropertyValidator.validateAttributeWithConfig(PropertyValidator.java:69)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidator.validateAttributeWithConfig(BeanValidator.java:158)
+	at org.springframework.ide.eclipse.quickfix.QuickfixUtils.validateAttribute(QuickfixUtils.java:526)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitAttributes(BeanValidatorVisitor.java:63)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:85)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validateNode(BeansEditorValidator.java:485)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validate(BeansEditorValidator.java:465)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:381)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:259)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:95)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2014-10-20 23:04:17.785
+!MESSAGE null
+!STACK 0
+java.lang.NullPointerException
+	at org.springframework.ide.eclipse.core.model.validation.AbstractValidationContext.get(AbstractValidationContext.java:74)
+	at org.springframework.ide.eclipse.beans.core.model.validation.AbstractNonInfrastructureBeanValidationRule.getTypeHierarchyEngine(AbstractNonInfrastructureBeanValidationRule.java:89)
+	at org.springframework.ide.eclipse.beans.core.internal.model.validation.rules.BeanPropertyRule.validate(BeanPropertyRule.java:60)
+	at org.springframework.ide.eclipse.quickfix.validator.PropertyValidator.validateAttributeWithConfig(PropertyValidator.java:69)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidator.validateAttributeWithConfig(BeanValidator.java:158)
+	at org.springframework.ide.eclipse.quickfix.QuickfixUtils.validateAttribute(QuickfixUtils.java:526)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitAttributes(BeanValidatorVisitor.java:63)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:85)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validateNode(BeansEditorValidator.java:485)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validate(BeansEditorValidator.java:465)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:381)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:259)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:95)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2014-10-20 23:04:17.831
+!MESSAGE null
+!STACK 0
+java.lang.NullPointerException
+	at org.springframework.ide.eclipse.core.model.validation.AbstractValidationContext.get(AbstractValidationContext.java:74)
+	at org.springframework.ide.eclipse.beans.core.model.validation.AbstractNonInfrastructureBeanValidationRule.getTypeHierarchyEngine(AbstractNonInfrastructureBeanValidationRule.java:89)
+	at org.springframework.ide.eclipse.beans.core.internal.model.validation.rules.BeanPropertyRule.validate(BeanPropertyRule.java:60)
+	at org.springframework.ide.eclipse.quickfix.validator.PropertyValidator.validateAttributeWithConfig(PropertyValidator.java:69)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidator.validateAttributeWithConfig(BeanValidator.java:158)
+	at org.springframework.ide.eclipse.quickfix.QuickfixUtils.validateAttribute(QuickfixUtils.java:526)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitAttributes(BeanValidatorVisitor.java:63)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:85)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validateNode(BeansEditorValidator.java:485)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validate(BeansEditorValidator.java:465)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:381)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:259)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:95)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2014-10-20 23:04:17.843
+!MESSAGE null
+!STACK 0
+java.lang.NullPointerException
+	at org.springframework.ide.eclipse.core.model.validation.AbstractValidationContext.get(AbstractValidationContext.java:74)
+	at org.springframework.ide.eclipse.beans.core.model.validation.AbstractNonInfrastructureBeanValidationRule.getTypeHierarchyEngine(AbstractNonInfrastructureBeanValidationRule.java:89)
+	at org.springframework.ide.eclipse.beans.core.internal.model.validation.rules.BeanPropertyRule.validate(BeanPropertyRule.java:60)
+	at org.springframework.ide.eclipse.quickfix.validator.PropertyValidator.validateAttributeWithConfig(PropertyValidator.java:69)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidator.validateAttributeWithConfig(BeanValidator.java:158)
+	at org.springframework.ide.eclipse.quickfix.QuickfixUtils.validateAttribute(QuickfixUtils.java:526)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitAttributes(BeanValidatorVisitor.java:63)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:85)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validateNode(BeansEditorValidator.java:485)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validate(BeansEditorValidator.java:465)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:381)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:259)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:95)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2014-10-20 23:04:23.409
+!MESSAGE null
+!STACK 0
+java.lang.NullPointerException
+	at org.springframework.ide.eclipse.core.model.validation.AbstractValidationContext.get(AbstractValidationContext.java:74)
+	at org.springframework.ide.eclipse.beans.core.model.validation.AbstractNonInfrastructureBeanValidationRule.getTypeHierarchyEngine(AbstractNonInfrastructureBeanValidationRule.java:89)
+	at org.springframework.ide.eclipse.beans.core.internal.model.validation.rules.BeanPropertyRule.validate(BeanPropertyRule.java:60)
+	at org.springframework.ide.eclipse.quickfix.validator.PropertyValidator.validateAttributeWithConfig(PropertyValidator.java:69)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidator.validateAttributeWithConfig(BeanValidator.java:158)
+	at org.springframework.ide.eclipse.quickfix.QuickfixUtils.validateAttribute(QuickfixUtils.java:526)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitAttributes(BeanValidatorVisitor.java:63)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:85)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validateNode(BeansEditorValidator.java:485)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validate(BeansEditorValidator.java:465)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:381)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:259)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:95)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2014-10-20 23:04:23.422
+!MESSAGE null
+!STACK 0
+java.lang.NullPointerException
+	at org.springframework.ide.eclipse.core.model.validation.AbstractValidationContext.get(AbstractValidationContext.java:74)
+	at org.springframework.ide.eclipse.beans.core.model.validation.AbstractNonInfrastructureBeanValidationRule.getTypeHierarchyEngine(AbstractNonInfrastructureBeanValidationRule.java:89)
+	at org.springframework.ide.eclipse.beans.core.internal.model.validation.rules.BeanPropertyRule.validate(BeanPropertyRule.java:60)
+	at org.springframework.ide.eclipse.quickfix.validator.PropertyValidator.validateAttributeWithConfig(PropertyValidator.java:69)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidator.validateAttributeWithConfig(BeanValidator.java:158)
+	at org.springframework.ide.eclipse.quickfix.QuickfixUtils.validateAttribute(QuickfixUtils.java:526)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitAttributes(BeanValidatorVisitor.java:63)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:85)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validateNode(BeansEditorValidator.java:485)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validate(BeansEditorValidator.java:465)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:381)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:259)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:95)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2014-10-20 23:04:23.439
+!MESSAGE null
+!STACK 0
+java.lang.NullPointerException
+	at org.springframework.ide.eclipse.core.model.validation.AbstractValidationContext.get(AbstractValidationContext.java:74)
+	at org.springframework.ide.eclipse.beans.core.model.validation.AbstractNonInfrastructureBeanValidationRule.getTypeHierarchyEngine(AbstractNonInfrastructureBeanValidationRule.java:89)
+	at org.springframework.ide.eclipse.beans.core.internal.model.validation.rules.BeanPropertyRule.validate(BeanPropertyRule.java:60)
+	at org.springframework.ide.eclipse.quickfix.validator.PropertyValidator.validateAttributeWithConfig(PropertyValidator.java:69)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidator.validateAttributeWithConfig(BeanValidator.java:158)
+	at org.springframework.ide.eclipse.quickfix.QuickfixUtils.validateAttribute(QuickfixUtils.java:526)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitAttributes(BeanValidatorVisitor.java:63)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:85)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validateNode(BeansEditorValidator.java:485)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validate(BeansEditorValidator.java:465)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:381)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:259)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:95)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2014-10-20 23:04:23.451
+!MESSAGE null
+!STACK 0
+java.lang.NullPointerException
+	at org.springframework.ide.eclipse.core.model.validation.AbstractValidationContext.get(AbstractValidationContext.java:74)
+	at org.springframework.ide.eclipse.beans.core.model.validation.AbstractNonInfrastructureBeanValidationRule.getTypeHierarchyEngine(AbstractNonInfrastructureBeanValidationRule.java:89)
+	at org.springframework.ide.eclipse.beans.core.internal.model.validation.rules.BeanPropertyRule.validate(BeanPropertyRule.java:60)
+	at org.springframework.ide.eclipse.quickfix.validator.PropertyValidator.validateAttributeWithConfig(PropertyValidator.java:69)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidator.validateAttributeWithConfig(BeanValidator.java:158)
+	at org.springframework.ide.eclipse.quickfix.QuickfixUtils.validateAttribute(QuickfixUtils.java:526)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitAttributes(BeanValidatorVisitor.java:63)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:85)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validateNode(BeansEditorValidator.java:485)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validate(BeansEditorValidator.java:465)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:381)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:259)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:95)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2014-10-20 23:04:23.457
+!MESSAGE null
+!STACK 0
+java.lang.NullPointerException
+	at org.springframework.ide.eclipse.core.model.validation.AbstractValidationContext.get(AbstractValidationContext.java:74)
+	at org.springframework.ide.eclipse.beans.core.model.validation.AbstractNonInfrastructureBeanValidationRule.getTypeHierarchyEngine(AbstractNonInfrastructureBeanValidationRule.java:89)
+	at org.springframework.ide.eclipse.beans.core.internal.model.validation.rules.BeanPropertyRule.validate(BeanPropertyRule.java:60)
+	at org.springframework.ide.eclipse.quickfix.validator.PropertyValidator.validateAttributeWithConfig(PropertyValidator.java:69)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidator.validateAttributeWithConfig(BeanValidator.java:158)
+	at org.springframework.ide.eclipse.quickfix.QuickfixUtils.validateAttribute(QuickfixUtils.java:526)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitAttributes(BeanValidatorVisitor.java:63)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:85)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validateNode(BeansEditorValidator.java:485)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validate(BeansEditorValidator.java:465)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:381)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:259)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:95)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2014-10-20 23:04:34.536
+!MESSAGE null
+!STACK 0
+java.lang.NullPointerException
+	at org.springframework.ide.eclipse.core.model.validation.AbstractValidationContext.get(AbstractValidationContext.java:74)
+	at org.springframework.ide.eclipse.beans.core.model.validation.AbstractNonInfrastructureBeanValidationRule.getTypeHierarchyEngine(AbstractNonInfrastructureBeanValidationRule.java:89)
+	at org.springframework.ide.eclipse.beans.core.internal.model.validation.rules.BeanPropertyRule.validate(BeanPropertyRule.java:60)
+	at org.springframework.ide.eclipse.quickfix.validator.PropertyValidator.validateAttributeWithConfig(PropertyValidator.java:69)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidator.validateAttributeWithConfig(BeanValidator.java:158)
+	at org.springframework.ide.eclipse.quickfix.QuickfixUtils.validateAttribute(QuickfixUtils.java:526)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitAttributes(BeanValidatorVisitor.java:63)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:85)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validateNode(BeansEditorValidator.java:485)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validate(BeansEditorValidator.java:465)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:381)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:259)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:95)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2014-10-20 23:04:34.558
+!MESSAGE null
+!STACK 0
+java.lang.NullPointerException
+	at org.springframework.ide.eclipse.core.model.validation.AbstractValidationContext.get(AbstractValidationContext.java:74)
+	at org.springframework.ide.eclipse.beans.core.model.validation.AbstractNonInfrastructureBeanValidationRule.getTypeHierarchyEngine(AbstractNonInfrastructureBeanValidationRule.java:89)
+	at org.springframework.ide.eclipse.beans.core.internal.model.validation.rules.BeanPropertyRule.validate(BeanPropertyRule.java:60)
+	at org.springframework.ide.eclipse.quickfix.validator.PropertyValidator.validateAttributeWithConfig(PropertyValidator.java:69)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidator.validateAttributeWithConfig(BeanValidator.java:158)
+	at org.springframework.ide.eclipse.quickfix.QuickfixUtils.validateAttribute(QuickfixUtils.java:526)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitAttributes(BeanValidatorVisitor.java:63)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:85)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validateNode(BeansEditorValidator.java:485)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validate(BeansEditorValidator.java:465)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:381)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:259)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:95)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2014-10-20 23:04:34.575
+!MESSAGE null
+!STACK 0
+java.lang.NullPointerException
+	at org.springframework.ide.eclipse.core.model.validation.AbstractValidationContext.get(AbstractValidationContext.java:74)
+	at org.springframework.ide.eclipse.beans.core.model.validation.AbstractNonInfrastructureBeanValidationRule.getTypeHierarchyEngine(AbstractNonInfrastructureBeanValidationRule.java:89)
+	at org.springframework.ide.eclipse.beans.core.internal.model.validation.rules.BeanPropertyRule.validate(BeanPropertyRule.java:60)
+	at org.springframework.ide.eclipse.quickfix.validator.PropertyValidator.validateAttributeWithConfig(PropertyValidator.java:69)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidator.validateAttributeWithConfig(BeanValidator.java:158)
+	at org.springframework.ide.eclipse.quickfix.QuickfixUtils.validateAttribute(QuickfixUtils.java:526)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitAttributes(BeanValidatorVisitor.java:63)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:85)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validateNode(BeansEditorValidator.java:485)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validate(BeansEditorValidator.java:465)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:381)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:259)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:95)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2014-10-20 23:04:34.586
+!MESSAGE null
+!STACK 0
+java.lang.NullPointerException
+	at org.springframework.ide.eclipse.core.model.validation.AbstractValidationContext.get(AbstractValidationContext.java:74)
+	at org.springframework.ide.eclipse.beans.core.model.validation.AbstractNonInfrastructureBeanValidationRule.getTypeHierarchyEngine(AbstractNonInfrastructureBeanValidationRule.java:89)
+	at org.springframework.ide.eclipse.beans.core.internal.model.validation.rules.BeanPropertyRule.validate(BeanPropertyRule.java:60)
+	at org.springframework.ide.eclipse.quickfix.validator.PropertyValidator.validateAttributeWithConfig(PropertyValidator.java:69)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidator.validateAttributeWithConfig(BeanValidator.java:158)
+	at org.springframework.ide.eclipse.quickfix.QuickfixUtils.validateAttribute(QuickfixUtils.java:526)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitAttributes(BeanValidatorVisitor.java:63)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:85)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validateNode(BeansEditorValidator.java:485)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validate(BeansEditorValidator.java:465)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:381)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:259)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:95)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)
+
+!ENTRY org.eclipse.wst.sse.ui 4 4 2014-10-20 23:04:34.594
+!MESSAGE null
+!STACK 0
+java.lang.NullPointerException
+	at org.springframework.ide.eclipse.core.model.validation.AbstractValidationContext.get(AbstractValidationContext.java:74)
+	at org.springframework.ide.eclipse.beans.core.model.validation.AbstractNonInfrastructureBeanValidationRule.getTypeHierarchyEngine(AbstractNonInfrastructureBeanValidationRule.java:89)
+	at org.springframework.ide.eclipse.beans.core.internal.model.validation.rules.BeanPropertyRule.validate(BeanPropertyRule.java:60)
+	at org.springframework.ide.eclipse.quickfix.validator.PropertyValidator.validateAttributeWithConfig(PropertyValidator.java:69)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidator.validateAttributeWithConfig(BeanValidator.java:158)
+	at org.springframework.ide.eclipse.quickfix.QuickfixUtils.validateAttribute(QuickfixUtils.java:526)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitAttributes(BeanValidatorVisitor.java:63)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:85)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitChildren(BeanValidatorVisitor.java:77)
+	at org.springframework.ide.eclipse.quickfix.validator.BeanValidatorVisitor.visitNode(BeanValidatorVisitor.java:90)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validateNode(BeansEditorValidator.java:485)
+	at org.springframework.ide.eclipse.quickfix.BeansEditorValidator.validate(BeansEditorValidator.java:465)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.validate(ReconcileStepForValidator.java:381)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ReconcileStepForValidator.reconcileModel(ReconcileStepForValidator.java:259)
+	at org.eclipse.jface.text.reconciler.AbstractReconcileStep.reconcile(AbstractReconcileStep.java:95)
+	at org.eclipse.wst.sse.ui.internal.reconcile.validator.ValidatorStrategy.reconcile(ValidatorStrategy.java:269)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor.process(DocumentRegionProcessor.java:321)
+	at org.eclipse.wst.sse.ui.internal.reconcile.StructuredRegionProcessor.process(StructuredRegionProcessor.java:258)
+	at org.eclipse.wst.sse.ui.internal.reconcile.DirtyRegionProcessor$BackgroundThread.run(DirtyRegionProcessor.java:691)

@@ -3,28 +3,35 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="263" key="DIALOG_WIDTH"/>
 		<item value="103" key="DIALOG_Y_ORIGIN"/>
-		<item value="399" key="DIALOG_HEIGHT"/>
 		<item value="864" key="DIALOG_X_ORIGIN"/>
+		<item value="399" key="DIALOG_HEIGHT"/>
 		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="" key="selection"/>
+		<item value="Catego" key="selection"/>
 		<list key="findhistory">
-			<item value="cl/"/>
-			<item value="postingDate"/>
-			<item value="jackson-core-asl"/>
-			<item value="org.codehaus.jackson"/>
-			<item value="org.slf4j"/>
-			<item value="org.aspectj"/>
-			<item value="org.springframework"/>
-			<item value="Recording"/>
+			<item value="catego"/>
+			<item value="video"/>
+			<item value="VideoCategories"/>
+			<item value="recording"/>
+			<item value="record"/>
+			<item value="theRecordingId"/>
+			<item value="recordingId"/>
+			<item value="video recording"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Schools"/>
+			<item value="school"/>
+			<item value="theSchoolId"/>
+			<item value="schoolId"/>
+			<item value="theSchool"/>
+			<item value="School"/>
+			<item value="schools"/>
 			<item value=""/>
 		</list>
 	</section>

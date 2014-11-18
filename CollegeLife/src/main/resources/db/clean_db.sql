@@ -1,6 +1,4 @@
-
-
-use cldb;
+use cldatabase;
 
 drop table clpost_tags;
 drop table clpost;

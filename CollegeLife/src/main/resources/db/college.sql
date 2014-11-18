@@ -1,4 +1,4 @@
-use cldb;
+use cldatabase;
 
 insert into clcollege values ( 2,'img/Albright_College.jpg',' Albright College');  
 insert into clcollege values ( 3,'img/American_University.jpg',' American University');  

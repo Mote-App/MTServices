@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;CollegeLife/src/main/resources/db/cldb.sql&apos; to &apos;cldatabase.sql&apos;" description="Rename resource &apos;cldb.sql&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/db/cldb.sql" name="cldatabase.sql" stamp="1416086303558" updateReferences="true"/>
+</session>

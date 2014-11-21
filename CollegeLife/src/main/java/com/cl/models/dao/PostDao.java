@@ -20,14 +20,31 @@ public class PostDao {
 	  private EntityManager _entityManager;
 	  
 	  /**
-	   * Method getAll
-	   * <br/>
-	   * Return all the colleges stored in the database.
+	   * Get the posts for list of users sorted by post date in descending order.
+	   * This will arrange the user list in the order of recent posting and is helpful to 
+	   * retrieve most recent post (the first record for a user) and most recent post for a user
+	   * (the second record for a user) and based on likes you can find the most popular from the same list
 	   */
 	  @SuppressWarnings("unchecked")
-	  public List<Post> getAll(String userId) {
-	    return _entityManager.createQuery("from Post where user.id = :id")
-	    		.setParameter("id", userId)
+	  public List<Long> getUserPosts(List<Long> userIds) {
+	    return _entityManager.createQuery("SELECT DISTINCT P.userId FROM Post as P WHERE userId IN :userIds ORDER BY postDate DESC")
+	    		.setParameter("userIds", userIds)
 	    		.getResultList();
+	  }	
+	  
+	  public List<Post> getMostRecentPost(long userId){
+		  return _entityManager.createQuery("SELECT P FROM Post as P WHERE userId = :userId ORDER BY postDate DESC")
+				  .setParameter("userId", userId)
+				  .setMaxResults(2)
+				  .getResultList();
+		  
+	  }
+	  
+	  public Post getMostPopularPost(long userId){
+		  return (Post)_entityManager.createQuery("SELECT P FROM Post as P WHERE userId = :userId ORDER BY likes DESC")
+				  .setParameter("userId", userId)
+				  .setMaxResults(1)
+				  .getSingleResult();
+		  
 	  }
 }

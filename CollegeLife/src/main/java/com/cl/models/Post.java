@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 @Table(name="clpost")
 public class Post {
@@ -37,7 +39,8 @@ public class Post {
 	@Column(name="likes")
 	private long likes;
 
-	@OneToMany(mappedBy="clpost")
+	@OneToMany
+	@JoinColumn(name="post_id")
 	private List<PostTags> lstPostTags;
 	
 	
@@ -102,6 +105,19 @@ public class Post {
 		this.likes = likes;
 	}
 	
+	@Override
+	public boolean equals (Object o){
+		
+		if( o == null) return false;
+		
+		if(!(o instanceof Post )) return false;
+		
+		Post other = (Post)o;
+		
+		if( this.getUserId() != other.getUserId()) return false;
+		
+		return true;
+	}
 	
 	
 }

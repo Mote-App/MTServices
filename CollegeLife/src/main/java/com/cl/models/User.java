@@ -77,8 +77,8 @@ public class User {
   @Column(name = "religion")
   private String religion;
   
-  @OneToOne(optional = false)
-  @JoinColumn(name="id")
+  @OneToOne
+  @JoinColumn(name="college_id")
   private College college;
   
  

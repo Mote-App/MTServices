@@ -1,5 +1,7 @@
 package com.cl.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -97,15 +99,15 @@ public class UserController {
   
   @RequestMapping(value="/getuser",headers="accept=application/json")
   @ResponseBody
-  public User getUser(String email){
-    //User user ;
-    //user = _userDao.getByEmail(email); 
+  public List<User> getUser(String email){
+    return _userDao.getAll(); 
     
-	User user = new User();
-	user.setId(1);
-	//user.setName("Testing");
-	//user.setEmail("t@t.com");
-	
-    return user;
+  }
+  
+  @RequestMapping(value="/getuserById",headers="accept=application/json")
+  @ResponseBody
+  public User getUserById(Long userId){
+    return _userDao.getById(userId); 
+    
   }
 } // class UserController

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Post {
+public class PostDto {
 	
-	int 			postId;
-	Date 			postingDate;
+	long 			postId;
+	String 			postingDate;
 	String 			postImg;		
 	List<String> 	tags;
 	long 			likes; 
@@ -16,20 +16,20 @@ public class Post {
 	String 			SchoolName;
 	String 			SchoolImg;
 	
-	public Post(){
+	public PostDto(){
 		tags = new ArrayList<String>();
 	}
 	
-	public int getPostId() {
+	public long getPostId() {
 		return postId;
 	}
-	public void setPostId(int postId) {
+	public void setPostId(long postId) {
 		this.postId = postId;
 	}
-	public Date getPostingDate() {
+	public String getPostingDate() {
 		return postingDate;
 	}
-	public void setPostingDate(Date postingDate) {
+	public void setPostingDate(String postingDate) {
 		this.postingDate = postingDate;
 	}
 	public String getPostImg() {

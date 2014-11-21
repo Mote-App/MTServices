@@ -1,27 +1,27 @@
 package views;
 
-public class FriendFeeds {
+public class FriendFeedDto {
 
-	String 	userId;
+	long 	userId;
 	String 	userType;
 	String 	name;
 	String 	facebookName;
 	String 	profileImg;
-	String 	schoolId;
+	long 	schoolId;
 	String 	SchoolName;
 	String 	SchoolImg;
-	Posts 	posts;
+	PostsDto 	posts;
 	
-	public FriendFeeds(){
+	public FriendFeedDto(){
 		
-		posts = new Posts();
+		posts = new PostsDto();
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -57,11 +57,11 @@ public class FriendFeeds {
 		this.profileImg = profileImg;
 	}
 
-	public String getSchoolId() {
+	public long getSchoolId() {
 		return schoolId;
 	}
 
-	public void setSchoolId(String schoolId) {
+	public void setSchoolId(long schoolId) {
 		this.schoolId = schoolId;
 	}
 
@@ -81,11 +81,11 @@ public class FriendFeeds {
 		SchoolImg = schoolImg;
 	}
 
-	public Posts getPosts() {
+	public PostsDto getPosts() {
 		return posts;
 	}
 
-	public void setPosts(Posts posts) {
+	public void setPosts(PostsDto posts) {
 		this.posts = posts;
 	}
 	

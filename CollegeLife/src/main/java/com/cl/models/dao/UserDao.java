@@ -49,6 +49,17 @@ public class UserDao {
     return;
   }
   
+  /*
+   * get user
+   */
+  
+  public User getUser(Long userId){
+	  
+	  return (User)_entityManager.createQuery("SELECT P FROM User P where P.id = :userId")
+	  .setParameter("userId", userId)
+	  .getSingleResult();
+  }
+  
   /**
    * Method delete
    * <br/>
@@ -89,7 +100,7 @@ public class UserDao {
    * <br/>
    * Return the user having the passed id.
    */
-  public User getById(long id) {
+  public User getById(Long id) {
     return _entityManager.find(User.class, id);
   }
 

@@ -1,5 +1,6 @@
 package com.cl.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,37 +19,36 @@ public class PostTags {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@ManyToOne
-	@JoinColumn(name="id")
-	private Post post;
+	@Column(name="post_id")
+	private long postId;
 	
-	@OneToOne(optional=false)
-	@JoinColumn(name="id")
-	private Tag tag;
+	@Column(name="tag_id")
+	private long tagId;
 
 	public long getId() {
 		return id;
+	}
+
+	public long getPostId() {
+		return postId;
+	}
+
+	public void setPostId(long postId) {
+		this.postId = postId;
+	}
+
+	public long getTagId() {
+		return tagId;
+	}
+
+	public void setTagId(long tagId) {
+		this.tagId = tagId;
 	}
 
 	public void setId(long id) {
 		this.id = id;
 	}
 
-	public Post getPost() {
-		return post;
-	}
-
-	public void setPost(Post post) {
-		this.post = post;
-	}
-
-	public Tag getTag() {
-		return tag;
-	}
-
-	public void setTag(Tag tag) {
-		this.tag = tag;
-	}
 	
 	
 	

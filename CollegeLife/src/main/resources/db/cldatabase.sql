@@ -1,5 +1,4 @@
-
-use cldb;
+use cldatabase;
 
 CREATE TABLE clcollege (
     id          INTEGER      PRIMARY KEY,
@@ -47,12 +46,12 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE cltag (
     id        INTEGER      PRIMARY KEY,
     tag_type  VARCHAR(50)  NOT NULL,
-    sub_tag   VARCHAR(250)  NOT NULL
+    sub_tag   VARCHAR(250) NOT NULL
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE clpost(
+CREATE TABLE clpost (
 	id					INTEGER			PRIMARY KEY,
 	user_id				INTEGER      	REFERENCES clprofile(id),
 	post_image_path  	VARCHAR(250) 	NOT NULL,

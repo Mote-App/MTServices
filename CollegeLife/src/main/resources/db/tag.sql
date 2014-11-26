@@ -1,4 +1,4 @@
-use cldatabase;
+use cldb;
 
 insert into cltag values ( 1, 'smart','National News'); 
 insert into cltag values ( 2, 'smart','School based news'); 

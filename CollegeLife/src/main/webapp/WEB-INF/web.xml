@@ -28,8 +28,8 @@
 	</servlet>
 		
 	<servlet-mapping>
-		<servlet-name>activity</servlet-name>
-    	<url-pattern>/activity/*</url-pattern>
+		<servlet-name>*</servlet-name>
+    	<url-pattern>/*/*</url-pattern>
 	</servlet-mapping>
 	
     <welcome-file-list>

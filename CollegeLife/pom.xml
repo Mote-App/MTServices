@@ -6,7 +6,7 @@
 	<groupId>com.cl</groupId>
 	<artifactId>CollegeLife</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	
 	<name>CollegeLife</name>
 	<description>Creative Platform for College Students</description>
@@ -104,14 +104,14 @@
 		<java.version>1.7</java.version>
 	</properties>
 
-	<build>
+	<!-- <build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-	</build>
+	</build> -->
 
 	<repositories>
 		<repository>

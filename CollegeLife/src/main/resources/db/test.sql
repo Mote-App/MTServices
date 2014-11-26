@@ -12,6 +12,9 @@ values(3,"Kan", "Kam", "K", "1976-01-01", "k@k.com", "M", "kan","kan","img/kan.p
 insert into clprofile(id,first_name, last_name, middle_name, birth_date, email_address, gender, user_name, password, cover_picture_url, is_alumni, graduation_year, about_me, activities, interest, profile_picture_url, religion, college_id) 
 values(4,"Wan", "Wam", "W", "1976-01-01", "w@w.com", "M", "wan","wan","img/wan.png", "N", 0, "I am a pro athlete", "Football, cycling", "sports, studying", "img\wan.png", "Asian", 5);
 
+insert into clprofile(id,first_name, last_name, middle_name, birth_date, email_address, gender, user_name, password, cover_picture_url, is_alumni, graduation_year, about_me, activities, interest, profile_picture_url, religion, college_id) 
+values(5,"user", "user", "S", "1976-01-01", "s@s.com", "M", "user","user","img/san.png", "N", 0, "I am a pro athlete", "Football, cycling", "sports, studying", "img\san.png", "Asian", 2);
+
 
 insert into clfriend_relation values(1, true, 1, 1);
 insert into clfriend_relation values(2, true, 2, 1);

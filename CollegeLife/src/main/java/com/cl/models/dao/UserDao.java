@@ -1,11 +1,17 @@
 package com.cl.models.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import com.cl.models.User;
@@ -24,7 +30,7 @@ import com.cl.models.User;
  */
 @Repository
 @Transactional
-public class UserDao {
+public class UserDao{
   
   // ==============
   // PRIVATE FIELDS
@@ -49,6 +55,14 @@ public class UserDao {
     return;
   }
   
+  public User getUserbyName(String userName){
+	  
+	  User user = (User)_entityManager.createQuery("SELECT P FROM User P where P.userName = :userName")
+				.setParameter("userName", userName)
+				.getSingleResult();
+	  
+	  return user;
+  }
   /*
    * get user
    */
@@ -95,6 +109,18 @@ public class UserDao {
         .getSingleResult();
   }
 
+  /**
+   * Method getByEmail
+   * <br/>
+   * Return the user having the passed email.
+   */
+  public User getByName(String userName) {
+    return (User) _entityManager.createQuery(
+        "from User where userName = :userName")
+        .setParameter("userName", userName)
+        .getSingleResult();
+  }
+  
   /**
    * Method getById
    * <br/>

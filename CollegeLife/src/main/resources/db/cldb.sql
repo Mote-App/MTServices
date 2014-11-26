@@ -1,4 +1,4 @@
-use cldatabase;
+use cldb;
 
 CREATE TABLE clcollege (
     id          INTEGER      PRIMARY KEY,

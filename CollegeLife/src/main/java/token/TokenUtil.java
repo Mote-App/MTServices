@@ -3,17 +3,16 @@ package token;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.codec.Hex;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.crypto.codec.Hex;
 
 public class TokenUtil {
 
-	public static final String MAGIC_KEY = "obfuscate";
+	/*public static final String MAGIC_KEY = "obfuscate";
 	
 	
 	public static String createToken(UserDetails userDetails)
 	{
-		/* Expires in one hour */
 		long expires = System.currentTimeMillis() + 1000L * 60 * 60;
 
 		StringBuilder tokenBuilder = new StringBuilder();
@@ -71,5 +70,5 @@ public class TokenUtil {
 		}
 
 		return signature.equals(TokenUtil.computeSignature(userDetails, expires));
-	}
+	}*/
 }

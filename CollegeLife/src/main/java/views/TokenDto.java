@@ -2,8 +2,8 @@ package views;
 
 public class TokenDto {
 
-	private final String token;
-	private final long userId;
+	private String token;
+	private long userId;
 	
 	public TokenDto(String token, long userId){
 		
@@ -11,6 +11,15 @@ public class TokenDto {
 		this.userId = userId;
 	}
 	
+	
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
 	public String getToken() {
 		return token;
 	}

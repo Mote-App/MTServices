@@ -69,3 +69,12 @@ CREATE TABLE clpost_tags (
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE clpost_custom_tags (
+	id 					INTEGER		PRIMARY KEY,
+	post_id				INTEGER		REFERENCES clpost(id),
+	tag_name			INTEGER		NOT NULL,
+	user_id				INTEGER 	REFERENCES clprofile(id)	
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;

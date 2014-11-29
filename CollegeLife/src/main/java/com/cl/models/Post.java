@@ -43,6 +43,9 @@ public class Post {
 	@JoinColumn(name="post_id")
 	private List<PostTags> lstPostTags;
 	
+	@OneToMany
+	@JoinColumn(name="post_id")
+	private List<PostCustomTags> lstPostCustomTags;
 	
 	public Post(){
 		lstPostTags = new ArrayList<PostTags>();
@@ -105,6 +108,14 @@ public class Post {
 		this.likes = likes;
 	}
 	
+	public List<PostCustomTags> getLstPostCustomTags() {
+		return lstPostCustomTags;
+	}
+
+	public void setLstPostCustomTags(List<PostCustomTags> lstPostCustomTags) {
+		this.lstPostCustomTags = lstPostCustomTags;
+	}
+
 	@Override
 	public boolean equals (Object o){
 		

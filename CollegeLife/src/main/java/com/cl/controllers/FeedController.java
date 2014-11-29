@@ -36,10 +36,10 @@ public class FeedController {
 	@Autowired
 	private UserDao _userDao;
 	
-	/**
-	   * Create a new user with an auto-generated id and email and name as passed 
-	   * values.
-	   */
+	/** 
+	 * Create a new user with an auto-generated id and email and name as passed 
+	 * values.
+	 */
 	  @RequestMapping(value="/friend_feeds", method = RequestMethod.GET, produces="application/json")
 	  @ResponseBody
 	  public List<FriendFeedDto> getFriendFeeds(Long userId) {
@@ -97,7 +97,6 @@ public class FeedController {
 	    		friendFeed.setSchoolName(user.getCollege().getName());
 	    		friendFeed.setUserType(user.getIsAlumni());
 	    		
-	    		
 	    		PostsDto postsDto = new PostsDto();
 	    		
 	    		/*
@@ -117,7 +116,6 @@ public class FeedController {
 		    		postsDto.setCurrentPost(currentPost);
 
 	    		}
-	    			
 	    		
 	    		/*
 	    		 * The count should be 2 to get the most recent post, else current post is treated as most recent post
@@ -163,6 +161,7 @@ public class FeedController {
 		  destination.setCaption(source.getCaption());
 		  destination.setLikes(source.getLikes());
 		  destination.setPostingDate(source.getPostingDate());
+		  destination.setProgressInd(source.getProgressInd());
 	  }
 	  
 	  private void populatePostDto(PostDto destination, Post source){
@@ -171,6 +170,7 @@ public class FeedController {
 		  destination.setPostImg(source.getPostImgPath());
 		  destination.setCaption(source.getCaption());
 		  destination.setLikes(source.getLikes());
+		  destination.setProgressInd(35);
   		
   		/*
   		 * Calculate the elapsed time in Hours, Min or Days from posting date to current date 

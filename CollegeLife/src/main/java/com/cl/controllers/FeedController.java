@@ -19,8 +19,12 @@ import views.PostDto;
 import views.PostsDto;
 
 import com.cl.models.Post;
+import com.cl.models.PostCustomTags;
+import com.cl.models.PostTags;
+import com.cl.models.Tag;
 import com.cl.models.User;
 import com.cl.models.dao.PostDao;
+import com.cl.models.dao.TagDao;
 import com.cl.models.dao.UserDao;
 import com.cl.models.dao.UserFriendsDao;
 
@@ -36,9 +40,12 @@ public class FeedController {
 	@Autowired
 	private UserDao _userDao;
 	
+	@Autowired
+	private TagDao _tagDao;
+	
 	/** 
-	 * Create a new user with an auto-generated id and email and name as passed 
-	 * values.
+	 * Friend feeds, for generating VO. 
+	 * 
 	 */
 	  @RequestMapping(value="/friend_feeds", method = RequestMethod.GET, produces="application/json")
 	  @ResponseBody
@@ -128,7 +135,7 @@ public class FeedController {
 	    		}else{
 	    			copyPostDto(mostRecentPost, currentPost);	
 	    		}
-	    		postsDto.setCurrentPost(mostRecentPost);
+	    		postsDto.setMostRecentPost(mostRecentPost);
 	    		
 	    		/*
 	    		 * Find most popular post
@@ -141,6 +148,8 @@ public class FeedController {
 	    		}else{
 	    			copyPostDto(mostPopularPost, currentPost);
 	    		}
+	    		
+	    		postsDto.setPopularPost(mostPopularPost);
 	    		
 	    		friendFeed.setPosts(postsDto);
 	    		
@@ -162,6 +171,8 @@ public class FeedController {
 		  destination.setLikes(source.getLikes());
 		  destination.setPostingDate(source.getPostingDate());
 		  destination.setProgressInd(source.getProgressInd());
+		  destination.setTags(source.getTags());
+		  destination.setCustomTags(source.getCustomTags());
 	  }
 	  
 	  private void populatePostDto(PostDto destination, Post source){
@@ -176,11 +187,39 @@ public class FeedController {
   		 * Calculate the elapsed time in Hours, Min or Days from posting date to current date 
   		 */
 		  destination.setPostingDate(calculateElapsedTime(source.getPostDate()));
+		  
+		  /*
+		   * Populate tags
+		   */
+		  List<String> lstTags = new ArrayList<String>();
+		  
+		  for(int i=0; i < source.getLstPostTags().size(); i++){
+			  
+			  PostTags postTag = source.getLstPostTags().get(i);
+			  Tag tag = _tagDao.getTag(postTag.getTagId());
+			  
+			  lstTags.add(tag.getSubTag());
+			  
+			  destination.setTagCategory(tag.getTagType());
+		  }
+		  
+		  destination.setTags(lstTags);
+		  
+		  /*
+		   * populate custom tags
+		   */
+		  List<String> lstCustomTags = new ArrayList<String>();
+		  
+		  for(int i = 0; i < source.getLstPostCustomTags().size();i++){
+			  
+			  PostCustomTags customPostTag = source.getLstPostCustomTags().get(i);
+			  lstCustomTags.add(customPostTag.getTagName());
+		  }
+		  
+		  destination.setCustomTags(lstCustomTags);
 	  }
 	  
 	  private String calculateElapsedTime(Calendar dt){
-		  
-		  Calendar now = Calendar.getInstance();
 		  
 		  DateTime start = new DateTime(dt.get(Calendar.YEAR), dt.get(Calendar.MONTH), dt.get(Calendar.DAY_OF_MONTH) + 1, dt.get(Calendar.HOUR_OF_DAY), dt.get(Calendar.MINUTE));
 		  DateTime end = new DateTime();
@@ -200,6 +239,14 @@ public class FeedController {
 		  }
 		 		  
 		  return elspasedTime;
+	  }
+	  
+	  @RequestMapping(value="/school_feeds", method = RequestMethod.GET, produces="application/json")
+	  @ResponseBody
+	  public List<FriendFeedDto> getSchoolFeeds(Long schoolId) {
+		  
+		  
+		  return null;
 	  }
 	  
 }

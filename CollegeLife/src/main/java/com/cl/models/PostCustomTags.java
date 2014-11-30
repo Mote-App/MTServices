@@ -19,7 +19,7 @@ public class PostCustomTags {
 	private long postId;
 	
 	@Column(name="tag_name")
-	private long tagName;
+	private String tagName;
 	
 	@Column(name="user_id")
 	private long userId;
@@ -40,11 +40,11 @@ public class PostCustomTags {
 		this.postId = postId;
 	}
 
-	public long getTagName() {
+	public String getTagName() {
 		return tagName;
 	}
 
-	public void setTagName(long tagName) {
+	public void setTagName(String tagName) {
 		this.tagName = tagName;
 	}
 

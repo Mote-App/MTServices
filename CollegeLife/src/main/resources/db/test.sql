@@ -21,29 +21,29 @@ insert into clfriend_relation values(2, true, 2, 1);
 insert into clfriend_relation values(3, true, 3, 1);
 insert into clfriend_relation values(4, true, 4, 1);
 
-insert into clpost values(1, 1, "img/posts/post1.jpg", "2014-11-01", "My first year at college", 20);
-insert into clpost values(2, 1, "img/posts/post2.jpg", "2014-11-01", "Amazing nature", 10);
-insert into clpost values(3, 1, "img/posts/post3.jpg", "2014-11-01", "Great Achievement", 50);
-insert into clpost values(4, 1, "img/posts/post4.jpg", "2014-11-01", "Winner", 5);
-insert into clpost values(5, 1, "img/posts/post5.jpg", "2014-11-01", "playfull", 1);
+insert into clpost values(1, 1, "img/posts/post1.jpg", "2014-11-01", "My first year at college", 20,'N','N');
+insert into clpost values(2, 1, "img/posts/post2.jpg", "2014-11-01", "Amazing nature", 10,'N','N');
+insert into clpost values(3, 1, "img/posts/post3.jpg", "2014-11-01", "Great Achievement", 50,'N','N');
+insert into clpost values(4, 1, "img/posts/post4.jpg", "2014-11-01", "Winner", 5,'N','N');
+insert into clpost values(5, 1, "img/posts/post5.jpg", "2014-11-01", "playfull", 1,'N','N');
 
-insert into clpost values(6, 2, "img/posts/post6.jpg", "2014-11-01", "Life excitement", 20);
-insert into clpost values(7, 2, "img/posts/post7.jpg", "2014-11-01", "Fun and Excitement", 10);
-insert into clpost values(8, 2, "img/posts/post8.jpg", "2014-11-01", "Great Project", 50);
-insert into clpost values(9, 2, "img/posts/post9.jpg", "2014-11-01", "Creativity", 5);
-insert into clpost values(10, 2, "img/posts/post10.jpg", "2014-11-01", "Fired Up!!!", 1);
+insert into clpost values(6, 2, "img/posts/post6.jpg", "2014-11-01", "Life excitement", 20,'N','N');
+insert into clpost values(7, 2, "img/posts/post7.jpg", "2014-11-01", "Fun and Excitement", 10,'N','N');
+insert into clpost values(8, 2, "img/posts/post8.jpg", "2014-11-01", "Great Project", 50,'N','N');
+insert into clpost values(9, 2, "img/posts/post9.jpg", "2014-11-01", "Creativity", 5,'N','N');
+insert into clpost values(10, 2, "img/posts/post10.jpg", "2014-11-01", "Fired Up!!!", 1,'N','N');
 
-insert into clpost values(11, 3, "img/posts/post11.jpg", "2014-11-01", "Life excitement", 20);
-insert into clpost values(12, 3, "img/posts/post12.jpg", "2014-11-01", "Fun and Excitement", 10);
-insert into clpost values(13, 3, "img/posts/post13.jpg", "2014-11-01", "Great Project", 50);
-insert into clpost values(14, 3, "img/posts/post14.jpg", "2014-11-01", "Creativity", 5);
-insert into clpost values(15, 3, "img/posts/post15.jpg", "2014-11-01", "Fired Up!!!", 1);
+insert into clpost values(11, 3, "img/posts/post11.jpg", "2014-11-01", "Life excitement", 20,'N','N');
+insert into clpost values(12, 3, "img/posts/post12.jpg", "2014-11-01", "Fun and Excitement", 10,'N','N');
+insert into clpost values(13, 3, "img/posts/post13.jpg", "2014-11-01", "Great Project", 50,'N','N');
+insert into clpost values(14, 3, "img/posts/post14.jpg", "2014-11-01", "Creativity", 5,'N','N');
+insert into clpost values(15, 3, "img/posts/post15.jpg", "2014-11-01", "Fired Up!!!", 1,'N','N');
 
-insert into clpost values(16, 4, "img/posts/post16.jpg", "2014-11-01", "Life excitement", 20);
-insert into clpost values(17, 4, "img/posts/post17.jpg", "2014-11-01", "Fun and Excitement", 10);
-insert into clpost values(18, 4, "img/posts/post18.jpg", "2014-11-01", "Great Project", 50);
-insert into clpost values(19, 4, "img/posts/post19.jpg", "2014-11-01", "Creativity", 5);
-insert into clpost values(20, 4, "img/posts/post20.jpg", "2014-11-01", "Fired Up!!!", 1);
+insert into clpost values(16, 4, "img/posts/post16.jpg", "2014-11-01", "Life excitement", 20,'N','N');
+insert into clpost values(17, 4, "img/posts/post17.jpg", "2014-11-01", "Fun and Excitement", 10,'N','N');
+insert into clpost values(18, 4, "img/posts/post18.jpg", "2014-11-01", "Great Project", 50,'N','N');
+insert into clpost values(19, 4, "img/posts/post19.jpg", "2014-11-01", "Creativity", 5,'N','N');
+insert into clpost values(20, 4, "img/posts/post20.jpg", "2014-11-01", "Fired Up!!!", 1,'N','N');
 
 insert into clpost_tags(id, post_id, tag_id) values(1, 1, 3); 
 insert into clpost_tags(id, post_id, tag_id) values(2, 1, 7); 
@@ -102,4 +102,8 @@ insert into clpost_custom_tags(id, post_id, tag_name, user_id) values(8, 4, "#am
 insert into clpost_custom_tags(id, post_id, tag_name, user_id) values(9, 5, "#amazing", 1);
 insert into clpost_custom_tags(id, post_id, tag_name, user_id) values(10, 5, "#amazing", 1);
 
+
+insert into clpost_school values(1, 1, 3, 2, 50);
+
+insert into clpost_national values(1, 1, 3, 2, 50);
 

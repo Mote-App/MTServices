@@ -15,15 +15,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import views.FriendFeedDto;
+import views.NationalFeedDto;
 import views.PostDto;
 import views.PostsDto;
+import views.SchoolFeedDto;
 
+import com.cl.models.NationalFeed;
 import com.cl.models.Post;
 import com.cl.models.PostCustomTags;
 import com.cl.models.PostTags;
+import com.cl.models.SchoolFeed;
 import com.cl.models.Tag;
 import com.cl.models.User;
+import com.cl.models.dao.NationalFeedDao;
 import com.cl.models.dao.PostDao;
+import com.cl.models.dao.SchoolFeedDao;
 import com.cl.models.dao.TagDao;
 import com.cl.models.dao.UserDao;
 import com.cl.models.dao.UserFriendsDao;
@@ -35,13 +41,19 @@ public class FeedController {
 	private PostDao _postDao;
 	
 	@Autowired
-	private UserFriendsDao _userFirendsDao;
+	private UserFriendsDao _userFriendsDao;
 	
 	@Autowired
 	private UserDao _userDao;
 	
 	@Autowired
 	private TagDao _tagDao;
+	
+	@Autowired
+	private SchoolFeedDao _schoolFeedDao;
+	
+	@Autowired
+	private NationalFeedDao _nationaFeedDao;
 	
 	/** 
 	 * Friend feeds, for generating VO. 
@@ -74,7 +86,7 @@ public class FeedController {
 	    	
 	    	friendFeeds = new ArrayList<FriendFeedDto>();
 	    	
-	    	List<Long> friends  = _userFirendsDao.getFriends(userId);
+	    	List<Long> friends  = _userFriendsDao.getFriends(userId);
 	    	
 	    	/*
 	    	 * To include logged user id along with their friends and fetch all their post in descending order by post date
@@ -243,10 +255,82 @@ public class FeedController {
 	  
 	  @RequestMapping(value="/school_feeds", method = RequestMethod.GET, produces="application/json")
 	  @ResponseBody
-	  public List<FriendFeedDto> getSchoolFeeds(Long schoolId) {
+	  public List<SchoolFeedDto> getSchoolFeeds(Long collegeId) {
 		  
+		 List<SchoolFeedDto> lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
+		 
+		 List<SchoolFeed> feeds = _schoolFeedDao.getSchoolFeeds(collegeId);
+		 
+		 for(int i = 0; i < feeds.size(); i++){
+			 SchoolFeedDto dto = new SchoolFeedDto();
+			 
+			 dto.setUserId(feeds.get(i).getUser().getId());
+			 dto.setUserType(feeds.get(i).getUser().getIsAlumni());
+			 dto.setName(feeds.get(i).getUser().getUserName());
+			 dto.setSchoolId(feeds.get(i).getCollege().getId());
+			 dto.setSchoolName(feeds.get(i).getCollege().getName());
+			 dto.setSchoolImg(feeds.get(i).getCollege().getImgPath());
+			 dto.setProfileImg(feeds.get(i).getUser().getProfilePictureUrl());
+			 
+			 PostDto postDto = new PostDto();
+			 
+			 populatePostDto(postDto, feeds.get(i).getPost());
+			 
+			 dto.setPost(postDto);
+			 
+			 lstSchoolFeedDto.add(dto);
+			 
+			 
+			 /*postDto.setPostId(feeds.get(i).getPost().getId());
+			 postDto.setPostImg(feeds.get(i).getPost().getPostImgPath());
+			 postDto.setCaption(feeds.get(i).getPost().getCaption());
+			 postDto.setPostingDate(calculateElapsedTime(feeds.get(i).getPost().getPostDate()));
+			 postDto.setLikes(feeds.get(i).getPost().getLikes());*/
+			 
+			 
+		 }
+		 
+		 return lstSchoolFeedDto;
+	  }
+	  
+	  @RequestMapping(value="/national_feeds", method = RequestMethod.GET, produces="application/json")
+	  @ResponseBody
+	  public List<NationalFeedDto> getNationalFeeds(Long collegeId) {
 		  
-		  return null;
+		 List<NationalFeedDto> lstNationalFeedDto = new ArrayList<NationalFeedDto>();
+		 
+		 List<NationalFeed> feeds = _nationaFeedDao.getNationalFeeds(collegeId);
+		 
+		 for(int i = 0; i < feeds.size(); i++){
+			 NationalFeedDto dto = new NationalFeedDto();
+			 
+			 dto.setUserId(feeds.get(i).getUser().getId());
+			 dto.setUserType(feeds.get(i).getUser().getIsAlumni());
+			 dto.setName(feeds.get(i).getUser().getUserName());
+			 dto.setSchoolId(feeds.get(i).getCollege().getId());
+			 dto.setSchoolName(feeds.get(i).getCollege().getName());
+			 dto.setSchoolImg(feeds.get(i).getCollege().getImgPath());
+			 dto.setProfileImg(feeds.get(i).getUser().getProfilePictureUrl());
+			 
+			 PostDto postDto = new PostDto();
+			 
+			 populatePostDto(postDto, feeds.get(i).getPost());
+			 
+			 dto.setPost(postDto);
+			 
+			 lstNationalFeedDto.add(dto);
+			 
+			 
+			 /*postDto.setPostId(feeds.get(i).getPost().getId());
+			 postDto.setPostImg(feeds.get(i).getPost().getPostImgPath());
+			 postDto.setCaption(feeds.get(i).getPost().getCaption());
+			 postDto.setPostingDate(calculateElapsedTime(feeds.get(i).getPost().getPostDate()));
+			 postDto.setLikes(feeds.get(i).getPost().getLikes());*/
+			 
+			 
+		 }
+		 
+		 return lstNationalFeedDto;
 	  }
 	  
 }

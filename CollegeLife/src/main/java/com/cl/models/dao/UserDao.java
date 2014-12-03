@@ -57,6 +57,16 @@ public class UserDao{
 	  
 	  return user;
   }
+  
+  public List<User> getUsersbySchool(long schoolId){
+	  
+	  List<User> users = _entityManager.createQuery("SELECT P FROM User P where P.college.id = :schoolId")
+				.setParameter("schoolId", schoolId)
+				.getResultList();
+	  
+	  return users;
+  }
+  
   /*
    * get user
    */

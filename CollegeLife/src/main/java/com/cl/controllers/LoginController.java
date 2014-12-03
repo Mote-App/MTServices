@@ -28,7 +28,7 @@ public class LoginController {
 		
 		if ( user.getPassword().equals(login.getPassword())){
 			
-			TokenDto dto = new TokenDto("To Be Implemented", user.getId());
+			TokenDto dto = new TokenDto("To Be Implemented", user.getId(), user.getCollege().getId());
 			
 			return dto;
 		}else{

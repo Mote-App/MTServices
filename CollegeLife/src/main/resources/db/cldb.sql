@@ -68,7 +68,10 @@ CREATE TABLE clpost (
 	post_image_path  	VARCHAR(250) 	NOT NULL,
 	post_date        	DATE         	NULL,
 	caption          	VARCHAR(250) 	NOT NULL,
-	likes            	INTEGER        	NULL	
+	likes            	INTEGER        	NOT NULL DEFAULT 0,
+	school_promote		CHAR(1)			DEFAULT 'N',
+	national_promote	CHAR(1)			DEFAULT 'N'
+		
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -98,4 +101,36 @@ DEFAULT CHARACTER SET = utf8;
 
 create index `clpost_custom_tags` on clpost_custom_tags(id);
 create index `clpost_custom_tags_post_id` on clpost_custom_tags(post_id);
+
+
+CREATE TABLE clpost_school (
+	id					INTEGER			PRIMARY KEY,
+	user_id				INTEGER      	REFERENCES clprofile(id),
+	post_id				INTEGER		REFERENCES clpost(id),		
+    college_id          INTEGER        	REFERENCES clcollege(id),
+    likes            	INTEGER        	NOT NULL DEFAULT 0
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+create index `clpost_school` on clpost_school(id);
+create index `clpost_school_user_id` on clpost_school(user_id);
+create index `clpost_school_post_id` on clpost_school(post_id);
+create index `clpost_school_college_id` on clpost_school(college_id);
+
+
+CREATE TABLE clpost_national (
+	id					INTEGER			PRIMARY KEY,
+	user_id				INTEGER      	REFERENCES clprofile(id),
+	post_id				INTEGER			REFERENCES clpost(id),		
+    college_id          INTEGER        	REFERENCES clcollege(id),
+    likes            	INTEGER        	NOT NULL DEFAULT 0
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+create index `clpost_national` on clpost_national(id);
+create index `clpost_national_user_id` on clpost_national(user_id);
+create index `clpost_national_post_id` on clpost_national(post_id);
+create index `clpost_national_college_id` on clpost_national(college_id);
 

@@ -4,11 +4,13 @@ public class TokenDto {
 
 	private String token;
 	private long userId;
+	private long collegeId;
 	
-	public TokenDto(String token, long userId){
+	public TokenDto(String token, long userId, long collegeId){
 		
 		this.token = token;
 		this.userId = userId;
+		this.collegeId = collegeId;
 	}
 	
 	
@@ -26,6 +28,15 @@ public class TokenDto {
 
 	public long getUserId() {
 		return userId;
+	}
+
+	public long getCollegeId() {
+		return collegeId;
+	}
+
+
+	public void setCollegeId(long collegeId) {
+		this.collegeId = collegeId;
 	}
 	
 }

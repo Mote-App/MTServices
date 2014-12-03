@@ -12,9 +12,6 @@ public class PostDto {
 	long 			likes; 
 	String 			caption;
 	int				progressInd; //default value
-	int 			schoolId;
-	String 			SchoolName;
-	String 			SchoolImg;
 	String 			tagCategory; //Each post will only have one category and many sub categories
 	List<String> 	tags;
 	List<String>	customTags;
@@ -58,24 +55,6 @@ public class PostDto {
 	}
 	public void setCaption(String caption) {
 		this.caption = caption;
-	}
-	public int getSchoolId() {
-		return schoolId;
-	}
-	public void setSchoolId(int schoolId) {
-		this.schoolId = schoolId;
-	}
-	public String getSchoolName() {
-		return SchoolName;
-	}
-	public void setSchoolName(String schoolName) {
-		SchoolName = schoolName;
-	}
-	public String getSchoolImg() {
-		return SchoolImg;
-	}
-	public void setSchoolImg(String schoolImg) {
-		SchoolImg = schoolImg;
 	}
 
 	public String getTagCategory() {

@@ -1,0 +1,8 @@
+
+What is the factor to pick Top 100 Schools?
+
+Ans. On the School Selection Wheel on the School and National Feed is doesn't make sense to have X number of schools on a wheel... instead the wheel should consist of the top 100 (or maybe even top 50) schools based on number of likes total for that school. The likes for that school are all of the students that go to that school-- their posts and all of the likes all time on those posts make up the top schools. Then there will be a search bar to type in a school of choice
+So all students at JMU and their post likes will make up JMU's ranking
+It may be the highest number of likes in the country or so on
+just an analytic to keep track of and use to determine the schools present on the wheel
+

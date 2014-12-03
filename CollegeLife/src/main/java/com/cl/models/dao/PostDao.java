@@ -15,9 +15,9 @@ import com.cl.models.Post;
 public class PostDao {
 
 	//An EntityManager will be automatically injected from entityManagerFactory
-	  // setup on DatabaseConfig class.
-	  @PersistenceContext
-	  private EntityManager _entityManager;
+	// setup on DatabaseConfig class.
+	@PersistenceContext
+	private EntityManager _entityManager;
 	  
 	  /**
 	   * Get the posts for list of users sorted by post date in descending order.
@@ -47,4 +47,5 @@ public class PostDao {
 				  .getSingleResult();
 		  
 	  }
+	  
 }

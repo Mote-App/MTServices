@@ -6,7 +6,7 @@
 	<groupId>com.cl</groupId>
 	<artifactId>CollegeLife</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	
 	<name>CollegeLife</name>
 	<description>Creative Platform for College Students</description>
@@ -15,14 +15,13 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.2.0.M2</version>
-		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<dependencies>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
@@ -89,7 +88,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
+			
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -104,14 +103,14 @@
 		<java.version>1.7</java.version>
 	</properties>
 
-	<!-- <build>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-	</build> -->
+	</build>
 
 	<repositories>
 		<repository>

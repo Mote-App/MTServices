@@ -8,6 +8,8 @@ CREATE TABLE clcollege (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+create index `clcollege` on clcollege(id);
+
 CREATE TABLE clprofile (
     id                  INTEGER      	PRIMARY KEY, 
     first_name          VARCHAR(50)  	NOT NULL, 
@@ -31,6 +33,9 @@ CREATE TABLE clprofile (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+create index `clprofile_id` on clprofile(id);
+create index `clprofile_name` on clprofile(user_name);
+
 
 /* College Life Friend Relation table */
 CREATE TABLE clfriend_relation (
@@ -42,6 +47,9 @@ CREATE TABLE clfriend_relation (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+create index `clfriend_relation_id` on clfriend_relation(id);
+create index `clfriend_relation_user_id` on clfriend_relation(user_id);
+
 
 CREATE TABLE cltag (
     id        INTEGER      PRIMARY KEY,
@@ -50,6 +58,9 @@ CREATE TABLE cltag (
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+create index `cltag` on cltag(id);
+
 
 CREATE TABLE clpost (
 	id					INTEGER			PRIMARY KEY,
@@ -62,6 +73,9 @@ CREATE TABLE clpost (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+create index `clpost` on clpost(id);
+create index `clpost_user_id` on clpost(user_id);
+
 CREATE TABLE clpost_tags (
 	id 					INTEGER		PRIMARY KEY,
 	post_id				INTEGER		REFERENCES clpost(id),
@@ -69,3 +83,19 @@ CREATE TABLE clpost_tags (
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+create index `clpost_tags` on clpost_tags(id);
+create index `clpost_tags_post_id` on clpost_tags(post_id);
+
+CREATE TABLE clpost_custom_tags (
+	id 					INTEGER		PRIMARY KEY,
+	post_id				INTEGER		REFERENCES clpost(id),
+	tag_name			VARCHAR(250)		NOT NULL,
+	user_id				INTEGER 	REFERENCES clprofile(id)	
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+create index `clpost_custom_tags` on clpost_custom_tags(id);
+create index `clpost_custom_tags_post_id` on clpost_custom_tags(post_id);
+

@@ -8,13 +8,16 @@ public class PostDto {
 	
 	long 			postId;
 	String 			postingDate;
-	String 			postImg;		
-	List<String> 	tags;
+	String 			postImg;
 	long 			likes; 
 	String 			caption;
+	int				progressInd; //default value
 	int 			schoolId;
 	String 			SchoolName;
 	String 			SchoolImg;
+	String 			tagCategory; //Each post will only have one category and many sub categories
+	List<String> 	tags;
+	List<String>	customTags;
 	
 	public PostDto(){
 		tags = new ArrayList<String>();
@@ -73,6 +76,30 @@ public class PostDto {
 	}
 	public void setSchoolImg(String schoolImg) {
 		SchoolImg = schoolImg;
+	}
+
+	public String getTagCategory() {
+		return tagCategory;
+	}
+
+	public void setTagCategory(String tagCategory) {
+		this.tagCategory = tagCategory;
+	}
+
+	public List<String> getCustomTags() {
+		return customTags;
+	}
+
+	public void setCustomTags(List<String> customTags) {
+		this.customTags = customTags;
+	}
+
+	public int getProgressInd() {
+		return progressInd;
+	}
+
+	public void setProgressInd(int progressInd) {
+		this.progressInd = progressInd;
 	}
 	
 	

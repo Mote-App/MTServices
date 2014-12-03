@@ -24,7 +24,7 @@ import com.cl.models.User;
  */
 @Repository
 @Transactional
-public class UserDao {
+public class UserDao{
   
   // ==============
   // PRIVATE FIELDS
@@ -49,6 +49,14 @@ public class UserDao {
     return;
   }
   
+  public User getUserbyName(String userName){
+	  
+	  User user = (User)_entityManager.createQuery("SELECT P FROM User P where P.userName = :userName")
+				.setParameter("userName", userName)
+				.getSingleResult();
+	  
+	  return user;
+  }
   /*
    * get user
    */
@@ -95,6 +103,18 @@ public class UserDao {
         .getSingleResult();
   }
 
+  /**
+   * Method getByEmail
+   * <br/>
+   * Return the user having the passed email.
+   */
+  public User getByName(String userName) {
+    return (User) _entityManager.createQuery(
+        "from User where userName = :userName")
+        .setParameter("userName", userName)
+        .getSingleResult();
+  }
+  
   /**
    * Method getById
    * <br/>

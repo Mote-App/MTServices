@@ -14,7 +14,7 @@ import com.cl.models.Tag;
 @Transactional
 public class TagDao {
 	
-	 //An EntityManager will be automatically injected from entityManagerFactory
+	  //An EntityManager will be automatically injected from entityManagerFactory
 	  // setup on DatabaseConfig class.
 	  @PersistenceContext
 	  private EntityManager _entityManager;
@@ -31,4 +31,11 @@ public class TagDao {
 	    		.getResultList();
 	  }
 	  
+	  public Tag getTag(long tagId){
+		  
+		    return (Tag)_entityManager.createQuery("from Tag where id = :tagId")
+		    		.setParameter("tagId", tagId)
+		    		.getSingleResult();
+		  
+	  }
 }

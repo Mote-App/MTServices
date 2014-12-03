@@ -8,9 +8,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Hours;
 import org.joda.time.Minutes;
-import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.convert.JodaTimeConverters;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,8 +19,12 @@ import views.PostDto;
 import views.PostsDto;
 
 import com.cl.models.Post;
+import com.cl.models.PostCustomTags;
+import com.cl.models.PostTags;
+import com.cl.models.Tag;
 import com.cl.models.User;
 import com.cl.models.dao.PostDao;
+import com.cl.models.dao.TagDao;
 import com.cl.models.dao.UserDao;
 import com.cl.models.dao.UserFriendsDao;
 
@@ -38,10 +40,13 @@ public class FeedController {
 	@Autowired
 	private UserDao _userDao;
 	
-	/**
-	   * Create a new user with an auto-generated id and email and name as passed 
-	   * values.
-	   */
+	@Autowired
+	private TagDao _tagDao;
+	
+	/** 
+	 * Friend feeds, for generating VO. 
+	 * 
+	 */
 	  @RequestMapping(value="/friend_feeds", method = RequestMethod.GET, produces="application/json")
 	  @ResponseBody
 	  public List<FriendFeedDto> getFriendFeeds(Long userId) {
@@ -99,7 +104,6 @@ public class FeedController {
 	    		friendFeed.setSchoolName(user.getCollege().getName());
 	    		friendFeed.setUserType(user.getIsAlumni());
 	    		
-	    		
 	    		PostsDto postsDto = new PostsDto();
 	    		
 	    		/*
@@ -119,7 +123,6 @@ public class FeedController {
 		    		postsDto.setCurrentPost(currentPost);
 
 	    		}
-	    			
 	    		
 	    		/*
 	    		 * The count should be 2 to get the most recent post, else current post is treated as most recent post
@@ -132,7 +135,7 @@ public class FeedController {
 	    		}else{
 	    			copyPostDto(mostRecentPost, currentPost);	
 	    		}
-	    		postsDto.setCurrentPost(mostRecentPost);
+	    		postsDto.setMostRecentPost(mostRecentPost);
 	    		
 	    		/*
 	    		 * Find most popular post
@@ -145,6 +148,8 @@ public class FeedController {
 	    		}else{
 	    			copyPostDto(mostPopularPost, currentPost);
 	    		}
+	    		
+	    		postsDto.setPopularPost(mostPopularPost);
 	    		
 	    		friendFeed.setPosts(postsDto);
 	    		
@@ -165,6 +170,9 @@ public class FeedController {
 		  destination.setCaption(source.getCaption());
 		  destination.setLikes(source.getLikes());
 		  destination.setPostingDate(source.getPostingDate());
+		  destination.setProgressInd(source.getProgressInd());
+		  destination.setTags(source.getTags());
+		  destination.setCustomTags(source.getCustomTags());
 	  }
 	  
 	  private void populatePostDto(PostDto destination, Post source){
@@ -173,16 +181,45 @@ public class FeedController {
 		  destination.setPostImg(source.getPostImgPath());
 		  destination.setCaption(source.getCaption());
 		  destination.setLikes(source.getLikes());
+		  destination.setProgressInd(35);
   		
   		/*
   		 * Calculate the elapsed time in Hours, Min or Days from posting date to current date 
   		 */
 		  destination.setPostingDate(calculateElapsedTime(source.getPostDate()));
+		  
+		  /*
+		   * Populate tags
+		   */
+		  List<String> lstTags = new ArrayList<String>();
+		  
+		  for(int i=0; i < source.getLstPostTags().size(); i++){
+			  
+			  PostTags postTag = source.getLstPostTags().get(i);
+			  Tag tag = _tagDao.getTag(postTag.getTagId());
+			  
+			  lstTags.add(tag.getSubTag());
+			  
+			  destination.setTagCategory(tag.getTagType());
+		  }
+		  
+		  destination.setTags(lstTags);
+		  
+		  /*
+		   * populate custom tags
+		   */
+		  List<String> lstCustomTags = new ArrayList<String>();
+		  
+		  for(int i = 0; i < source.getLstPostCustomTags().size();i++){
+			  
+			  PostCustomTags customPostTag = source.getLstPostCustomTags().get(i);
+			  lstCustomTags.add(customPostTag.getTagName());
+		  }
+		  
+		  destination.setCustomTags(lstCustomTags);
 	  }
 	  
 	  private String calculateElapsedTime(Calendar dt){
-		  
-		  Calendar now = Calendar.getInstance();
 		  
 		  DateTime start = new DateTime(dt.get(Calendar.YEAR), dt.get(Calendar.MONTH), dt.get(Calendar.DAY_OF_MONTH) + 1, dt.get(Calendar.HOUR_OF_DAY), dt.get(Calendar.MINUTE));
 		  DateTime end = new DateTime();
@@ -202,6 +239,14 @@ public class FeedController {
 		  }
 		 		  
 		  return elspasedTime;
+	  }
+	  
+	  @RequestMapping(value="/school_feeds", method = RequestMethod.GET, produces="application/json")
+	  @ResponseBody
+	  public List<FriendFeedDto> getSchoolFeeds(Long schoolId) {
+		  
+		  
+		  return null;
 	  }
 	  
 }

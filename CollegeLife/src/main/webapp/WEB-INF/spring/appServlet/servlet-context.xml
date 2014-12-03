@@ -73,7 +73,7 @@
 	
 	<!-- Session factory creation -->
 	<beans:bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<beans:property name="dbDataSource" ref="clSessionFactory" />
+		<!-- <beans:property name="dbDataSource" ref="clSessionFactory" /> -->
 		<beans:property name="configLocation" value="/WEB-INF/classes/hibernate.cfg.xml"></beans:property>
 		
 		<!-- <beans:property  name="configurationClass">
@@ -94,9 +94,9 @@
         </beans:property>
     </beans:bean>
 	
-	<beans:bean id="collegeLifeDao" class="com.cl.feeds.dao.HibernateSpringCollegeLifeDao">
+	<!-- <beans:bean id="collegeLifeDao" class="com.cl.feeds.dao.HibernateSpringCollegeLifeDao">
 		<beans:property name="sessionFactory" ref="sessionFactory"/>
-	</beans:bean>
+	</beans:bean> -->
 	
 	<beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<beans:property name="sessionFactory" ref="sessionFactory"/>

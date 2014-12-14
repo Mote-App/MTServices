@@ -10,10 +10,12 @@ import org.joda.time.Hours;
 import org.joda.time.Minutes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import views.FilterDto;
 import views.FriendFeedDto;
 import views.NationalFeedDto;
 import views.PostDto;
@@ -291,6 +293,105 @@ public class FeedController {
 		 }
 		 
 		 return lstSchoolFeedDto;
+	  }
+	  
+	  /*
+	   * School Feed Filter
+	   */
+	  @RequestMapping(value="/school_feed_filter", method = RequestMethod.POST, produces="application/json")
+	  @ResponseBody
+	  public List<SchoolFeedDto> schoolFeedFilter(@RequestBody FilterDto filter ) {
+		  
+		  List<SchoolFeedDto> lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
+		  
+		  /*
+		   *Filter posts specific to College and tags 
+		   */
+		  if (filter.getCollegeId() > 0 && filter.getLstTags().size() > 0){
+			  
+			  List<SchoolFeed> feeds = _schoolFeedDao.getSchoolFeedsByCollegeAndTags(filter.getCollegeId() , filter.getLstTags());
+			  
+			  for(int i = 0; i < feeds.size(); i++){
+					 SchoolFeedDto dto = new SchoolFeedDto();
+					 
+					 dto.setUserId(feeds.get(i).getUser().getId());
+					 dto.setUserType(feeds.get(i).getUser().getIsAlumni());
+					 dto.setName(feeds.get(i).getUser().getUserName());
+					 dto.setSchoolId(feeds.get(i).getCollege().getId());
+					 dto.setSchoolName(feeds.get(i).getCollege().getName());
+					 dto.setSchoolImg(feeds.get(i).getCollege().getImgPath());
+					 dto.setProfileImg(feeds.get(i).getUser().getProfilePictureUrl());
+					 
+					 PostDto postDto = new PostDto();
+					 
+					 populatePostDto(postDto, feeds.get(i).getPost());
+					 
+					 dto.setPost(postDto);
+					 
+					 lstSchoolFeedDto.add(dto);
+					 
+					 
+					 /*postDto.setPostId(feeds.get(i).getPost().getId());
+					 postDto.setPostImg(feeds.get(i).getPost().getPostImgPath());
+					 postDto.setCaption(feeds.get(i).getPost().getCaption());
+					 postDto.setPostingDate(calculateElapsedTime(feeds.get(i).getPost().getPostDate()));
+					 postDto.setLikes(feeds.get(i).getPost().getLikes());*/
+					 
+					 
+				 }
+			  
+		  }
+		  
+		  /*
+		   * Filter posts specific to a college only
+		   */
+		  else if (filter.getCollegeId() > 0){
+			  
+			  lstSchoolFeedDto =  getSchoolFeeds(filter.getCollegeId());
+			  
+		  }
+		  
+		  /*
+		   * Filter posts specific to tags only
+		   */
+		  else if (filter.getLstTags().size() > 0){
+			  
+			  List<SchoolFeed> feeds = _schoolFeedDao.getSchoolFeedsByTags(filter.getLstTags());
+			  lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
+			  
+			  
+			  for(int i = 0; i < feeds.size(); i++){
+					 SchoolFeedDto dto = new SchoolFeedDto();
+					 
+					 dto.setUserId(feeds.get(i).getUser().getId());
+					 dto.setUserType(feeds.get(i).getUser().getIsAlumni());
+					 dto.setName(feeds.get(i).getUser().getUserName());
+					 dto.setSchoolId(feeds.get(i).getCollege().getId());
+					 dto.setSchoolName(feeds.get(i).getCollege().getName());
+					 dto.setSchoolImg(feeds.get(i).getCollege().getImgPath());
+					 dto.setProfileImg(feeds.get(i).getUser().getProfilePictureUrl());
+					 
+					 PostDto postDto = new PostDto();
+					 
+					 populatePostDto(postDto, feeds.get(i).getPost());
+					 
+					 dto.setPost(postDto);
+					 
+					 lstSchoolFeedDto.add(dto);
+					 
+					 
+					 /*postDto.setPostId(feeds.get(i).getPost().getId());
+					 postDto.setPostImg(feeds.get(i).getPost().getPostImgPath());
+					 postDto.setCaption(feeds.get(i).getPost().getCaption());
+					 postDto.setPostingDate(calculateElapsedTime(feeds.get(i).getPost().getPostDate()));
+					 postDto.setLikes(feeds.get(i).getPost().getLikes());*/
+					 
+					 
+				 }
+			  
+		  }
+		  
+		  return lstSchoolFeedDto;
 	  }
 	  
 	  @RequestMapping(value="/national_feeds", method = RequestMethod.GET, produces="application/json")

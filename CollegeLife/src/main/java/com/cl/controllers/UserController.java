@@ -4,11 +4,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import views.UserDto;
+
+import com.cl.models.College;
 import com.cl.models.User;
 import com.cl.models.dao.UserDao;
+import com.cl.models.repository.UserRepository;
 
 /**
  * Class UserController
@@ -28,27 +34,48 @@ public class UserController {
   // PRIVATE METHODS
   // ===============
 
+  @Autowired
+  UserRepository _userRepo;
+  
   /**
    * Create a new user with an auto-generated id and email and name as passed 
    * values.
    */
-  @RequestMapping(value="/create")
+  @RequestMapping(value="/user/create", method = RequestMethod.POST, produces="application/json")
   @ResponseBody
-  public String create(String email, String name) {
+  public String create(@RequestBody UserDto userDto) {
     try {
-      //User user = new User(email, name);
-      //_userDao.create(user);
+    	
+      User user = new User();
+      user.setFirstName(userDto.getFirstName());
+      user.setLastName(userDto.getLastName());
+      user.setIsAlumni(userDto.getIsAlumni());
+      user.setGender(userDto.getGender());
+      user.setUserName(userDto.getUserName());
+      user.setPassword(userDto.getPassword());
+      user.setProfilePictureUrl(userDto.getProfilePictureUrl());
+      
+      College college = new College();
+      
+      college.setId(userDto.getCollege().getId());
+      college.setImgPath(userDto.getCollege().getImgPath());
+      college.setName(userDto.getCollege().getName());
+      
+      user.setCollege(college);
+      _userRepo.save(user);
+     
     }
     catch (Exception ex) {
       return "Error creating the user: " + ex.toString();
     }
-    return "User succesfully created!";
+    
+    return "Successfully created User";
   }
   
   /**
    * Delete the user with the passed id.
    */
-  @RequestMapping(value="/delete")
+  @RequestMapping(value="user/delete")
   @ResponseBody
   public String delete(long id) {
     try {

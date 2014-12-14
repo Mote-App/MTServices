@@ -1,5 +1,7 @@
 use cldb;
 
+drop table clpost_school;
+drop table clpost_national;
 drop table clpost_custom_tags;
 drop table clpost_tags;
 drop table clpost;

@@ -2,14 +2,14 @@ package views;
 
 public class FriendFeedDto {
 
-	long 	userId;
-	String 	userType;
-	String 	name;
-	String 	facebookName;
-	String 	profileImg;
-	long 	schoolId;
-	String 	SchoolName;
-	String 	SchoolImg;
+	long 		userId;
+	String 		userType;
+	String 		name;
+	String 		facebookName;
+	String 		profileImg;
+	long 		schoolId;
+	String 		SchoolName;
+	String 		SchoolImg;
 	PostsDto 	posts;
 	
 	public FriendFeedDto(){

@@ -26,4 +26,24 @@ public class SchoolFeedDao {
 		
 		return feeds;
 	}
+	
+	public List<SchoolFeed> getSchoolFeedsByCollegeAndTags(long collegeId, List<Long> tagIds){
+		
+		List<SchoolFeed> feeds = _entityManager.createQuery("SELECT S FROM SchoolFeed S JOIN S.post P JOIN S.post.lstPostTags T where S.college.id = :collegeId and T.tagId IN :tagIds")
+		.setParameter("collegeId", collegeId)
+		.setParameter("tagIds", tagIds)
+		.getResultList();
+		
+		return feeds;
+	}
+	
+	public List<SchoolFeed> getSchoolFeedsByTags( List<Long> tagIds){
+		
+		List<SchoolFeed> feeds = _entityManager.createQuery("SELECT S FROM SchoolFeed S JOIN S.post P JOIN S.post.lstPostTags T where T.tagId IN :tagIds")
+		.setParameter("tagIds", tagIds)
+		.getResultList();
+		
+		return feeds;
+	}
+
 }

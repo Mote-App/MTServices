@@ -1,6 +1,7 @@
 use cldb;
 
-insert into clprofile(id,first_name, last_name, middle_name, birth_date, email_address, gender, user_name, password, cover_picture_url, is_alumni, graduation_year, about_me, activities, interest, profile_picture_url, religion, college_id) 
+
+/*insert into clprofile(id,first_name, last_name, middle_name, birth_date, email_address, gender, user_name, password, cover_picture_url, is_alumni, graduation_year, about_me, activities, interest, profile_picture_url, religion, college_id) 
 values(1,"San", "Sam", "S", "1976-01-01", "s@s.com", "M", "san","san","img/san.png", "N", 0, "I am a pro athlete", "Football, cycling", "sports, studying", "img/profiles/1.png", "Asian", 2);
 
 insert into clprofile(id,first_name, last_name, middle_name, birth_date, email_address, gender, user_name, password, cover_picture_url, is_alumni, graduation_year, about_me, activities, interest, profile_picture_url, religion, college_id) 
@@ -14,6 +15,22 @@ values(4,"Wan", "Wam", "W", "1976-01-01", "w@w.com", "M", "wan","wan","img/wan.p
 
 insert into clprofile(id,first_name, last_name, middle_name, birth_date, email_address, gender, user_name, password, cover_picture_url, is_alumni, graduation_year, about_me, activities, interest, profile_picture_url, religion, college_id) 
 values(5,"user", "user", "S", "1976-01-01", "s@s.com", "M", "user","user","img/san.png", "N", 0, "I am a pro athlete", "Football, cycling", "sports, studying", "img/profiles/5.png", "Asian", 2);
+*/
+
+insert into clprofile(id,first_name, last_name, gender, user_name, password, is_alumni, profile_picture_url, college_id) 
+values(1,"San", "Sam", "M", "san","san", "N", "img/profiles/1.png", 2);
+
+insert into clprofile(id,first_name, last_name, gender, user_name, password, is_alumni, profile_picture_url, college_id) 
+values(2,"Tan", "Tam", "M", "tan","tan", "N", "img/profiles/2.png", 3);
+
+insert into clprofile(id,first_name, last_name, gender, user_name, password, is_alumni, profile_picture_url, college_id) 
+values(3,"Kan", "Kam", "M", "kan","kan", "N", "img/profiles/3.png", 4);
+
+insert into clprofile(id,first_name, last_name, gender, user_name, password, is_alumni, profile_picture_url, college_id) 
+values(4,"Wan", "Wam", "M", "wan","wan","N", "img/profiles/4.png", 5);
+
+insert into clprofile(id,first_name, last_name, gender, user_name, password, is_alumni, profile_picture_url, college_id) 
+values(5,"user", "user", "M", "user","user","N", "img/profiles/5.png", 2);
 
 
 insert into clfriend_relation values(1, true, 1, 1);

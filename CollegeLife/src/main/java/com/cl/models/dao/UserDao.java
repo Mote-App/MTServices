@@ -44,9 +44,9 @@ public class UserDao{
    * <br/>
    * Save the user in the database.
    */
-  public void create(User user) {
+  public User create(User user) {
     _entityManager.persist(user);
-    return;
+    return user;
   }
   
   public User getUserbyName(String userName){

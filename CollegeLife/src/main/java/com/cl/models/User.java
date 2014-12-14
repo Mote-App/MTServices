@@ -27,7 +27,7 @@ public class User {
   
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private long id;
+  private Long id;
   
   @Column(name = "first_name")
   private String firstName;
@@ -35,14 +35,14 @@ public class User {
   @Column(name = "last_name")
   private String lastName;
 
-  @Column(name = "middle_name")
+  /*@Column(name = "middle_name")
   private String middleName;
 
   @Column(name = "birth_date")
   private Calendar birthDate;
   
   @Column(name = "email_address")
-  private String emailAddress;
+  private String emailAddress;*/
   
   @Column(name = "gender")
   private String gender;
@@ -53,13 +53,13 @@ public class User {
   @Column(name = "password")
   private String password;
   
-  @Column(name = "cover_picture_url")
+  /*@Column(name = "cover_picture_url")
   private String coverPictureUrl;
-  
+  */
   @Column(name = "is_alumni")
   private String isAlumni;
   
-  @Column(name = "graduation_year")
+  /*@Column(name = "graduation_year")
   private String graduationYear;
   
   @Column(name = "about_me")
@@ -70,13 +70,13 @@ public class User {
   
   @Column(name = "interest")
   private String interest;
-  
+  */
   @Column(name = "profile_picture_url")
   private String profilePictureUrl;
   
-  @Column(name = "religion")
+  /*@Column(name = "religion")
   private String religion;
-  
+  */
   @OneToOne
   @JoinColumn(name="college_id")
   private College college;
@@ -93,11 +93,11 @@ public class User {
   		this.id = id;
   	}
 
-  	public long getId() {
+  	public Long getId() {
   		return id;
   	}
 
-  	public void setId(long value) {
+  	public void setId(Long value) {
   		this.id = value;
   	}
 
@@ -117,7 +117,7 @@ public class User {
 		this.lastName = lastName;
 	}
 	
-	public String getMiddleName() {
+	/*public String getMiddleName() {
 		return middleName;
 	}
 	
@@ -139,7 +139,7 @@ public class User {
 	
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
-	}
+	}*/
 	
 	public String getGender() {
 		return gender;
@@ -165,13 +165,13 @@ public class User {
 		this.password = password;
 	}
 	
-	public String getCoverPictureUrl() {
+	/*public String getCoverPictureUrl() {
 		return coverPictureUrl;
 	}
 	
 	public void setCoverPictureUrl(String coverPictureUrl) {
 		this.coverPictureUrl = coverPictureUrl;
-	}
+	}*/
 	
 	public String getIsAlumni() {
 		return isAlumni;
@@ -181,7 +181,7 @@ public class User {
 		this.isAlumni = isAlumni;
 	}
 	
-	public String getGraduationYear() {
+	/*public String getGraduationYear() {
 		return graduationYear;
 	}
 	
@@ -211,7 +211,7 @@ public class User {
 	
 	public void setInterest(String interest) {
 		this.interest = interest;
-	}
+	}*/
 	
 	public String getProfilePictureUrl() {
 		return profilePictureUrl;
@@ -221,13 +221,13 @@ public class User {
 		this.profilePictureUrl = profilePictureUrl;
 	}
 	
-	public String getReligion() {
+	/*public String getReligion() {
 		return religion;
 	}
 	
 	public void setReligion(String religion) {
 		this.religion = religion;
-	}
+	}*/
 	
 	public College getCollege() {
 		return college;

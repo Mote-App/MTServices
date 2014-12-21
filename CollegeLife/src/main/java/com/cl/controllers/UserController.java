@@ -43,10 +43,12 @@ public class UserController {
    */
   @RequestMapping(value="/user/create", method = RequestMethod.POST, produces="application/json")
   @ResponseBody
-  public String create(@RequestBody UserDto userDto) {
-    try {
-    	
-      User user = new User();
+  public User create(@RequestBody UserDto userDto) {
+    
+	  User user = new User();
+	  
+	  try {
+     
       user.setFirstName(userDto.getFirstName());
       user.setLastName(userDto.getLastName());
       user.setIsAlumni(userDto.getIsAlumni());
@@ -66,10 +68,11 @@ public class UserController {
      
     }
     catch (Exception ex) {
-      return "Error creating the user: " + ex.toString();
+      //return "Error creating the user: " + ex.toString();
+    	ex.printStackTrace();
     }
     
-    return "Successfully created User";
+    return user;
   }
   
   /**

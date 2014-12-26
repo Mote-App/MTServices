@@ -1,7 +1,7 @@
 use cldb;
 
 CREATE TABLE clcollege (
-    id          INTEGER      PRIMARY KEY,
+    id          INTEGER      PRIMARY KEY AUTO_INCREMENT,
     img_path    VARCHAR(250) NOT NULL,
     name        VARCHAR(250) NOT NULL
 )
@@ -52,7 +52,7 @@ create index `clfriend_relation_user_id` on clfriend_relation(user_id);
 
 
 CREATE TABLE cltag (
-    id        INTEGER      PRIMARY KEY,
+    id        INTEGER      PRIMARY KEY AUTO_INCREMENT,
     tag_type  VARCHAR(50)  NOT NULL,
     sub_tag   VARCHAR(250) NOT NULL
 )
@@ -63,7 +63,7 @@ create index `cltag` on cltag(id);
 
 
 CREATE TABLE clpost (
-	id					INTEGER			PRIMARY KEY,
+	id					INTEGER			PRIMARY KEY AUTO_INCREMENT,
 	user_id				INTEGER      	REFERENCES clprofile(id),
 	post_image_path  	VARCHAR(250) 	NOT NULL,
 	post_date        	DATE         	NULL,
@@ -80,7 +80,7 @@ create index `clpost` on clpost(id);
 create index `clpost_user_id` on clpost(user_id);
 
 CREATE TABLE clpost_tags (
-	id 					INTEGER		PRIMARY KEY,
+	id 					INTEGER		PRIMARY KEY AUTO_INCREMENT,
 	post_id				INTEGER		REFERENCES clpost(id),
 	tag_id				INTEGER		REFERENCES cltag(id)
 )
@@ -91,7 +91,7 @@ create index `clpost_tags` on clpost_tags(id);
 create index `clpost_tags_post_id` on clpost_tags(post_id);
 
 CREATE TABLE clpost_custom_tags (
-	id 					INTEGER		PRIMARY KEY,
+	id 					INTEGER		PRIMARY KEY AUTO_INCREMENT,
 	post_id				INTEGER		REFERENCES clpost(id),
 	tag_name			VARCHAR(250)		NOT NULL,
 	user_id				INTEGER 	REFERENCES clprofile(id)	
@@ -104,7 +104,7 @@ create index `clpost_custom_tags_post_id` on clpost_custom_tags(post_id);
 
 
 CREATE TABLE clpost_school (
-	id					INTEGER			PRIMARY KEY,
+	id					INTEGER			PRIMARY KEY AUTO_INCREMENT,
 	user_id				INTEGER      	REFERENCES clprofile(id),
 	post_id				INTEGER		REFERENCES clpost(id),		
     college_id          INTEGER        	REFERENCES clcollege(id),
@@ -120,7 +120,7 @@ create index `clpost_school_college_id` on clpost_school(college_id);
 
 
 CREATE TABLE clpost_national (
-	id					INTEGER			PRIMARY KEY,
+	id					INTEGER			PRIMARY KEY AUTO_INCREMENT,
 	user_id				INTEGER      	REFERENCES clprofile(id),
 	post_id				INTEGER			REFERENCES clpost(id),		
     college_id          INTEGER        	REFERENCES clcollege(id),

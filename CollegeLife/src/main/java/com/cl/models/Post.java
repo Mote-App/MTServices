@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,7 +44,7 @@ public class Post {
 	@JoinColumn(name="post_id")
 	private List<PostTags> lstPostTags;
 	
-	@OneToMany
+	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name="post_id")
 	private List<PostCustomTags> lstPostCustomTags;
 	

@@ -10,9 +10,11 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +22,7 @@ import com.cl.models.Post;
 import com.cl.models.PostCustomTags;
 import com.cl.models.PostTags;
 import com.cl.models.repository.PostRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import views.NewPostDto;
 
@@ -50,16 +53,22 @@ public class FileUploadController {
     }
 
 	@RequestMapping(value="/upload_post", method=RequestMethod.POST)
-	public @ResponseBody String handlePostUpload(@RequestParam("new_post_dto") NewPostDto newPostDto,
+	public @ResponseBody String handlePostUpload(@RequestParam("post") String newPostDtoStr,
             @RequestParam("file") MultipartFile file){
 		
 		String fileName="";
+		
+		
 		
 		if (!file.isEmpty()) {
         	String path = "/var/www/html/img/posts/";
         	
         	try {
-            	
+        
+        		ObjectMapper mapper = new ObjectMapper();
+        		NewPostDto newPostDto =  mapper.readValue(newPostDtoStr,NewPostDto.class);
+        		
+        		
             	Post post = new Post();
             	post.setUserId(newPostDto.getUserId());
             	post.setCaption(newPostDto.getCaption());
@@ -94,7 +103,7 @@ public class FileUploadController {
             		post.setLstPostCustomTags(lstPostCustomTags);
             	}
             	
-            	_postRepo.save(post);
+            	post = _postRepo.save(post);
             	
             	fileName = post.getUserId() + "_" + post.getId() + ".jpeg";
             	

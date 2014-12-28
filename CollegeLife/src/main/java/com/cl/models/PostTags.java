@@ -22,6 +22,9 @@ public class PostTags {
 	@Column(name="post_id")
 	private long postId;
 	
+	/*@ManyToOne
+	private Post post;*/
+	
 	@Column(name="tag_id")
 	private long tagId;
 
@@ -29,6 +32,7 @@ public class PostTags {
 		return id;
 	}
 
+	
 	public long getPostId() {
 		return postId;
 	}
@@ -48,6 +52,16 @@ public class PostTags {
 	public void setId(long id) {
 		this.id = id;
 	}
+
+
+	/*public Post getPost() {
+		return post;
+	}
+
+
+	public void setPost(Post post) {
+		this.post = post;
+	}*/
 
 	
 	

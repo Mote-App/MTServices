@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +19,9 @@ public class PostCustomTags {
 	@Column(name="post_id")
 	private long postId;
 	
+	/*@ManyToOne
+	private Post post;
+	*/
 	@Column(name="tag_name")
 	private String tagName;
 	
@@ -55,6 +59,14 @@ public class PostCustomTags {
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
+
+	/*public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}*/
 	
 
 }

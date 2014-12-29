@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cl.exception.ClException;
 import com.cl.models.User;
 import com.cl.models.dao.UserDao;
 
@@ -21,19 +22,24 @@ public class LoginController {
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST, produces="application/json")
 	@ResponseBody
-	public TokenDto login(@RequestBody LoginDto login){
+	public TokenDto login(@RequestBody LoginDto login) throws ClException{
 		
-		String userName = login.getUserName();
-		User user = _userDao.getUserbyName(userName);
-		
-		if ( user.getPassword().equals(login.getPassword())){
+		try{
+			String userName = login.getUserName();
+			User user = _userDao.getUserbyName(userName);
 			
-			TokenDto dto = new TokenDto("To Be Implemented", user.getId(), user.getCollege().getId());
+			if ( user.getPassword().equals(login.getPassword())){
+				
+				TokenDto dto = new TokenDto("To Be Implemented", user.getId(), user.getCollege().getId());
+				
+				return dto;
+			}else{
+				
+				throw new ClException("Invalid Username or Password","User defined message");
+			}
+		}catch(Exception e){
 			
-			return dto;
-		}else{
-			
-			return null;
+			throw new ClException("Invalid Username or Password", e.getMessage() + e.getCause());
 		}
 		
 	}

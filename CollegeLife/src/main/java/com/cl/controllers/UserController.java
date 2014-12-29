@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import views.UserDto;
 
+import com.cl.exception.ClException;
 import com.cl.models.College;
 import com.cl.models.User;
 import com.cl.models.dao.UserDao;
@@ -43,7 +44,7 @@ public class UserController {
    */
   @RequestMapping(value="/user/create", method = RequestMethod.POST, produces="application/json")
   @ResponseBody
-  public User create(@RequestBody UserDto userDto) {
+  public User create(@RequestBody UserDto userDto) throws ClException{
     
 	  User user = new User();
 	  
@@ -66,13 +67,16 @@ public class UserController {
       user.setCollege(college);
       _userRepo.save(user);
      
+      return user;
     }
-    catch (Exception ex) {
-      //return "Error creating the user: " + ex.toString();
-    	ex.printStackTrace();
+    catch (Exception e) {
+    	
+    	throw new ClException("Error Creating new user.", e.getMessage() + e.getCause());
+    	//return "Error creating the user: " + ex.toString();
+    	//ex.printStackTrace();
     }
     
-    return user;
+   
   }
   
   /**

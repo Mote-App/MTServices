@@ -21,9 +21,12 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cl.exception.ClException;
 import com.cl.models.Post;
 import com.cl.models.PostCustomTags;
 import com.cl.models.PostTags;
+import com.cl.models.User;
+import com.cl.models.dao.UserDao;
 import com.cl.models.repository.PostCustomTagsRepository;
 import com.cl.models.repository.PostRepository;
 import com.cl.models.repository.PostTagsRepository;
@@ -35,9 +38,6 @@ import views.NewPostDto;
 public class FileUploadController {
 
 	@Autowired
-	EntityManager _entityManager;
-	
-	@Autowired
 	PostTagsRepository _postTagsRepository;
 	
 	@Autowired
@@ -45,44 +45,49 @@ public class FileUploadController {
 	
 	@Autowired 
 	PostRepository _postRepo;
+	
+	@Autowired
+	UserDao	_userDao;
+	
 		
 	
 	@RequestMapping(value="/upload", method=RequestMethod.POST)
     public @ResponseBody String handleFileUpload(@RequestParam("name") String name,
-            @RequestParam("file") MultipartFile file){
+            @RequestParam("file") MultipartFile file) throws ClException{
         if (!file.isEmpty()) {
         	String path = "/var/www/html/img/profiles/";
             try {
                 byte[] bytes = file.getBytes();
                 BufferedOutputStream stream =
-                        new BufferedOutputStream(new FileOutputStream(new File(path + name)));
+                        new BufferedOutputStream(new FileOutputStream(new File(path + name + "jpg")));
                 stream.write(bytes);
                 stream.close();
-                return "You successfully uploaded " + name + " into " + "/var/www/html/img/profiles/";
+                
+                User user = _userDao.getById(Long.parseLong(name));
+                user.setProfilePictureUrl("img/profiles/" + name + ".jpg");
+                _userDao.update(user);
+                
+                return "You successfully uploaded " + name;
             } catch (Exception e) {
-                return "You failed to upload " + name + " => " + e.getMessage();
+               throw new ClException("Failed to upload profile image", e.getMessage() + e.getCause());
             }
         } else {
-            return "You failed to upload " + name + " because the file was empty.";
+        	throw new ClException("You failed to upload " + name + " because the file was empty.","User Defined message");
         }
     }
 
 	@Transactional
 	@RequestMapping(value="/upload_post", method=RequestMethod.POST)
 	public @ResponseBody String handlePostUpload(@RequestParam("post") String newPostDtoStr,
-            @RequestParam("file") MultipartFile file){
+            @RequestParam("file") MultipartFile file) throws ClException{
 		
 		String fileName="";
-		
-		
 		
 		if (!file.isEmpty()) {
         	String path = "/var/www/html/img/posts/";
 			//String path = "c://developer//research//";
         	try {
         
-        		//_entityManager.getTransaction().begin();
-        		
         		ObjectMapper mapper = new ObjectMapper();
         		NewPostDto newPostDto =  mapper.readValue(newPostDtoStr,NewPostDto.class);
         		
@@ -137,9 +142,8 @@ public class FileUploadController {
             	
             	//post = _postRepo.save(post);
             	
-            	//_entityManager.getTransaction().commit();
             	
-            	fileName = post.getUserId() + "_" + post.getId() + ".jpeg";
+            	fileName = post.getUserId() + "_" + post.getId() + ".jpg";
             	
                 byte[] bytes = file.getBytes();
                 BufferedOutputStream stream =
@@ -149,12 +153,12 @@ public class FileUploadController {
                 post.setPostImgPath("img/posts/" + fileName);
                 _postRepo.save(post);
                 
-                return "You successfully uploaded " + fileName + " into " + "/var/www/html/img/posts/";
+                return "You successfully uploaded " + fileName;
             } catch (Exception e) {
-                return "You failed to upload " + fileName + " => " + e.getMessage();
+            	throw new ClException("Failed to upload post image", e.getMessage() + e.getCause());
             }
         } else {
-            return "You failed to upload " + fileName + " because the file was empty.";
+        	throw new ClException("You failed to upload " + fileName + " because the file was empty.","User Defined message");
         }
 		
 	}

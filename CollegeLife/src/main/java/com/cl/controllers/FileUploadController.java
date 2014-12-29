@@ -59,7 +59,7 @@ public class FileUploadController {
             try {
                 byte[] bytes = file.getBytes();
                 BufferedOutputStream stream =
-                        new BufferedOutputStream(new FileOutputStream(new File(path + name + "jpg")));
+                        new BufferedOutputStream(new FileOutputStream(new File(path + name + ".jpg")));
                 stream.write(bytes);
                 stream.close();
                 

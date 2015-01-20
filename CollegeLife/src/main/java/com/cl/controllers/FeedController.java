@@ -13,10 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import views.FilterDto;
 import views.FriendFeedDto;
+import views.LikeDto;
 import views.NationalFeedDto;
 import views.PostDto;
 import views.PostsDto;
@@ -26,6 +29,7 @@ import com.cl.models.NationalFeed;
 import com.cl.models.Post;
 import com.cl.models.PostCustomTags;
 import com.cl.models.PostTags;
+import com.cl.models.PostUser;
 import com.cl.models.SchoolFeed;
 import com.cl.models.Tag;
 import com.cl.models.User;
@@ -35,6 +39,8 @@ import com.cl.models.dao.SchoolFeedDao;
 import com.cl.models.dao.TagDao;
 import com.cl.models.dao.UserDao;
 import com.cl.models.dao.UserFriendsDao;
+import com.cl.models.repository.PostRepository;
+import com.cl.models.repository.PostUserRepository;
 
 @Controller
 public class FeedController {
@@ -56,6 +62,12 @@ public class FeedController {
 	
 	@Autowired
 	private NationalFeedDao _nationaFeedDao;
+	
+	@Autowired 
+	PostRepository _postRepo;
+	
+	@Autowired 
+	PostUserRepository _postUserRepository;
 	
 	/** 
 	 * Friend feeds, for generating VO. 
@@ -85,6 +97,8 @@ public class FeedController {
 		  
 	    try {
 	    	
+	    	List<Long> likedPostIds = _postUserRepository.findByUserIdForFriends(userId);
+	    	
 	    	
 	    	friendFeeds = new ArrayList<FriendFeedDto>();
 	    	
@@ -96,7 +110,7 @@ public class FeedController {
 	    	friends.add(userId); 
 	      
 	    	/*
-	    	 * Get the userId order by posting date DESC mens latest first
+	    	 * Get the userId order by posting date DESC means latest first
 	    	 */
 	    	List<Long> postUserIds = _postDao.getUserPosts(friends);
 	      
@@ -133,7 +147,7 @@ public class FeedController {
 	    		if( posts != null && posts.size() > 0){
 	    			
 	    			Post post = posts.get(0);
-	    			populatePostDto(currentPost, post);
+	    			populatePostDto(currentPost, post, likedPostIds);
 		    		postsDto.setCurrentPost(currentPost);
 
 	    		}
@@ -144,7 +158,7 @@ public class FeedController {
 	    		PostDto mostRecentPost = new PostDto();
 	    		if( posts != null && posts.size() == 2){
 	    			Post post = posts.get(1);
-	    			populatePostDto(mostRecentPost, post);
+	    			populatePostDto(mostRecentPost, post, likedPostIds);
 	    			
 	    		}else{
 	    			copyPostDto(mostRecentPost, currentPost);	
@@ -158,7 +172,7 @@ public class FeedController {
 	    		Post post = _postDao.getMostPopularPost(user.getId());
 	    		
 	    		if ( post != null ){
-	    			populatePostDto(mostPopularPost, post);
+	    			populatePostDto(mostPopularPost, post, likedPostIds);
 	    		}else{
 	    			copyPostDto(mostPopularPost, currentPost);
 	    		}
@@ -189,7 +203,7 @@ public class FeedController {
 		  destination.setCustomTags(source.getCustomTags());
 	  }
 	  
-	  private void populatePostDto(PostDto destination, Post source){
+	  private void populatePostDto(PostDto destination, Post source, List<Long> likedPostIds){
 		 
 		  destination.setPostId(source.getId());
 		  destination.setPostImg(source.getPostImgPath());
@@ -197,6 +211,12 @@ public class FeedController {
 		  destination.setLikes(source.getLikes());
 		  destination.setProgressInd(35);
   		
+		  /*
+		   * Set the flag to check if user has already 
+		   * clicked the Like button. So that he is not allowed to make a second attempt
+		   */
+		  isApplicableForLiking(destination, likedPostIds);
+		  
   		/*
   		 * Calculate the elapsed time in Hours, Min or Days from posting date to current date 
   		 */
@@ -233,6 +253,21 @@ public class FeedController {
 		  destination.setCustomTags(lstCustomTags);
 	  }
 	  
+	  private void isApplicableForLiking(PostDto post, List<Long> likedPostIds){
+		  
+		  if( likedPostIds != null && likedPostIds.size() > 0){
+			  
+			  if( likedPostIds.contains(post.getPostId()) ){
+				  post.setLikeDone(true);
+			  }else{
+				  post.setLikeDone(false);
+			  }
+		  }else{
+			  post.setLikeDone(false);
+		  }
+		  
+	  }
+	  
 	  private String calculateElapsedTime(Calendar dt){
 		  
 		  DateTime start = new DateTime(dt.get(Calendar.YEAR), dt.get(Calendar.MONTH), dt.get(Calendar.DAY_OF_MONTH) + 1, dt.get(Calendar.HOUR_OF_DAY), dt.get(Calendar.MINUTE));
@@ -257,11 +292,13 @@ public class FeedController {
 	  
 	  @RequestMapping(value="/school_feeds", method = RequestMethod.GET, produces="application/json")
 	  @ResponseBody
-	  public List<SchoolFeedDto> getSchoolFeeds(Long collegeId) {
-		  
+	  public List<SchoolFeedDto> getSchoolFeeds(Long collegeId, long userId) {
+		 
 		 List<SchoolFeedDto> lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
 		 
 		 List<SchoolFeed> feeds = _schoolFeedDao.getSchoolFeeds(collegeId);
+		 
+		 List<Long> likedPostIds = _postUserRepository.findByUserIdForSchools(userId);
 		 
 		 for(int i = 0; i < feeds.size(); i++){
 			 SchoolFeedDto dto = new SchoolFeedDto();
@@ -273,10 +310,10 @@ public class FeedController {
 			 dto.setSchoolName(feeds.get(i).getCollege().getName());
 			 dto.setSchoolImg(feeds.get(i).getCollege().getImgPath());
 			 dto.setProfileImg(feeds.get(i).getUser().getProfilePictureUrl());
-			 
+			
 			 PostDto postDto = new PostDto();
 			 
-			 populatePostDto(postDto, feeds.get(i).getPost());
+			 populatePostDto(postDto, feeds.get(i).getPost(), likedPostIds);
 			 
 			 dto.setPost(postDto);
 			 
@@ -300,9 +337,11 @@ public class FeedController {
 	   */
 	  @RequestMapping(value="/school_feed_filter", method = RequestMethod.POST, produces="application/json")
 	  @ResponseBody
-	  public List<SchoolFeedDto> schoolFeedFilter(@RequestBody FilterDto filter ) {
+	  public List<SchoolFeedDto> schoolFeedFilter(@RequestBody FilterDto filter, long userId ) {
 		  
 		  List<SchoolFeedDto> lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
+		  
+		  List<Long> likedPostIds = _postUserRepository.findByUserIdForSchools(userId);
 		  
 		  /*
 		   *Filter posts specific to College and tags 
@@ -324,7 +363,7 @@ public class FeedController {
 					 
 					 PostDto postDto = new PostDto();
 					 
-					 populatePostDto(postDto, feeds.get(i).getPost());
+					 populatePostDto(postDto, feeds.get(i).getPost(), likedPostIds);
 					 
 					 dto.setPost(postDto);
 					 
@@ -347,7 +386,7 @@ public class FeedController {
 		   */
 		  else if (filter.getCollegeId() > 0){
 			  
-			  lstSchoolFeedDto =  getSchoolFeeds(filter.getCollegeId());
+			  lstSchoolFeedDto =  getSchoolFeeds(filter.getCollegeId(), userId);
 			  
 		  }
 		  
@@ -373,7 +412,7 @@ public class FeedController {
 					 
 					 PostDto postDto = new PostDto();
 					 
-					 populatePostDto(postDto, feeds.get(i).getPost());
+					 populatePostDto(postDto, feeds.get(i).getPost(), likedPostIds);
 					 
 					 dto.setPost(postDto);
 					 
@@ -396,9 +435,11 @@ public class FeedController {
 	  
 	  @RequestMapping(value="/national_feeds", method = RequestMethod.GET, produces="application/json")
 	  @ResponseBody
-	  public List<NationalFeedDto> getNationalFeeds(Long collegeId) {
+	  public List<NationalFeedDto> getNationalFeeds(Long collegeId, long userId) {
 		  
 		 List<NationalFeedDto> lstNationalFeedDto = new ArrayList<NationalFeedDto>();
+		 
+		 List<Long> likedPostIds = _postUserRepository.findByUserIdForNational(userId);
 		 
 		 List<NationalFeed> feeds = _nationaFeedDao.getNationalFeeds(collegeId);
 		 
@@ -415,7 +456,7 @@ public class FeedController {
 			 
 			 PostDto postDto = new PostDto();
 			 
-			 populatePostDto(postDto, feeds.get(i).getPost());
+			 populatePostDto(postDto, feeds.get(i).getPost(), likedPostIds);
 			 
 			 dto.setPost(postDto);
 			 
@@ -433,5 +474,29 @@ public class FeedController {
 		 
 		 return lstNationalFeedDto;
 	  }
+
 	  
+	  @RequestMapping(value="/likes", method=RequestMethod.POST, produces="application/json")
+	  @ResponseBody
+	  public LikeDto updateLike(@RequestBody LikeDto likeDto){
+		  
+		  Post post =  _postDao.getPost(likeDto.getPostId());
+		  
+		  long like = post.getLikes();
+		  
+		  post.setLikes(++like);
+		  
+		  post = _postRepo.save(post);
+		  
+		  PostUser postUser = new PostUser();
+		  postUser.setPostId(post.getId());
+		  postUser.setUserId(post.getUserId());
+		  postUser.setLevel(likeDto.getLevel());
+		  
+		  _postUserRepository.save(postUser);
+		  
+		  likeDto.setLikeCount(like);
+		  
+		  return likeDto;
+	  }
 }

@@ -103,6 +103,20 @@ create index `clpost_custom_tags` on clpost_custom_tags(id);
 create index `clpost_custom_tags_post_id` on clpost_custom_tags(post_id);
 
 
+CREATE TABLE clpost_users (
+	id 					INTEGER		PRIMARY KEY AUTO_INCREMENT,
+	post_id				INTEGER		REFERENCES clpost(id),
+	user_id				INTEGER		REFERENCES clprofile(id),
+	level				CHAR(1)
+	
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+create index `clpost_users_post_id` on clpost_users(post_id);
+create index `clpost_users_user_id` on clpost_users(user_id);
+
+
 CREATE TABLE clpost_school (
 	id					INTEGER			PRIMARY KEY AUTO_INCREMENT,
 	user_id				INTEGER      	REFERENCES clprofile(id),

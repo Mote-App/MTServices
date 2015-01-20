@@ -32,6 +32,7 @@ public class PostDao {
 	    		.getResultList();
 	  }	
 	  
+	  @SuppressWarnings("unchecked")
 	  public List<Post> getMostRecentPost(long userId){
 		  return _entityManager.createQuery("SELECT P FROM Post as P WHERE userId = :userId ORDER BY postDate DESC")
 				  .setParameter("userId", userId)
@@ -48,4 +49,11 @@ public class PostDao {
 		  
 	  }
 	  
+	  public Post getPost(long postId){
+		  return (Post)_entityManager.createQuery("SELECT P FROM Post as P WHERE id = :postId")
+				  .setParameter("postId", postId)
+				  .setMaxResults(1)
+				  .getSingleResult();
+		  
+	  }
 }

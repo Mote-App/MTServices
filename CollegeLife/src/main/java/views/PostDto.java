@@ -15,6 +15,7 @@ public class PostDto {
 	String 			tagCategory; //Each post will only have one category and many sub categories
 	List<String> 	tags;
 	List<String>	customTags;
+	boolean			likeDone = false;
 	
 	public PostDto(){
 		tags = new ArrayList<String>();
@@ -79,6 +80,14 @@ public class PostDto {
 
 	public void setProgressInd(int progressInd) {
 		this.progressInd = progressInd;
+	}
+
+	public boolean isLikeDone() {
+		return likeDone;
+	}
+
+	public void setLikeDone(boolean likeDone) {
+		this.likeDone = likeDone;
 	}
 	
 	

@@ -5,9 +5,8 @@ public class UserDto {
 	private String 	firstName;
 	private String 	lastName;
 	private String 	userName;
+	private String 	email;
 	private String 	password;
-	private String 	isAlumni;
-	private String 	gender;
 	private String 	profilePictureUrl;
 	private CollegeDto 	college;
 	  
@@ -35,12 +34,7 @@ public class UserDto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getIsAlumni() {
-		return isAlumni;
-	}
-	public void setIsAlumni(String isAlumni) {
-		this.isAlumni = isAlumni;
-	}
+	
 	public String getProfilePictureUrl() {
 		return profilePictureUrl;
 	}
@@ -53,12 +47,13 @@ public class UserDto {
 	public void setCollege(CollegeDto college) {
 		this.college = college;
 	}
-	public String getGender() {
-		return gender;
+	public String getEmail() {
+		return email;
 	}
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+	
 	
 	  
 	  

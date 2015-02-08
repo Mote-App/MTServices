@@ -11,23 +11,24 @@ DEFAULT CHARACTER SET = utf8;
 create index `clcollege` on clcollege(id);
 
 CREATE TABLE clprofile (
-    id                  INTEGER      	PRIMARY KEY AUTO_INCREMENT, 
+    id                  INTEGER      	PRIMARY KEY AUTO_INCREMENT,
+    email				VARCHAR(60)		NOT NULL, 
     first_name          VARCHAR(50)  	NOT NULL, 
     last_name           VARCHAR(50)  	NOT NULL, 
-    /*middle_name         VARCHAR(50)  	NOT NULL, 
+    /*middle_name       VARCHAR(50)  	NOT NULL, 
     birth_date          DATE         	NULL, 
     email_address       VARCHAR(50)  	NOT NULL,*/ 
-    gender              CHAR(1)  		NOT NULL, 
+    //gender            CHAR(1)  		NOT NULL, 
 	user_name			VARCHAR(20)		NOT NULL,
     password            VARCHAR(50)  	NOT NULL, 
-    /*cover_picture_url   VARCHAR(250) 	NOT NULL,*/ 
-    is_alumni           CHAR(1)      	DEFAULT 'N', 
-    /*graduation_year     INTEGER      	NULL, 
+    /*cover_picture_url VARCHAR(250) 	NOT NULL,*/ 
+    //is_alumni         CHAR(1)      	DEFAULT 'N', 
+    /*graduation_year   INTEGER      	NULL, 
     about_me            VARCHAR(250) 	NOT NULL, 
     activities          VARCHAR(250) 	NOT NULL, 
     interest            VARCHAR(250) 	NOT NULL,*/ 
     profile_picture_url VARCHAR(250) 	NOT NULL, 
-    /*religion            VARCHAR(50)  	NOT NULL,*/
+    /*religion          VARCHAR(50)  	NOT NULL,*/
     college_id          INTEGER        	REFERENCES clcollege(id)
 )
 ENGINE = InnoDB

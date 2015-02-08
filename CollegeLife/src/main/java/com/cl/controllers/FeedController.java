@@ -130,7 +130,7 @@ public class FeedController {
 	    		friendFeed.setSchoolId(user.getCollege().getId());
 	    		friendFeed.setSchoolImg(user.getCollege().getImgPath());
 	    		friendFeed.setSchoolName(user.getCollege().getName());
-	    		friendFeed.setUserType(user.getIsAlumni());
+	    		//friendFeed.setUserType(user.getIsAlumni());
 	    		
 	    		PostsDto postsDto = new PostsDto();
 	    		
@@ -304,7 +304,7 @@ public class FeedController {
 			 SchoolFeedDto dto = new SchoolFeedDto();
 			 
 			 dto.setUserId(feeds.get(i).getUser().getId());
-			 dto.setUserType(feeds.get(i).getUser().getIsAlumni());
+			 //dto.setUserType(feeds.get(i).getUser().getIsAlumni());
 			 dto.setName(feeds.get(i).getUser().getUserName());
 			 dto.setSchoolId(feeds.get(i).getCollege().getId());
 			 dto.setSchoolName(feeds.get(i).getCollege().getName());
@@ -354,7 +354,7 @@ public class FeedController {
 					 SchoolFeedDto dto = new SchoolFeedDto();
 					 
 					 dto.setUserId(feeds.get(i).getUser().getId());
-					 dto.setUserType(feeds.get(i).getUser().getIsAlumni());
+					 //dto.setUserType(feeds.get(i).getUser().getIsAlumni());
 					 dto.setName(feeds.get(i).getUser().getUserName());
 					 dto.setSchoolId(feeds.get(i).getCollege().getId());
 					 dto.setSchoolName(feeds.get(i).getCollege().getName());
@@ -403,7 +403,7 @@ public class FeedController {
 					 SchoolFeedDto dto = new SchoolFeedDto();
 					 
 					 dto.setUserId(feeds.get(i).getUser().getId());
-					 dto.setUserType(feeds.get(i).getUser().getIsAlumni());
+					 //dto.setUserType(feeds.get(i).getUser().getIsAlumni());
 					 dto.setName(feeds.get(i).getUser().getUserName());
 					 dto.setSchoolId(feeds.get(i).getCollege().getId());
 					 dto.setSchoolName(feeds.get(i).getCollege().getName());
@@ -447,7 +447,7 @@ public class FeedController {
 			 NationalFeedDto dto = new NationalFeedDto();
 			 
 			 dto.setUserId(feeds.get(i).getUser().getId());
-			 dto.setUserType(feeds.get(i).getUser().getIsAlumni());
+			 //dto.setUserType(feeds.get(i).getUser().getIsAlumni());
 			 dto.setName(feeds.get(i).getUser().getUserName());
 			 dto.setSchoolId(feeds.get(i).getCollege().getId());
 			 dto.setSchoolName(feeds.get(i).getCollege().getName());

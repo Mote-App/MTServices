@@ -1,6 +1,5 @@
 package com.cl.models;
 
-import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,10 +41,10 @@ public class User {
   private Calendar birthDate;
   
   @Column(name = "email_address")
-  private String emailAddress;*/
+  private String emailAddress;
   
   @Column(name = "gender")
-  private String gender;
+  private String gender;*/
     
   @Column(name = "user_name")
   private String userName;
@@ -53,12 +52,14 @@ public class User {
   @Column(name = "password")
   private String password;
   
+  @Column(name = "email")
+  private String email;
   /*@Column(name = "cover_picture_url")
   private String coverPictureUrl;
-  */
+  
   @Column(name = "is_alumni")
   private String isAlumni;
-  
+  */
   /*@Column(name = "graduation_year")
   private String graduationYear;
   
@@ -139,7 +140,7 @@ public class User {
 	
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
-	}*/
+	}
 	
 	public String getGender() {
 		return gender;
@@ -147,7 +148,7 @@ public class User {
 	
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
+	}*/
 	
 	public String getUserName() {
 		return userName;
@@ -171,7 +172,7 @@ public class User {
 	
 	public void setCoverPictureUrl(String coverPictureUrl) {
 		this.coverPictureUrl = coverPictureUrl;
-	}*/
+	}
 	
 	public String getIsAlumni() {
 		return isAlumni;
@@ -179,7 +180,7 @@ public class User {
 	
 	public void setIsAlumni(String isAlumni) {
 		this.isAlumni = isAlumni;
-	}
+	}*/
 	
 	/*public String getGraduationYear() {
 		return graduationYear;
@@ -235,6 +236,14 @@ public class User {
 	
 	public void setCollege(College college) {
 		this.college = college;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 

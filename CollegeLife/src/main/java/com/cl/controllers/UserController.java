@@ -3,6 +3,8 @@ package com.cl.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +40,8 @@ public class UserController {
   @Autowired
   UserRepository _userRepo;
   
+  @Autowired
+  JavaMailSender javaMailSender;
   /**
    * Create a new user with an auto-generated id and email and name as passed 
    * values.
@@ -52,10 +56,11 @@ public class UserController {
      
       user.setFirstName(userDto.getFirstName());
       user.setLastName(userDto.getLastName());
-      user.setIsAlumni(userDto.getIsAlumni());
-      user.setGender(userDto.getGender());
+      user.setEmail(userDto.getEmail());
+      //user.setIsAlumni(userDto.getIsAlumni());
+      //user.setGender(userDto.getGender());
       user.setUserName(userDto.getUserName());
-      user.setPassword(userDto.getPassword());
+      //user.setPassword(userDto.getPassword());
       user.setProfilePictureUrl(userDto.getProfilePictureUrl());
       
       College college = new College();
@@ -65,8 +70,21 @@ public class UserController {
       college.setName(userDto.getCollege().getName());
       
       user.setCollege(college);
+      
+      //Generate password and send the email to created user.
+      SimpleMailMessage mailMessage = new SimpleMailMessage();
+      mailMessage.setTo(user.getEmail());
+      mailMessage.setReplyTo("someone@localhost");
+      mailMessage.setFrom("admin@CollegeLife.com");
+      mailMessage.setSubject("CollegeLife Verification");
+      
+      String emailMessage = "Hi " + user.getFirstName() + "\n Thank You for signing up for CollegeLife App, here is your temporary password "  ;
+      
+      mailMessage.setText("Hi ");
+      javaMailSender.send(mailMessage);
+      
       _userRepo.save(user);
-     
+      
       return user;
     }
     catch (Exception e) {

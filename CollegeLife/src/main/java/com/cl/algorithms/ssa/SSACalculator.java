@@ -1,6 +1,44 @@
-package com.cl.sta;
+package com.cl.algorithms.ssa;
 
-public enum STACalculator {
+/**
+ * The <code>SSACalculator</code> enum is the Social Stairway Algorithm Calculator.
+ * 
+ * An enum that isn't enclosed in a class can be declared only the public or default modifier, just like a non-inner class (outer class).
+ * Enums or Enumerated List can be declared as their own class, because an enum really is a special kind of class, you can do more than
+ * just list the enumarated constant values.  You can add constructors, instance variables, methods, and 'constant specific class body',
+ * like an anonymous inner class.
+ * 
+ * @author gibranecastillo
+ *
+ */
+public enum SSACalculator {
+	/*
+	 * It's not required that enum constants be in all caps.
+	 * Kf is of type SSACalculator.  Ks is of type SSACalculator.
+	 * They're represented as static and final, which in the Java world, is thought of as a constant.
+	 * Note that each enum value knows its index or position; in other words, the order in which enum values are declared matters.
+	 * You can think of the SSACalculator enums as existing in an array of type SSACalculator.  You can iterate through the values of an
+	 * enum by invoking the 'values()' method on any enum type.
+	 * 
+	 * The following is a conceptual example of how you can think about enums:
+	 * public class SSACalculator {
+	 *     private String enumName;
+	 *     private int enumIndex;
+	 *     private double enumValue;
+	 *     public static final SSACalculator Kf = new SSACalculator("Kf", 0, 0.2); // enumName, enumIndex, enumValue
+	 *     public static final SSACalculator Ks = new SSACalculator("Ks", 1, 0.2); // enumName, enumIndex, enumValue
+	 *     
+	 *     // Constructs a SSACalculator instance
+	 *     public SSACalculator(String enumName, int enumIndex, double enumValue) {
+	 *         this.enumName = enumName;
+	 *         this.enumIndex = enumIndex;
+	 *         this.enumValue = enumValue;
+	 *     }
+	 *     
+	 *     ........
+	 * }
+	 */
+	
 	// Friend Feed to School Feed Threshold Ratio.
 	Kf(0.2), // calls constructor with value 0.2
 	
@@ -23,11 +61,18 @@ public enum STACalculator {
 	private final double value;
 	
 	/**
-	 * Constructs an STACalculator.
+	 * Constructs an SSACalculator enum instance.
+	 * <> You can NEVER invoke an enum constructor directly [explicitly].  The enum constructor is invoked automatically [implicitly],
+	 *    with the arguments you define after the constant value.  For example, Kf(0.2) invokes the SSACalculator constructor that takes
+	 *    a double, passing the double literal 0.2 to the constructor.  Behind the scenes, of course, you can imagine that the String 
+	 *    'Kf' and int index 0 is also passed to the constructor, but we don't have to know or worry about those details.
+	 * 
+	 * <> You can define more than one argument to the constructor, and you can overload the enum constructor just as you overload
+	 *    a normal class constructor.
 	 * 
 	 * @param value
 	 */
-	STACalculator(double value) {
+	SSACalculator(double value) {
 		this.value = value;
 	}
 	

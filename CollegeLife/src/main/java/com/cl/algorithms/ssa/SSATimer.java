@@ -1,12 +1,17 @@
-package com.cl.sta;
+package com.cl.algorithms.ssa;
 
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import com.cl.models.dao.PostDao;
 
+/**
+ * 
+ * @author gibranecastillo
+ *
+ */
 @EnableScheduling
-public class STATimer {
+public class SSATimer {
 	PostDao _postDao;
 	
 	@Scheduled(fixedRate=60000)

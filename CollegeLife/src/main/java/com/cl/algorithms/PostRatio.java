@@ -1,5 +1,10 @@
-package com.cl.sta;
+package com.cl.algorithms;
 
+/**
+ * 
+ * @author gibranecastillo
+ *
+ */
 public class PostRatio {
 	private double ratio;
 	private boolean isGreaterThan;

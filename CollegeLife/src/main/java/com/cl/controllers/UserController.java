@@ -60,7 +60,8 @@ public class UserController {
       //user.setIsAlumni(userDto.getIsAlumni());
       //user.setGender(userDto.getGender());
       user.setUserName(userDto.getUserName());
-      //user.setPassword(userDto.getPassword());
+      //Set the password 1234 on temporary , needs to replace with dynamic algorithm to produce unique random password.
+      user.setPassword("1234");
       user.setProfilePictureUrl(userDto.getProfilePictureUrl());
       
       College college = new College();
@@ -78,9 +79,9 @@ public class UserController {
       mailMessage.setFrom("admin@CollegeLife.com");
       mailMessage.setSubject("CollegeLife Verification");
       
-      String emailMessage = "Hi " + user.getFirstName() + "\n Thank You for signing up for CollegeLife App, here is your temporary password "  ;
+      String emailMessage = "Hi " + user.getFirstName() + "\n Thank You for signing up for CollegeLife App, here is your temporary password 1234 "  ;
       
-      mailMessage.setText("Hi ");
+     // mailMessage.setText("Hi ");
       javaMailSender.send(mailMessage);
       
       _userRepo.save(user);

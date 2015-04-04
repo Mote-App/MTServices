@@ -49,6 +49,13 @@ public class SSAScheduledTask {
 		long Ns = _postDao.getNs();
 		List<Post> friendPosts = _postDao.getFriendFeedPosts();
 		
+		/*
+		 * Instead of using a List<Post> what other existing Java collections data structure I could use that would do
+		 * this process more efficiently for time complexity [performance] and space complexity [memory footprint].
+		 * 
+		 * First I'll algorithm working and then I'll improve performance/memory footprint.
+		 */
+		
 		for(int i = 0; i < friendPosts.size(); i++) {
 			Post friendPost = friendPosts.get(i);
 			examineFriendFeedPost(friendPost.getViews(), friendPost.getLikes(), Ns, friendPost.getId());

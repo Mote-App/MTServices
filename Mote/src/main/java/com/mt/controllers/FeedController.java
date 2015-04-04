@@ -227,9 +227,9 @@ public class FeedController {
 		   */
 		  List<String> lstTags = new ArrayList<String>();
 		  
-		  for(int i=0; i < source.getLstPostTags().size(); i++){
+		  for(int i=0; i < source.getListPostTags().size(); i++){
 			  
-			  PostTags postTag = source.getLstPostTags().get(i);
+			  PostTags postTag = source.getListPostTags().get(i);
 			  Tag tag = _tagDao.getTag(postTag.getTagId());
 			  
 			  lstTags.add(tag.getSubTag());
@@ -244,9 +244,9 @@ public class FeedController {
 		   */
 		  List<String> lstCustomTags = new ArrayList<String>();
 		  
-		  for(int i = 0; i < source.getLstPostCustomTags().size();i++){
+		  for(int i = 0; i < source.getListPostCustomTags().size();i++){
 			  
-			  PostCustomTags customPostTag = source.getLstPostCustomTags().get(i);
+			  PostCustomTags customPostTag = source.getListPostCustomTags().get(i);
 			  lstCustomTags.add(customPostTag.getTagName());
 		  }
 		  

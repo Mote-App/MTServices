@@ -1,11 +1,11 @@
-package com.mt.algorithms;
+package com.mt.algorithm.ssa;
 
 /**
  * 
  * @author gibranecastillo
  *
  */
-public class PostRatio {
+public class SSAPostRatio {
 	private double ratio;
 	private boolean isGreaterThan;
 	

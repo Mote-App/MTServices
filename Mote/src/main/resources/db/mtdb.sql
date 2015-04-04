@@ -1,5 +1,6 @@
 use cldb;
 
+/* Mote College table */
 CREATE TABLE clcollege (
     id          INTEGER      PRIMARY KEY AUTO_INCREMENT,
     img_path    VARCHAR(250) NOT NULL,
@@ -10,6 +11,8 @@ DEFAULT CHARACTER SET = utf8;
 
 create index `clcollege` on clcollege(id);
 
+
+/* Mote user Profile table */
 CREATE TABLE clprofile (
     id                  INTEGER      	PRIMARY KEY AUTO_INCREMENT,
     email				VARCHAR(60)		NOT NULL, 
@@ -52,6 +55,7 @@ create index `clfriend_relation_id` on clfriend_relation(id);
 create index `clfriend_relation_user_id` on clfriend_relation(user_id);
 
 
+/* Mote Tag table */
 CREATE TABLE cltag (
     id        INTEGER      PRIMARY KEY AUTO_INCREMENT,
     tag_type  VARCHAR(50)  NOT NULL,
@@ -63,22 +67,40 @@ DEFAULT CHARACTER SET = utf8;
 create index `cltag` on cltag(id);
 
 
+/*
+ * Mote Post table
+ * V - the number of 'views' on a post.
+ * L - the number of 'likes' on a post.
+ * Ns - the number of 'posts' in School Feed.
+ * 
+ * Cr - the number of 'people' registered from that school.
+ * 
+ * Cl - the number of 'likes' per post from that school.
+ * 
+ * 
+ * CrIdealAvg - the average number of 'people' registered per school.
+ * ClIdealAvg - the average number of 'likes' per post from all school.
+ * Cpn - the number of 'post' from that school per unit time.  Is this decimal or integer?
+ * CpnAvg - the average number of 'post' from that school per unit time.
+ */
 CREATE TABLE clpost (
 	id					INTEGER			PRIMARY KEY AUTO_INCREMENT,
 	user_id				INTEGER      	REFERENCES clprofile(id),
 	post_image_path  	VARCHAR(250) 	NOT NULL,
 	post_date        	DATE         	NULL,
 	caption          	VARCHAR(250) 	NOT NULL,
+	views            	INTEGER        	NOT NULL DEFAULT 0,
 	likes            	INTEGER        	NOT NULL DEFAULT 0,
-	school_promote		CHAR(1)			DEFAULT 'N',
-	national_promote	CHAR(1)			DEFAULT 'N'
-		
+	school_promote		BOOLEAN         DEFAULT false,
+	national_promote	BOOLEAN         DEFAULT false,
+	college_id          INTEGER        	REFERENCES clcollege(id)
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 create index `clpost` on clpost(id);
 create index `clpost_user_id` on clpost(user_id);
+
 
 CREATE TABLE clpost_tags (
 	id 					INTEGER		PRIMARY KEY AUTO_INCREMENT,

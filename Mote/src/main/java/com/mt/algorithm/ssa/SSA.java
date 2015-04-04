@@ -1,13 +1,12 @@
-package com.mt.algorithms.ssa;
+package com.mt.algorithm.ssa;
 
-import com.mt.algorithms.PostRatio;
 
 /**
  * 
  * @author gibranecastillo
  *
  */
-public class SocialStairwayAlgorithm {
+public class SSA {
 	private double Rf = 0.0;
 	private double Kf = 0.0;
 	private boolean isRfGreaterThanKf = false;
@@ -22,19 +21,19 @@ public class SocialStairwayAlgorithm {
 	/**
 	 * Calculates the Post Ratio to determine if a Friend Feed post can be display or publish in the School Feed as well.
 	 * 
-	 * @param V a double value that represents the number of 'views' on a post.
-	 * @param L a double value that represents the number of 'likes' on a post.
-	 * @param Ns a double value that represents the number of 'posts' in School Feed.
+	 * @param V a long value that represents the number of 'views' on a post.
+	 * @param L a long value that represents the number of 'likes' on a post.
+	 * @param Ns a long value that represents the number of 'posts' in School Feed.
 	 * 
 	 * @return a PostRatio object that holds the calculated post ratio value and true or false if Rf > Kf.
 	 */
-	public PostRatio calculateRf(double V, double L, double Ns) {
-		SocialStairwayAlgorithm ssa = new SocialStairwayAlgorithm();
+	public SSAPostRatio calculateRf(long V, long L, long Ns) {
+		SSA ssa = new SSA();
 		
 		// enum SSACalculator is outside the SocialStairwayAlgorithm class.
 		ssa.calculator = SSACalculator.Kf;
 		
-		PostRatio rfPostRatio = new PostRatio();
+		SSAPostRatio rfPostRatio = new SSAPostRatio();
 		
 		Rf = ssa.calculator.calculateRf(V, L, Ns);
 		Kf = ssa.calculator.getValue();
@@ -53,25 +52,25 @@ public class SocialStairwayAlgorithm {
 	 * Calculates the Post Ratio to determine if a Friend Feed post that is already showing in
 	 * the School Feed can be display or publish in the National Feed as well.
 	 * 
-	 * @param V a double value that represents the number of 'views' on a post.
-	 * @param L a double value that represents the number of 'likes' on a post.
-	 * @param Cr a double value that represents the number of 'people' registered from that school.
+	 * @param V a long value that represents the number of 'views' on a post.
+	 * @param L a long value that represents the number of 'likes' on a post.
+	 * @param Cr a long value that represents the number of 'people' registered from that school.
 	 * @param CrIdealAvg a double value that represents the average number of 'people' registered per school.
-	 * @param Cl a double value that represents the number of 'likes' per post from that school.
+	 * @param Cl a long value that represents the number of 'likes' per post from that school.
 	 * @param ClIdealAvg a double value that represents the average number of 'likes' per post from all school.
 	 * @param Cpn a double value that represents the number of 'post' from that school per unit time.
 	 * @param CpnAvg a double value that represents the average number of 'post' from that school per unit time. 
-	 * @param Ns a double value that represents the number of 'posts' in School Feed.
+	 * @param Ns a long value that represents the number of 'posts' in School Feed.
 	 * 
 	 * @return a PostRatio object that holds the calculated post ratio value and true or false if Rs > Ks.
 	 */
-	public PostRatio calculateRs(double V, double L, double Cr, double CrIdealAvg, double Cl, double ClIdealAvg, double Cpn, double CpnAvg, double Ns) {
-		SocialStairwayAlgorithm ssa = new SocialStairwayAlgorithm();
+	public SSAPostRatio calculateRs(long V, long L, long Cr, double CrIdealAvg, long Cl, double ClIdealAvg, double Cpn, double CpnAvg, long Ns) {
+		SSA ssa = new SSA();
 		
 		// enum SSACalculator is outside the SocialStairwayAlgorithm class.
 		ssa.calculator = SSACalculator.Ks;
 		
-		PostRatio rsPostRatio = new PostRatio();
+		SSAPostRatio rsPostRatio = new SSAPostRatio();
 		
 		Rs = ssa.calculator.calculateRs(V, L, Cr, CrIdealAvg, Cl, ClIdealAvg, Cpn, CpnAvg, Ns);
 		Ks = ssa.calculator.getValue();

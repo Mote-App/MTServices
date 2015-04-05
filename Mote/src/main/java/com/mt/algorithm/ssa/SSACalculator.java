@@ -127,13 +127,13 @@ public enum SSACalculator {
 	 * @param CrIdealAvg a double value that represents the average number of 'people' registered per school.
 	 * @param Cl a long value that represents the number of 'likes' per post from that school.
 	 * @param ClIdealAvg a double value that represents the average number of 'likes' per post from all school.
-	 * @param Cpn a double value that represents the number of 'post' from that school per unit time.
-	 * @param CpnAvg a double value that represents the average number of 'post' from that school per unit time. 
+	 * @param Cpn a long value that represents the number of 'post' from that school.
+	 * @param CpnAvg a double value that represents the average number of 'post' from that school. 
 	 * @param Ns a long value that represents the number of 'posts' in School Feed.
 	 * 
 	 * @return a double value that represents the calculated post ratio.
 	 */
-	public double calculateRs(long V, long L, long Cr, double CrIdealAvg, long Cl, double ClIdealAvg, double Cpn, double CpnAvg, long Ns) {
+	public double calculateRs(long V, long L, long Cr, double CrIdealAvg, long Cl, double ClIdealAvg, long Cpn, double CpnAvg, long Ns) {
 		double Rs = 0.0;
 		double Cs = this.calculateCs(Cr, CrIdealAvg, Cl, ClIdealAvg);
 		double Cp = this.calculateCp(Cpn, CpnAvg);
@@ -165,12 +165,12 @@ public enum SSACalculator {
 	/**
 	 * Calculates the Post Flux Coefficient.
 	 * 
-	 * @param Cpn a double value that represents the number of 'post' from that school per unit time.
-	 * @param CpnAvg a double value that represents the average number of 'post' from that school per unit time.
+	 * @param Cpn a long value that represents the number of 'post' from that school.
+	 * @param CpnAvg a double value that represents the average number of 'post' from that school.
 	 * 
 	 * @return a double value that represents the calculated post flux coefficient.
 	 */
-	public double calculateCp(double Cpn, double CpnAvg) {
+	public double calculateCp(long Cpn, double CpnAvg) {
 		double Cp = 0.0;
 		
 		Cp = (CpnAvg/Cpn) * T3;

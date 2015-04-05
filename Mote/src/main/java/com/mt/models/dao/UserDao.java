@@ -146,7 +146,7 @@ public class UserDao{
 	
 
 	public Long getCr(long collegeId) {
-		return (Long)_entityManager.createQuery("SELECT COUNT(*) AS Cr FROM User as U WHERE college_id = :collegeId")
+		return (Long)_entityManager.createQuery("SELECT COUNT(user_id) AS Cr FROM User as U WHERE college_id = :collegeId")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();
 	}

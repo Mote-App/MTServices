@@ -84,10 +84,10 @@ public class SSAScheduledTask {
 		long collegeId = schoolPost.getCollege().getId();
 		long postId = schoolPost.getId();
 		long Cr = _userDao.getCr(collegeId);
-		long Cl = 0; //pending!
+		long Cl = _postDao.getCl(collegeId);
+		long Cpn = _postDao.getCpn(collegeId);
 		double CrIdealAvg = 0.0; //pending!
 		double ClIdealAvg = 0.0; //pending!
-		double Cpn = 0.0; //pending!
 		double CpnAvg = 0.0; //pending!
 		
 		SSA ssa = new SSA();

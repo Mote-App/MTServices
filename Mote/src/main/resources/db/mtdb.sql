@@ -74,14 +74,12 @@ create index `cltag` on cltag(id);
  * Ns - the number of 'posts' in School Feed.
  * 
  * Cr - the number of 'people' registered from that school.
- * 
  * Cl - the number of 'likes' per post from that school.
- * 
+ * Cpn - the number of 'post' from that school.
  * 
  * CrIdealAvg - the average number of 'people' registered per school.
  * ClIdealAvg - the average number of 'likes' per post from all school.
- * Cpn - the number of 'post' from that school per unit time.  Is this decimal or integer?
- * CpnAvg - the average number of 'post' from that school per unit time.
+ * CpnAvg - the average number of 'post' from that school.
  */
 CREATE TABLE clpost (
 	id					INTEGER			PRIMARY KEY AUTO_INCREMENT,

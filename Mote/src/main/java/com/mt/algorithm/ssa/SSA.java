@@ -1,6 +1,5 @@
 package com.mt.algorithm.ssa;
 
-
 /**
  * 
  * @author gibranecastillo
@@ -58,13 +57,13 @@ public class SSA {
 	 * @param CrIdealAvg a double value that represents the average number of 'people' registered per school.
 	 * @param Cl a long value that represents the number of 'likes' per post from that school.
 	 * @param ClIdealAvg a double value that represents the average number of 'likes' per post from all school.
-	 * @param Cpn a double value that represents the number of 'post' from that school per unit time.
-	 * @param CpnAvg a double value that represents the average number of 'post' from that school per unit time. 
+	 * @param Cpn a long value that represents the number of 'post' from that school.
+	 * @param CpnAvg a double value that represents the average number of 'post' from that school. 
 	 * @param Ns a long value that represents the number of 'posts' in School Feed.
 	 * 
 	 * @return a PostRatio object that holds the calculated post ratio value and true or false if Rs > Ks.
 	 */
-	public SSAPostRatio calculateRs(long V, long L, long Cr, double CrIdealAvg, long Cl, double ClIdealAvg, double Cpn, double CpnAvg, long Ns) {
+	public SSAPostRatio calculateRs(long V, long L, long Cr, double CrIdealAvg, long Cl, double ClIdealAvg, long Cpn, double CpnAvg, long Ns) {
 		SSA ssa = new SSA();
 		
 		// enum SSACalculator is outside the SocialStairwayAlgorithm class.

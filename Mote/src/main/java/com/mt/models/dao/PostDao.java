@@ -55,6 +55,8 @@ public class PostDao {
 	
 	
 	
+	
+	
 	/*
 	 * Instead of using a List<Post> what other existing Java collections data structure I could use that would do
 	 * this process more efficiently for time complexity [performance] and space complexity [memory footprint].
@@ -77,10 +79,24 @@ public class PostDao {
 				.executeUpdate();
 	}
 	
+	
+	
 	@SuppressWarnings("unchecked")
 	public List<Post> getSchoolFeedPosts() {
 		return _entityManager.createQuery("SELECT P FROM Post as P WHERE school_promote = true AND national_promote = false ORDER BY postDate DESC")
 				.getResultList();
+	}
+	
+	public Long getCl(long collegeId) {
+		return (Long)_entityManager.createQuery("SELECT SUM(likes) AS Cl FROM Post as P WHERE college_id = :collegeId")
+				.setParameter("collegeId", collegeId)
+				.getSingleResult();
+	}
+	
+	public Long getCpn(long collegeId) {
+		return (Long)_entityManager.createQuery("SELECT COUNT(*) AS Cpn FROM Post as P WHERE college_id = :collegeId")
+				.setParameter("collegeId", collegeId)
+				.getSingleResult();
 	}
 	
 	public int promotePostToNationalFeed(long postId) {

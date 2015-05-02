@@ -36,22 +36,22 @@ insert into clprofile(id,first_name, last_name, gender, user_name, password, is_
 values(5,"user", "user", "M", "user","user","N", "img/profiles/5.png", 2);
 
 insert into clprofile(id,first_name, last_name, gender, user_name, password, is_alumni, profile_picture_url, college_id) 
-values(6,"Kevin", "Schaffer", "M", "kevin","kevin","N", "img/profiles/6.png", 38);
+values(6,"Kevin", "Schaffer", "M", "kevin","kevin","N", "img/profiles/6.jpg", 38);
 
 insert into clprofile(id,first_name, last_name, gender, user_name, password, is_alumni, profile_picture_url, college_id) 
-values(7,"Ryan", "Ohneiser", "M", "ryan","ryan","N", "img/profiles/7.png", 38);
+values(7,"Ryan", "Ohneiser", "M", "ryan","ryan","N", "img/profiles/7.jpg", 38);
 
 insert into clprofile(id,first_name, last_name, gender, user_name, password, is_alumni, profile_picture_url, college_id) 
-values(8,"Sanjay", "Sao", "M", "sanjay","sanjay","N", "img/profiles/8.png", 38);
+values(8,"Sanjay", "Sao", "M", "sanjay","sanjay","N", "img/profiles/8.jpg", 38);
 
 insert into clprofile(id,first_name, last_name, gender, user_name, password, is_alumni, profile_picture_url, college_id) 
-values(9,"Gibran", "Castillo", "M", "gibran","gibran","N", "img/profiles/9.png", 38);
+values(9,"Gibran", "Castillo", "M", "gibran","gibran","N", "img/profiles/9.jpg", 38);
 
 insert into clprofile(id,first_name, last_name, gender, user_name, password, is_alumni, profile_picture_url, college_id) 
-values(10,"Gordan", "Cummings", "M", "gordon","gordon","N", "img/profiles/10.png", 38);
+values(10,"Gordan", "Cummings", "M", "gordon","gordon","N", "img/profiles/10.jpg", 38);
 
 insert into clprofile(id,first_name, last_name, gender, user_name, password, is_alumni, profile_picture_url, college_id) 
-values(11,"Gordan", "Cummings", "M", "gordon","gordon","N", "img/profiles/10.png", 38);
+values(11,"Gordan", "Cummings", "M", "gordon","gordon","N", "img/profiles/10.jpg", 38);
 
 
 insert into clfriend_relation values(1, true, 1, 1);

@@ -72,23 +72,29 @@ public class UserController {
       
       user.setCollege(college);
       
-      //Generate password and send the email to created user.
-      SimpleMailMessage mailMessage = new SimpleMailMessage();
-      mailMessage.setTo(user.getEmail());
-      mailMessage.setReplyTo("someone@localhost");
-      mailMessage.setFrom("admin@CollegeLife.com");
-      mailMessage.setSubject("CollegeLife Verification");
-      
-      String emailMessage = "Hi " + user.getFirstName() + "\n Thank You for signing up for CollegeLife App, here is your temporary password 1234 "  ;
-      
-     // mailMessage.setText("Hi ");
-      javaMailSender.send(mailMessage);
+      try{
+	      //Generate password and send the email to created user.
+	      SimpleMailMessage mailMessage = new SimpleMailMessage();
+	      mailMessage.setTo(user.getEmail());
+	      mailMessage.setSubject("Mote Verification");
+	
+	      String emailMessage = "Hi " + user.getFirstName() + "\n Thank You for signing up for Mote App, here is your temporary password 1234 "  ;
+	      mailMessage.setText(emailMessage);
+	      
+	      javaMailSender.send(mailMessage);
+	      
+      }catch(Exception e){
+    	  e.printStackTrace();
+    	  throw new ClException("Invalid Email. ", e.getMessage() + e.getCause());
+      }
       
       _userRepo.save(user);
       
       return user;
     }
     catch (Exception e) {
+    	
+    	e.printStackTrace();
     	
     	throw new ClException("Error Creating new user.", e.getMessage() + e.getCause());
     	//return "Error creating the user: " + ex.toString();

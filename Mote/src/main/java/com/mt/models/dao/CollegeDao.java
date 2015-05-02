@@ -10,18 +10,22 @@ import org.springframework.stereotype.Repository;
 
 import com.mt.models.College;
 
+/**
+ * 
+ * @author gibranecastillo
+ *
+ */
 @Repository
 @Transactional
 public class CollegeDao {
-	
 	//An EntityManager will be automatically injected from entityManagerFactory setup on DatabaseConfig class.
 	@PersistenceContext
 	private EntityManager _entityManager;
 	
 	/**
-	 * Method getAll
-	 * <br/>
-	 * Return all the colleges stored in the database.
+	 * This method get All the Colleges listed in the motedb.
+	 * 
+	 * @return all the colleges stored in the Mote database.
 	 */
 	@SuppressWarnings("unchecked")
 	public List<College> getAll() {

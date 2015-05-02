@@ -87,12 +87,42 @@ public class PostDao {
 				.getResultList();
 	}
 	
+	/**
+	 * Cl - the number of 'likes' per post from that school.
+	 * New Data Model
+	 * SELECT SUM(A.likes) FROM profile_has_post A JOIN profile B ON A.idprofile = B.idprofile WHERE A.school_promote = true AND B.idcollege = :collegeId 
+	 * 
+	 * @param collegeId
+	 * @return
+	 */
 	public Long getCl(long collegeId) {
 		return (Long)_entityManager.createQuery("SELECT SUM(likes) AS Cl FROM Post as P WHERE college_id = :collegeId")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();
 	}
 	
+	/**
+	 * ClIdealAvg - the average number of 'likes' per post from all school.
+	 * New Data Model
+	 * SELECT SUM(A.likes) FROM profile_has_post A JOIN profile B ON A.idprofile = B.idprofile WHERE A.school_promote = true AND B.idcollege = :collegeId 
+	 * 
+	 * @param collegeId
+	 * @return
+	 */
+	public Long getClIdealAvg(long collegeId) {
+		return (Long)_entityManager.createQuery("SELECT SUM(likes) AS Cl FROM Post as P WHERE college_id = :collegeId")
+				.setParameter("collegeId", collegeId)
+				.getSingleResult();
+	}
+	
+	/**
+	 * Cpn - the number of 'post' from that school.
+	 * New Data Model
+	 * SELECT COUNT(A.idpost) FROM profile_has_post A JOIN profile B ON A.idprofile = B.idprofile WHERE A.school_promote = true AND B.idcollege = :collegeId 
+	 * 
+	 * @param collegeId
+	 * @return
+	 */
 	public Long getCpn(long collegeId) {
 		return (Long)_entityManager.createQuery("SELECT COUNT(*) AS Cpn FROM Post as P WHERE college_id = :collegeId")
 				.setParameter("collegeId", collegeId)

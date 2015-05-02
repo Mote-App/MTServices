@@ -14,34 +14,38 @@ import com.mt.models.dao.UserDao;
 import views.LoginDto;
 import views.TokenDto;
 
+/**
+ * 
+ * @author gibranecastillo
+ *
+ */
 @Controller
 public class LoginController {
-
 	@Autowired
 	UserDao _userDao;
 	
+	/**
+	 * 
+	 * @param login
+	 * @return
+	 * @throws ClException
+	 */
 	@RequestMapping(value="/login", method = RequestMethod.POST, produces="application/json")
 	@ResponseBody
-	public TokenDto login(@RequestBody LoginDto login) throws ClException{
-		
-		try{
+	public TokenDto login(@RequestBody LoginDto login) throws ClException {
+		try {
 			String userName = login.getUserName();
 			User user = _userDao.getUserbyName(userName);
 			
-			if ( user.getPassword().equals(login.getPassword())){
-				
-				TokenDto dto = new TokenDto("To Be Implemented", user.getId(), user.getCollege().getId());
+			if(user.getPassword().equals(login.getPassword())) {
+				TokenDto dto = new TokenDto("To Be Implemented", user.getId(), user.getCollege().getCollegeId());
 				
 				return dto;
-			}else{
-				
-				throw new ClException("Invalid Username or Password","User defined message");
+			} else {
+				throw new ClException("Invalid Username or Password", "User defined message");
 			}
-		}catch(Exception e){
-			
+		} catch(Exception e) {
 			throw new ClException("Invalid Username or Password", e.getMessage() + e.getCause());
 		}
-		
 	}
-	
 }

@@ -20,7 +20,9 @@ import com.mt.models.dao.UserDao;
 import com.mt.models.repository.UserRepository;
 
 /**
- * Class UserController
+ * 
+ * @author gibranecastillo
+ *
  */
 @Controller
 public class UserController {
@@ -172,3 +174,4 @@ public class UserController {
   
   
 } // class UserController
+

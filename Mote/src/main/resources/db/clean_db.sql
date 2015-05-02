@@ -1,13 +1,14 @@
-use cldb;
+use motedb;
 
-drop table clpost_school;
-drop table clpost_national;
-drop table clpost_custom_tags;
-drop table clpost_tags;
-drop table clpost;
-drop table cltag;
-drop table clfriend_relation;
-drop table clprofile;
-drop table clcollege;
+drop table country;
+drop table language;
+drop table college;
+drop table profile;
+drop table type;
+drop table tag;
+drop table post;
+drop table profile_has_post;
+drop table profile_has_friend;
+drop table locale;
 
 commit;

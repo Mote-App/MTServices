@@ -69,6 +69,13 @@ public class SSAScheduledTask {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param V
+	 * @param L
+	 * @param Ns
+	 * @param postId
+	 */
 	public void examineFriendFeedPost(long V, long L, long Ns, long postId) {
 		SSA ssa = new SSA();
 		SSAPostRatio rfPostRatio = ssa.calculateRf(V, L, Ns);
@@ -78,10 +85,15 @@ public class SSAScheduledTask {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param Ns
+	 * @param schoolPost
+	 */
 	public void examineSchoolFeedPost(long Ns, Post schoolPost) {
 		long V = schoolPost.getViews();
 		long L = schoolPost.getLikes();
-		long collegeId = schoolPost.getCollege().getId();
+		long collegeId = schoolPost.getCollege().getCollegeId();
 		long postId = schoolPost.getId();
 		long Cr = _userDao.getCr(collegeId);
 		long Cl = _postDao.getCl(collegeId);

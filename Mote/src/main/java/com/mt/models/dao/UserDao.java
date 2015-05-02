@@ -143,11 +143,48 @@ public class UserDao{
 	
 	
 	
-	
-
+	/**
+	 * Cr - the number of 'people' registered from that school.
+	 * New Data Model
+	 * SELECT COUNT(A.idcollege) FROM profile A JOIN profile_has_post B ON A.idprofile = B.idprofile WHERE A.idcollege = :collegeId 
+	 * 
+	 * @param collegeId
+	 * @return
+	 */
 	public Long getCr(long collegeId) {
 		return (Long)_entityManager.createQuery("SELECT COUNT(user_id) AS Cr FROM User as U WHERE college_id = :collegeId")
 				.setParameter("collegeId", collegeId)
+				.getSingleResult();
+	}
+	
+	/**
+	 * CrIdealAvg - the average number of 'people' registered per school.
+	 * New Data Model
+	 * SELECT A.idcollege, COUNT(B.idprofile) FROM college A JOIN profile B ON A.idprofile = B.idprofile GROUP BY A.idcollege
+	 * 
+	 * select sum(TempTable.ProfileTotal)/TempTable.count(*) From (select a.idcollege College, count(b.idprofile) ProfileTotal from college A join profile B on a.idcollege=b.college) TempTable
+	 * 
+	 * declare cursor c_average
+select a.idcollege College, count(b.idprofile) ProfileTotal from college A join profile B on a.idcollege=b.college;
+
+
+SchoolNumber Int;
+TotalStudents int;
+
+For each row in c_average
+  SchoolNumber ++;
+  TotalStudents=  profileTotal + TotalStudents;
+End For
+
+Average= TotalStudetns/SchoolNumber;
+
+Return Average
+	 * 
+	 * @param collegeId
+	 * @return
+	 */
+	public Long getCrIdealAvg() {
+		return (Long)_entityManager.createQuery("SELECT COUNT(user_id) AS Cr FROM User as U WHERE college_id = :collegeId")
 				.getSingleResult();
 	}
 }

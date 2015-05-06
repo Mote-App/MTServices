@@ -27,6 +27,19 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `motedb`.`college`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `motedb`.`college` ;
+
+CREATE TABLE IF NOT EXISTS `motedb`.`college` (
+  `college_id` INT NOT NULL,
+  `college_img_path` VARCHAR(250) NOT NULL,
+  `college_name` VARCHAR(250) NOT NULL,
+  PRIMARY KEY (`college_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `motedb`.`language`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `motedb`.`language` ;
@@ -39,32 +52,30 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `motedb`.`college`
+-- Table `motedb`.`locale`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `motedb`.`college` ;
+DROP TABLE IF EXISTS `motedb`.`locale` ;
 
-CREATE TABLE IF NOT EXISTS `motedb`.`college` (
-  `college_id` INT NOT NULL,
-  `college_img_path` VARCHAR(250) NOT NULL,
-  `college_name` VARCHAR(250) NOT NULL,
-  `college_language_code` VARCHAR(5) NOT NULL,
-  `college_country_code` VARCHAR(5) NOT NULL,
-  PRIMARY KEY (`college_id`),
-  CONSTRAINT `fk_college_language1`
-    FOREIGN KEY (`college_language_code`)
-    REFERENCES `motedb`.`language` (`language_code`)
+CREATE TABLE IF NOT EXISTS `motedb`.`locale` (
+  `locale_country_code` VARCHAR(5) NOT NULL,
+  `locale_language_code` VARCHAR(5) NOT NULL,
+  `locale_id` INT NOT NULL,
+  PRIMARY KEY (`locale_id`),
+  CONSTRAINT `fk_locale_country1`
+    FOREIGN KEY (`locale_country_code`)
+    REFERENCES `motedb`.`country` (`country_code`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_college_country1`
-    FOREIGN KEY (`college_country_code`)
-    REFERENCES `motedb`.`country` (`country_code`)
+  CONSTRAINT `fk_locale_language1`
+    FOREIGN KEY (`locale_language_code`)
+    REFERENCES `motedb`.`language` (`language_code`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_college_language1_idx` ON `motedb`.`college` (`college_language_code` ASC);
+CREATE INDEX `fk_locale_country1_idx` ON `motedb`.`locale` (`locale_country_code` ASC);
 
-CREATE INDEX `fk_college_country1_idx` ON `motedb`.`college` (`college_country_code` ASC);
+CREATE INDEX `fk_locale_language1_idx` ON `motedb`.`locale` (`locale_language_code` ASC);
 
 
 -- -----------------------------------------------------
@@ -81,10 +92,16 @@ CREATE TABLE IF NOT EXISTS `motedb`.`profile` (
   `profile_password` VARCHAR(100) NOT NULL,
   `profile_picture_url` VARCHAR(250) NOT NULL,
   `profile_college_id` INT NOT NULL,
-  PRIMARY KEY (`profile_id`),
+  `locale_locale_id` INT NOT NULL,
+  PRIMARY KEY (`profile_id`, `locale_locale_id`),
   CONSTRAINT `fk_profile_college1`
     FOREIGN KEY (`profile_college_id`)
     REFERENCES `motedb`.`college` (`college_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_profile_locale1`
+    FOREIGN KEY (`locale_locale_id`)
+    REFERENCES `motedb`.`locale` (`locale_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -92,6 +109,8 @@ ENGINE = InnoDB;
 CREATE UNIQUE INDEX `profile_user_name_UNIQUE` ON `motedb`.`profile` (`profile_user_name` ASC);
 
 CREATE INDEX `fk_profile_college1_idx` ON `motedb`.`profile` (`profile_college_id` ASC);
+
+CREATE INDEX `fk_profile_locale1_idx` ON `motedb`.`profile` (`locale_locale_id` ASC);
 
 
 -- -----------------------------------------------------
@@ -107,6 +126,41 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `motedb`.`post`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `motedb`.`post` ;
+
+CREATE TABLE IF NOT EXISTS `motedb`.`post` (
+  `post_id` INT NOT NULL COMMENT 'Mote Profile Post Feeds [Friend, School and National]\nV - the number of \'views\' on a post.\nL - the number of \'likes\' on a post.\nNs - the number of \'posts\' in School Feed.\n\nCr - the number of \'people\' registered from that school.\nCl - the number of \'likes\' per post from that school.\nCpn - the number of \'post\' from that school.\n\nCrIdealAvg - the average number of \'people\' registered per school.\nClIdealAvg - the average number of \'likes\' per post from all school.\nCpnAvg - the average number of \'post\' from that school.',
+  `post_type_code` VARCHAR(5) NOT NULL,
+  `post_tag_id` INT NOT NULL,
+  `post_object_path` VARCHAR(250) NOT NULL,
+  `post_date` DATETIME NOT NULL DEFAULT now(),
+  `post_caption` VARCHAR(45) NULL,
+  `post_likes` INT NULL DEFAULT 0,
+  `post_views` INT NULL DEFAULT 0,
+  `post_school_promote` TINYINT(1) NULL DEFAULT 0,
+  `post_national_promote` TINYINT(1) NULL DEFAULT 0,
+  `post_profile_id` INT NOT NULL,
+  PRIMARY KEY (`post_id`, `post_profile_id`),
+  CONSTRAINT `fk_post_type1`
+    FOREIGN KEY (`post_type_code`)
+    REFERENCES `motedb`.`type` (`type_code`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_post_profile1`
+    FOREIGN KEY (`post_profile_id`)
+    REFERENCES `motedb`.`profile` (`profile_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_post_type1_idx` ON `motedb`.`post` (`post_type_code` ASC);
+
+CREATE INDEX `fk_post_profile1_idx` ON `motedb`.`post` (`post_profile_id` ASC);
+
+
+-- -----------------------------------------------------
 -- Table `motedb`.`tag`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `motedb`.`tag` ;
@@ -116,36 +170,6 @@ CREATE TABLE IF NOT EXISTS `motedb`.`tag` (
   `tag_description` VARCHAR(250) NOT NULL,
   PRIMARY KEY (`tag_id`))
 ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `motedb`.`post`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `motedb`.`post` ;
-
-CREATE TABLE IF NOT EXISTS `motedb`.`post` (
-  `post_id` INT NOT NULL,
-  `post_type_code` VARCHAR(5) NOT NULL,
-  `post_tag_id` INT NOT NULL,
-  `post_object_path` VARCHAR(250) NOT NULL,
-  `post_date` DATETIME NOT NULL DEFAULT now(),
-  `post_caption` VARCHAR(45) NULL,
-  PRIMARY KEY (`post_id`),
-  CONSTRAINT `fk_post_type1`
-    FOREIGN KEY (`post_type_code`)
-    REFERENCES `motedb`.`type` (`type_code`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_post_tag1`
-    FOREIGN KEY (`post_tag_id`)
-    REFERENCES `motedb`.`tag` (`tag_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-CREATE INDEX `fk_post_type1_idx` ON `motedb`.`post` (`post_type_code` ASC);
-
-CREATE INDEX `fk_post_tag1_idx` ON `motedb`.`post` (`post_tag_id` ASC);
 
 
 -- -----------------------------------------------------
@@ -160,20 +184,8 @@ CREATE TABLE IF NOT EXISTS `motedb`.`profile_has_post` (
   `national_promote` TINYINT(1) NULL DEFAULT 0,
   `profile_id` INT NOT NULL,
   `post_id` INT NOT NULL,
-  PRIMARY KEY (`profile_id`, `post_id`),
-  CONSTRAINT `fk_profile_has_post_profile1`
-    FOREIGN KEY (`profile_id`)
-    REFERENCES `motedb`.`profile` (`profile_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_profile_has_post_post1`
-    FOREIGN KEY (`post_id`)
-    REFERENCES `motedb`.`post` (`post_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`profile_id`, `post_id`))
 ENGINE = InnoDB;
-
-CREATE INDEX `fk_profile_has_post_post1_idx` ON `motedb`.`profile_has_post` (`post_id` ASC);
 
 
 -- -----------------------------------------------------
@@ -203,29 +215,29 @@ CREATE INDEX `fk_profile_has_profile_profile1_idx` ON `motedb`.`profile_has_frie
 
 
 -- -----------------------------------------------------
--- Table `motedb`.`locale`
+-- Table `motedb`.`post_has_tag`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `motedb`.`locale` ;
+DROP TABLE IF EXISTS `motedb`.`post_has_tag` ;
 
-CREATE TABLE IF NOT EXISTS `motedb`.`locale` (
-  `locale_country_code` VARCHAR(5) NOT NULL,
-  `locale_language_code` VARCHAR(5) NOT NULL,
-  PRIMARY KEY (`locale_country_code`, `locale_language_code`),
-  CONSTRAINT `fk_locale_country1`
-    FOREIGN KEY (`locale_country_code`)
-    REFERENCES `motedb`.`country` (`country_code`)
+CREATE TABLE IF NOT EXISTS `motedb`.`post_has_tag` (
+  `post_post_id` INT NOT NULL,
+  `tag_tag_id` INT NOT NULL,
+  PRIMARY KEY (`post_post_id`, `tag_tag_id`),
+  CONSTRAINT `fk_post_has_tag_post1`
+    FOREIGN KEY (`post_post_id`)
+    REFERENCES `motedb`.`post` (`post_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_locale_language1`
-    FOREIGN KEY (`locale_language_code`)
-    REFERENCES `motedb`.`language` (`language_code`)
+  CONSTRAINT `fk_post_has_tag_tag1`
+    FOREIGN KEY (`tag_tag_id`)
+    REFERENCES `motedb`.`tag` (`tag_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_locale_country1_idx` ON `motedb`.`locale` (`locale_country_code` ASC);
+CREATE INDEX `fk_post_has_tag_tag1_idx` ON `motedb`.`post_has_tag` (`tag_tag_id` ASC);
 
-CREATE INDEX `fk_locale_language1_idx` ON `motedb`.`locale` (`locale_language_code` ASC);
+CREATE INDEX `fk_post_has_tag_post1_idx` ON `motedb`.`post_has_tag` (`post_post_id` ASC);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

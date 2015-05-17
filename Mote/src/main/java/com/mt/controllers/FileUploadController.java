@@ -93,11 +93,11 @@ public class FileUploadController {
         		
         		
             	Post post = new Post();
-            	post.setUserId(newPostDto.getUserId());
-            	post.setCaption(newPostDto.getCaption());
+            	post.setProfileId(newPostDto.getUserId());
+            	post.setPostCaption(newPostDto.getCaption());
             	post.setLikes(0);
             	post.setPostDate( Calendar.getInstance());
-            	post.setPostImgPath("dummy");
+            	post.setPostObjectPath("dummy");
             	
             	_postRepo.save(post);
             	
@@ -106,7 +106,7 @@ public class FileUploadController {
             	for (int i=0; i < newPostDto.getTags().size(); i++){
             		
             		PostTags postTag = new PostTags();
-            		postTag.setPostId(post.getId());
+            		postTag.setPostId(post.getPostId());
             		postTag.setTagId(newPostDto.getTags().get(i));
             		
             		_postTagsRepository.save(postTag);
@@ -128,7 +128,7 @@ public class FileUploadController {
             		for (int i=0; i < arr.length; i++){
             			PostCustomTags postCustomTag = new PostCustomTags();
             			
-            			postCustomTag.setPostId(post.getId());
+            			postCustomTag.setPostId(post.getPostId());
             			postCustomTag.setUserId(newPostDto.getUserId());
             			postCustomTag.setTagName(arr[i]);
             			
@@ -143,14 +143,14 @@ public class FileUploadController {
             	//post = _postRepo.save(post);
             	
             	
-            	fileName = post.getUserId() + "_" + post.getId() + ".jpg";
+            	fileName = post.getProfileId() + "_" + post.getPostId() + ".jpg";
             	
                 byte[] bytes = file.getBytes();
                 BufferedOutputStream stream =
                         new BufferedOutputStream(new FileOutputStream(new File(path + fileName)));
                 stream.write(bytes);
                 stream.close();
-                post.setPostImgPath("img/posts/" + fileName);
+                post.setPostObjectPath("img/posts/" + fileName);
                 _postRepo.save(post);
                 
                 return "You successfully uploaded " + fileName;

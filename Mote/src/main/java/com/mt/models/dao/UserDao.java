@@ -51,16 +51,16 @@ public class UserDao{
 	}
 	
 	public User getUserbyName(String userName){
-		User user = (User)_entityManager.createQuery("SELECT P FROM User P where P.userName = :userName")
+		User user = (User)_entityManager.createQuery("SELECT P FROM User P where P.profileUserName = :userName")
 				.setParameter("userName", userName)
 				.getSingleResult();
 		
 		return user;
 	}
 	
-	public List<User> getUsersbySchool(long schoolId){
-		List<User> users = _entityManager.createQuery("SELECT P FROM User P where P.college.id = :schoolId")
-				.setParameter("schoolId", schoolId)
+	public List<User> getUsersbySchool(long collegeId){
+		List<User> users = _entityManager.createQuery("SELECT P FROM User P where P.profileCollege.collegeId = :collegeId")
+				.setParameter("collegeId", collegeId)
 				.getResultList();
 		
 		return users;
@@ -70,7 +70,7 @@ public class UserDao{
 	 * get user
 	 */
 	public User getUser(Long userId){
-		return (User)_entityManager.createQuery("SELECT P FROM User P where P.id = :userId")
+		return (User)_entityManager.createQuery("SELECT P FROM User P where P.profileId = :userId")
 				.setParameter("userId", userId)
 				.getSingleResult();
 	}

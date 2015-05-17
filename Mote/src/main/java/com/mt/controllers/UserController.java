@@ -56,31 +56,31 @@ public class UserController {
 	  
 	  try {
      
-      user.setFirstName(userDto.getFirstName());
-      user.setLastName(userDto.getLastName());
-      user.setEmail(userDto.getEmail());
+      user.setProfileFirstName(userDto.getFirstName());
+      user.setProfileLastName(userDto.getLastName());
+      user.setProfileEmail(userDto.getEmail());
       //user.setIsAlumni(userDto.getIsAlumni());
       //user.setGender(userDto.getGender());
-      user.setUserName(userDto.getUserName());
+      user.setProfileUserName(userDto.getUserName());
       //Set the password 1234 on temporary , needs to replace with dynamic algorithm to produce unique random password.
-      user.setPassword("1234");
+      user.setProfilePassword("1234");
       user.setProfilePictureUrl(userDto.getProfilePictureUrl());
       
       College college = new College();
       
-      college.setId(userDto.getCollege().getId());
-      college.setImgPath(userDto.getCollege().getImgPath());
-      college.setName(userDto.getCollege().getName());
+      college.setCollegeId(userDto.getCollege().getId());
+      college.setCollegeImgPath(userDto.getCollege().getImgPath());
+      college.setCollegeName(userDto.getCollege().getName());
       
-      user.setCollege(college);
+      user.setProfileCollege(college);
       
-      try{
+      /*try{
 	      //Generate password and send the email to created user.
 	      SimpleMailMessage mailMessage = new SimpleMailMessage();
-	      mailMessage.setTo(user.getEmail());
+	      mailMessage.setTo(userDto.getEmail());
 	      mailMessage.setSubject("Mote Verification");
 	
-	      String emailMessage = "Hi " + user.getFirstName() + "\n Thank You for signing up for Mote App, here is your temporary password 1234 "  ;
+	      String emailMessage = "Hi " + userDto.getFirstName() + "\n Thank You for signing up for Mote App, here is your temporary password 1234 "  ;
 	      mailMessage.setText(emailMessage);
 	      
 	      javaMailSender.send(mailMessage);
@@ -88,7 +88,7 @@ public class UserController {
       }catch(Exception e){
     	  e.printStackTrace();
     	  throw new ClException("Invalid Email. ", e.getMessage() + e.getCause());
-      }
+      }*/
       
       _userRepo.save(user);
       
@@ -131,7 +131,7 @@ public class UserController {
     String userId;
     try {
       User user = _userDao.getByEmail(email);
-      userId = String.valueOf(user.getId());
+      userId = String.valueOf(user.getProfileId());
     }
     catch (Exception ex) {
       return "User not found: " + ex.toString();

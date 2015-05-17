@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -12,26 +13,26 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="clpost_tags")
+@Table(name="post_has_tag")
+@IdClass(PostTagAssociationId.class)
 public class PostTags {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
-	@Column(name="post_id")
+	@Column(name="post_post_id")
 	private long postId;
-	
-	/*@ManyToOne
-	private Post post;*/
-	
-	@Column(name="tag_id")
+		
+	@Id
+	@Column(name="tag_tag_id")
 	private long tagId;
 
-	public long getId() {
-		return id;
-	}
-
+	@ManyToOne
+	@JoinColumn(name = "post_post_id", updatable = false, insertable = false)
+	private Post post;
+	
+	@ManyToOne
+	@JoinColumn(name = "tag_tag_id", updatable = false, insertable = false)
+	private Tag tag;
+	
 	
 	public long getPostId() {
 		return postId;
@@ -49,21 +50,6 @@ public class PostTags {
 		this.tagId = tagId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-
-	/*public Post getPost() {
-		return post;
-	}
-
-
-	public void setPost(Post post) {
-		this.post = post;
-	}*/
-
-	
 	
 	
 }

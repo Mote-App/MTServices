@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import com.mt.models.Post;
+import com.mt.models.User;
 import com.mt.models.dao.PostDao;
 import com.mt.models.dao.UserDao;
 
@@ -58,7 +59,7 @@ public class SSAScheduledTask {
 		
 		for(int i = 0; i < friendPosts.size(); i++) {
 			Post friendPost = friendPosts.get(i);
-			examineFriendFeedPost(friendPost.getViews(), friendPost.getLikes(), Ns, friendPost.getId());
+			examineFriendFeedPost(friendPost.getViews(), friendPost.getLikes(), Ns, friendPost.getPostId());
 		}
 		
 		List<Post> schoolPosts = _postDao.getSchoolFeedPosts();
@@ -93,8 +94,10 @@ public class SSAScheduledTask {
 	public void examineSchoolFeedPost(long Ns, Post schoolPost) {
 		long V = schoolPost.getViews();
 		long L = schoolPost.getLikes();
-		long collegeId = schoolPost.getCollege().getCollegeId();
-		long postId = schoolPost.getId();
+		User user = _userDao.getById(schoolPost.getProfileId());
+		
+		long collegeId = user.getProfileCollege().getCollegeId();
+		long postId = schoolPost.getPostId();
 		long Cr = _userDao.getCr(collegeId);
 		long Cl = _postDao.getCl(collegeId);
 		long Cpn = _postDao.getCpn(collegeId);

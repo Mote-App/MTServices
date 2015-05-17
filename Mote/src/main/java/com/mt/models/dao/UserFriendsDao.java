@@ -19,7 +19,7 @@ public class UserFriendsDao {
 	  
   	public List<Long> getFriends(long userId){
   		
-  		List<Long> friends = _entityManager.createQuery("SELECT P.friendId FROM UserFriends P where P.userId = :userId")
+  		List<Long> friends = _entityManager.createQuery("SELECT P.profileFriendId FROM UserFriends P where P.profileId = :userId")
   				.setParameter("userId", userId)
   				.getResultList();
   		

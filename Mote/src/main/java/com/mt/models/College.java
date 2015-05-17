@@ -5,11 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.mt.models.tmp.Language;
 
 /**
  * The persistent class for the college database table.
@@ -30,24 +26,6 @@ public class College {
 	
 	@Column(name="college_name")
 	private String collegeName;
-	
-	/*
-	 * Foreign Key fk_college_country1
-	 * Referenced Table 'motedb'.'country'
-	 * field college_country_code in college table references the country_code field in the country table
-	 */
-	@OneToOne
-	@JoinColumn(name="college_country_code")
-	private Country country;
-	
-	/*
-	 * Foreign Key fk_college_language1
-	 * Referenced Table 'motedb'.'language'
-	 * field college_language_code in college table references the language_code field in the language table
-	 */
-	@OneToOne
-	@JoinColumn(name="college_language_code")
-	private Language language;
 	
 	/**
 	 * Constructs a College object.  Require by spring/hibernate.
@@ -110,19 +88,4 @@ public class College {
 		this.collegeName = collegeName;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public Country getCountry() {
-		return country;
-	}
-	
-	/**
-	 * 
-	 * @param country
-	 */
-	public void setCountry(Country country) {
-		this.country = country;
-	}
 }

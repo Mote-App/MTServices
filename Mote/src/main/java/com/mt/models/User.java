@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * Represents an User for this web application.
  */
 @Entity
-@Table(name = "clprofile")
+@Table(name = "profile")
 public class User {
 
   // ==============
@@ -26,61 +26,30 @@ public class User {
   
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
+  @Column(name="profile_id")
+  private Long profileId;
   
-  @Column(name = "first_name")
-  private String firstName;
+  @Column(name = "profile_first_name")
+  private String profileFirstName;
   
-  @Column(name = "last_name")
-  private String lastName;
-
-  /*@Column(name = "middle_name")
-  private String middleName;
-
-  @Column(name = "birth_date")
-  private Calendar birthDate;
-  
-  @Column(name = "email_address")
-  private String emailAddress;
-  
-  @Column(name = "gender")
-  private String gender;*/
+  @Column(name = "profile_last_name")
+  private String profileLastName;
     
-  @Column(name = "user_name")
-  private String userName;
+  @Column(name = "profile_user_name")
+  private String profileUserName;
   
-  @Column(name = "password")
-  private String password;
+  @Column(name = "profile_password")
+  private String profilePassword;
   
-  @Column(name = "email")
-  private String email;
-  /*@Column(name = "cover_picture_url")
-  private String coverPictureUrl;
+  @Column(name = "profile_email")
+  private String profileEmail;
   
-  @Column(name = "is_alumni")
-  private String isAlumni;
-  */
-  /*@Column(name = "graduation_year")
-  private String graduationYear;
-  
-  @Column(name = "about_me")
-  private String aboutMe;
-  
-  @Column(name = "activities")
-  private String activities;
-  
-  @Column(name = "interest")
-  private String interest;
-  */
   @Column(name = "profile_picture_url")
   private String profilePictureUrl;
-  
-  /*@Column(name = "religion")
-  private String religion;
-  */
+    
   @OneToOne
-  @JoinColumn(name="college_id")
-  private College college;
+  @JoinColumn(name="profile_college_id")
+  private College profileCollege;
   
  
   
@@ -90,160 +59,103 @@ public class User {
   
   	public User() { }
 
-  	public User(long id) { 
-  		this.id = id;
+  	public User(Long profileId) { 
+  		
+  		this.profileId = profileId;
   	}
 
-  	public Long getId() {
-  		return id;
-  	}
+	public Long getProfileId() {
+		return profileId;
+	}
 
-  	public void setId(Long value) {
-  		this.id = value;
-  	}
 
-	public String getFirstName() {
-		return firstName;
+
+	public void setProfileId(Long profileId) {
+		this.profileId = profileId;
 	}
-	
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+
+
+
+	public String getProfileFirstName() {
+		return profileFirstName;
 	}
-	
-	public String getLastName() {
-		return lastName;
+
+
+
+	public void setProfileFirstName(String profileFirstName) {
+		this.profileFirstName = profileFirstName;
 	}
-	
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+
+
+
+	public String getProfileLastName() {
+		return profileLastName;
 	}
-	
-	/*public String getMiddleName() {
-		return middleName;
+
+
+
+	public void setProfileLastName(String profileLastName) {
+		this.profileLastName = profileLastName;
 	}
-	
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
+
+
+
+	public String getProfileUserName() {
+		return profileUserName;
 	}
-	
-	public Calendar getBirthDate() {
-		return birthDate;
+
+
+
+	public void setProfileUserName(String profileUserName) {
+		this.profileUserName = profileUserName;
 	}
-	
-	public void setBirthDate(Calendar birthDate) {
-		this.birthDate = birthDate;
+
+
+
+	public String getProfilePassword() {
+		return profilePassword;
 	}
-	
-	public String getEmailAddress() {
-		return emailAddress;
+
+
+
+	public void setProfilePassword(String profilePassword) {
+		this.profilePassword = profilePassword;
 	}
-	
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
+
+
+
+	public String getProfileEmail() {
+		return profileEmail;
 	}
-	
-	public String getGender() {
-		return gender;
+
+
+
+	public void setProfileEmail(String profileEmail) {
+		this.profileEmail = profileEmail;
 	}
-	
-	public void setGender(String gender) {
-		this.gender = gender;
-	}*/
-	
-	public String getUserName() {
-		return userName;
-	}
-	
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-	
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	/*public String getCoverPictureUrl() {
-		return coverPictureUrl;
-	}
-	
-	public void setCoverPictureUrl(String coverPictureUrl) {
-		this.coverPictureUrl = coverPictureUrl;
-	}
-	
-	public String getIsAlumni() {
-		return isAlumni;
-	}
-	
-	public void setIsAlumni(String isAlumni) {
-		this.isAlumni = isAlumni;
-	}*/
-	
-	/*public String getGraduationYear() {
-		return graduationYear;
-	}
-	
-	public void setGraduationYear(String graduationYear) {
-		this.graduationYear = graduationYear;
-	}
-	
-	public String getAboutMe() {
-		return aboutMe;
-	}
-	
-	public void setAboutMe(String aboutMe) {
-		this.aboutMe = aboutMe;
-	}
-	
-	public String getActivities() {
-		return activities;
-	}
-	
-	public void setActivities(String activities) {
-		this.activities = activities;
-	}
-	
-	public String getInterest() {
-		return interest;
-	}
-	
-	public void setInterest(String interest) {
-		this.interest = interest;
-	}*/
-	
+
+
+
 	public String getProfilePictureUrl() {
 		return profilePictureUrl;
 	}
-	
+
+
+
 	public void setProfilePictureUrl(String profilePictureUrl) {
 		this.profilePictureUrl = profilePictureUrl;
 	}
-	
-	/*public String getReligion() {
-		return religion;
-	}
-	
-	public void setReligion(String religion) {
-		this.religion = religion;
-	}*/
-	
-	public College getCollege() {
-		return college;
-	}
-	
-	public void setCollege(College college) {
-		this.college = college;
+
+
+
+	public College getProfileCollege() {
+		return profileCollege;
 	}
 
-	public String getEmail() {
-		return email;
-	}
 
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setProfileCollege(College profileCollege) {
+		this.profileCollege = profileCollege;
 	}
 
 

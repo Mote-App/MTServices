@@ -37,8 +37,8 @@ public class LoginController {
 			String userName = login.getUserName();
 			User user = _userDao.getUserbyName(userName);
 			
-			if(user.getPassword().equals(login.getPassword())) {
-				TokenDto dto = new TokenDto("To Be Implemented", user.getId(), user.getCollege().getCollegeId());
+			if(user.getProfilePassword().equals(login.getPassword())) {
+				TokenDto dto = new TokenDto("To Be Implemented", user.getProfileId(), user.getProfileCollege().getCollegeId());
 				
 				return dto;
 			} else {

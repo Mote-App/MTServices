@@ -41,9 +41,11 @@ public class StaticDataController {
 		
 		TagDto tagDto = new TagDto();
 		
-		tagDto.setSmarts(_tagDao.getTags("smart"));
+		/*tagDto.setSmarts(_tagDao.getTags("smart"));
 		tagDto.setSocials(_tagDao.getTags("social"));
-		tagDto.setGenre(_tagDao.getTags("genre"));
+		tagDto.setGenre(_tagDao.getTags("genre"));*/
+		
+		tagDto.setTags(_tagDao.getTags());
 		
 		return tagDto;
 		

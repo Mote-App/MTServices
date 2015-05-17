@@ -10,7 +10,7 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Country.findAll", query="SELECT c FROM Country c")
+@Table(name="country")
 public class Country implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,14 +22,6 @@ public class Country implements Serializable {
 	@Column(name="country_name")
 	private String countryName;
 
-	//bi-directional many-to-one association to College
-	@OneToMany(mappedBy="country")
-	private List<College> colleges;
-
-	//bi-directional many-to-many association to Language
-	@ManyToMany(mappedBy="countries")
-	private List<Language> languages;
-	
 	public Country() {
 	}
 
@@ -49,34 +41,5 @@ public class Country implements Serializable {
 		this.countryName = countryName;
 	}
 
-	public List<College> getColleges() {
-		return this.colleges;
-	}
-
-	public void setColleges(List<College> colleges) {
-		this.colleges = colleges;
-	}
-
-	public College addCollege(College college) {
-		getColleges().add(college);
-		college.setCountry(this);
-
-		return college;
-	}
-
-	public College removeCollege(College college) {
-		getColleges().remove(college);
-		college.setCountry(null);
-
-		return college;
-	}
-
-	public List<Language> getLanguages() {
-		return this.languages;
-	}
-
-	public void setLanguages(List<Language> languages) {
-		this.languages = languages;
-	}
 
 }

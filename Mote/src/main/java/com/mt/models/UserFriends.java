@@ -11,21 +11,19 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="clfriend_relation")
+@Table(name="profile_has_friend")
 public class UserFriends {
 
+	//TODO: Discuss with team and add id to avoid complexity of composite primary key.
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@Column(name="user_id")
-	private long userId;
+	@Column(name="profile_id")
+	private long profileId;
 	
-	@Column(name="friend_id")
-	private long friendId;
-
-	@Column(name="are_friends")
-	private boolean isFriend;
+	@Column(name="profile_friend_id")
+	private long profileFriendId;
 
 	
 	public long getId() {
@@ -36,28 +34,20 @@ public class UserFriends {
 		this.id = id;
 	}
 
-	public long getUserId() {
-		return userId;
+	public long getProfileId() {
+		return profileId;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setProfileId(long profileId) {
+		this.profileId = profileId;
 	}
 
-	public long getFriendId() {
-		return friendId;
+	public long getProfileFriendId() {
+		return profileFriendId;
 	}
 
-	public void setFriendId(long friendId) {
-		this.friendId = friendId;
-	}
-
-	public boolean isFriend() {
-		return isFriend;
-	}
-
-	public void setFriend(boolean isFriend) {
-		this.isFriend = isFriend;
+	public void setProfileFriendId(long profileFriendId) {
+		this.profileFriendId = profileFriendId;
 	}
 	
 	

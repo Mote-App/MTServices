@@ -23,26 +23,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name="post")
 public class Post {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="post_id")
 	private long postId;
 	
-	@Column(name="user_id")
-	private long userId;
+	@Column(name="post_profile_id")
+	private long profileId;
 
-	@Column(name="post_image_path")
-	private String postImgPath;
+	@Column(name="post_tag_id")
+	private long postTagId;
+	
+	
+	@Column(name="post_object_path")
+	private String postObjectPath;
 
 	@Column(name="post_date")
 	private Calendar postDate;
 
-	@Column(name="caption")
-	private String caption;
+	@Column(name="post_caption")
+	private String postCaption;
 
 	@Column(name="views")
 	private long views;
@@ -50,50 +51,51 @@ public class Post {
 	@Column(name="likes")
 	private long likes;
 
-	@Column(name="school_promote")
-	private boolean isSchoolFeedPost;
+	@Column(name="post_school_promote")
+	private boolean postSchoolPromote;
 
-	@Column(name="national_promote")
-	private boolean isNationalFeedPost;
-
-	@OneToOne
-	@JoinColumn(name="college_id")
-	private College college;
+	@Column(name="post_national_promote")
+	private boolean postNationalPromote;
 
 	@OneToMany
-	@JoinColumn(name="post_id")
+	@JoinColumn(name="post_post_id")
 	private List<PostTags> listPostTags;
 
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinColumn(name="post_id")
-	private List<PostCustomTags> listPostCustomTags;
 
 	public Post(){
 		listPostTags = new ArrayList<PostTags>();
 	}
 
-	public long getId() {
-		return id;
+	public long getPostId() {
+		return postId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setPostId(long postId) {
+		this.postId = postId;
 	}
 
-	public long getUserId() {
-		return userId;
+	public long getProfileId() {
+		return profileId;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setProfileId(long profileId) {
+		this.profileId = profileId;
 	}
 
-	public String getPostImgPath() {
-		return postImgPath;
+	public long getPostTagId() {
+		return postTagId;
 	}
 
-	public void setPostImgPath(String postImgPath) {
-		this.postImgPath = postImgPath;
+	public void setPostTagId(long postTagId) {
+		this.postTagId = postTagId;
+	}
+
+	public String getPostObjectPath() {
+		return postObjectPath;
+	}
+
+	public void setPostObjectPath(String postObjectPath) {
+		this.postObjectPath = postObjectPath;
 	}
 
 	public Calendar getPostDate() {
@@ -104,12 +106,12 @@ public class Post {
 		this.postDate = postDate;
 	}
 
-	public String getCaption() {
-		return caption;
+	public String getPostCaption() {
+		return postCaption;
 	}
 
-	public void setCaption(String caption) {
-		this.caption = caption;
+	public void setPostCaption(String postCaption) {
+		this.postCaption = postCaption;
 	}
 
 	public long getViews() {
@@ -128,45 +130,32 @@ public class Post {
 		this.likes = likes;
 	}
 
-	public boolean isSchoolFeedPost() {
-		return isSchoolFeedPost;
+	public boolean isPostSchoolPromote() {
+		return postSchoolPromote;
 	}
 
-	public void setSchoolFeedPost(boolean isSchoolFeedPost) {
-		this.isSchoolFeedPost = isSchoolFeedPost;
+	public void setPostSchoolPromote(boolean postSchoolPromote) {
+		this.postSchoolPromote = postSchoolPromote;
 	}
 
-	public boolean isNationalFeedPost() {
-		return isNationalFeedPost;
+	public boolean isPostNationalPromote() {
+		return postNationalPromote;
 	}
 
-	public void setNationalFeedPost(boolean isNationalFeedPost) {
-		this.isNationalFeedPost = isNationalFeedPost;
-	}
-
-	public College getCollege() {
-		return college;
-	}
-
-	public void setCollege(College college) {
-		this.college = college;
+	public void setPostNationalPromote(boolean postNationalPromote) {
+		this.postNationalPromote = postNationalPromote;
 	}
 
 	public List<PostTags> getListPostTags() {
 		return listPostTags;
 	}
-
-	public void setListPostTags(List<PostTags> lstPostTags) {
-		this.listPostTags = lstPostTags;
+	
+	public void setListPostTags(List<PostTags> listPostTags) {
+		this.listPostTags = listPostTags;
 	}
 
-	public List<PostCustomTags> getListPostCustomTags() {
-		return listPostCustomTags;
-	}
 
-	public void setListPostCustomTags(List<PostCustomTags> lstPostCustomTags) {
-		this.listPostCustomTags = lstPostCustomTags;
-	}
+
 
 	@Override
 	public boolean equals (Object o){	
@@ -176,7 +165,7 @@ public class Post {
 
 		Post other = (Post)o;
 
-		if( this.getUserId() != other.getUserId()) return false;
+		if( this.getProfileId() != other.getProfileId()) return false;
 
 		return true;
 	}	

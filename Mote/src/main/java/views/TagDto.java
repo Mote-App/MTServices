@@ -7,12 +7,12 @@ import com.mt.models.Tag;
 
 public class TagDto {
 
-	List<Tag> smarts = new ArrayList<Tag>();
+	/*List<Tag> smarts = new ArrayList<Tag>();
 	List<Tag> socials = new ArrayList<Tag>();
-	List<Tag> genre = new ArrayList<Tag>();
+	List<Tag> genre = new ArrayList<Tag>();*/
+	List<Tag> tags = new ArrayList<Tag>();
 	
-	
-	public List<Tag> getSmarts() {
+	/*public List<Tag> getSmarts() {
 		return smarts;
 	}
 	public void setSmarts(List<Tag> smarts) {
@@ -29,6 +29,13 @@ public class TagDto {
 	}
 	public void setGenre(List<Tag> genre) {
 		this.genre = genre;
+	}*/
+	
+	public List<Tag> getTags() {
+		return tags;
+	}
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
 	}
 	
 	

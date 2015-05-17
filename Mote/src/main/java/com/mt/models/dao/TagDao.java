@@ -22,15 +22,20 @@ public class TagDao {
 	  /**
 	   * Method getAll
 	   * <br/>
-	   * Return all the colleges stored in the database.
+	   * 
 	   */
-	  @SuppressWarnings("unchecked")
+	  /*@SuppressWarnings("unchecked")
 	  public List<Tag> getTags(String type) {
 	    return _entityManager.createQuery("from Tag where tagType = :tagType")
 	    		.setParameter("tagType", type)
 	    		.getResultList();
-	  }
+	  }*/
 	  
+	  public List<Tag> getTags() {
+		    return _entityManager.createQuery("from Tag")
+		    		.getResultList();
+	  }
+		  
 	  public Tag getTag(long tagId){
 		  
 		    return (Tag)_entityManager.createQuery("from Tag where id = :tagId")

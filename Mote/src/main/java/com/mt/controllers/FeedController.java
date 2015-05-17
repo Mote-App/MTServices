@@ -50,6 +50,7 @@ public class FeedController {
 	@Autowired
 	private PostDao _postDao;
 	
+	
 	@Autowired
 	private UserFriendsDao _userFriendsDao;
 	
@@ -114,19 +115,19 @@ public class FeedController {
 				FriendFeedDto friendFeed = new FriendFeedDto();
 				
 				friendFeed.setUserId(postUserId);
-				friendFeed.setName(user.getFirstName() + " " + user.getLastName());
+				friendFeed.setName(user.getProfileFirstName() + " " + user.getProfileLastName());
 				//friendFeed.setFacebookName(user.getFa);
 				friendFeed.setProfileImg(user.getProfilePictureUrl());
-				friendFeed.setSchoolId(user.getCollege().getCollegeId());
-				friendFeed.setSchoolImg(user.getCollege().getCollegeImgPath());
-				friendFeed.setSchoolName(user.getCollege().getCollegeName());
+				friendFeed.setSchoolId(user.getProfileCollege().getCollegeId());
+				friendFeed.setSchoolImg(user.getProfileCollege().getCollegeImgPath());
+				friendFeed.setSchoolName(user.getProfileCollege().getCollegeName());
 				//TODO:  Remove .getId() if getCollegeId() works, add getCollegeLanguageCode() and getCollegeCountryCode()
 				//friendFeed.setUserType(user.getIsAlumni());
 				
 				PostsDto postsDto = new PostsDto();
 				
 				// Find the current and most recent post
-				List<Post> posts = _postDao.getMostRecentPost(user.getId());
+				List<Post> posts = _postDao.getMostRecentPost(user.getProfileId());
 				
 				// Get the current post
 				PostDto currentPost = new PostDto();
@@ -151,7 +152,7 @@ public class FeedController {
 				
 				// Find most popular post
 				PostDto mostPopularPost = new PostDto();
-				Post post = _postDao.getMostPopularPost(user.getId());
+				Post post = _postDao.getMostPopularPost(user.getProfileId());
 				
 				if(post != null) {
 					populatePostDto(mostPopularPost, post, likedPostIds);
@@ -183,7 +184,7 @@ public class FeedController {
 		destination.setPostingDate(source.getPostingDate());
 		destination.setProgressInd(source.getProgressInd());
 		destination.setTags(source.getTags());
-		destination.setCustomTags(source.getCustomTags());
+		//destination.setCustomTags(source.getCustomTags());
 	}
 	
 	/**
@@ -193,9 +194,9 @@ public class FeedController {
 	 * @param likedPostIds
 	 */
 	private void populatePostDto(PostDto destination, Post source, List<Long> likedPostIds) {
-		destination.setPostId(source.getId());
-		destination.setPostImg(source.getPostImgPath());
-		destination.setCaption(source.getCaption());
+		destination.setPostId(source.getPostId());
+		destination.setPostImg(source.getPostObjectPath());
+		destination.setCaption(source.getPostCaption());
 		destination.setLikes(source.getLikes());
 		destination.setProgressInd(35);
 		
@@ -209,20 +210,22 @@ public class FeedController {
 		destination.setPostingDate(calculateElapsedTime(source.getPostDate()));
 		
 		// Populate tags
-		List<String> lstTags = new ArrayList<String>();
+		List<Long> lstTags = new ArrayList<Long>();
 		
 		for(int i=0; i < source.getListPostTags().size(); i++) {
 			PostTags postTag = source.getListPostTags().get(i);
 			Tag tag = _tagDao.getTag(postTag.getTagId());
 			
-			lstTags.add(tag.getSubTag());
+			lstTags.add(tag.getTagId());
 			
-			destination.setTagCategory(tag.getTagType());
+			//destination.setTagCategory(tag.getTagType());
 		}
 		
 		destination.setTags(lstTags);
 		
-		// Populate custom tags
+		/*
+		 * Discarded
+		 * // Populate custom tags
 		List<String> lstCustomTags = new ArrayList<String>();
 		
 		for(int i = 0; i < source.getListPostCustomTags().size(); i++) {
@@ -230,7 +233,7 @@ public class FeedController {
 			lstCustomTags.add(customPostTag.getTagName());
 		}
 		
-		destination.setCustomTags(lstCustomTags);
+		destination.setCustomTags(lstCustomTags);*/
 	}
 	
 	/**
@@ -288,9 +291,9 @@ public class FeedController {
 		for(int i = 0; i < feeds.size(); i++) {
 			SchoolFeedDto dto = new SchoolFeedDto();
 			
-			dto.setUserId(feeds.get(i).getUser().getId());
+			dto.setUserId(feeds.get(i).getUser().getProfileId());
 			//dto.setUserType(feeds.get(i).getUser().getIsAlumni());
-			dto.setName(feeds.get(i).getUser().getUserName());
+			dto.setName(feeds.get(i).getUser().getProfileUserName());
 			dto.setSchoolId(feeds.get(i).getCollege().getCollegeId());
 			dto.setSchoolImg(feeds.get(i).getCollege().getCollegeImgPath());
 			dto.setSchoolName(feeds.get(i).getCollege().getCollegeName());
@@ -335,9 +338,9 @@ public class FeedController {
 			for(int i = 0; i < feeds.size(); i++) {
 				SchoolFeedDto dto = new SchoolFeedDto();
 				
-				dto.setUserId(feeds.get(i).getUser().getId());
+				dto.setUserId(feeds.get(i).getUser().getProfileId());
 				//dto.setUserType(feeds.get(i).getUser().getIsAlumni());
-				dto.setName(feeds.get(i).getUser().getUserName());
+				dto.setName(feeds.get(i).getUser().getProfileUserName());
 				dto.setSchoolId(feeds.get(i).getCollege().getCollegeId());
 				dto.setSchoolImg(feeds.get(i).getCollege().getCollegeImgPath());
 				dto.setSchoolName(feeds.get(i).getCollege().getCollegeName());
@@ -370,9 +373,9 @@ public class FeedController {
 			for(int i = 0; i < feeds.size(); i++) {
 				SchoolFeedDto dto = new SchoolFeedDto();
 				
-				dto.setUserId(feeds.get(i).getUser().getId());
+				dto.setUserId(feeds.get(i).getUser().getProfileId());
 				//dto.setUserType(feeds.get(i).getUser().getIsAlumni());
-				dto.setName(feeds.get(i).getUser().getUserName());
+				dto.setName(feeds.get(i).getUser().getProfileUserName());
 				dto.setSchoolId(feeds.get(i).getCollege().getCollegeId());
 				dto.setSchoolImg(feeds.get(i).getCollege().getCollegeImgPath());
 				dto.setSchoolName(feeds.get(i).getCollege().getCollegeName());
@@ -414,9 +417,9 @@ public class FeedController {
 		for(int i = 0; i < feeds.size(); i++) {
 			NationalFeedDto dto = new NationalFeedDto();
 			
-			dto.setUserId(feeds.get(i).getUser().getId());
+			dto.setUserId(feeds.get(i).getUser().getProfileId());
 			//dto.setUserType(feeds.get(i).getUser().getIsAlumni());
-			dto.setName(feeds.get(i).getUser().getUserName());
+			dto.setName(feeds.get(i).getUser().getProfileUserName());
 			dto.setSchoolId(feeds.get(i).getCollege().getCollegeId());
 			dto.setSchoolImg(feeds.get(i).getCollege().getCollegeImgPath());
 			dto.setSchoolName(feeds.get(i).getCollege().getCollegeName());
@@ -457,8 +460,8 @@ public class FeedController {
 		post = _postRepo.save(post);
 		
 		PostUser postUser = new PostUser();
-		postUser.setPostId(post.getId());
-		postUser.setUserId(post.getUserId());
+		postUser.setPostId(post.getPostId());
+		postUser.setUserId(post.getProfileId());
 		postUser.setLevel(likeDto.getLevel());
 		
 		_postUserRepository.save(postUser);

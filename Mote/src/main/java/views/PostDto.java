@@ -12,13 +12,13 @@ public class PostDto {
 	long 			likes; 
 	String 			caption;
 	int				progressInd; //default value
-	String 			tagCategory; //Each post will only have one category and many sub categories
-	List<String> 	tags;
-	List<String>	customTags;
+	String 			tagCategory; //Each post will only have one category and many sub categories -discarded
+	List<Long> 	tags;
+	//List<String>	customTags;
 	boolean			likeDone = false;
 	
 	public PostDto(){
-		tags = new ArrayList<String>();
+		tags = new ArrayList<Long>();
 	}
 	
 	public long getPostId() {
@@ -39,10 +39,10 @@ public class PostDto {
 	public void setPostImg(String postImg) {
 		this.postImg = postImg;
 	}
-	public List<String> getTags() {
+	public List<Long> getTags() {
 		return tags;
 	}
-	public void setTags(List<String> tags) {
+	public void setTags(List<Long> tags) {
 		this.tags = tags;
 	}
 	public long getLikes() {
@@ -66,13 +66,13 @@ public class PostDto {
 		this.tagCategory = tagCategory;
 	}
 
-	public List<String> getCustomTags() {
+	/*public List<String> getCustomTags() {
 		return customTags;
 	}
 
 	public void setCustomTags(List<String> customTags) {
 		this.customTags = customTags;
-	}
+	}*/
 
 	public int getProgressInd() {
 		return progressInd;

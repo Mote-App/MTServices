@@ -8,40 +8,32 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cltag")
+@Table(name="tag")
 public class Tag {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private long tagId;
 	
-	@Column(name="tag_type")
-	private String tagType;
-	
-	@Column(name="sub_tag")
-	private String subTag;
-	
-	public long getId() {
-		return id;
+	@Column(name="tag_description")
+	private String tagDescription;
+
+	public long getTagId() {
+		return tagId;
+	}
+
+	public void setTagId(long tagId) {
+		this.tagId = tagId;
+	}
+
+	public String getTagDescription() {
+		return tagDescription;
+	}
+
+	public void setTagDescription(String tagDescription) {
+		this.tagDescription = tagDescription;
 	}
 	
-	public void setId(long id) {
-		this.id = id;
-	}
 	
-	public String getTagType() {
-		return tagType;
-	}
 	
-	public void setTagType(String tagType) {
-		this.tagType = tagType;
-	}
-	
-	public String getSubTag() {
-		return subTag;
-	}
-	
-	public void setSubTag(String subTag) {
-		this.subTag = subTag;
-	}	
 }

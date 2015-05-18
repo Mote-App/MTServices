@@ -27,7 +27,7 @@ import com.mt.models.NationalFeed;
 import com.mt.models.Post;
 import com.mt.models.PostCustomTags;
 import com.mt.models.PostTags;
-import com.mt.models.PostUser;
+import com.mt.models.PostProfileLike;
 import com.mt.models.SchoolFeed;
 import com.mt.models.Tag;
 import com.mt.models.User;
@@ -93,18 +93,20 @@ public class FeedController {
 	 */
 	@RequestMapping(value="/friend_feeds", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public List<FriendFeedDto> getFriendFeeds(Long userId) {
+	public List<FriendFeedDto> getFriendFeeds(Long profileId) {
 		List<FriendFeedDto> friendFeeds = null;
 		
 		try {
-			List<Long> likedPostIds = _postUserRepository.findByUserIdForFriends(userId);
+			
+			//A tricky process 
+			List<Long> likedPostIds = _postUserRepository.findByUserIdForFriends(profileId);
 			
 			friendFeeds = new ArrayList<FriendFeedDto>();
 			
-			List<Long> friends  = _userFriendsDao.getFriends(userId);
+			List<Long> friends  = _userFriendsDao.getFriends(profileId);
 			
 			// To include logged user id along with their friends and fetch all their post in descending order by post date
-			friends.add(userId); 
+			friends.add(profileId); 
 			
 			// Get the userId order by posting date DESC means latest first
 			List<Long> postUserIds = _postDao.getUserPosts(friends);
@@ -237,7 +239,7 @@ public class FeedController {
 	}
 	
 	/**
-	 * 
+	 * This is required so that, on client user cannot do multiple likes.
 	 * @param post
 	 * @param likedPostIds
 	 */
@@ -459,9 +461,9 @@ public class FeedController {
 		
 		post = _postRepo.save(post);
 		
-		PostUser postUser = new PostUser();
+		PostProfileLike postUser = new PostProfileLike();
 		postUser.setPostId(post.getPostId());
-		postUser.setUserId(post.getProfileId());
+		postUser.setProfileId(post.getProfileId());
 		postUser.setLevel(likeDto.getLevel());
 		
 		_postUserRepository.save(postUser);

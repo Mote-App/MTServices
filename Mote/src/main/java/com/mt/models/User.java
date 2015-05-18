@@ -50,7 +50,10 @@ public class User {
   @OneToOne
   @JoinColumn(name="profile_college_id")
   private College profileCollege;
-  
+ 
+  @OneToOne
+  @JoinColumn(name="locale_locale_id")
+  private Locale locale;
  
   
   // ==============
@@ -156,6 +159,14 @@ public class User {
 
 	public void setProfileCollege(College profileCollege) {
 		this.profileCollege = profileCollege;
+	}
+
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
 	}
 
 

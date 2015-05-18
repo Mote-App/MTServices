@@ -31,4 +31,14 @@ public class CollegeDao {
 	public List<College> getAll() {
 		return _entityManager.createQuery("from College").getResultList();
 	}
+	
+	public College getCollege(long collegeId){
+		
+		College college = (College)_entityManager.createQuery("SELECT C FROM College C where C.collegeId = :collegeId")
+				.setParameter("collegeId", collegeId)
+				.getSingleResult();
+		
+		return college;
+		
+	}
 }

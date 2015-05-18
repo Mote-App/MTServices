@@ -7,26 +7,29 @@ package views;
  */
 public class CollegeDto {
 	
-	private long id;
-	private String imgPath;
-	private String name;
+	private long collegeId;
+	private String collegeImgPath;
+	private String collegeName;
 	
-	public long getId() {
-		return id;
+	
+	public long getCollegeId() {
+		return collegeId;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setCollegeId(long collegeId) {
+		this.collegeId = collegeId;
 	}
-	public String getImgPath() {
-		return imgPath;
+	public String getCollegeImgPath() {
+		return collegeImgPath;
 	}
-	public void setImgPath(String imgPath) {
-		this.imgPath = imgPath;
+	public void setCollegeImgPath(String collegeImgPath) {
+		this.collegeImgPath = collegeImgPath;
 	}
-	public String getName() {
-		return name;
+	public String getCollegeName() {
+		return collegeName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setCollegeName(String collegeName) {
+		this.collegeName = collegeName;
 	}
+	
+	
 }

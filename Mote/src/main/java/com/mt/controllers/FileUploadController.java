@@ -155,6 +155,7 @@ public class FileUploadController {
                 
                 return "You successfully uploaded " + fileName;
             } catch (Exception e) {
+            	e.printStackTrace();
             	throw new ClException("Failed to upload post image", e.getMessage() + e.getCause());
             }
         } else {

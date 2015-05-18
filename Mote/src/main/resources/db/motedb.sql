@@ -32,7 +32,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `motedb`.`college` ;
 
 CREATE TABLE IF NOT EXISTS `motedb`.`college` (
-  `college_id` INT NOT NULL,
+  `college_id` INT NOT NULL AUTO_INCREMENT,
   `college_img_path` VARCHAR(250) NOT NULL,
   `college_name` VARCHAR(250) NOT NULL,
   PRIMARY KEY (`college_id`))
@@ -84,7 +84,7 @@ CREATE INDEX `fk_locale_language1_idx` ON `motedb`.`locale` (`locale_language_co
 DROP TABLE IF EXISTS `motedb`.`profile` ;
 
 CREATE TABLE IF NOT EXISTS `motedb`.`profile` (
-  `profile_id` INT NOT NULL,
+  `profile_id` INT NOT NULL AUTO_INCREMENT,
   `profile_email` VARCHAR(250) NOT NULL,
   `profile_first_name` VARCHAR(100) NOT NULL,
   `profile_last_name` VARCHAR(100) NOT NULL,
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `motedb`.`profile` (
   `profile_picture_url` VARCHAR(250) NOT NULL,
   `profile_college_id` INT NOT NULL,
   `locale_locale_id` INT NOT NULL,
-  PRIMARY KEY (`profile_id`, `locale_locale_id`),
+  PRIMARY KEY (`profile_id`),
   CONSTRAINT `fk_profile_college1`
     FOREIGN KEY (`profile_college_id`)
     REFERENCES `motedb`.`college` (`college_id`)
@@ -131,7 +131,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `motedb`.`post` ;
 
 CREATE TABLE IF NOT EXISTS `motedb`.`post` (
-  `post_id` INT NOT NULL COMMENT 'Mote Profile Post Feeds [Friend, School and National]\nV - the number of \'views\' on a post.\nL - the number of \'likes\' on a post.\nNs - the number of \'posts\' in School Feed.\n\nCr - the number of \'people\' registered from that school.\nCl - the number of \'likes\' per post from that school.\nCpn - the number of \'post\' from that school.\n\nCrIdealAvg - the average number of \'people\' registered per school.\nClIdealAvg - the average number of \'likes\' per post from all school.\nCpnAvg - the average number of \'post\' from that school.',
+  `post_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Mote Profile Post Feeds [Friend, School and National]\nV - the number of \'views\' on a post.\nL - the number of \'likes\' on a post.\nNs - the number of \'posts\' in School Feed.\n\nCr - the number of \'people\' registered from that school.\nCl - the number of \'likes\' per post from that school.\nCpn - the number of \'post\' from that school.\n\nCrIdealAvg - the average number of \'people\' registered per school.\nClIdealAvg - the average number of \'likes\' per post from all school.\nCpnAvg - the average number of \'post\' from that school.',
   `post_type_code` VARCHAR(5) NOT NULL,
   `post_tag_id` INT NOT NULL,
   `post_object_path` VARCHAR(250) NOT NULL,
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `motedb`.`post` (
   `post_school_promote` TINYINT(1) NULL DEFAULT 0,
   `post_national_promote` TINYINT(1) NULL DEFAULT 0,
   `post_profile_id` INT NOT NULL,
-  PRIMARY KEY (`post_id`, `post_profile_id`),
+  PRIMARY KEY (`post_id`),
   CONSTRAINT `fk_post_type1`
     FOREIGN KEY (`post_type_code`)
     REFERENCES `motedb`.`type` (`type_code`)
@@ -166,25 +166,9 @@ CREATE INDEX `fk_post_profile1_idx` ON `motedb`.`post` (`post_profile_id` ASC);
 DROP TABLE IF EXISTS `motedb`.`tag` ;
 
 CREATE TABLE IF NOT EXISTS `motedb`.`tag` (
-  `tag_id` INT NOT NULL,
+  `tag_id` INT NOT NULL AUTO_INCREMENT,
   `tag_description` VARCHAR(250) NOT NULL,
   PRIMARY KEY (`tag_id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `motedb`.`profile_has_post`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `motedb`.`profile_has_post` ;
-
-CREATE TABLE IF NOT EXISTS `motedb`.`profile_has_post` (
-  `likes` INT NULL DEFAULT 0 COMMENT 'Mote Profile Post Feeds [Friend, School and National]\nV - the number of \'views\' on a post.\nL - the number of \'likes\' on a post.\nNs - the number of \'posts\' in School Feed.\n\nCr - the number of \'people\' registered from that school.\nCl - the number of \'likes\' per post from that school.\nCpn - the number of \'post\' from that school.\n\nCrIdealAvg - the average number of \'people\' registered per school.\nClIdealAvg - the average number of \'likes\' per post from all school.\nCpnAvg - the average number of \'post\' from that school.',
-  `views` INT NULL DEFAULT 0,
-  `school_promote` TINYINT(1) NULL DEFAULT 0,
-  `national_promote` TINYINT(1) NULL DEFAULT 0,
-  `profile_id` INT NOT NULL,
-  `post_id` INT NOT NULL,
-  PRIMARY KEY (`profile_id`, `post_id`))
 ENGINE = InnoDB;
 
 
@@ -239,6 +223,25 @@ CREATE INDEX `fk_post_has_tag_tag1_idx` ON `motedb`.`post_has_tag` (`tag_tag_id`
 
 CREATE INDEX `fk_post_has_tag_post1_idx` ON `motedb`.`post_has_tag` (`post_post_id` ASC);
 
+-- -----------------------------------------------------
+-- Table `motedb`.`post_user_like`
+-- Used for avoiding mulitple likes by a user and maintain 
+-- like at level of Friends, School and National
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `motedb`.`post_user_like` ;
+
+CREATE TABLE IF NOT EXISTS `motedb`.`post_user_like` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	 `post_id` INT NOT NULL,
+	 `profile_id` INT NOT NULL,
+	 `level` char(1) DEFAULT NULL,
+	 PRIMARY KEY (`id`)
+	 
+)
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_post_user_like_profile_id_idx` ON `motedb`.`post_user_like` (`profile_id` ASC);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

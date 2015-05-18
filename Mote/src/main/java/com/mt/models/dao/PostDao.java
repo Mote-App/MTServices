@@ -25,29 +25,29 @@ public class PostDao {
 	 * (the second record for a user) and based on likes you can find the most popular from the same list
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Long> getUserPosts(List<Long> userIds) {
-	    return _entityManager.createQuery("SELECT DISTINCT P.userId FROM Post as P WHERE userId IN :userIds ORDER BY postDate DESC")
-	    		.setParameter("userIds", userIds)
+	public List<Long> getUserPosts(List<Long> profileIds) {
+	    return _entityManager.createQuery("SELECT DISTINCT P.profileId FROM Post as P WHERE P.profileId IN :profileIds ORDER BY postDate DESC")
+	    		.setParameter("profileIds", profileIds)
 	    		.getResultList();
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Post> getMostRecentPost(long userId) {
-		return _entityManager.createQuery("SELECT P FROM Post as P WHERE userId = :userId ORDER BY postDate DESC")
-				.setParameter("userId", userId)
+	public List<Post> getMostRecentPost(long profileId) {
+		return _entityManager.createQuery("SELECT P FROM Post as P WHERE P.profileId = :profileId ORDER BY postDate DESC")
+				.setParameter("profileId", profileId)
 				.setMaxResults(2)
 				.getResultList();
 	}
 	
-	public Post getMostPopularPost(long userId){
-		return (Post)_entityManager.createQuery("SELECT P FROM Post as P WHERE userId = :userId ORDER BY likes DESC")
-				.setParameter("userId", userId)
+	public Post getMostPopularPost(long profileId){
+		return (Post)_entityManager.createQuery("SELECT P FROM Post as P WHERE P.profileId = :profileId ORDER BY likes DESC")
+				.setParameter("profileId", profileId)
 				.setMaxResults(1)
 				.getSingleResult();
 	}
 	
 	public Post getPost(long postId){
-		return (Post)_entityManager.createQuery("SELECT P FROM Post as P WHERE id = :postId")
+		return (Post)_entityManager.createQuery("SELECT P FROM Post as P WHERE P.postId = :postId")
 				.setParameter("postId", postId)
 				.setMaxResults(1)
 				.getSingleResult();

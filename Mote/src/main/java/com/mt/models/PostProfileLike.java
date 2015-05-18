@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="clpost_users")
-public class PostUser {
+@Table(name="post_user_like")
+public class PostProfileLike {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,8 +18,8 @@ public class PostUser {
 	@Column(name="post_id")
 	private long postId;
 	
-	@Column(name="user_id")
-	private long userId;
+	@Column(name="profile_id")
+	private long profileId;
 
 	@Column(name="level")
 	private String level;
@@ -40,12 +40,12 @@ public class PostUser {
 		this.postId = postId;
 	}
 
-	public long getUserId() {
-		return userId;
+	public long getProfileId() {
+		return profileId;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setProfileId(long profileId) {
+		this.profileId = profileId;
 	}
 
 	public String getLevel() {

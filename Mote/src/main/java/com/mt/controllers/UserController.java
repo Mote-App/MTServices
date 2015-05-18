@@ -15,7 +15,10 @@ import views.UserDto;
 
 import com.mt.exception.ClException;
 import com.mt.models.College;
+import com.mt.models.Locale;
 import com.mt.models.User;
+import com.mt.models.dao.CollegeDao;
+import com.mt.models.dao.LocaleDao;
 import com.mt.models.dao.UserDao;
 import com.mt.models.repository.UserRepository;
 
@@ -34,6 +37,12 @@ public class UserController {
   // Wire the UserDao that will be used inside this controller.
   @Autowired
   private UserDao _userDao;
+  
+  @Autowired
+  private LocaleDao _localeDao;
+  
+  @Autowired
+  private CollegeDao _collegeDao;
   
   // ===============
   // PRIVATE METHODS
@@ -59,18 +68,21 @@ public class UserController {
       user.setProfileFirstName(userDto.getFirstName());
       user.setProfileLastName(userDto.getLastName());
       user.setProfileEmail(userDto.getEmail());
-      //user.setIsAlumni(userDto.getIsAlumni());
-      //user.setGender(userDto.getGender());
       user.setProfileUserName(userDto.getUserName());
+
       //Set the password 1234 on temporary , needs to replace with dynamic algorithm to produce unique random password.
       user.setProfilePassword("1234");
       user.setProfilePictureUrl(userDto.getProfilePictureUrl());
       
-      College college = new College();
+      /*
+       * For performance reason creating College model using CollegeDto
+       * instead of fetching from database using collegeId.
+       */
+      College college  = new College();
       
-      college.setCollegeId(userDto.getCollege().getId());
-      college.setCollegeImgPath(userDto.getCollege().getImgPath());
-      college.setCollegeName(userDto.getCollege().getName());
+      college.setCollegeId(userDto.getCollege().getCollegeId());
+      college.setCollegeImgPath(userDto.getCollege().getCollegeImgPath());
+      college.setCollegeName(userDto.getCollege().getCollegeName());
       
       user.setProfileCollege(college);
       
@@ -89,6 +101,14 @@ public class UserController {
     	  e.printStackTrace();
     	  throw new ClException("Invalid Email. ", e.getMessage() + e.getCause());
       }*/
+      
+      /*
+       * Hard coded locale to en_US
+       */
+      
+      Locale locale = _localeDao.getLocale(1L);
+      
+      user.setLocale(locale);
       
       _userRepo.save(user);
       

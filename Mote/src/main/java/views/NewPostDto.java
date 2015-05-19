@@ -4,11 +4,19 @@ import java.util.List;
 
 public class NewPostDto {
 
+	String			postType;			
 	long 			userId;
 	String 			caption;
 	List<Integer> 	tags;
 	String			customTags; //Comma separated tags.
 	
+	
+	public String getPostType() {
+		return postType;
+	}
+	public void setPostType(String postType) {
+		this.postType = postType;
+	}
 	public long getUserId() {
 		return userId;
 	}

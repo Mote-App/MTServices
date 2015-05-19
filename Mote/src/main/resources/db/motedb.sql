@@ -119,7 +119,7 @@ CREATE INDEX `fk_profile_locale1_idx` ON `motedb`.`profile` (`locale_locale_id` 
 DROP TABLE IF EXISTS `motedb`.`type` ;
 
 CREATE TABLE IF NOT EXISTS `motedb`.`type` (
-  `type_code` VARCHAR(5) NOT NULL COMMENT 'username, name [public], or anonymous',
+  `type_code` VARCHAR(20) NOT NULL COMMENT 'username, name [public], or anonymous',
   `type_description` VARCHAR(250) NOT NULL,
   PRIMARY KEY (`type_code`))
 ENGINE = InnoDB;
@@ -131,9 +131,8 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `motedb`.`post` ;
 
 CREATE TABLE IF NOT EXISTS `motedb`.`post` (
-  `post_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Mote Profile Post Feeds [Friend, School and National]\nV - the number of \'views\' on a post.\nL - the number of \'likes\' on a post.\nNs - the number of \'posts\' in School Feed.\n\nCr - the number of \'people\' registered from that school.\nCl - the number of \'likes\' per post from that school.\nCpn - the number of \'post\' from that school.\n\nCrIdealAvg - the average number of \'people\' registered per school.\nClIdealAvg - the average number of \'likes\' per post from all school.\nCpnAvg - the average number of \'post\' from that school.',
-  `post_type_code` VARCHAR(5) NOT NULL,
-  `post_tag_id` INT NOT NULL,
+  `post_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Mote Profile Post Feeds [Friend, School and National]\nV - the number of views on a post.\nL - the number of likes on a post.\nNs - the number of posts in School Feed.\n\nCr - the number of people registered from that school.\nCl - the number of likes per post from that school.\nCpn - the number of post from that school.\n\nCrIdealAvg - the average number of people registered per school.\nClIdealAvg - the average number of likes per post from all school.\nCpnAvg - the average number of post from that school.',
+  `post_type_code` VARCHAR(20) NOT NULL,
   `post_object_path` VARCHAR(250) NOT NULL,
   `post_date` DATETIME NOT NULL DEFAULT now(),
   `post_caption` VARCHAR(45) NULL,

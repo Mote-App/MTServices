@@ -29,11 +29,14 @@ public class Post {
 	@Column(name="post_id")
 	private long postId;
 	
+	@Column(name="post_type_code")
+	private String postTypeCode;
+	
 	@Column(name="post_profile_id")
 	private long profileId;
 
-	@Column(name="post_tag_id")
-	private long postTagId;
+	//@Column(name="post_tag_id")
+	//private long postTagId;
 	
 	
 	@Column(name="post_object_path")
@@ -73,6 +76,14 @@ public class Post {
 	public void setPostId(long postId) {
 		this.postId = postId;
 	}
+	
+	public String getPostTypeCode() {
+		return postTypeCode;
+	}
+
+	public void setPostTypeCode(String postTypeCode) {
+		this.postTypeCode = postTypeCode;
+	}
 
 	public long getProfileId() {
 		return profileId;
@@ -82,13 +93,13 @@ public class Post {
 		this.profileId = profileId;
 	}
 
-	public long getPostTagId() {
+	/*public long getPostTagId() {
 		return postTagId;
 	}
 
 	public void setPostTagId(long postTagId) {
 		this.postTagId = postTagId;
-	}
+	}*/
 
 	public String getPostObjectPath() {
 		return postObjectPath;

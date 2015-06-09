@@ -11,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +39,8 @@ import views.NewPostDto;
 @Controller
 public class FileUploadController {
 
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	PostTagsRepository _postTagsRepository;
 	
@@ -88,6 +92,8 @@ public class FileUploadController {
 			//String path = "c://developer//research//";
         	try {
         
+        		log.info("New Post Parameter :" + newPostDtoStr);
+        		
         		ObjectMapper mapper = new ObjectMapper();
         		NewPostDto newPostDto =  mapper.readValue(newPostDtoStr,NewPostDto.class);
         		
@@ -144,7 +150,7 @@ public class FileUploadController {
             	//post = _postRepo.save(post);
             	
             	
-            	fileName = post.getProfileId() + "_" + post.getPostId() + ".jpg";
+            	fileName = post.getProfileId() + "_" + post.getPostId() + ".png";
             	
                 byte[] bytes = file.getBytes();
                 BufferedOutputStream stream =

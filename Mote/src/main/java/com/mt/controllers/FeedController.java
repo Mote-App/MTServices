@@ -256,7 +256,10 @@ public class FeedController {
 	}
 	
 	private String calculateElapsedTime(Calendar dt) {
-		DateTime start = new DateTime(dt.get(Calendar.YEAR), dt.get(Calendar.MONTH), dt.get(Calendar.DAY_OF_MONTH) + 1, dt.get(Calendar.HOUR_OF_DAY), dt.get(Calendar.MINUTE));
+		
+		//Difference between Joda and Calendar is Joda starts with 1-12 and Calendar starts with 0-11 for month value
+		//and 
+		DateTime start = new DateTime(dt.get(Calendar.YEAR), dt.get(Calendar.MONTH) + 1, dt.get(Calendar.DAY_OF_MONTH), dt.get(Calendar.HOUR_OF_DAY), dt.get(Calendar.MINUTE));
 		DateTime end = new DateTime();
 		
 		//int years = Years.yearsBetween(start, end).getYears();

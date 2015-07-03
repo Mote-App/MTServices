@@ -69,6 +69,9 @@ public class PostDao {
 	}
 	
 	public Long getNs() {
+		
+		//Q. Which logic updates the school_promote? So that we can calculate Ns.
+		//Ans. See the method promotePostToSchoolFeed, which is called after algorithm calculation
 		return (Long)_entityManager.createQuery("SELECT COUNT(P.school_promote) AS Ns FROM Post as P WHERE school_promote = true")
 				.getSingleResult();
 	}
@@ -96,7 +99,7 @@ public class PostDao {
 	 * @return
 	 */
 	public Long getCl(long collegeId) {
-		return (Long)_entityManager.createQuery("SELECT SUM(likes) AS Cl FROM Post as P WHERE college_id = :collegeId")
+		return (Long)_entityManager.createQuery("SELECT SUM(likes) AS Cl FROM Post as P JOIN User as U WHERE P.profileId = U.profileId AND U.profileCollege.collegeId = :collegeId")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();
 	}

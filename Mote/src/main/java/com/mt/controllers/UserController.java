@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import views.UserDto;
 
-import com.mt.exception.ClException;
+import com.mt.exception.MtException;
 import com.mt.models.College;
 import com.mt.models.Locale;
 import com.mt.models.User;
@@ -59,7 +59,7 @@ public class UserController {
    */
   @RequestMapping(value="/user/create", method = RequestMethod.POST, produces="application/json")
   @ResponseBody
-  public User create(@RequestBody UserDto userDto) throws ClException{
+  public User create(@RequestBody UserDto userDto) throws MtException{
     
 	  User user = new User();
 	  
@@ -118,7 +118,7 @@ public class UserController {
     	
     	e.printStackTrace();
     	
-    	throw new ClException("Error Creating new user.", e.getMessage() + e.getCause());
+    	throw new MtException("Error Creating new user.", e.getMessage() + e.getCause());
     	//return "Error creating the user: " + ex.toString();
     	//ex.printStackTrace();
     }

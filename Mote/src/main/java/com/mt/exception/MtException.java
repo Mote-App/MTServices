@@ -1,16 +1,16 @@
 package com.mt.exception;
 
-public class ClException extends Exception {
+public class MtException extends Exception {
 
 	//private String status;
 	private String message;
 	private String exception;
 	
-	public ClException(){
+	public MtException(){
 		
 	}
 
-	public ClException(String message, String exception){
+	public MtException(String message, String exception){
 		//this.status = status;
 		this.message = message;
 		this.exception = exception;

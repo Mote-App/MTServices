@@ -62,7 +62,7 @@ public class FileUploadController {
 	@RequestMapping(value="/upload", method=RequestMethod.POST)
 	public @ResponseBody String handleFileUpload(@RequestParam("name") String name, @RequestParam("file") MultipartFile file) throws MtException {
 		if(!file.isEmpty()) {
-			String path = "/var/www/cdn/img/profiles/";
+			String path = "/var/www/html/img/profiles/";
 			
 			try {
 				byte[] bytes = file.getBytes();
@@ -96,7 +96,7 @@ public class FileUploadController {
 		String fileName="";
 		
 		if(!file.isEmpty()) {
-			String path = "/var/www/cdn/img/posts/";
+			String path = "/var/www/html/img/posts/";
 			//String path = "c://developer//research//";
 			try {
 				log.info("New Post Parameter :" + newPostDtoStr);

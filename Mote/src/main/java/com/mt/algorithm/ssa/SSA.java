@@ -29,7 +29,7 @@ public class SSA {
 	public SSAPostRatio calculateRf(long V, long L, long Ns) {
 		SSA ssa = new SSA();
 		
-		// enum SSACalculator is outside the SocialStairwayAlgorithm class.
+		// enum SSACalculator is outside the [Social Stairway Algorithm] SSA class.
 		ssa.calculator = SSACalculator.Kf;
 		
 		SSAPostRatio rfPostRatio = new SSAPostRatio();
@@ -66,7 +66,7 @@ public class SSA {
 	public SSAPostRatio calculateRs(long V, long L, long Cr, double CrIdealAvg, long Cl, double ClIdealAvg, long Cpn, double CpnAvg, long Ns) {
 		SSA ssa = new SSA();
 		
-		// enum SSACalculator is outside the SocialStairwayAlgorithm class.
+		// enum SSACalculator is outside the [Social Stairway Algorithm] SSA class.
 		ssa.calculator = SSACalculator.Ks;
 		
 		SSAPostRatio rsPostRatio = new SSAPostRatio();

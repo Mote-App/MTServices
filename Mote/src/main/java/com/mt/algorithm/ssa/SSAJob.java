@@ -33,18 +33,14 @@ import com.mt.models.dao.UserDao;
  * @author gibranecastillo
  *
  */
-
 public class SSAJob {
-
 	@Autowired
 	private PostDao _postDao;
 	
 	@Autowired
 	private UserDao _userDao;
-
-	public void initiate(){
-		
-		
+	
+	public void initiate(){	
 		long Ns = _postDao.getNs();
 		List<Post> friendPosts = _postDao.getFriendFeedPosts();
 		
@@ -71,9 +67,7 @@ public class SSAJob {
 			Post schoolPost = schoolPosts.get(i);
 			examineSchoolFeedPost(Ns, schoolPost);
 		}
-		
 	}
-	
 	
 	/**
 	 * 
@@ -97,7 +91,6 @@ public class SSAJob {
 	 * @param schoolPost
 	 */
 	public void examineSchoolFeedPost(long Ns, Post schoolPost) {
-		
 		//TODO: Implement logic to calculate number of views on client (Javascript)
 		long V = schoolPost.getViews();
 		long L = schoolPost.getLikes();
@@ -120,6 +113,4 @@ public class SSAJob {
 			_postDao.promotePostToNationalFeed(postId);
 		}
 	}
-	
-	
 }

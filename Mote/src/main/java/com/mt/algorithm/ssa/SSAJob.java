@@ -53,7 +53,7 @@ public class SSAJob {
 		 * 
 		 * To get the count of school and 
 		 *  
-		 * First I'll algorithm working and then I'll improve performance/memory footprint.
+		 * First I'll get the algorithm working and then I'll improve performance/memory footprint.
 		 */
 		
 		for(int i = 0; i < friendPosts.size(); i++) {
@@ -71,9 +71,9 @@ public class SSAJob {
 	
 	/**
 	 * 
-	 * @param V
-	 * @param L
-	 * @param Ns
+	 * @param V a long value that represents the number of 'views' on a post.
+	 * @param L a long value that represents the number of 'likes' on a post.
+	 * @param Ns a long value that represents the number of 'posts' in School Feed.
 	 * @param postId
 	 */
 	public void examineFriendFeedPost(long V, long L, long Ns, long postId) {
@@ -87,7 +87,7 @@ public class SSAJob {
 	
 	/**
 	 * 
-	 * @param Ns
+	 * @param Ns a long value that represents the number of 'posts' in School Feed.
 	 * @param schoolPost
 	 */
 	public void examineSchoolFeedPost(long Ns, Post schoolPost) {
@@ -102,7 +102,7 @@ public class SSAJob {
 		long Cr = _userDao.getCr(collegeId);
 		long Cl = _postDao.getCl(collegeId);
 		long Cpn = _postDao.getCpn(collegeId);
-		double CrIdealAvg = 0.0; //pending!
+		double CrIdealAvg = _userDao.getCrIdealAvg(); //pending!
 		double ClIdealAvg = 0.0; //pending!
 		double CpnAvg = 0.0; //pending!
 		

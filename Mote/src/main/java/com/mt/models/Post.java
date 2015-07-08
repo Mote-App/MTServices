@@ -48,10 +48,10 @@ public class Post {
 	@Column(name="post_caption")
 	private String postCaption;
 
-	@Column(name="views")
+	@Column(name="post_views")
 	private long views;
 
-	@Column(name="likes")
+	@Column(name="post_likes")
 	private long likes;
 
 	@Column(name="post_school_promote")

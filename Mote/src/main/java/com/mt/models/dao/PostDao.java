@@ -61,10 +61,14 @@ public class PostDao {
 	 * Instead of using a List<Post> what other existing Java collections data structure I could use that would do
 	 * this process more efficiently for time complexity [performance] and space complexity [memory footprint].
 	 */
-	
+	/**
+	 * old:  SELECT P FROM Post as P WHERE post_school_promote = false AND post_national_promote = false ORDER BY postDate DESC
+	 * new:  SELECT P FROM Post as P WHERE P.post_school_promote = false AND P.post_national_promote = false ORDER BY P.post_date DESC
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Post> getFriendFeedPosts() {
-		return _entityManager.createQuery("SELECT P FROM Post as P WHERE school_promote = false AND national_promote = false ORDER BY postDate DESC")
+		return _entityManager.createQuery("SELECT P FROM Post as P WHERE P.postSchoolPromote = false AND P.postNationalPromote = false ORDER BY P.postDate DESC")
 				.getResultList();
 	}
 	
@@ -72,12 +76,12 @@ public class PostDao {
 		
 		//Q. Which logic updates the school_promote? So that we can calculate Ns.
 		//Ans. See the method promotePostToSchoolFeed, which is called after algorithm calculation
-		return (Long)_entityManager.createQuery("SELECT COUNT(P.school_promote) AS Ns FROM Post as P WHERE school_promote = true")
+		return (Long)_entityManager.createQuery("SELECT COUNT(P.postSchoolPromote) AS Ns FROM Post as P WHERE P.postSchoolPromote = true")
 				.getSingleResult();
 	}
 	
 	public int promotePostToSchoolFeed(long postId) {
-		return _entityManager.createQuery("UPDATE Post SET school_promote = true WHERE id = :postId")
+		return _entityManager.createQuery("UPDATE Post SET P.postSchoolPromote = true WHERE P.postId = :postId")
 				.setParameter("postId", postId)
 				.executeUpdate();
 	}
@@ -86,7 +90,7 @@ public class PostDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Post> getSchoolFeedPosts() {
-		return _entityManager.createQuery("SELECT P FROM Post as P WHERE school_promote = true AND national_promote = false ORDER BY postDate DESC")
+		return _entityManager.createQuery("SELECT P FROM Post as P WHERE P.postSchoolPromote = true AND P.postNationalPromote = false ORDER BY P.postDate DESC")
 				.getResultList();
 	}
 	
@@ -99,7 +103,7 @@ public class PostDao {
 	 * @return
 	 */
 	public Long getCl(long collegeId) {
-		return (Long)_entityManager.createQuery("SELECT SUM(likes) AS Cl FROM Post as P JOIN User as U WHERE P.profileId = U.profileId AND U.profileCollege.collegeId = :collegeId")
+		return (Long)_entityManager.createQuery("SELECT SUM(P.likes) AS Cl FROM Post as P JOIN Profile as U ON P.profileId = U.profileId WHERE U.profileCollege = :collegeId")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();
 	}
@@ -113,7 +117,7 @@ public class PostDao {
 	 * @return
 	 */
 	public Long getClIdealAvg(long collegeId) {
-		return (Long)_entityManager.createQuery("SELECT SUM(likes) AS Cl FROM Post as P WHERE college_id = :collegeId")
+		return (Long)_entityManager.createQuery("SELECT SUM(P.likes) AS Cl FROM Post as P JOIN Profile as U ON P.profileId = U.profileId")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();
 	}
@@ -127,13 +131,13 @@ public class PostDao {
 	 * @return
 	 */
 	public Long getCpn(long collegeId) {
-		return (Long)_entityManager.createQuery("SELECT COUNT(*) AS Cpn FROM Post as P WHERE college_id = :collegeId")
+		return (Long)_entityManager.createQuery("SELECT COUNT(P.postId) AS Cpn FROM Post as P JOIN Profile as U ON P.profileId = U.profileId WHERE U.profileCollege = :collegeId")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();
 	}
 	
 	public int promotePostToNationalFeed(long postId) {
-		return _entityManager.createQuery("UPDATE Post SET national_promote = true WHERE id = :postId")
+		return _entityManager.createQuery("UPDATE Post as P SET P.postNationalPromote = true WHERE P.postId = :postId")
 				.setParameter("postId", postId)
 				.executeUpdate();
 	}

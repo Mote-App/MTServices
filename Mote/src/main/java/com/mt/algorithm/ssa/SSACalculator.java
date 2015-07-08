@@ -44,7 +44,7 @@ public enum SSACalculator {
 	
 	// School Feed to National Feed Threshold Ratio.
 	Ks(0.2); // calls constructor with value 0.2
-		
+	
 	// Preliminary Post Coefficient.
 	private final double Cf = 0.5;
 	

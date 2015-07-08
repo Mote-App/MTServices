@@ -152,39 +152,64 @@ public class UserDao{
 	 * @return
 	 */
 	public Long getCr(long collegeId) {
-		return (Long)_entityManager.createQuery("SELECT COUNT(user_id) AS Cr FROM User as U WHERE college_id = :collegeId")
+		return (Long)_entityManager.createQuery("SELECT COUNT(U.profileId) AS Cr FROM Profile as U WHERE U.profile_college_id = :collegeId")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();
 	}
 	
 	/**
 	 * CrIdealAvg - the average number of 'people' registered per school.
+	 * CrIdealAvg - the average number of 'people' registered by the total number of register schools.
+	 * 
 	 * New Data Model
 	 * SELECT A.idcollege, COUNT(B.idprofile) FROM college A JOIN profile B ON A.idprofile = B.idprofile GROUP BY A.idcollege
 	 * 
 	 * select sum(TempTable.ProfileTotal)/TempTable.count(*) From (select a.idcollege College, count(b.idprofile) ProfileTotal from college A join profile B on a.idcollege=b.college) TempTable
 	 * 
 	 * declare cursor c_average
-select a.idcollege College, count(b.idprofile) ProfileTotal from college A join profile B on a.idcollege=b.college;
-
-
-SchoolNumber Int;
-TotalStudents int;
-
-For each row in c_average
-  SchoolNumber ++;
-  TotalStudents=  profileTotal + TotalStudents;
-End For
-
-Average= TotalStudetns/SchoolNumber;
-
-Return Average
+	 * select a.collegeId College, count(b.profileId) ProfileTotal from college A join profile B on a.collegeId=b.profileCollegeId;
+	 * 
+	 * SchoolNumber Int;
+	 * TotalStudents int;
+	 * 
+	 * For each row in c_average
+	 *   SchoolNumber ++;
+	 *   TotalStudents=  profileTotal + TotalStudents;
+	 * End For
+	 * 
+	 * Average= TotalStudetns/SchoolNumber;
+	 * 
+	 * Return Average
+	 * 
+	 * 
+	 * collegeID      profile total
+	 *    FSU             1,500
+	 *    UVA             500
+	 *    NCSU            500
+	 *    
+	 * SchoolNumber = 3
+	 * TotalStudents = 2,000
+	 * 
+	 * Average = 2,000 / 3
 	 * 
 	 * @param collegeId
 	 * @return
 	 */
 	public Long getCrIdealAvg() {
-		return (Long)_entityManager.createQuery("SELECT COUNT(user_id) AS Cr FROM User as U WHERE college_id = :collegeId")
+		return (Long)_entityManager.createQuery("declare cursor c_average "
+				+ "SELECT C.collegeId College, COUNT(U.profileId) ProfileTotal FROM college C JOIN profile U ON C.collegeId = U.profileCollegeId;"
+				+ ""
+				+ "SchoolNumber Int;"
+				+ "TotalStudents int;"
+				+ ""
+				+ "For each row in c_average"
+				+ "  SchoolNumber ++;"
+				+ "  TotalStudents=  profileTotal + TotalStudents;"
+				+ "End For"
+				+ ""
+				+ "Average = TotalStudetns / SchoolNumber;"
+				+ ""
+				+ "Return Average")
 				.getSingleResult();
 	}
 }

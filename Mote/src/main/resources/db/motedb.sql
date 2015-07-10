@@ -245,3 +245,21 @@ CREATE INDEX `fk_post_user_like_profile_id_idx` ON `motedb`.`post_user_like` (`p
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+-- -----------------------------------------------------
+-- Table `motedb`.`ssa_coefficient_parameters`
+-- Used for configuring the Social Stairway Algorithm Coefficients 
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `motedb`.`ssa_coefficient_parameters` (
+  `Kf` DECIMAL(3) NOT NULL DEFAULT 0.2,
+  `Ks` DECIMAL(3) NOT NULL DEFAULT 0.2,
+  `Cf` DECIMAL(3) NOT NULL DEFAULT 0.5,
+  `NsIdeal` INT NOT NULL DEFAULT 800,
+  `NsIdeal` INT NOT NULL DEFAULT 800,
+  `T1` DECIMAL(3) NOT NULL DEFAULT 0.5,
+  `T2` DECIMAL(3) NOT NULL DEFAULT 0.3,
+  `T3` DECIMAL(3) NOT NULL DEFAULT 0.3,
+  `T4` DECIMAL(3) NOT NULL DEFAULT 0.3)
+ENGINE = InnoDB

@@ -12,9 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * The <code>SimpleCORSFilter</code> ...
+ * 
+ * @author gibranecastillo
+ *
+ */
 @Component
 public class SimpleCORSFilter implements Filter {
 	
+	/**
+	 * @param req
+	 * @param res
+	 * @param chain
+	 * 
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletResponse response = (HttpServletResponse) res;
@@ -25,10 +39,15 @@ public class SimpleCORSFilter implements Filter {
 		response.setHeader("Access-Control-Allow-Headers", "content-type");
 		chain.doFilter(req, res);
 	}
-
+	
+	/**
+	 * 
+	 * @param filterConfig
+	 */
 	public void init(FilterConfig filterConfig) {}
-
+	
+	/**
+	 * 
+	 */
 	public void destroy() {}
-
-
 }

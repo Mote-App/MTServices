@@ -4,6 +4,12 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.mt.models.User;
 
-public interface UserRepository extends CrudRepository<User, Long>{
-
+/**
+ * The <code>UserRepository</code> ...
+ * 
+ * @author gibranecastillo
+ *
+ */
+public interface UserRepository extends CrudRepository<User, Long> {
+	
 }

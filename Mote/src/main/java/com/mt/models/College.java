@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * The persistent class for the college database table.
+ * The <code>College</code> is the persistent class for the college database table.
  * 
  * @author gibranecastillo
  *
@@ -87,5 +87,4 @@ public class College {
 	public void setCollegeName(String collegeName) {
 		this.collegeName = collegeName;
 	}
-	
 }

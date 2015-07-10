@@ -15,6 +15,7 @@ import views.LoginDto;
 import views.TokenDto;
 
 /**
+ * The <code>LoginController</code> ...
  * 
  * @author gibranecastillo
  *

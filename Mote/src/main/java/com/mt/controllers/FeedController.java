@@ -22,10 +22,12 @@ import views.NationalFeedDto;
 import views.PostDto;
 import views.PostsDto;
 import views.SchoolFeedDto;
+import views.ViewDto;
 
 import com.mt.models.NationalFeed;
 import com.mt.models.Post;
 import com.mt.models.PostCustomTags;
+import com.mt.models.PostProfileView;
 import com.mt.models.PostTags;
 import com.mt.models.PostProfileLike;
 import com.mt.models.SchoolFeed;
@@ -38,9 +40,11 @@ import com.mt.models.dao.TagDao;
 import com.mt.models.dao.UserDao;
 import com.mt.models.dao.UserFriendsDao;
 import com.mt.models.repository.PostRepository;
-import com.mt.models.repository.PostUserRepository;
+import com.mt.models.repository.PostUserLikeRepository;
+import com.mt.models.repository.PostUserViewRepository;
 
 /**
+ * The <code>FeedController</code> ...
  * 
  * @author gibranecastillo
  *
@@ -49,7 +53,6 @@ import com.mt.models.repository.PostUserRepository;
 public class FeedController {
 	@Autowired
 	private PostDao _postDao;
-	
 	
 	@Autowired
 	private UserFriendsDao _userFriendsDao;
@@ -70,7 +73,10 @@ public class FeedController {
 	PostRepository _postRepo;
 	
 	@Autowired 
-	PostUserRepository _postUserRepository;
+	PostUserLikeRepository _postUserLikeRepository;
+	
+	@Autowired 
+	PostUserViewRepository _postUserViewRepository;
 	
 	/**
 	 * Friend feeds, for generating VO.
@@ -97,9 +103,8 @@ public class FeedController {
 		List<FriendFeedDto> friendFeeds = null;
 		
 		try {
-			
 			//A tricky process 
-			List<Long> likedPostIds = _postUserRepository.findByUserIdForFriends(profileId);
+			List<Long> likedPostIds = _postUserLikeRepository.findByUserIdForFriends(profileId);
 			
 			friendFeeds = new ArrayList<FriendFeedDto>();
 			
@@ -114,8 +119,8 @@ public class FeedController {
 			for(int i = 0; i < postUserIds.size(); i++) {
 				Long postUserId = postUserIds.get(i);
 				User user = _userDao.getUser(postUserId);
-				FriendFeedDto friendFeed = new FriendFeedDto();
 				
+				FriendFeedDto friendFeed = new FriendFeedDto();
 				friendFeed.setUserId(postUserId);
 				friendFeed.setName(user.getProfileFirstName() + " " + user.getProfileLastName());
 				//friendFeed.setFacebookName(user.getFa);
@@ -214,7 +219,7 @@ public class FeedController {
 		// Populate tags
 		List<Long> lstTags = new ArrayList<Long>();
 		
-		for(int i=0; i < source.getListPostTags().size(); i++) {
+		for(int i = 0; i < source.getListPostTags().size(); i++) {
 			PostTags postTag = source.getListPostTags().get(i);
 			Tag tag = _tagDao.getTag(postTag.getTagId());
 			
@@ -255,10 +260,13 @@ public class FeedController {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param dt
+	 * @return
+	 */
 	private String calculateElapsedTime(Calendar dt) {
-		
-		//Difference between Joda and Calendar is Joda starts with 1-12 and Calendar starts with 0-11 for month value
-		//and 
+		//Difference between Joda and Calendar is Joda starts with 1-12 and Calendar starts with 0-11 for month value and 
 		DateTime start = new DateTime(dt.get(Calendar.YEAR), dt.get(Calendar.MONTH) + 1, dt.get(Calendar.DAY_OF_MONTH), dt.get(Calendar.HOUR_OF_DAY), dt.get(Calendar.MINUTE));
 		DateTime end = new DateTime();
 		
@@ -269,7 +277,7 @@ public class FeedController {
 		
 		String elspasedTime = "";
 		
-		if( days > 0) {
+		if(days > 0) {
 			elspasedTime = days + " Days";
 		} else if(hours > 0) {
 			elspasedTime = hours + " Hours";
@@ -291,7 +299,7 @@ public class FeedController {
 	public List<SchoolFeedDto> getSchoolFeeds(Long collegeId, long userId) {
 		List<SchoolFeedDto> lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
 		List<SchoolFeed> feeds = _schoolFeedDao.getSchoolFeeds(collegeId);
-		List<Long> likedPostIds = _postUserRepository.findByUserIdForSchools(userId);
+		List<Long> likedPostIds = _postUserLikeRepository.findByUserIdForSchools(userId);
 		
 		for(int i = 0; i < feeds.size(); i++) {
 			SchoolFeedDto dto = new SchoolFeedDto();
@@ -334,7 +342,7 @@ public class FeedController {
 	@ResponseBody
 	public List<SchoolFeedDto> schoolFeedFilter(@RequestBody FilterDto filter, long userId ) {
 		List<SchoolFeedDto> lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
-		List<Long> likedPostIds = _postUserRepository.findByUserIdForSchools(userId);
+		List<Long> likedPostIds = _postUserLikeRepository.findByUserIdForSchools(userId);
 		
 		// Filter posts specific to College and tags
 		if(filter.getCollegeId() > 0 && filter.getLstTags().size() > 0) {
@@ -365,12 +373,12 @@ public class FeedController {
 				postDto.setCaption(feeds.get(i).getPost().getCaption());
 				postDto.setPostingDate(calculateElapsedTime(feeds.get(i).getPost().getPostDate()));
 				postDto.setLikes(feeds.get(i).getPost().getLikes());*/
-				
+
 			}
-		} else if (filter.getCollegeId() > 0) {
+		} else if(filter.getCollegeId() > 0) {
 			// Filter posts specific to a college only
 			lstSchoolFeedDto =  getSchoolFeeds(filter.getCollegeId(), userId);
-		} else if (filter.getLstTags().size() > 0) {
+		} else if(filter.getLstTags().size() > 0) {
 			// Filter posts specific to tags only
 			List<SchoolFeed> feeds = _schoolFeedDao.getSchoolFeedsByTags(filter.getLstTags());
 			lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
@@ -416,7 +424,7 @@ public class FeedController {
 	@ResponseBody
 	public List<NationalFeedDto> getNationalFeeds(Long collegeId, long userId) {
 		List<NationalFeedDto> lstNationalFeedDto = new ArrayList<NationalFeedDto>();
-		List<Long> likedPostIds = _postUserRepository.findByUserIdForNational(userId);
+		List<Long> likedPostIds = _postUserLikeRepository.findByUserIdForNational(userId);
 		List<NationalFeed> feeds = _nationaFeedDao.getNationalFeeds(collegeId);
 		
 		for(int i = 0; i < feeds.size(); i++) {
@@ -469,10 +477,37 @@ public class FeedController {
 		postUser.setProfileId(post.getProfileId());
 		postUser.setLevel(likeDto.getLevel());
 		
-		_postUserRepository.save(postUser);
+		_postUserLikeRepository.save(postUser);
 		
 		likeDto.setLikeCount(like);
 		
 		return likeDto;
+	}
+	
+	/**
+	 * 
+	 * @param viewDto
+	 * @return
+	 */
+	@RequestMapping(value="/views", method=RequestMethod.POST, produces="application/json")
+	@ResponseBody
+	public ViewDto updateView(@RequestBody ViewDto viewDto) {
+		Post post =  _postDao.getPost(viewDto.getPostId());
+		long view = post.getViews();
+		
+		post.setViews(++view);
+		
+		post = _postRepo.save(post);
+		
+		PostProfileView postUser = new PostProfileView();
+		postUser.setPostId(post.getPostId());
+		postUser.setProfileId(post.getProfileId());
+		postUser.setLevel(viewDto.getLevel());
+		
+		_postUserViewRepository.save(postUser);
+		
+		viewDto.setViewCount(view);
+		
+		return viewDto;
 	}
 }

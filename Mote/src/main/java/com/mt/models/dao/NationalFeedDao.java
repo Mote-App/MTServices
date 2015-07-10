@@ -10,6 +10,12 @@ import org.springframework.stereotype.Repository;
 
 import com.mt.models.NationalFeed;
 
+/**
+ * The <code>NationalFeedDao</code> ...
+ * 
+ * @author gibranecastillo
+ *
+ */
 @Repository
 @Transactional
 public class NationalFeedDao {
@@ -17,14 +23,11 @@ public class NationalFeedDao {
 	@PersistenceContext
 	private EntityManager _entityManager;
 
-	public List<NationalFeed> getNationalFeeds(long collegeId){
-		
+	public List<NationalFeed> getNationalFeeds(long collegeId) {
 		List<NationalFeed> feeds = _entityManager.createQuery("SELECT P FROM NationalFeed P where P.college.id = :collegeId")
-		.setParameter("collegeId", collegeId)
-		.getResultList();
+				.setParameter("collegeId", collegeId)
+				.getResultList();
 		
 		return feeds;
 	}
-	
-	
 }

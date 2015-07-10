@@ -9,10 +9,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ * The <code>Locale</code> is the persistent class for the locale database table.
+ * 
+ * @author gibranecastillo
+ *
+ */
 @Entity
 @Table(name="locale")
 public class Locale {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="locale_id")
@@ -25,35 +30,57 @@ public class Locale {
 	@OneToOne
 	@JoinColumn(name="language_code")
 	Language language;
-
-	public Locale(){
-		
-	}
 	
+	/**
+	 * 
+	 */
+	public Locale() { }
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public Long getLocaleId() {
 		return localeId;
 	}
-
+	
+	/**
+	 * 
+	 * @param localeId
+	 */
 	public void setLocaleId(Long localeId) {
 		this.localeId = localeId;
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public Country getCountry() {
 		return country;
 	}
-
+	
+	/**
+	 * 
+	 * @param country
+	 */
 	public void setCountry(Country country) {
 		this.country = country;
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public Language getLanguage() {
 		return language;
 	}
-
+	
+	/**
+	 * 
+	 * @param language
+	 */
 	public void setLanguage(Language language) {
 		this.language = language;
-	}
-	
-	
-	
+	}	
 }

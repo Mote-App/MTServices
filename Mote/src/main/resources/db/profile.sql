@@ -20,8 +20,8 @@ insert into clprofile(id,first_name, last_name, middle_name, birth_date, email_a
 values(6,"John", "Marshall", "S", "1976-01-01", "s@s.com", "M", "demo","demo","img/demo.png", "N", 0, "I am a pro athlete", "Football, cycling", "sports, studying", "img/profiles/5.png", "Asian", 38);
 */
 
-insert into clprofile(profile_id, profile_email, profile_first_name, profile_last_name, profile_user_name, profile_password, profile_picture_url, profile_college_id) 
-values(1, "san.samz@mtemail.com", "San", "Samz", "sansamz", "password", "img/profiles/1.png", 2);
+insert into clprofile(profile_id, profile_email, profile_first_name, profile_last_name, profile_user_name, profile_password, profile_picture_url, profile_college_id, locale_locale_id) 
+values(1, "san.samz@mtemail.com", "San", "Samz", "sansamz", "password", "img/profiles/1.png", 2, 1);
 
 insert into clprofile(profile_id, profile_email, profile_first_name, profile_last_namamz profile_user_name, profile_password, profile_picture_url, profile_college_id) 
 values(2, "tan.tamz@mtemail.com", "Tan", "Tamz", "tantamz", "password", "img/profiles/2.png", 3);

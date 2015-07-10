@@ -5,33 +5,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- * The <code>UserFriends</code> is the persistent class for the profile_has_friend database table.
+ * The <code>PostProfileView</code> is the persistent class for the post_user_view database table.
  * 
  * @author gibranecastillo
  *
  */
 @Entity
-@Table(name="profile_has_friend")
-public class UserFriends {
-	//TODO: Discuss with team and add id to avoid complexity of composite primary key.
+@Table(name="post_user_view")
+public class PostProfileView {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	@Column(name="post_id")
+	private long postId;
+	
 	@Column(name="profile_id")
 	private long profileId;
 	
-	//@Column(name="profile_friend_id")
-	//private long profileFriendId;
-	
-	@OneToOne
-	@JoinColumn(name="profile_friend_id")
-	private User friend;
+	@Column(name="level")
+	private String level;
 	
 	/**
 	 * 
@@ -53,6 +49,22 @@ public class UserFriends {
 	 * 
 	 * @return
 	 */
+	public long getPostId() {
+		return postId;
+	}
+	
+	/**
+	 * 
+	 * @param postId
+	 */
+	public void setPostId(long postId) {
+		this.postId = postId;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public long getProfileId() {
 		return profileId;
 	}
@@ -65,27 +77,19 @@ public class UserFriends {
 		this.profileId = profileId;
 	}
 	
-	/*public long getProfileFriendId() {
-		return profileFriendId;
-	}
-	
-	public void setProfileFriendId(long profileFriendId) {
-		this.profileFriendId = profileFriendId;
-	}*/
-	
 	/**
 	 * 
 	 * @return
 	 */
-	public User getFriend() {
-		return friend;
+	public String getLevel() {
+		return level;
 	}
 	
 	/**
 	 * 
-	 * @param friend
+	 * @param level
 	 */
-	public void setFriend(User friend) {
-		this.friend = friend;
+	public void setLevel(String level) {
+		this.level = level;
 	}	
 }

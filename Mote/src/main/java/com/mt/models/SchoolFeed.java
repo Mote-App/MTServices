@@ -9,10 +9,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ * The <code>SchoolFeed</code> is the persistent class for the clpost_school database table.
+ * 
+ * @author gibranecastillo
+ *
+ */
 @Entity
 @Table(name="clpost_school")
 public class SchoolFeed {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;

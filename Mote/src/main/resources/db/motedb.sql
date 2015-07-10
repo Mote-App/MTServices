@@ -232,12 +232,10 @@ DROP TABLE IF EXISTS `motedb`.`post_user_like` ;
 
 CREATE TABLE IF NOT EXISTS `motedb`.`post_user_like` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
-	 `post_id` INT NOT NULL,
-	 `profile_id` INT NOT NULL,
+	 `post_id` INT(11) NOT NULL,
+	 `profile_id` INT(11) NOT NULL,
 	 `level` char(1) DEFAULT NULL,
-	 PRIMARY KEY (`id`)
-	 
-)
+	 PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_post_user_like_profile_id_idx` ON `motedb`.`post_user_like` (`profile_id` ASC);
@@ -247,11 +245,36 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
+-- -----------------------------------------------------
+-- Table `motedb`.`post_user_view`
+-- Used for avoiding mulitple views by a user and maintain 
+-- like at level of Friends, School and National
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `motedb`.`post_user_view` ;
+
+CREATE TABLE IF NOT EXISTS `motedb`.`post_user_view` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `post_id` INT(11) NOT NULL,
+  `profile_id` INT(11) NOT NULL,
+  `level` CHAR(1) NOT NULL DEFAULT 'F',
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_post_user_view_profile_id_idx` ON `motedb`.`post_user_view` (`profile_id` ASC);
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 
 -- -----------------------------------------------------
 -- Table `motedb`.`ssa_coefficient_parameters`
 -- Used for configuring the Social Stairway Algorithm Coefficients 
 -- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `motedb`.`ssa_coefficient_parameters` ;
+
 CREATE TABLE IF NOT EXISTS `motedb`.`ssa_coefficient_parameters` (
   `Kf` DECIMAL(3,2) NOT NULL DEFAULT 0.20,
   `Ks` DECIMAL(3,2) NOT NULL DEFAULT 0.20,
@@ -263,3 +286,6 @@ CREATE TABLE IF NOT EXISTS `motedb`.`ssa_coefficient_parameters` (
   `T3` DECIMAL(3,2) NOT NULL DEFAULT 0.30,
   `T4` DECIMAL(3,2) NOT NULL DEFAULT 0.30)
 ENGINE = InnoDB
+
+
+

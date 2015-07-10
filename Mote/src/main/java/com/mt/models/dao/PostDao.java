@@ -10,10 +10,15 @@ import org.springframework.stereotype.Repository;
 
 import com.mt.models.Post;
 
+/**
+ * The <code>PostDao</code> ...
+ * 
+ * @author gibranecastillo
+ *
+ */
 @Repository
 @Transactional
 public class PostDao {
-	
 	//An EntityManager will be automatically injected from entityManagerFactory setup on DatabaseConfig class.
 	@PersistenceContext
 	private EntityManager _entityManager;
@@ -31,6 +36,11 @@ public class PostDao {
 	    		.getResultList();
 	}
 	
+	/**
+	 * 
+	 * @param profileId
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Post> getMostRecentPost(long profileId) {
 		return _entityManager.createQuery("SELECT P FROM Post as P WHERE P.profileId = :profileId ORDER BY postDate DESC")
@@ -39,31 +49,36 @@ public class PostDao {
 				.getResultList();
 	}
 	
-	public Post getMostPopularPost(long profileId){
+	/**
+	 * 
+	 * @param profileId
+	 * @return
+	 */
+	public Post getMostPopularPost(long profileId) {
 		return (Post)_entityManager.createQuery("SELECT P FROM Post as P WHERE P.profileId = :profileId ORDER BY likes DESC")
 				.setParameter("profileId", profileId)
 				.setMaxResults(1)
 				.getSingleResult();
 	}
 	
-	public Post getPost(long postId){
+	/**
+	 * 
+	 * @param postId
+	 * @return
+	 */
+	public Post getPost(long postId) {
 		return (Post)_entityManager.createQuery("SELECT P FROM Post as P WHERE P.postId = :postId")
 				.setParameter("postId", postId)
 				.setMaxResults(1)
 				.getSingleResult();
 	}
 	
-	
-	
-	
-	
 	/*
 	 * Instead of using a List<Post> what other existing Java collections data structure I could use that would do
 	 * this process more efficiently for time complexity [performance] and space complexity [memory footprint].
 	 */
 	/**
-	 * old:  SELECT P FROM Post as P WHERE post_school_promote = false AND post_national_promote = false ORDER BY postDate DESC
-	 * new:  SELECT P FROM Post as P WHERE P.post_school_promote = false AND P.post_national_promote = false ORDER BY P.post_date DESC
+	 * 
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -72,22 +87,33 @@ public class PostDao {
 				.getResultList();
 	}
 	
+	/**
+	 * Returns the number of 'posts' in School Feed.
+	 * 
+	 * @return
+	 */
 	public Long getNs() {
-		
 		//Q. Which logic updates the school_promote? So that we can calculate Ns.
 		//Ans. See the method promotePostToSchoolFeed, which is called after algorithm calculation
 		return (Long)_entityManager.createQuery("SELECT COUNT(P.postSchoolPromote) AS Ns FROM Post as P WHERE P.postSchoolPromote = true")
 				.getSingleResult();
 	}
 	
+	/**
+	 * 
+	 * @param postId
+	 * @return
+	 */
 	public int promotePostToSchoolFeed(long postId) {
 		return _entityManager.createQuery("UPDATE Post SET P.postSchoolPromote = true WHERE P.postId = :postId")
 				.setParameter("postId", postId)
 				.executeUpdate();
 	}
 	
-	
-	
+	/**
+	 * 
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Post> getSchoolFeedPosts() {
 		return _entityManager.createQuery("SELECT P FROM Post as P WHERE P.postSchoolPromote = true AND P.postNationalPromote = false ORDER BY P.postDate DESC")
@@ -96,8 +122,6 @@ public class PostDao {
 	
 	/**
 	 * Cl - the number of 'likes' per post from that school.
-	 * New Data Model
-	 * SELECT SUM(A.likes) FROM profile_has_post A JOIN profile B ON A.idprofile = B.idprofile WHERE A.school_promote = true AND B.idcollege = :collegeId 
 	 * 
 	 * @param collegeId
 	 * @return
@@ -110,8 +134,6 @@ public class PostDao {
 	
 	/**
 	 * ClIdealAvg - the average number of 'likes' per post from all school.
-	 * New Data Model
-	 * SELECT SUM(A.likes) FROM profile_has_post A JOIN profile B ON A.idprofile = B.idprofile WHERE A.school_promote = true AND B.idcollege = :collegeId 
 	 * 
 	 * @param collegeId
 	 * @return
@@ -124,8 +146,6 @@ public class PostDao {
 	
 	/**
 	 * Cpn - the number of 'post' from that school.
-	 * New Data Model
-	 * SELECT COUNT(A.idpost) FROM profile_has_post A JOIN profile B ON A.idprofile = B.idprofile WHERE A.school_promote = true AND B.idcollege = :collegeId 
 	 * 
 	 * @param collegeId
 	 * @return
@@ -136,6 +156,11 @@ public class PostDao {
 				.getSingleResult();
 	}
 	
+	/**
+	 * 
+	 * @param postId
+	 * @return
+	 */
 	public int promotePostToNationalFeed(long postId) {
 		return _entityManager.createQuery("UPDATE Post as P SET P.postNationalPromote = true WHERE P.postId = :postId")
 				.setParameter("postId", postId)

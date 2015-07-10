@@ -11,21 +11,19 @@ import org.springframework.stereotype.Repository;
 import com.mt.models.User;
 
 /**
- * Class UserDao
+ * The <code>UserDao</code> ...
  * <br />
  * This class is used to access data for the User entity.
- * Repository annotation allows the component scanning support to find and 
- * configure the DAO wihtout any XML configuration and also provide the Spring 
- * exceptiom translation.
- * Since we've setup setPackagesToScan and transaction manager on
- * DatabaseConfig, any bean method annotated with Transactional will cause
- * Spring to magically call begin() and commit() at the start/end of the
- * method. If exception occurs it will also call rollback().
+ * Repository annotation allows the component scanning support to find and configure
+ * the DAO without any XML configuration and also provide the Spring exception translation.
+ * 
+ * Since we've setup setPackagesToScan and transaction manager on DatabaseConfig, any bean
+ * method annotated with Transactional will cause Spring to magically call begin() and commit()
+ * at the start/end of the method. If exception occurs it will also call rollback().
  */
 @Repository
 @Transactional
-public class UserDao{
-	
+public class UserDao {
 	// ==============
 	// PRIVATE FIELDS
 	// ==============
@@ -50,7 +48,12 @@ public class UserDao{
 		return user;
 	}
 	
-	public User getUserbyName(String userName){
+	/**
+	 * 
+	 * @param userName
+	 * @return
+	 */
+	public User getUserbyName(String userName) {
 		User user = (User)_entityManager.createQuery("SELECT P FROM User P where P.profileUserName = :userName")
 				.setParameter("userName", userName)
 				.getSingleResult();
@@ -58,7 +61,12 @@ public class UserDao{
 		return user;
 	}
 	
-	public List<User> getUsersbySchool(long collegeId){
+	/**
+	 * 
+	 * @param collegeId
+	 * @return
+	 */
+	public List<User> getUsersbySchool(long collegeId) {
 		List<User> users = _entityManager.createQuery("SELECT P FROM User P where P.profileCollege.collegeId = :collegeId")
 				.setParameter("collegeId", collegeId)
 				.getResultList();
@@ -69,7 +77,7 @@ public class UserDao{
 	/**
 	 * get user
 	 */
-	public User getUser(Long userId){
+	public User getUser(Long userId) {
 		return (User)_entityManager.createQuery("SELECT P FROM User P where P.profileId = :userId")
 				.setParameter("userId", userId)
 				.getSingleResult();
@@ -81,7 +89,7 @@ public class UserDao{
 	 * Delete the user from the database.
 	 */
 	public void delete(User user) {
-		if (_entityManager.contains(user))
+		if(_entityManager.contains(user))
 			_entityManager.remove(user);
 		else
 			_entityManager.remove(_entityManager.merge(user));
@@ -141,12 +149,8 @@ public class UserDao{
 		return;
 	}
 	
-	
-	
 	/**
 	 * Cr - the number of 'people' registered from that school.
-	 * New Data Model
-	 * SELECT COUNT(A.idcollege) FROM profile A JOIN profile_has_post B ON A.idprofile = B.idprofile WHERE A.idcollege = :collegeId 
 	 * 
 	 * @param collegeId
 	 * @return

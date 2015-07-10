@@ -31,6 +31,7 @@ import com.mt.models.repository.PostRepository;
 import com.mt.models.repository.PostTagsRepository;
 
 /**
+ * The <code>FileUploadController</code> ...
  * 
  * @author gibranecastillo
  *
@@ -116,7 +117,7 @@ public class FileUploadController {
 				
 				//List<PostTags> lstPostTags = new ArrayList<PostTags>();
 				
-				for(int i=0; i < newPostDto.getTags().size(); i++) {
+				for(int i = 0; i < newPostDto.getTags().size(); i++) {
 					PostTags postTag = new PostTags();
 					postTag.setPostId(post.getPostId());
 					postTag.setTagId(newPostDto.getTags().get(i));
@@ -133,7 +134,7 @@ public class FileUploadController {
 					//List<PostCustomTags> lstPostCustomTags = new ArrayList<PostCustomTags>();
 					String arr[] = csvCustomTags.split(",");
 					
-					for(int i=0; i < arr.length; i++) {
+					for(int i = 0; i < arr.length; i++) {
 						PostCustomTags postCustomTag = new PostCustomTags();
 						postCustomTag.setPostId(post.getPostId());
 						postCustomTag.setUserId(newPostDto.getUserId());
@@ -143,8 +144,10 @@ public class FileUploadController {
 						//_postCustomTagsRepository.save(postCustomTag);
 						//lstPostCustomTags.add(postCustomTag);
 					}
+					
 					//post.setLstPostCustomTags(lstPostCustomTags);
 				}
+				
 				//post = _postRepo.save(post);
 				fileName = post.getProfileId() + "_" + post.getPostId() + ".png";
 				

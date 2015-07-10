@@ -8,10 +8,15 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+/**
+ * The <code>SSAScheduledTask</code> is the Social Stairway Algorithm Scheduler.
+ * 
+ * @author gibranecastillo
+ *
+ */
 @ComponentScan
 @EnableScheduling
 public class SSAScheduledTask {
-	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	/**
@@ -19,12 +24,10 @@ public class SSAScheduledTask {
 	 */
 	@Scheduled(fixedRate=300000)
 	public synchronized void executeSSATask() {
-		
 		log.info("Starting Algorithm : " + new Date());
 		
 		SSAJob ssaJob = new SSAJob();
 		
 		ssaJob.initiate();
-	}
-	
+	}	
 }

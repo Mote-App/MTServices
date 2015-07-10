@@ -11,22 +11,44 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * The <code>Application</code> is the Social Stairway Algorithm application entry point.
+ * 
+ * @author gibranecastillo
+ *
+ */
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
 public class Application extends SpringBootServletInitializer {
-
+	
+	/**
+	 * A standard method that allows the Java connection for an application entry point.
+	 * This main method delegates to Spring Boot's SpringApplication class by calling the run.
+	 * SpringApplication will bootstrap the mt.jar or mote service, starting Spring which will in turn
+	 * start auto-configured Tomcat web server
+	 * 
+	 * @param args a String array passed through to expose any command-line arguments.
+	 */
     public static void main(String[] args) {
         SpringApplication.run(applicationClass, args);
     }
     
+    /**
+     * 
+     * @param application
+     */
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(applicationClass);
     }
-
+    
     private static Class<Application> applicationClass = Application.class;
     
+    /**
+     * 
+     * @return
+     */
     @Bean
     MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();

@@ -7,15 +7,34 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.mt.models.PostProfileLike;
 
-public interface PostUserRepository extends CrudRepository<PostProfileLike, Long>{
-
+/**
+ * The <code>PostUserLikeRepository</code> ...
+ * 
+ * @author gibranecastillo
+ *
+ */
+public interface PostUserLikeRepository extends CrudRepository<PostProfileLike, Long> {
+	/**
+	 * 
+	 * @param profileId
+	 * @return
+	 */
 	@Query("select u.postId from PostProfileLike u where u.profileId = ? and level='F'")
 	List<Long> findByUserIdForFriends(long profileId);
 	
+	/**
+	 * 
+	 * @param profileId
+	 * @return
+	 */
 	@Query("select u.postId from PostProfileLike u where u.profileId = ? and level='S'")
 	List<Long> findByUserIdForSchools(long profileId);
-
+	
+	/**
+	 * 
+	 * @param profileId
+	 * @return
+	 */
 	@Query("select u.postId from PostProfileLike u where u.profileId = ? and level='N'")
 	List<Long> findByUserIdForNational(long profileId);
-
 }

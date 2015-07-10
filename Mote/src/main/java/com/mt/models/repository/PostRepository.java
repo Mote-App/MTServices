@@ -4,6 +4,12 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.mt.models.Post;
 
-public interface PostRepository extends CrudRepository<Post, Long>{
-
+/**
+ * The <code>PostRepository</code> ...
+ * 
+ * @author gibranecastillo
+ *
+ */
+public interface PostRepository extends CrudRepository<Post, Long> {
+	
 }

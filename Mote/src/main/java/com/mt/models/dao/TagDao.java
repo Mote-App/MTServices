@@ -10,37 +10,49 @@ import org.springframework.stereotype.Repository;
 
 import com.mt.models.Tag;
 
+/**
+ * The <code>TagDao</code> ...
+ * 
+ * @author gibranecastillo
+ *
+ */
 @Repository
 @Transactional
 public class TagDao {
+	//An EntityManager will be automatically injected from entityManagerFactory
+	// setup on DatabaseConfig class.
+	@PersistenceContext
+	private EntityManager _entityManager;
 	
-	  //An EntityManager will be automatically injected from entityManagerFactory
-	  // setup on DatabaseConfig class.
-	  @PersistenceContext
-	  private EntityManager _entityManager;
-	  
-	  /**
-	   * Method getAll
-	   * <br/>
-	   * 
-	   */
-	  /*@SuppressWarnings("unchecked")
-	  public List<Tag> getTags(String type) {
+	/**
+	 * Method getAll
+	 * <br/>
+	 * 
+	 */
+	/*@SuppressWarnings("unchecked")
+	public List<Tag> getTags(String type) {
 	    return _entityManager.createQuery("from Tag where tagType = :tagType")
 	    		.setParameter("tagType", type)
 	    		.getResultList();
-	  }*/
-	  
-	  public List<Tag> getTags() {
-		    return _entityManager.createQuery("from Tag")
-		    		.getResultList();
-	  }
-		  
-	  public Tag getTag(long tagId){
-		  
-		    return (Tag)_entityManager.createQuery("from Tag where id = :tagId")
-		    		.setParameter("tagId", tagId)
-		    		.getSingleResult();
-		  
-	  }
+	}*/
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Tag> getTags() {
+		return _entityManager.createQuery("from Tag")
+				.getResultList();
+	}
+	
+	/**
+	 * 
+	 * @param tagId
+	 * @return
+	 */
+	public Tag getTag(long tagId) {
+		return (Tag)_entityManager.createQuery("from Tag where id = :tagId")
+				.setParameter("tagId", tagId)
+				.getSingleResult();
+	}
 }

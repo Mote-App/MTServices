@@ -1,13 +1,13 @@
 package views;
 
 /**
- * The <code>LikeDto</code> ...
+ * The <code>ViewDto</code> ...
  * 
  * @author gibranecastillo
  *
  */
-public class LikeDto {
-	long likeCount;
+public class ViewDto {
+	long viewCount;
 	long postId;
 	long userId;
 	String level;
@@ -16,16 +16,16 @@ public class LikeDto {
 	 * 
 	 * @return
 	 */
-	public long getLikeCount() {
-		return likeCount;
+	public long getViewCount() {
+		return viewCount;
 	}
 	
 	/**
 	 * 
-	 * @param likeCount
+	 * @param viewCount
 	 */
-	public void setLikeCount(long likeCount) {
-		this.likeCount = likeCount;
+	public void setViewCount(long viewCount) {
+		this.viewCount = viewCount;
 	}
 	
 	/**

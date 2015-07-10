@@ -22,9 +22,12 @@ public class UserFriends {
 	@Column(name="profile_id")
 	private long profileId;
 	
-	@Column(name="profile_friend_id")
-	private long profileFriendId;
+	//@Column(name="profile_friend_id")
+	//private long profileFriendId;
 
+	@OneToOne
+	@JoinColumn(name="profile_friend_id")
+	private User friend;
 	
 	public long getId() {
 		return id;
@@ -42,13 +45,22 @@ public class UserFriends {
 		this.profileId = profileId;
 	}
 
-	public long getProfileFriendId() {
+	/*public long getProfileFriendId() {
 		return profileFriendId;
 	}
 
 	public void setProfileFriendId(long profileFriendId) {
 		this.profileFriendId = profileFriendId;
+	}*/
+
+	public User getFriend() {
+		return friend;
 	}
+
+	public void setFriend(User friend) {
+		this.friend = friend;
+	}
+	
 	
 	
 	

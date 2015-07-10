@@ -2,13 +2,14 @@ package views;
 
 public class UserDto {
 
-	private String 	firstName;
-	private String 	lastName;
-	private String 	userName;
-	private String 	email;
-	private String 	password;
-	private String 	profilePictureUrl;
+	private String 		firstName;
+	private String 		lastName;
+	private String 		userName;
+	private String 		email;
+	private String 		password;
+	private String 		profilePictureUrl;
 	private CollegeDto 	college;
+	private byte 		isFriend = 0;
 	  
 	public String getFirstName() {
 		return firstName;
@@ -52,6 +53,12 @@ public class UserDto {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public byte getIsFriend() {
+		return isFriend;
+	}
+	public void setIsFriend(byte isFriend) {
+		this.isFriend = isFriend;
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.mt.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import views.CollegeDto;
 import views.UserDto;
 
 import com.mt.exception.MtException;
@@ -20,6 +22,7 @@ import com.mt.models.User;
 import com.mt.models.dao.CollegeDao;
 import com.mt.models.dao.LocaleDao;
 import com.mt.models.dao.UserDao;
+import com.mt.models.dao.UserFriendsDao;
 import com.mt.models.repository.UserRepository;
 
 /**
@@ -43,6 +46,9 @@ public class UserController {
   
   @Autowired
   private CollegeDao _collegeDao;
+  
+  @Autowired
+  private UserFriendsDao _userFriendsDao;
   
   // ===============
   // PRIVATE METHODS
@@ -125,6 +131,97 @@ public class UserController {
     
    
   }
+  
+  /*
+   * Get all users profile except requesting user
+   */
+  
+  @RequestMapping(value="users/profile")
+  @ResponseBody
+  public List<UserDto> getUsersProfile(Long profileId){
+	  
+	  List<User> profiles = _userFriendsDao.getUsersProfile(profileId);
+	  
+	  List<UserDto> profilesDto = new ArrayList<UserDto>();
+	  
+	  for (int i=0; i < profiles.size(); i ++){
+		  
+		  UserDto userDto = new UserDto();
+		  User profile = profiles.get(i);
+		  
+		  userDto.setFirstName(profile.getProfileFirstName());
+		  userDto.setLastName(profile .getProfileLastName());
+		  userDto.setProfilePictureUrl(profile.getProfilePictureUrl());
+		  
+		  CollegeDto collegeDto = new CollegeDto();
+		  
+		  userDto.setCollege(collegeDto);
+		  collegeDto.setCollegeName(profile.getProfileCollege().getCollegeName());
+		  
+		  profilesDto.add(userDto);
+	  }
+	  
+	  return profilesDto;
+  }
+  
+  /*
+   * Get user friends 
+   */
+  @RequestMapping(value="user/friends")
+  @ResponseBody
+  public List<UserDto> getUserFriends(Long profileId){
+	  
+	  List<User> friends = _userFriendsDao.getFriendsProfile(profileId);
+	  
+	  List<UserDto> profiles = new ArrayList<UserDto>();
+	  
+	  for (int i=0; i < friends.size(); i ++){
+		  
+		  UserDto userDto = new UserDto();
+		  User friend = friends.get(i);
+		  
+		  userDto.setFirstName(friend.getProfileFirstName());
+		  userDto.setLastName(friend .getProfileLastName());
+		  userDto.setProfilePictureUrl(friend.getProfilePictureUrl());
+		  
+		  CollegeDto collegeDto = new CollegeDto();
+		  
+		  userDto.setCollege(collegeDto);
+		  collegeDto.setCollegeName(friend.getProfileCollege().getCollegeName());
+		  
+		  userDto.setIsFriend((byte)1);
+		  
+		  profiles.add(userDto);
+	  }
+	  
+	  return profiles;
+  }
+  
+  /*
+   * Add new friend
+   */
+  
+  @RequestMapping(value="user/add/friend")
+  @ResponseBody
+  public Byte addFriend(Long profileId, Long friendId){
+	  
+	  _userFriendsDao.addFriend(profileId, friendId);
+	  return 1;
+  }
+  
+  /*
+   * Delete user friend
+   */
+  @RequestMapping(value="user/remove/friend")
+  @ResponseBody
+  public Byte removeFriend(Long profileId, Long friendId){
+	  
+	  _userFriendsDao.removeFriend(profileId, friendId);
+	  return 1;
+  }
+  
+  
+  
   
   /**
    * Delete the user with the passed id.

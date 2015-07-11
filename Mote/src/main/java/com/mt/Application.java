@@ -10,15 +10,19 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * The <code>Application</code> is the Social Stairway Algorithm application entry point.
+ * 
+ * EnableScheduling ensures that a background task executor is created, without it nothing gets scheduled.
  * 
  * @author gibranecastillo
  *
  */
 @Configuration
 @EnableAutoConfiguration
+@EnableScheduling
 @ComponentScan
 public class Application extends SpringBootServletInitializer {
 	

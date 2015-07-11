@@ -1,5 +1,10 @@
 package com.mt.algorithm.ssa;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.mt.models.SSAParams;
+import com.mt.models.dao.SSAParamsDao;
+
 /**
  * The <code>SSACalculator</code> enum is the Social Stairway Algorithm Calculator.
  * 
@@ -40,25 +45,44 @@ public enum SSACalculator {
 	 */
 	
 	// Friend Feed to School Feed Threshold Ratio.
-	Kf(0.2), // calls constructor with value 0.2
+	Kf(0.20), // calls constructor with value 0.2
 	
 	// School Feed to National Feed Threshold Ratio.
-	Ks(0.2); // calls constructor with value 0.2
+	Ks(0.20); // calls constructor with value 0.2
+	
+	@Autowired
+	private SSAParamsDao _ssaParamsDao;
 	
 	// Preliminary Post Coefficient.
-	private final double Cf = 0.5;
+	private final double Cf;
 	
 	// Ideal Number of posts in School feed.
-	private final long NsIdeal = 800;
+	private final long NsIdeal;
 	
 	// Ideal Number of posts in National feed.
-	private final long NnIdeal = 800;
+	private final long NnIdeal;
 	
 	// T1, T2, T3, and T4 are Tuning Coefficients.
-	private final double T1 = 0.5, T2 = 0.3, T3 = 0.3, T4 = 0.3;
+	private final double T1, T2, T3, T4;
 	
 	// value to be added to enum.
 	private final double value;
+	
+	/*
+	 * An instance initialization block runs every time a new instance is
+	 * created.  It runs right after the call to super() in a constructor,
+	 * in other words, after all the super-constructors have run.
+	 */
+	{
+		SSAParams ssaParams = _ssaParamsDao.getSSAParams();
+		Cf = ssaParams.getCf();
+		NsIdeal = ssaParams.getNsIdeal();
+		NnIdeal = ssaParams.getNnIdeal();
+		T1 = ssaParams.getT1();
+		T2 = ssaParams.getT2();
+		T3 = ssaParams.getT3();
+		T4 = ssaParams.getT4();
+	}
 	
 	/**
 	 * Constructs an SSACalculator enum instance.

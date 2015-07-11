@@ -1,6 +1,7 @@
 package com.mt.algorithm.ssa;
 
 /**
+ * The <code>SSA</code> ...
  * 
  * @author gibranecastillo
  *

@@ -28,8 +28,7 @@ public class UserDao {
 	// PRIVATE FIELDS
 	// ==============
 	
-	// An EntityManager will be automatically injected from entityManagerFactory
-	// setup on DatabaseConfig class.
+	// An EntityManager will be automatically injected from entityManagerFactory setup on DatabaseConfig class.
 	@PersistenceContext
 	private EntityManager _entityManager;
 	

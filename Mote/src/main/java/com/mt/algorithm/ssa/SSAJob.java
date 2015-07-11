@@ -40,7 +40,7 @@ public class SSAJob {
 	@Autowired
 	private UserDao _userDao;
 	
-	public void initiate(){	
+	public void initiate() {	
 		long Ns = _postDao.getNs();
 		List<Post> friendPosts = _postDao.getFriendFeedPosts();
 		

@@ -20,6 +20,10 @@ public class SSAScheduledTask {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	/**
+	 * The Scheduled annotation defines when to execute the SSA task or job.
+	 * Using fixedRate, which specifies the interval between method invocations
+	 * measure from the start time of each invocation.
+	 * 
 	 * 300000 Milliseconds equal to 5 Minutes
 	 */
 	@Scheduled(fixedRate=300000)
@@ -29,5 +33,5 @@ public class SSAScheduledTask {
 		SSAJob ssaJob = new SSAJob();
 		
 		ssaJob.initiate();
-	}	
+	}
 }

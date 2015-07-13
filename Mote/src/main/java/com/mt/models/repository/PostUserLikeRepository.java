@@ -35,6 +35,6 @@ public interface PostUserLikeRepository extends CrudRepository<PostProfileLike, 
 	 * @param profileId
 	 * @return
 	 */
-	@Query("select u.postId from PostProfileLike u where u.profileId = ? and and u.postId = ? level='N'")
+	@Query("select u.postId from PostProfileLike u where u.profileId = ? and u.postId = ? and level='N'")
 	List<Long> findPostLikeForNationalFeeds(long profileId, long postId);
 }

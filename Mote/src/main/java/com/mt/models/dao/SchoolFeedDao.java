@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.mt.models.SchoolFeed;
+import com.mt.models.PostTags;
 
 /**
  * The <code>SchoolFeedDao</code> ...
@@ -22,18 +22,6 @@ public class SchoolFeedDao {
 	@PersistenceContext
 	private EntityManager _entityManager;
 	
-	/**
-	 * 
-	 * @param collegeId
-	 * @return
-	 */
-	public List<SchoolFeed> getSchoolFeeds(long collegeId) {
-		List<SchoolFeed> feeds = _entityManager.createQuery("SELECT P FROM SchoolFeed P where P.college.id = :collegeId")
-				.setParameter("collegeId", collegeId)
-				.getResultList();
-		
-		return feeds;
-	}
 	
 	/**
 	 * 
@@ -41,8 +29,8 @@ public class SchoolFeedDao {
 	 * @param tagIds
 	 * @return
 	 */
-	public List<SchoolFeed> getSchoolFeedsByCollegeAndTags(long collegeId, List<Long> tagIds) {
-		List<SchoolFeed> feeds = _entityManager.createQuery("SELECT S FROM SchoolFeed S JOIN S.post P JOIN S.post.lstPostTags T where S.college.id = :collegeId and T.tagId IN :tagIds")
+	public List<PostTags> getSchoolFeedsByCollegeAndTags(long collegeId, List<Long> tagIds) {
+		List<PostTags> feeds = _entityManager.createQuery("SELECT PT FROM PostTags PT JOIN User U on PT.post.profileId = U.profileId where U.profileCollege.collegeId = :collegeId and PT.postSchoolPromote = true and PT.tagId IN :tagIds")
 				.setParameter("collegeId", collegeId)
 				.setParameter("tagIds", tagIds)
 				.getResultList();
@@ -55,8 +43,8 @@ public class SchoolFeedDao {
 	 * @param tagIds
 	 * @return
 	 */
-	public List<SchoolFeed> getSchoolFeedsByTags( List<Long> tagIds) {
-		List<SchoolFeed> feeds = _entityManager.createQuery("SELECT S FROM SchoolFeed S JOIN S.post P JOIN S.post.lstPostTags T where T.tagId IN :tagIds")
+	public List<PostTags> getSchoolFeedsByTags( List<Long> tagIds) {
+		List<PostTags> feeds = _entityManager.createQuery("SELECT PT FROM PostTags PT JOIN User U on PT.post.profileId = U.profileId where PT.postSchoolPromote = true and PT.tagId IN :tagIds")
 				.setParameter("tagIds", tagIds)
 				.getResultList();
 		

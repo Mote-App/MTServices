@@ -24,9 +24,9 @@ public class PostDao {
 	private EntityManager _entityManager;
 	
 	/**
-	 * Get the posts for list of users sorted by post date in descending order.
+	 * Get the posts for list of user's friends sorted by post date in descending order.
 	 * This will arrange the user list in the order of recent posting and is helpful to 
-	 * retrieve most recent post (the first record for a user) and most recent post for a user
+	 * retrieve current post (the first record for a user) and most recent post for a user
 	 * (the second record for a user) and based on likes you can find the most popular from the same list
 	 */
 	@SuppressWarnings("unchecked")
@@ -59,6 +59,30 @@ public class PostDao {
 				.setParameter("profileId", profileId)
 				.setMaxResults(1)
 				.getSingleResult();
+	}
+	
+	/**
+	 * Get the list of post for user and its friends sorted by post date in descending order.
+	 * Here Post entity is used to filter school post based on field postSchoolPromote.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Post> getUserSchoolPosts(List<Long> profileIds, Long collegeId) {
+	    return _entityManager.createQuery("SELECT P FROM Post as P JOIN Profile as U ON P.profileId = U.profileId WHERE P.profileId IN :profileIds and U.profileCollege.collegeId = :collegeId and P.postSchoolPromote=true ORDER BY postDate DESC")
+	    		.setParameter("profileIds", profileIds)
+	    		.setParameter("collegeId", collegeId)
+	    		.getResultList();
+	}
+	
+	/**
+	 * Get the list of post for user and its friends sorted by post date in descending order.
+	 * Here Post entity is used to filter school post based on field postSchoolPromote.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Post> getUserNationalPosts(List<Long> profileIds, Long collegeId) {
+	    return _entityManager.createQuery("SELECT P FROM Post as P JOIN Profile as U ON P.profileId = U.profileId WHERE P.profileId IN :profileIds and U.profileCollege.collegeId = :collegeId and P.postNationalPromote=true ORDER BY postDate DESC")
+	    		.setParameter("profileIds", profileIds)
+	    		.setParameter("collegeId", collegeId)
+	    		.getResultList();
 	}
 	
 	/**
@@ -127,7 +151,7 @@ public class PostDao {
 	 * @return
 	 */
 	public Long getCl(long collegeId) {
-		return (Long)_entityManager.createQuery("SELECT SUM(P.likes) AS Cl FROM Post as P JOIN Profile as U ON P.profileId = U.profileId WHERE U.profileCollege = :collegeId")
+		return (Long)_entityManager.createQuery("SELECT SUM(P.likes) AS Cl FROM Post as P JOIN Profile as U ON P.profileId = U.profileId WHERE U.profileCollege.collegeId = :collegeId")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();
 	}

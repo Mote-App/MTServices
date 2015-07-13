@@ -22,11 +22,9 @@ import views.NewPostDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mt.exception.MtException;
 import com.mt.models.Post;
-import com.mt.models.PostCustomTags;
 import com.mt.models.PostTags;
 import com.mt.models.User;
 import com.mt.models.dao.UserDao;
-import com.mt.models.repository.PostCustomTagsRepository;
 import com.mt.models.repository.PostRepository;
 import com.mt.models.repository.PostTagsRepository;
 
@@ -42,9 +40,6 @@ public class FileUploadController {
 	
 	@Autowired
 	PostTagsRepository _postTagsRepository;
-	
-	@Autowired
-	PostCustomTagsRepository _postCustomTagsRepository; 
 	
 	@Autowired 
 	PostRepository _postRepo;
@@ -130,7 +125,7 @@ public class FileUploadController {
 				//post.setLstPostTags(lstPostTags);
 				String csvCustomTags = newPostDto.getCustomTags();
 				
-				if(csvCustomTags != null) {
+				/*if(csvCustomTags != null) {
 					//List<PostCustomTags> lstPostCustomTags = new ArrayList<PostCustomTags>();
 					String arr[] = csvCustomTags.split(",");
 					
@@ -146,7 +141,7 @@ public class FileUploadController {
 					}
 					
 					//post.setLstPostCustomTags(lstPostCustomTags);
-				}
+				}*/
 				
 				//post = _postRepo.save(post);
 				fileName = post.getProfileId() + "_" + post.getPostId() + ".png";

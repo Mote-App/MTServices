@@ -64,5 +64,23 @@ public class PostTags {
 	 */
 	public void setTagId(long tagId) {
 		this.tagId = tagId;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
+	public Tag getTag() {
+		return tag;
+	}
+
+	public void setTag(Tag tag) {
+		this.tag = tag;
 	}	
+	
+	
 }

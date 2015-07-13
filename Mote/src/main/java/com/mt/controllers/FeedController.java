@@ -24,16 +24,12 @@ import views.PostsDto;
 import views.SchoolFeedDto;
 import views.ViewDto;
 
-import com.mt.models.NationalFeed;
 import com.mt.models.Post;
-import com.mt.models.PostCustomTags;
 import com.mt.models.PostProfileView;
 import com.mt.models.PostTags;
 import com.mt.models.PostProfileLike;
-import com.mt.models.SchoolFeed;
 import com.mt.models.Tag;
 import com.mt.models.User;
-import com.mt.models.dao.NationalFeedDao;
 import com.mt.models.dao.PostDao;
 import com.mt.models.dao.SchoolFeedDao;
 import com.mt.models.dao.TagDao;
@@ -66,9 +62,6 @@ public class FeedController {
 	@Autowired
 	private SchoolFeedDao _schoolFeedDao;
 	
-	@Autowired
-	private NationalFeedDao _nationaFeedDao;
-	
 	@Autowired 
 	PostRepository _postRepo;
 	
@@ -84,9 +77,10 @@ public class FeedController {
 	 * This method is required to return Posts of the logged in User and his friends (which may range from 1 - 1000).
 	 * Each user maximum 3 post should be pulled from history of his postings. The 3 posts is categorized into 
 	 * 
-	 * Current, Most Recent, and Popular. The logical steps could be
-	 * 1. Prepare the list of logged in userId's friends using the UserFriends entity.
-	 * 2. For each user get the current, most popular and most recent post,
+	 * Current, Most Recent, and Popular. 
+	 * The logical steps are:
+	 * 1. Prepare the list of friends of logged in userId's.
+	 * 2. For each user get the current, most popular and most recent post.
 	 * 3. Fetch the user information for each user and fill the FriendFeeds object to return the JSON.
 	 * 
 	 * The complexity is in terms of performance i.e.
@@ -103,11 +97,10 @@ public class FeedController {
 		List<FriendFeedDto> friendFeeds = null;
 		
 		try {
-			//A tricky process 
-			List<Long> likedPostIds = _postUserLikeRepository.findByUserIdForFriends(profileId);
 			
 			friendFeeds = new ArrayList<FriendFeedDto>();
-			
+
+			//Build the list of friends
 			List<Long> friends  = _userFriendsDao.getFriends(profileId);
 			
 			// To include logged user id along with their friends and fetch all their post in descending order by post date
@@ -141,7 +134,7 @@ public class FeedController {
 				
 				if(posts != null && posts.size() > 0) {
 					Post post = posts.get(0);
-					populatePostDto(currentPost, post, likedPostIds);
+					populatePostDto(currentPost, post, 'F');
 					postsDto.setCurrentPost(currentPost);
 				}
 				
@@ -150,7 +143,7 @@ public class FeedController {
 				
 				if(posts != null && posts.size() == 2) {
 					Post post = posts.get(1);
-					populatePostDto(mostRecentPost, post, likedPostIds);
+					populatePostDto(mostRecentPost, post, 'F');
 				} else {
 					copyPostDto(mostRecentPost, currentPost);	
 				}
@@ -162,7 +155,7 @@ public class FeedController {
 				Post post = _postDao.getMostPopularPost(user.getProfileId());
 				
 				if(post != null) {
-					populatePostDto(mostPopularPost, post, likedPostIds);
+					populatePostDto(mostPopularPost, post, 'F');
 				} else {
 					copyPostDto(mostPopularPost, currentPost);
 				}
@@ -196,25 +189,25 @@ public class FeedController {
 	
 	/**
 	 * 
-	 * @param destination
+	 * @param postDto
 	 * @param source
 	 * @param likedPostIds
 	 */
-	private void populatePostDto(PostDto destination, Post source, List<Long> likedPostIds) {
-		destination.setPostId(source.getPostId());
-		destination.setPostImg(source.getPostObjectPath());
-		destination.setCaption(source.getPostCaption());
-		destination.setLikes(source.getLikes());
-		destination.setProgressInd(35);
+	private void populatePostDto(PostDto postDto, Post source, char postType) {
+		postDto.setPostId(source.getPostId());
+		postDto.setPostImg(source.getPostObjectPath());
+		postDto.setCaption(source.getPostCaption());
+		postDto.setLikes(source.getLikes());
+		postDto.setProgressInd(35);
 		
 		/*
 		 * Set the flag to check if user has already 
 		 * clicked the Like button. So that he is not allowed to make a second attempt
 		 */
-		isApplicableForLiking(destination, likedPostIds);
+		isApplicableForLiking(postDto, source, postType);
 		
 		// Calculate the elapsed time in Hours, Minutes or Days from posting date to current date
-		destination.setPostingDate(calculateElapsedTime(source.getPostDate()));
+		postDto.setPostingDate(calculateElapsedTime(source.getPostDate()));
 		
 		// Populate tags
 		List<Long> lstTags = new ArrayList<Long>();
@@ -228,7 +221,7 @@ public class FeedController {
 			//destination.setTagCategory(tag.getTagType());
 		}
 		
-		destination.setTags(lstTags);
+		postDto.setTags(lstTags);
 		
 		/*
 		 * Discarded
@@ -244,19 +237,30 @@ public class FeedController {
 	}
 	
 	/**
-	 * This is required so that, on client user cannot do multiple likes.
+	 * This logic to avoid multiple likes.
 	 * @param post
 	 * @param likedPostIds
 	 */
-	private void isApplicableForLiking(PostDto post, List<Long> likedPostIds) {
-		if(likedPostIds != null && likedPostIds.size() > 0) {
-			if(likedPostIds.contains(post.getPostId())) {
-				post.setLikeDone(true);
-			} else {
-				post.setLikeDone(false);
-			}
-		} else {
-			post.setLikeDone(false);
+	private void isApplicableForLiking(PostDto postDto, Post source, char postType) {
+		
+		List<Long> likedPostIds = null;
+		
+		if( postType == 'F'){
+			likedPostIds = _postUserLikeRepository.findPostLikeForFriendFeeds(source.getProfileId(), source.getPostId());			
+		}
+
+		if( postType == 'S'){
+			likedPostIds = _postUserLikeRepository.findPostLikeForSchoolFeeds(source.getProfileId(), source.getPostId());			
+		}
+
+		if( postType == 'N'){
+			likedPostIds = _postUserLikeRepository.findPostLikeForNationalFeeds(source.getProfileId(), source.getPostId());			
+		}
+
+		if(likedPostIds != null && likedPostIds.size() > 0){
+			postDto.setLikeDone(true);
+		}else{
+			postDto.setLikeDone(false);
 		}
 	}
 	
@@ -296,26 +300,35 @@ public class FeedController {
 	 */
 	@RequestMapping(value="/school_feeds", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public List<SchoolFeedDto> getSchoolFeeds(Long collegeId, long userId) {
-		List<SchoolFeedDto> lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
-		List<SchoolFeed> feeds = _schoolFeedDao.getSchoolFeeds(collegeId);
-		List<Long> likedPostIds = _postUserLikeRepository.findByUserIdForSchools(userId);
+	public List<SchoolFeedDto> getSchoolFeeds(long collegeId, long profileId) {
 		
-		for(int i = 0; i < feeds.size(); i++) {
+		List<SchoolFeedDto> lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
+		
+		List<Long> friends  = _userFriendsDao.getFriends(profileId);
+		// To include logged user id along with their friends and fetch all their post in descending order by post date
+		friends.add(profileId); 
+		
+		// Get the userId order by posting date DESC means latest first
+		List<Post> posts = _postDao.getUserSchoolPosts(friends, collegeId);
+					
+		for(int i = 0; i < posts.size(); i++) {
+			
+			User user = _userDao.getUser(posts.get(i).getProfileId());
+			
 			SchoolFeedDto dto = new SchoolFeedDto();
 			
-			dto.setUserId(feeds.get(i).getUser().getProfileId());
+			dto.setUserId(user.getProfileId());
 			//dto.setUserType(feeds.get(i).getUser().getIsAlumni());
-			dto.setName(feeds.get(i).getUser().getProfileUserName());
-			dto.setSchoolId(feeds.get(i).getCollege().getCollegeId());
-			dto.setSchoolImg(feeds.get(i).getCollege().getCollegeImgPath());
-			dto.setSchoolName(feeds.get(i).getCollege().getCollegeName());
+			dto.setName(user.getProfileUserName());
+			dto.setSchoolId(user.getProfileCollege().getCollegeId());
+			dto.setSchoolImg(user.getProfileCollege().getCollegeImgPath());
+			dto.setSchoolName(user.getProfileCollege().getCollegeName());
 			//TODO:  Remove .getId() if getCollegeId() works, add getCollegeLanguageCode() and getCollegeCountryCode()
-			dto.setProfileImg(feeds.get(i).getUser().getProfilePictureUrl());
+			dto.setProfileImg(user.getProfilePictureUrl());
 			
 			PostDto postDto = new PostDto();
 			
-			populatePostDto(postDto, feeds.get(i).getPost(), likedPostIds);
+			populatePostDto(postDto, posts.get(i), 'S');
 			
 			dto.setPost(postDto);
 			
@@ -340,29 +353,33 @@ public class FeedController {
 	 */
 	@RequestMapping(value="/school_feed_filter", method = RequestMethod.POST, produces="application/json")
 	@ResponseBody
-	public List<SchoolFeedDto> schoolFeedFilter(@RequestBody FilterDto filter, long userId ) {
+	public List<SchoolFeedDto> schoolFeedFilter(@RequestBody FilterDto filter, long profileId ) {
+		
 		List<SchoolFeedDto> lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
-		List<Long> likedPostIds = _postUserLikeRepository.findByUserIdForSchools(userId);
 		
 		// Filter posts specific to College and tags
 		if(filter.getCollegeId() > 0 && filter.getLstTags().size() > 0) {
-			List<SchoolFeed> feeds = _schoolFeedDao.getSchoolFeedsByCollegeAndTags(filter.getCollegeId() , filter.getLstTags());
+			
+			List<PostTags> feeds = _schoolFeedDao.getSchoolFeedsByCollegeAndTags(filter.getCollegeId() , filter.getLstTags());
 			
 			for(int i = 0; i < feeds.size(); i++) {
+			
+				User user = _userDao.getUser(feeds.get(i).getPost().getProfileId());
+				
 				SchoolFeedDto dto = new SchoolFeedDto();
 				
-				dto.setUserId(feeds.get(i).getUser().getProfileId());
+				dto.setUserId(user.getProfileId());
 				//dto.setUserType(feeds.get(i).getUser().getIsAlumni());
-				dto.setName(feeds.get(i).getUser().getProfileUserName());
-				dto.setSchoolId(feeds.get(i).getCollege().getCollegeId());
-				dto.setSchoolImg(feeds.get(i).getCollege().getCollegeImgPath());
-				dto.setSchoolName(feeds.get(i).getCollege().getCollegeName());
+				dto.setName(user.getProfileUserName());
+				dto.setSchoolId(user.getProfileCollege().getCollegeId());
+				dto.setSchoolImg(user.getProfileCollege().getCollegeImgPath());
+				dto.setSchoolName(user.getProfileCollege().getCollegeName());
 				//TODO:  Remove .getId() if getCollegeId() works, add getCollegeLanguageCode() and getCollegeCountryCode()
-				dto.setProfileImg(feeds.get(i).getUser().getProfilePictureUrl());
+				dto.setProfileImg(user.getProfilePictureUrl());
 				
 				PostDto postDto = new PostDto();
 				
-				populatePostDto(postDto, feeds.get(i).getPost(), likedPostIds);
+				populatePostDto(postDto, feeds.get(i).getPost(), 'S');
 				
 				dto.setPost(postDto);
 				
@@ -377,27 +394,30 @@ public class FeedController {
 			}
 		} else if(filter.getCollegeId() > 0) {
 			// Filter posts specific to a college only
-			lstSchoolFeedDto =  getSchoolFeeds(filter.getCollegeId(), userId);
+			lstSchoolFeedDto =  getSchoolFeeds(filter.getCollegeId(), profileId);
 		} else if(filter.getLstTags().size() > 0) {
 			// Filter posts specific to tags only
-			List<SchoolFeed> feeds = _schoolFeedDao.getSchoolFeedsByTags(filter.getLstTags());
+			List<PostTags> feeds = _schoolFeedDao.getSchoolFeedsByTags(filter.getLstTags());
 			lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
 			
 			for(int i = 0; i < feeds.size(); i++) {
+			
+				User user = _userDao.getUser(feeds.get(i).getPost().getProfileId());
+				
 				SchoolFeedDto dto = new SchoolFeedDto();
 				
-				dto.setUserId(feeds.get(i).getUser().getProfileId());
+				dto.setUserId(user.getProfileId());
 				//dto.setUserType(feeds.get(i).getUser().getIsAlumni());
-				dto.setName(feeds.get(i).getUser().getProfileUserName());
-				dto.setSchoolId(feeds.get(i).getCollege().getCollegeId());
-				dto.setSchoolImg(feeds.get(i).getCollege().getCollegeImgPath());
-				dto.setSchoolName(feeds.get(i).getCollege().getCollegeName());
+				dto.setName(user.getProfileUserName());
+				dto.setSchoolId(user.getProfileCollege().getCollegeId());
+				dto.setSchoolImg(user.getProfileCollege().getCollegeImgPath());
+				dto.setSchoolName(user.getProfileCollege().getCollegeName());
 				//TODO:  Remove .getId() if getCollegeId() works, add getCollegeLanguageCode() and getCollegeCountryCode()
-				dto.setProfileImg(feeds.get(i).getUser().getProfilePictureUrl());
+				dto.setProfileImg(user.getProfilePictureUrl());
 				
 				PostDto postDto = new PostDto();
 				
-				populatePostDto(postDto, feeds.get(i).getPost(), likedPostIds);
+				populatePostDto(postDto, feeds.get(i).getPost(), 'S');
 				
 				dto.setPost(postDto);
 				
@@ -422,26 +442,35 @@ public class FeedController {
 	 */
 	@RequestMapping(value="/national_feeds", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public List<NationalFeedDto> getNationalFeeds(Long collegeId, long userId) {
-		List<NationalFeedDto> lstNationalFeedDto = new ArrayList<NationalFeedDto>();
-		List<Long> likedPostIds = _postUserLikeRepository.findByUserIdForNational(userId);
-		List<NationalFeed> feeds = _nationaFeedDao.getNationalFeeds(collegeId);
+	public List<NationalFeedDto> getNationalFeeds(Long collegeId, long profileId) {
 		
-		for(int i = 0; i < feeds.size(); i++) {
+		List<NationalFeedDto> lstNationalFeedDto = new ArrayList<NationalFeedDto>();
+		
+		List<Long> friends  = _userFriendsDao.getFriends(profileId);
+		// To include logged user id along with their friends and fetch all their post in descending order by post date
+		friends.add(profileId); 
+		
+		// Get the userId order by posting date DESC means latest first
+		List<Post> posts = _postDao.getUserNationalPosts(friends, collegeId);
+		
+		for(int i = 0; i < posts.size(); i++) {
+			
 			NationalFeedDto dto = new NationalFeedDto();
 			
-			dto.setUserId(feeds.get(i).getUser().getProfileId());
+			User user = _userDao.getUser(posts.get(i).getProfileId());
+			
+			dto.setUserId(user.getProfileId());
 			//dto.setUserType(feeds.get(i).getUser().getIsAlumni());
-			dto.setName(feeds.get(i).getUser().getProfileUserName());
-			dto.setSchoolId(feeds.get(i).getCollege().getCollegeId());
-			dto.setSchoolImg(feeds.get(i).getCollege().getCollegeImgPath());
-			dto.setSchoolName(feeds.get(i).getCollege().getCollegeName());
+			dto.setName(user.getProfileUserName());
+			dto.setSchoolId(user.getProfileCollege().getCollegeId());
+			dto.setSchoolImg(user.getProfileCollege().getCollegeImgPath());
+			dto.setSchoolName(user.getProfileCollege().getCollegeName());
 			//TODO:  Remove .getId() if getCollegeId() works, add getCollegeLanguageCode() and getCollegeCountryCode()
-			dto.setProfileImg(feeds.get(i).getUser().getProfilePictureUrl());
+			dto.setProfileImg(user.getProfilePictureUrl());
 			
 			PostDto postDto = new PostDto();
 			
-			populatePostDto(postDto, feeds.get(i).getPost(), likedPostIds);
+			populatePostDto(postDto, posts.get(i), 'N');
 			
 			dto.setPost(postDto);
 			

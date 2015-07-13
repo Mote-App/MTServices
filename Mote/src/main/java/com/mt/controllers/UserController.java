@@ -132,7 +132,7 @@ public class UserController {
 	 * @param profileId
 	 * @return
 	 */
-	@RequestMapping(value="users/profile")
+	@RequestMapping(value="users/profile", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<UserDto> getUsersProfile(Long profileId) {
 		List<User> profiles = _userFriendsDao.getUsersProfile(profileId);
@@ -163,7 +163,7 @@ public class UserController {
 	 * @param profileId
 	 * @return
 	 */
-	@RequestMapping(value="user/friends")
+	@RequestMapping(value="user/friends", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<UserDto> getUserFriends(Long profileId) {
 		List<User> friends = _userFriendsDao.getFriendsProfile(profileId);
@@ -197,7 +197,7 @@ public class UserController {
 	 * @param friendId
 	 * @return
 	 */
-	@RequestMapping(value="user/add/friend")
+	@RequestMapping(value="user/add/friend", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public Byte addFriend(Long profileId, Long friendId) {
 		_userFriendsDao.addFriend(profileId, friendId);
@@ -212,7 +212,7 @@ public class UserController {
 	 * @param friendId
 	 * @return
 	 */
-	@RequestMapping(value="user/remove/friend")
+	@RequestMapping(value="user/remove/friend", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public Byte removeFriend(Long profileId, Long friendId) {
 		_userFriendsDao.removeFriend(profileId, friendId);

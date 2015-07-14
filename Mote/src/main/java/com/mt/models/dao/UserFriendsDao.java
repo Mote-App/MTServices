@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mt.models.User;
@@ -25,6 +26,9 @@ public class UserFriendsDao {
   	@PersistenceContext
   	private EntityManager _entityManager;
 	
+  	@Autowired
+  	UserDao _userDao;
+  	
   	/**
   	 * 
   	 * @param userId
@@ -86,11 +90,14 @@ public class UserFriendsDao {
   	 * @param friendId
   	 */
   	public void addFriend(Long profileId, Long friendId) {
+  		
   		UserFriends userFriend = new UserFriends();
   		
   		userFriend.setProfileId(profileId);
-  		userFriend.setFriend(new User());
-  		userFriend.getFriend().setProfileId(friendId);
+
+  		User friend = _userDao.getUser(friendId);
+  		userFriend.setFriend(friend);
+  		
   		
   		_entityManager.persist(userFriend);
   	}

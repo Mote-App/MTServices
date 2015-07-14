@@ -177,9 +177,10 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `motedb`.`profile_has_friend` ;
 
 CREATE TABLE IF NOT EXISTS `motedb`.`profile_has_friend` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `profile_id` INT NOT NULL,
   `profile_friend_id` INT NOT NULL,
-  PRIMARY KEY (`profile_id`, `profile_friend_id`),
+  PRIMARY KEY (`id`),
   CONSTRAINT `fk_profile_has_profile_profile1`
     FOREIGN KEY (`profile_id`)
     REFERENCES `motedb`.`profile` (`profile_id`)

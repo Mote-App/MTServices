@@ -4,9 +4,9 @@ import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 /**
  * The <code>SSAScheduledTask</code> is the Social Stairway Algorithm Scheduler.
@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
  * @author gibranecastillo
  *
  */
-@ComponentScan
+@Component
 @EnableScheduling
 public class SSAScheduledTask {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());

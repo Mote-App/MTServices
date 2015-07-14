@@ -7,15 +7,26 @@ package views;
  *
  */
 public class UserDto {
-	private String 	   firstName;
-	private String 	   lastName;
-	private String 	   userName;
-	private String 	   email;
-	private String 	   password;
-	private String 	   profilePictureUrl;
-	private CollegeDto college;
-	private byte 	   isFriend = 0;
+	private long 	   	profileId;
+	private String 	   	firstName;
+	private String 	   	lastName;
+	private String 	   	userName;
+	private String 	   	email;
+	private String 	   	password;
+	private String 	   	profilePictureUrl;
+	private CollegeDto 	college;
+	private byte 	   	isFriend = 0;
 	
+	
+	
+	public long getProfileId() {
+		return profileId;
+	}
+
+	public void setProfileId(long profileId) {
+		this.profileId = profileId;
+	}
+
 	/**
 	 * 
 	 * @return

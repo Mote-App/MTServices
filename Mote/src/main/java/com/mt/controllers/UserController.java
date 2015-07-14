@@ -142,6 +142,7 @@ public class UserController {
 			UserDto userDto = new UserDto();
 			User profile = profiles.get(i);
 			
+			userDto.setProfileId(profile.getProfileId());
 			userDto.setFirstName(profile.getProfileFirstName());
 			userDto.setLastName(profile .getProfileLastName());
 			userDto.setProfilePictureUrl(profile.getProfilePictureUrl());
@@ -173,6 +174,7 @@ public class UserController {
 			UserDto userDto = new UserDto();
 			User friend = friends.get(i);
 			
+			userDto.setProfileId(friend.getProfileId());
 			userDto.setFirstName(friend.getProfileFirstName());
 			userDto.setLastName(friend .getProfileLastName());
 			userDto.setProfilePictureUrl(friend.getProfilePictureUrl());
@@ -199,7 +201,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="user/add/friend", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public Byte addFriend(Long profileId, Long friendId) {
+	public byte addFriend(Long profileId, Long friendId) {
 		_userFriendsDao.addFriend(profileId, friendId);
 		
 		return 1;
@@ -214,7 +216,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="user/remove/friend", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public Byte removeFriend(Long profileId, Long friendId) {
+	public byte removeFriend(Long profileId, Long friendId) {
 		_userFriendsDao.removeFriend(profileId, friendId);
 		
 		return 1;

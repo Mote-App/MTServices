@@ -34,7 +34,6 @@ import com.mt.models.dao.UserDao;
  * @author gibranecastillo
  *
  */
-@Component
 public class SSAJob {
 	@Autowired
 	private PostDao _postDao;

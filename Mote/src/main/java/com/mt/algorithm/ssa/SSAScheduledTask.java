@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,9 @@ import org.springframework.stereotype.Component;
 public class SSAScheduledTask {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
+	@Autowired
+	private SSAJob ssaJob;
+	
 	/**
 	 * The Scheduled annotation defines when to execute the SSA task or job.
 	 * Using fixedRate, which specifies the interval between method invocations
@@ -32,8 +36,6 @@ public class SSAScheduledTask {
 	@Scheduled(fixedRate=300000)
 	public synchronized void executeSSATask() {
 		log.info("Starting Algorithm : " + new Date());
-		
-		SSAJob ssaJob = new SSAJob();
 		
 		ssaJob.initiate();
 	}

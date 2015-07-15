@@ -14,27 +14,15 @@ import com.mt.models.PostProfileView;
  *
  */
 public interface PostUserViewRepository extends CrudRepository<PostProfileView, Long> {
+
 	/**
 	 * 
 	 * @param profileId
 	 * @return
 	 */
-	@Query("select u.postId from PostProfileView u where u.profileId = ? and level='F'")
-	List<Long> findByUserIdForFriends(long profileId);
+	@Query("select u.postId from PostProfileView u where u.profileId = ? and u.postId = ? and level = ? ")
+	List<Long> findPostViewForLevel(long profileId, long postId, String level);
 	
-	/**
-	 * 
-	 * @param profileId
-	 * @return
-	 */
-	@Query("select u.postId from PostProfileView u where u.profileId = ? and level='S'")
-	List<Long> findByUserIdForSchools(long profileId);
-	
-	/**
-	 * 
-	 * @param profileId
-	 * @return
-	 */
-	@Query("select u.postId from PostProfileView u where u.profileId = ? and level='N'")
-	List<Long> findByUserIdForNational(long profileId);
+	@Query("select count(u.postId) from PostProfileView u where u.postId = ? and level = ? ")
+	int countPostViewForLevel(long postId, String level);
 }

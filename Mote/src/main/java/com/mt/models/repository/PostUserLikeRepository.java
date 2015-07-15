@@ -19,22 +19,10 @@ public interface PostUserLikeRepository extends CrudRepository<PostProfileLike, 
 	 * @param profileId
 	 * @return
 	 */
-	@Query("select u.postId from PostProfileLike u where u.profileId = ? and u.postId = ? and level='F'")
-	List<Long> findPostLikeForFriendFeeds(long profileId, long postId);
+	@Query("select u.postId from PostProfileLike u where u.profileId = ? and u.postId = ? and level = ? ")
+	Long findPostLikeForLevel(long profileId, long postId, String level);
 	
-	/**
-	 * 
-	 * @param profileId
-	 * @return
-	 */
-	@Query("select u.postId from PostProfileLike u where u.profileId = ? and u.postId = ? and level='S'")
-	List<Long> findPostLikeForSchoolFeeds(long profileId, long postId);
+	@Query("select count(u.postId) from PostProfileLike u where u.postId = ? and level = ? ")
+	int countPostLikeForLevel(long postId, String level);
 	
-	/**
-	 * 
-	 * @param profileId
-	 * @return
-	 */
-	@Query("select u.postId from PostProfileLike u where u.profileId = ? and u.postId = ? and level='N'")
-	List<Long> findPostLikeForNationalFeeds(long profileId, long postId);
 }

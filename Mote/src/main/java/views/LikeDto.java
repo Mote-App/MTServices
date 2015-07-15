@@ -9,7 +9,7 @@ package views;
 public class LikeDto {
 	long likeCount;
 	long postId;
-	long userId;
+	long profileId;
 	String level;
 	
 	/**
@@ -48,16 +48,16 @@ public class LikeDto {
 	 * 
 	 * @return
 	 */
-	public long getUserId() {
-		return userId;
+	public long getProfileId() {
+		return profileId;
 	}
 	
 	/**
 	 * 
-	 * @param userId
+	 * @param profileId
 	 */
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setProfileIdId(long profileId) {
+		this.profileId = profileId;
 	}
 	
 	/**

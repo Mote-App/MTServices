@@ -9,7 +9,7 @@ package views;
 public class ViewDto {
 	long viewCount;
 	long postId;
-	long userId;
+	long profileId;
 	String level;
 	
 	/**
@@ -48,16 +48,16 @@ public class ViewDto {
 	 * 
 	 * @return
 	 */
-	public long getUserId() {
-		return userId;
+	public long getProfileId() {
+		return profileId;
 	}
 	
 	/**
 	 * 
 	 * @param userId
 	 */
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setProfileId(long profileId) {
+		this.profileId = profileId;
 	}
 	
 	/**

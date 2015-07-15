@@ -18,6 +18,7 @@ import javax.persistence.Table;
 public class Tag {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="tag_id")
 	private long tagId;
 	
 	@Column(name="tag_description")

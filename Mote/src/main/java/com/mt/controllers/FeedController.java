@@ -134,7 +134,7 @@ public class FeedController {
 				
 				if(posts != null && posts.size() > 0) {
 					Post post = posts.get(0);
-					populatePostDto(currentPost, post, 'F');
+					populatePostDto(currentPost, post, "F");
 					postsDto.setCurrentPost(currentPost);
 				}
 				
@@ -143,7 +143,7 @@ public class FeedController {
 				
 				if(posts != null && posts.size() == 2) {
 					Post post = posts.get(1);
-					populatePostDto(mostRecentPost, post, 'F');
+					populatePostDto(mostRecentPost, post, "F");
 				} else {
 					copyPostDto(mostRecentPost, currentPost);	
 				}
@@ -155,7 +155,7 @@ public class FeedController {
 				Post post = _postDao.getMostPopularPost(user.getProfileId());
 				
 				if(post != null) {
-					populatePostDto(mostPopularPost, post, 'F');
+					populatePostDto(mostPopularPost, post, "F");
 				} else {
 					copyPostDto(mostPopularPost, currentPost);
 				}
@@ -193,7 +193,7 @@ public class FeedController {
 	 * @param source
 	 * @param likedPostIds
 	 */
-	private void populatePostDto(PostDto postDto, Post source, char postType) {
+	private void populatePostDto(PostDto postDto, Post source, String postType) {
 		postDto.setPostId(source.getPostId());
 		postDto.setPostImg(source.getPostObjectPath());
 		postDto.setCaption(source.getPostCaption());
@@ -241,23 +241,13 @@ public class FeedController {
 	 * @param post
 	 * @param likedPostIds
 	 */
-	private void isApplicableForLiking(PostDto postDto, Post source, char postType) {
+	private void isApplicableForLiking(PostDto postDto, Post source, String postType) {
 		
-		List<Long> likedPostIds = null;
+		Long likedPostId = null;
 		
-		if( postType == 'F'){
-			likedPostIds = _postUserLikeRepository.findPostLikeForFriendFeeds(source.getProfileId(), source.getPostId());			
-		}
+		likedPostId = _postUserLikeRepository.findPostLikeForLevel(source.getProfileId(), source.getPostId(), postType);			
 
-		if( postType == 'S'){
-			likedPostIds = _postUserLikeRepository.findPostLikeForSchoolFeeds(source.getProfileId(), source.getPostId());			
-		}
-
-		if( postType == 'N'){
-			likedPostIds = _postUserLikeRepository.findPostLikeForNationalFeeds(source.getProfileId(), source.getPostId());			
-		}
-
-		if(likedPostIds != null && likedPostIds.size() > 0){
+		if(likedPostId != null && likedPostId > 0){
 			postDto.setLikeDone(true);
 		}else{
 			postDto.setLikeDone(false);
@@ -328,7 +318,7 @@ public class FeedController {
 			
 			PostDto postDto = new PostDto();
 			
-			populatePostDto(postDto, posts.get(i), 'S');
+			populatePostDto(postDto, posts.get(i), "S");
 			
 			dto.setPost(postDto);
 			
@@ -379,7 +369,7 @@ public class FeedController {
 				
 				PostDto postDto = new PostDto();
 				
-				populatePostDto(postDto, feeds.get(i).getPost(), 'S');
+				populatePostDto(postDto, feeds.get(i).getPost(), "S");
 				
 				dto.setPost(postDto);
 				
@@ -417,7 +407,7 @@ public class FeedController {
 				
 				PostDto postDto = new PostDto();
 				
-				populatePostDto(postDto, feeds.get(i).getPost(), 'S');
+				populatePostDto(postDto, feeds.get(i).getPost(), "S");
 				
 				dto.setPost(postDto);
 				
@@ -470,7 +460,7 @@ public class FeedController {
 			
 			PostDto postDto = new PostDto();
 			
-			populatePostDto(postDto, posts.get(i), 'N');
+			populatePostDto(postDto, posts.get(i), "N");
 			
 			dto.setPost(postDto);
 			
@@ -494,21 +484,31 @@ public class FeedController {
 	@RequestMapping(value="/likes", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
 	public LikeDto updateLike(@RequestBody LikeDto likeDto) {
-		Post post =  _postDao.getPost(likeDto.getPostId());
-		long like = post.getLikes();
 		
-		post.setLikes(++like);
+		Long likedPostId = null;
 		
-		post = _postRepo.save(post);
+		likedPostId = _postUserLikeRepository.findPostLikeForLevel(likeDto.getProfileId(), likeDto.getPostId(), likeDto.getLevel());
 		
-		PostProfileLike postUser = new PostProfileLike();
-		postUser.setPostId(post.getPostId());
-		postUser.setProfileId(post.getProfileId());
-		postUser.setLevel(likeDto.getLevel());
-		
-		_postUserLikeRepository.save(postUser);
-		
-		likeDto.setLikeCount(like);
+		if( likedPostId != null && likedPostId > 0){
+			//Like already done for the post by user id at particular feed level
+			
+			int likeCount = _postUserLikeRepository.countPostLikeForLevel(likeDto.getPostId(), likeDto.getLevel());
+			likeDto.setLikeCount(likeCount);
+			
+		}else{
+			//User just liked the post so save and return the new total like count based on level
+			
+			PostProfileLike postUser = new PostProfileLike();
+			postUser.setPostId(likeDto.getPostId());
+			postUser.setProfileId(likeDto.getProfileId());
+			postUser.setLevel(likeDto.getLevel());
+			
+			_postUserLikeRepository.save(postUser);
+			
+			int likeCount = _postUserLikeRepository.countPostLikeForLevel(likeDto.getPostId(), likeDto.getLevel());
+			likeDto.setLikeCount(likeCount);
+			
+		}
 		
 		return likeDto;
 	}
@@ -520,23 +520,14 @@ public class FeedController {
 	 */
 	@RequestMapping(value="/views", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
-	public ViewDto updateView(@RequestBody ViewDto viewDto) {
-		Post post =  _postDao.getPost(viewDto.getPostId());
-		long view = post.getViews();
-		
-		post.setViews(++view);
-		
-		post = _postRepo.save(post);
-		
+	public void updateView(@RequestBody ViewDto viewDto) {
+
 		PostProfileView postUser = new PostProfileView();
-		postUser.setPostId(post.getPostId());
-		postUser.setProfileId(post.getProfileId());
+		postUser.setPostId(viewDto.getPostId());
+		postUser.setProfileId(viewDto.getProfileId());
 		postUser.setLevel(viewDto.getLevel());
 		
 		_postUserViewRepository.save(postUser);
 		
-		viewDto.setViewCount(view);
-		
-		return viewDto;
 	}
 }

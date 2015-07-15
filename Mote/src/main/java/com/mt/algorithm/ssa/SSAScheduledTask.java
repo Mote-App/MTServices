@@ -24,7 +24,7 @@ public class SSAScheduledTask {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	private SSAJob ssaJob = new SSAJob();
+	private SSAJob ssaJob;
 	
 	/**
 	 * The Scheduled annotation defines when to execute the SSA task or job.

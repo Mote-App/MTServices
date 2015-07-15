@@ -151,6 +151,12 @@ public class UserController {
 			userDto.setLastName(profile .getProfileLastName());
 			userDto.setProfilePictureUrl(profile.getProfilePictureUrl());
 			
+			Long id = _userFriendRepository.findUserFriend(profileId, profile.getProfileId());
+			
+			if( id != null && id > 0 ){
+				userDto.setIsFriend((byte)1);
+			}
+			
 			CollegeDto collegeDto = new CollegeDto();
 			
 			userDto.setCollege(collegeDto);
@@ -234,7 +240,7 @@ public class UserController {
 		Long id = _userFriendRepository.findUserFriend(profileId, friendId);
 		
 		if( id != null && id > 0){
-			_userRepository.delete(id);
+			_userFriendRepository.delete(id);
 		}
 		
 		//_userFriendsDao.removeFriend(profileId, friendId);

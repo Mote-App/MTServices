@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 /**
  * The <code>SSAScheduledTask</code> is the Social Stairway Algorithm Scheduler.
  * 
+ * ComponentScan is used on configuration classes to configure the packages to be scanned by spring.
+ * Component is used to mark your class as a bean (and eligible to scanning).
+ * 
  * @author gibranecastillo
  *
  */

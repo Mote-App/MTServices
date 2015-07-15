@@ -3,6 +3,7 @@ package com.mt.algorithm.ssa;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.mt.models.Post;
 import com.mt.models.User;
@@ -33,6 +34,7 @@ import com.mt.models.dao.UserDao;
  * @author gibranecastillo
  *
  */
+@Component
 public class SSAJob {
 	@Autowired
 	private PostDao _postDao;

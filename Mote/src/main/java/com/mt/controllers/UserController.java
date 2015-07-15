@@ -234,7 +234,7 @@ public class UserController {
 		Long id = _userFriendRepository.findUserFriend(profileId, friendId);
 		
 		if( id != null && id > 0){
-			_userRepository.delete(id);
+			_userFriendRepository.delete(id);
 		}
 		
 		//_userFriendsDao.removeFriend(profileId, friendId);

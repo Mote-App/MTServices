@@ -3,7 +3,6 @@ package com.mt.algorithm.ssa;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.mt.models.Post;
 import com.mt.models.User;
@@ -40,6 +39,8 @@ public class SSAJob {
 	
 	@Autowired
 	private UserDao _userDao;
+	
+	private SSA ssa = new SSA();
 	
 	public void initiate() {	
 		long Ns = _postDao.getNs();
@@ -78,7 +79,6 @@ public class SSAJob {
 	 * @param postId
 	 */
 	public void examineFriendFeedPost(long V, long L, long Ns, long postId) {
-		SSA ssa = new SSA();
 		SSAPostRatio rfPostRatio = ssa.calculateRf(V, L, Ns);
 		
 		if(rfPostRatio.isGreaterThan()) {
@@ -107,7 +107,6 @@ public class SSAJob {
 		double ClIdealAvg = 0.0; //pending!
 		double CpnAvg = 0.0; //pending!
 		
-		SSA ssa = new SSA();
 		SSAPostRatio rsPostRatio = ssa.calculateRs(V, L, Cr, CrIdealAvg, Cl, ClIdealAvg, Cpn, CpnAvg, Ns);
 		
 		if(rsPostRatio.isGreaterThan()) {

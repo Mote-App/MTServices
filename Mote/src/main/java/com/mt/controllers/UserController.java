@@ -23,6 +23,7 @@ import com.mt.models.dao.CollegeDao;
 import com.mt.models.dao.LocaleDao;
 import com.mt.models.dao.UserDao;
 import com.mt.models.dao.UserFriendsDao;
+import com.mt.models.repository.UserFriendRepository;
 import com.mt.models.repository.UserRepository;
 
 /**
@@ -51,7 +52,10 @@ public class UserController {
 	private UserFriendsDao _userFriendsDao;
 	
 	@Autowired
-	UserRepository _userRepo;
+	UserRepository _userRepository;
+	
+	@Autowired
+	UserFriendRepository _userFriendRepository;
 	
 	@Autowired
 	JavaMailSender javaMailSender;
@@ -114,7 +118,7 @@ public class UserController {
 			
 			user.setLocale(locale);
 			
-			_userRepo.save(user);
+			_userRepository.save(user);
 			
 			return user;
 		} catch(Exception e) {
@@ -202,7 +206,16 @@ public class UserController {
 	@RequestMapping(value="user/add/friend", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public byte addFriend(Long profileId, Long friendId) {
-		_userFriendsDao.addFriend(profileId, friendId);
+		
+		Long friend = _userFriendRepository.findUserFriend(profileId, friendId);
+		
+		if( friend != null &&  friend > 0 ){
+			//Already friend show no need to reset and avoid adding duplicate record.
+			return 1;
+		}else{
+			//New friend to be added 
+			_userFriendsDao.addFriend(profileId, friendId);
+		}
 		
 		return 1;
 	}
@@ -217,7 +230,14 @@ public class UserController {
 	@RequestMapping(value="user/remove/friend", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public byte removeFriend(Long profileId, Long friendId) {
-		_userFriendsDao.removeFriend(profileId, friendId);
+		
+		Long id = _userFriendRepository.findUserFriend(profileId, friendId);
+		
+		if( id != null && id > 0){
+			_userRepository.delete(id);
+		}
+		
+		//_userFriendsDao.removeFriend(profileId, friendId);
 		
 		return 1;
 	}

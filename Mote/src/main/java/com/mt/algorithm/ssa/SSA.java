@@ -1,13 +1,17 @@
 package com.mt.algorithm.ssa;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 /**
  * 
  * @author gibranecastillo
  *
  */
+@Component
 public class SSA {
-	// each instance of SSACalculator has an enum
-	private SSACalculator ssaCalculator = new SSACalculator();
+	@Autowired
+	private SSACalculator ssaCalculator;
 	
 	/**
 	 * Calculates the Post Ratio to determine if a Friend Feed post can be display or publish in the School Feed as well.

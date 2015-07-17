@@ -1,6 +1,7 @@
 package com.mt.algorithm.ssa;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.mt.models.SSAParams;
 import com.mt.models.dao.SSAParamsDao;
@@ -11,6 +12,7 @@ import com.mt.models.dao.SSAParamsDao;
  * @author gibranecastillo
  *
  */
+@Component
 public class SSACalculator {
 	@Autowired
 	private SSAParamsDao _ssaParamsDao = new SSAParamsDao();

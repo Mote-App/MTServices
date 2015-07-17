@@ -4,6 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.mt.models.SSAParams;
@@ -17,6 +19,8 @@ import com.mt.models.SSAParams;
 @Repository
 @Transactional
 public class SSAParamsDao {
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	//An EntityManager will be automatically injected from entityManagerFactory setup on DatabaseConfig class.
 	@PersistenceContext
 	private EntityManager _entityManager;
@@ -27,6 +31,10 @@ public class SSAParamsDao {
 	 * @return
 	 */
 	public SSAParams getSSAParams() {
+		log.info("*********************************");
+		log.info("_entityManager: " + _entityManager);
+		log.info("*********************************");
+		
 		return (SSAParams)_entityManager.createQuery("FROM SSAParams")
 				.getSingleResult();
 	}

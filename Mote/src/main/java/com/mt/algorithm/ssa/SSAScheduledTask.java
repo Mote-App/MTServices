@@ -38,5 +38,7 @@ public class SSAScheduledTask {
 		log.info("Starting Algorithm : " + new Date());
 		
 		ssaJob.initiate();
+		
+		log.info("Completed Algorithm : " + new Date());
 	}
 }

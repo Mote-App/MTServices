@@ -10,25 +10,19 @@ import java.util.List;
  *
  */
 public class FilterDto {
-	Long collegeId;
+	List<Long> collegeIds = new ArrayList<Long>();
 	List<Long> lstTags = new ArrayList<Long>();
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public Long getCollegeId() {
-		return collegeId;
-	}
 	
-	/**
-	 * 
-	 * @param collegeId
-	 */
-	public void setCollegeId(Long collegeId) {
-		this.collegeId = collegeId;
-	}
 	
+	public List<Long> getCollegeIds() {
+		return collegeIds;
+	}
+
+	public void setCollegeIds(List<Long> collegeIds) {
+		this.collegeIds = collegeIds;
+	}
+
 	/**
 	 * 
 	 * @return

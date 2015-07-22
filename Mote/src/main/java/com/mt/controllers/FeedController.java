@@ -47,6 +47,7 @@ import com.mt.models.repository.PostUserViewRepository;
  */
 @Controller
 public class FeedController {
+	
 	@Autowired
 	private PostDao _postDao;
 	
@@ -348,9 +349,9 @@ public class FeedController {
 		List<SchoolFeedDto> lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
 		
 		// Filter posts specific to College and tags
-		if(filter.getCollegeId() > 0 && filter.getLstTags().size() > 0) {
+		if(filter.getCollegeIds().size() > 0 && filter.getLstTags().size() > 0) {
 			
-			List<PostTags> feeds = _schoolFeedDao.getSchoolFeedsByCollegeAndTags(filter.getCollegeId() , filter.getLstTags());
+			List<PostTags> feeds = _schoolFeedDao.getSchoolFeedsByCollegeAndTags(filter.getCollegeIds() , filter.getLstTags());
 			
 			for(int i = 0; i < feeds.size(); i++) {
 			
@@ -382,9 +383,13 @@ public class FeedController {
 				postDto.setLikes(feeds.get(i).getPost().getLikes());*/
 
 			}
-		} else if(filter.getCollegeId() > 0) {
-			// Filter posts specific to a college only
-			lstSchoolFeedDto =  getSchoolFeeds(filter.getCollegeId(), profileId);
+		} else if(filter.getCollegeIds().size() > 0) {
+			// Filter posts specific to a list of colleges only
+			for(int i = 0; i < filter.getCollegeIds().size(); i++){
+				
+				lstSchoolFeedDto.addAll(getSchoolFeeds(filter.getCollegeIds().get(i), profileId));
+			}
+			
 		} else if(filter.getLstTags().size() > 0) {
 			// Filter posts specific to tags only
 			List<PostTags> feeds = _schoolFeedDao.getSchoolFeedsByTags(filter.getLstTags());

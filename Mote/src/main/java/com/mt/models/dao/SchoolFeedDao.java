@@ -29,9 +29,9 @@ public class SchoolFeedDao {
 	 * @param tagIds
 	 * @return
 	 */
-	public List<PostTags> getSchoolFeedsByCollegeAndTags(long collegeId, List<Long> tagIds) {
-		List<PostTags> feeds = _entityManager.createQuery("SELECT PT FROM PostTags PT JOIN User U on PT.post.profileId = U.profileId where U.profileCollege.collegeId = :collegeId and PT.postSchoolPromote = true and PT.tagId IN :tagIds")
-				.setParameter("collegeId", collegeId)
+	public List<PostTags> getSchoolFeedsByCollegeAndTags(List<Long> collegeIds, List<Long> tagIds) {
+		List<PostTags> feeds = _entityManager.createQuery("SELECT PT FROM PostTags PT JOIN User U on PT.post.profileId = U.profileId where U.profileCollege.collegeId IN :collegeIds and PT.postSchoolPromote = true and PT.tagId IN :tagIds")
+				.setParameter("collegeIds", collegeIds)
 				.setParameter("tagIds", tagIds)
 				.getResultList();
 		

@@ -1,10 +1,6 @@
 package com.mt.algorithm.ssa;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.mt.models.SSAParams;
-import com.mt.models.dao.SSAParamsDao;
 
 /**
  * The <code>SSACalculator</code> class is the Social Stairway Algorithm Calculator.
@@ -12,11 +8,7 @@ import com.mt.models.dao.SSAParamsDao;
  * @author gibranecastillo
  *
  */
-@Component
 public class SSACalculator {
-	@Autowired
-	private SSAParamsDao _ssaParamsDao = new SSAParamsDao();
-	
 	// Friend Feed to School Feed Threshold Ratio.
 	private double Kf;
 	
@@ -40,8 +32,7 @@ public class SSACalculator {
 	 * 
 	 * @param value
 	 */
-	public SSACalculator() {
-		SSAParams ssaParams = _ssaParamsDao.getSSAParams();
+	public SSACalculator(SSAParams ssaParams) {
 		Kf = ssaParams.getKf();
 		Ks = ssaParams.getKs();
 		Cf = ssaParams.getCf();
@@ -79,9 +70,11 @@ public class SSACalculator {
 	public double calculateRf(long V, long L, long Ns) {
 		double Rf = 0.0;
 		
-		Rf = (L/V) * Cf * this.calculateCns(Ns);
+		if(V != 0) {
+			Rf = (L / V) * Cf * this.calculateCns(Ns);
+		}
 		
-		return Rf; 
+		return Rf;
 	}
 	
 	/**
@@ -94,7 +87,9 @@ public class SSACalculator {
 	public double calculateCns(long Ns) {
 		double Cns = 0.0;
 		
-		Cns = (NsIdeal/Ns) * T1;
+		if(Ns != 0) {
+			Cns = (NsIdeal / Ns) * T1;
+		}
 		
 		return Cns;
 	}
@@ -121,7 +116,9 @@ public class SSACalculator {
 		double Cp = this.calculateCp(Cpn, CpnAvg);
 		double Cnn = this.calculateCnn(Ns);
 		
-		Rs = (L/V) * Cs * Cp * Cnn;
+		if(V != 0) {
+			Rs = (L / V) * Cs * Cp * Cnn;
+		}
 		
 		return Rs;
 	}
@@ -139,7 +136,9 @@ public class SSACalculator {
 	public double calculateCs(long Cr, double CrIdealAvg, long Cl, double ClIdealAvg) {
 		double Cs = 0.0;
 		
-		Cs = ((Cr/CrIdealAvg) * (Cl/ClIdealAvg)) * T2;
+		if(CrIdealAvg != 0 && ClIdealAvg != 0) {
+			Cs = ((Cr / CrIdealAvg) * (Cl / ClIdealAvg)) * T2;
+		}
 		
 		return Cs;
 	}
@@ -155,7 +154,9 @@ public class SSACalculator {
 	public double calculateCp(long Cpn, double CpnAvg) {
 		double Cp = 0.0;
 		
-		Cp = (CpnAvg/Cpn) * T3;
+		if(Cpn != 0) {
+			Cp = (CpnAvg / Cpn) * T3;
+		}
 		
 		return Cp;
 	}
@@ -170,7 +171,9 @@ public class SSACalculator {
 	public double calculateCnn(long Ns) {
 		double Cnn = 0.0;
 		
-		Cnn = (NnIdeal/Ns) * T4;
+		if(Ns != 0) {
+			Cnn = (NnIdeal/Ns) * T4;
+		}
 		
 		return Cnn;
 	}

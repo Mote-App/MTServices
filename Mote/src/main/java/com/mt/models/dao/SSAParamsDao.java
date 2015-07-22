@@ -4,8 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.mt.models.SSAParams;
@@ -19,7 +17,7 @@ import com.mt.models.SSAParams;
 @Repository
 @Transactional
 public class SSAParamsDao {
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	//private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	//An EntityManager will be automatically injected from entityManagerFactory setup on DatabaseConfig class.
 	@PersistenceContext
@@ -27,35 +25,16 @@ public class SSAParamsDao {
 	
 	/**
 	 * 
+	 * This works:  SELECT * FROM motedb.ssa_coefficient_parameters as S WHERE S.id = 1;
+	 * 
 	 * @param ssaParamsId
 	 * @return
 	 */
-	public SSAParams getSSAParams() {
-		log.info("*********************************");
-		log.info("_entityManager: " + _entityManager);
-		log.info("*********************************");
-		
-		return (SSAParams)_entityManager.createQuery("FROM SSAParams")
+	public SSAParams getSSAParams(long ssaParamsId) {
+		return (SSAParams)_entityManager.createQuery("SELECT S FROM SSAParams as S WHERE S.id = :ssaParamsId")
+		//return (SSAParams)_entityManager.createQuery("FROM SSAParams WHERE id = :ssaParamsId")
+				.setParameter("ssaParamsId", ssaParamsId)
+				.setMaxResults(1)
 				.getSingleResult();
 	}
-	
-	/**
-	 * 
-	 * @param ssaParamsId
-	 * @return
-	 */
-	/*public SSAParams getSSAParams(long ssaParamsId) {
-		return (SSAParams)_entityManager.createQuery("FROM SSAParams WHERE id = :ssaParamsId")
-				.setParameter("ssaParamsId", ssaParamsId)
-				.getSingleResult();
-	}*/
-	
-	/**
-	 * 
-	 * @return
-	 */
-	/*public List<SSAParams> getSSAParamsList() {
-		return _entityManager.createQuery("FROM SSAParams")
-				.getResultList();
-	}*/
 }

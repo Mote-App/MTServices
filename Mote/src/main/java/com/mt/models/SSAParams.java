@@ -2,6 +2,8 @@ package com.mt.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,8 +16,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ssa_coefficient_parameters")
 public class SSAParams {
-	// Friend Feed to School Feed Threshold Ratio.
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="id")
+	private long id;
+	
+	// Friend Feed to School Feed Threshold Ratio.
 	@Column(name="Kf")
 	private double Kf;
 	
@@ -50,6 +56,20 @@ public class SSAParams {
 	// T4 Tuning Coefficient.
 	@Column(name="T4")
 	private double T4;
+	
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+	
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
+	}
 	
 	/**
 	 * @return the kf

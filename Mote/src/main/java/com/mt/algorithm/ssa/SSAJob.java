@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.mt.models.Post;
+import com.mt.models.SSAParams;
 import com.mt.models.User;
 import com.mt.models.dao.PostDao;
+import com.mt.models.dao.SSAParamsDao;
 import com.mt.models.dao.UserDao;
 
 
@@ -42,10 +44,26 @@ public class SSAJob {
 	@Autowired
 	private UserDao _userDao;
 	
-	//@Autowired
-	private SSA ssa = new SSA();
+	@Autowired
+	private SSAParamsDao _ssaParamsDao;
 	
-	public void initiate() {	
+	//@Autowired
+	private SSA ssa;
+	
+	public void initiate() {
+		//SSAParams ssaParams = _ssaParamsDao.getSSAParams(1);
+		SSAParams ssaParams = new SSAParams();
+		ssaParams.setKf(0.20);
+		ssaParams.setKs(0.20);
+		ssaParams.setCf(0.50);
+		ssaParams.setNsIdeal(800);
+		ssaParams.setNnIdeal(800);
+		ssaParams.setT1(0.50);
+		ssaParams.setT2(0.30);
+		ssaParams.setT3(0.30);
+		ssaParams.setT4(0.30);
+		ssa = new SSA(ssaParams);
+		
 		long Ns = _postDao.getNs();
 		List<Post> friendPosts = _postDao.getFriendFeedPosts();
 		

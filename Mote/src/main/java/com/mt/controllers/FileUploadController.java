@@ -102,7 +102,7 @@ public class FileUploadController {
 				
 				Post post = new Post();
 				post.setPostTypeCode(newPostDto.getPostType());
-				post.setProfileId(newPostDto.getUserId());
+				post.getProfile().setProfileId(newPostDto.getUserId());
 				post.setPostCaption(newPostDto.getCaption());
 				post.setLikes(0);
 				post.setPostDate( Calendar.getInstance());
@@ -144,7 +144,7 @@ public class FileUploadController {
 				}*/
 				
 				//post = _postRepo.save(post);
-				fileName = post.getProfileId() + "_" + post.getPostId() + ".png";
+				fileName = post.getProfile().getProfileId() + "_" + post.getPostId() + ".png";
 				
 				byte[] bytes = file.getBytes();
 				

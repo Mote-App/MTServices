@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -27,11 +28,13 @@ public class Post {
 	@Column(name="post_id")
 	private long postId;
 	
+	
 	@Column(name="post_type_code")
 	private String postTypeCode;
 	
-	@Column(name="post_profile_id")
-	private long profileId;
+	@OneToOne
+	@JoinColumn(name="post_profile_id")
+	private User profile;
 	
 	//@Column(name="post_tag_id")
 	//private long postTagId;
@@ -52,10 +55,10 @@ public class Post {
 	private long likes;
 	
 	@Column(name="post_school_promote")
-	private boolean postSchoolPromote;
+	private byte postSchoolPromote;
 	
 	@Column(name="post_national_promote")
-	private boolean postNationalPromote;
+	private byte postNationalPromote;
 	
 	@OneToMany
 	@JoinColumn(name="post_post_id")
@@ -66,6 +69,7 @@ public class Post {
 	 */
 	public Post() {
 		listPostTags = new ArrayList<PostTags>();
+		profile = new User();
 	}
 	
 	/**
@@ -100,21 +104,6 @@ public class Post {
 		this.postTypeCode = postTypeCode;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public long getProfileId() {
-		return profileId;
-	}
-	
-	/**
-	 * 
-	 * @param profileId
-	 */
-	public void setProfileId(long profileId) {
-		this.profileId = profileId;
-	}
 	
 	/*public long getPostTagId() {
 		return postTagId;
@@ -124,6 +113,14 @@ public class Post {
 		this.postTagId = postTagId;
 	}*/
 	
+	public User getProfile() {
+		return profile;
+	}
+
+	public void setProfile(User profile) {
+		this.profile = profile;
+	}
+
 	/**
 	 * 
 	 * @return
@@ -208,7 +205,7 @@ public class Post {
 	 * 
 	 * @return
 	 */
-	public boolean isPostSchoolPromote() {
+	public byte isPostSchoolPromote() {
 		return postSchoolPromote;
 	}
 	
@@ -216,7 +213,7 @@ public class Post {
 	 * 
 	 * @param postSchoolPromote
 	 */
-	public void setPostSchoolPromote(boolean postSchoolPromote) {
+	public void setPostSchoolPromote(byte postSchoolPromote) {
 		this.postSchoolPromote = postSchoolPromote;
 	}
 	
@@ -224,7 +221,7 @@ public class Post {
 	 * 
 	 * @return
 	 */
-	public boolean isPostNationalPromote() {
+	public byte isPostNationalPromote() {
 		return postNationalPromote;
 	}
 	
@@ -232,7 +229,7 @@ public class Post {
 	 * 
 	 * @param postNationalPromote
 	 */
-	public void setPostNationalPromote(boolean postNationalPromote) {
+	public void setPostNationalPromote(byte postNationalPromote) {
 		this.postNationalPromote = postNationalPromote;
 	}
 	
@@ -263,7 +260,7 @@ public class Post {
 		
 		Post other = (Post)o;
 		
-		if(this.getProfileId() != other.getProfileId()) return false;
+		if(this.getProfile().getProfileId() != other.getProfile().getProfileId()) return false;
 		
 		return true;
 	}

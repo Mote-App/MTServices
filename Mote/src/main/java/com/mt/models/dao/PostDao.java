@@ -37,7 +37,7 @@ public class PostDao {
 	public List<Long> getUserPosts(List<Long> profileIds) {
 		log.info("Get the posts for list of user's [" + profileIds + "] friends sorted by post date in descending order.");
 		
-	    return _entityManager.createQuery("SELECT DISTINCT P.profileId FROM Post as P WHERE P.profileId IN :profileIds ORDER BY postDate DESC")
+	    return _entityManager.createQuery("SELECT DISTINCT P.profile.profileId FROM Post as P WHERE P.profile.profileId IN :profileIds ORDER BY P.postDate DESC")
 	    		.setParameter("profileIds", profileIds)
 	    		.getResultList();
 	}
@@ -51,7 +51,7 @@ public class PostDao {
 	public List<Post> getMostRecentPost(long profileId) {
 		log.info("Get most recent post for user [profileId]: " + profileId);
 		
-		return _entityManager.createQuery("SELECT P FROM Post as P WHERE P.profileId = :profileId ORDER BY postDate DESC")
+		return _entityManager.createQuery("SELECT P FROM Post as P WHERE P.profile.profileId = :profileId ORDER BY P.postDate DESC")
 				.setParameter("profileId", profileId)
 				.setMaxResults(2)
 				.getResultList();
@@ -65,7 +65,7 @@ public class PostDao {
 	public Post getMostPopularPost(long profileId) {
 		log.info("Get most popular post for user [profileId]: " + profileId);
 		
-		return (Post)_entityManager.createQuery("SELECT P FROM Post as P WHERE P.profileId = :profileId ORDER BY likes DESC")
+		return (Post)_entityManager.createQuery("SELECT P FROM Post as P WHERE P.profile.profileId = :profileId ORDER BY P.likes DESC")
 				.setParameter("profileId", profileId)
 				.setMaxResults(1)
 				.getSingleResult();
@@ -79,7 +79,7 @@ public class PostDao {
 	public List<Post> getUserSchoolPosts(List<Long> profileIds, Long collegeId) {
 		log.info("Get the list of school post for user [" + profileIds + "] from college [" + collegeId + "] and its friends sorted by post date in descending order");
 		
-	    return _entityManager.createQuery("SELECT P FROM Post as P JOIN Profile as U ON P.profileId = U.profileId WHERE P.profileId IN :profileIds and U.profileCollege.collegeId = :collegeId and P.postSchoolPromote=true ORDER BY postDate DESC")
+	    return _entityManager.createQuery("SELECT P FROM Post P WHERE P.profile.profileId IN :profileIds and P.profile.profileCollege.collegeId = :collegeId and P.postSchoolPromote = 1 ORDER BY P.postDate DESC")
 	    		.setParameter("profileIds", profileIds)
 	    		.setParameter("collegeId", collegeId)
 	    		.getResultList();
@@ -93,7 +93,7 @@ public class PostDao {
 	public List<Post> getUserNationalPosts(List<Long> profileIds, Long collegeId) {
 		log.info("Get the list of national post for user [" + profileIds + "] from college [" + collegeId + "] and its friends sorted by post date in descending order");
 		
-	    return _entityManager.createQuery("SELECT P FROM Post as P JOIN Profile as U ON P.profileId = U.profileId WHERE P.profileId IN :profileIds and U.profileCollege.collegeId = :collegeId and P.postNationalPromote=true ORDER BY postDate DESC")
+	    return _entityManager.createQuery("SELECT P FROM Post P WHERE P.profile.profileId IN :profileIds and P.profile.profileCollege.collegeId = :collegeId and P.postNationalPromote=1 ORDER BY P.postDate DESC")
 	    		.setParameter("profileIds", profileIds)
 	    		.setParameter("collegeId", collegeId)
 	    		.getResultList();
@@ -123,7 +123,7 @@ public class PostDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Post> getFriendFeedPosts() {
-		return _entityManager.createQuery("SELECT P FROM Post as P WHERE P.postSchoolPromote = false AND P.postNationalPromote = false ORDER BY P.postDate DESC")
+		return _entityManager.createQuery("SELECT P FROM Post as P WHERE P.postSchoolPromote = 0 AND P.postNationalPromote = 0 ORDER BY P.postDate DESC")
 				.getResultList();
 	}
 	
@@ -137,7 +137,7 @@ public class PostDao {
 		//Ans. See the method promotePostToSchoolFeed, which is called after algorithm calculation
 		log.info("Get Ns - the number of 'post' in School Feed.");
 		
-		return (Long)_entityManager.createQuery("SELECT COUNT(P.postSchoolPromote) AS Ns FROM Post as P WHERE P.postSchoolPromote = true")
+		return (Long)_entityManager.createQuery("SELECT COUNT(P.postSchoolPromote) AS Ns FROM Post as P WHERE P.postSchoolPromote = 1")
 				.getSingleResult();
 	}
 	
@@ -147,7 +147,7 @@ public class PostDao {
 	 * @return
 	 */
 	public int promotePostToSchoolFeed(long postId) {
-		return _entityManager.createQuery("UPDATE Post SET P.postSchoolPromote = true WHERE P.postId = :postId")
+		return _entityManager.createQuery("UPDATE Post SET P.postSchoolPromote = 1 WHERE P.postId = :postId")
 				.setParameter("postId", postId)
 				.executeUpdate();
 	}
@@ -158,7 +158,7 @@ public class PostDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Post> getSchoolFeedPosts() {
-		return _entityManager.createQuery("SELECT P FROM Post as P WHERE P.postSchoolPromote = true AND P.postNationalPromote = false ORDER BY P.postDate DESC")
+		return _entityManager.createQuery("SELECT P FROM Post as P WHERE P.postSchoolPromote = 1 AND P.postNationalPromote = 0 ORDER BY P.postDate DESC")
 				.getResultList();
 	}
 	
@@ -171,7 +171,7 @@ public class PostDao {
 	public Long getCl(long collegeId) {
 		log.info("Get Cl - the number of 'likes' per post from that school [collegeId]: " + collegeId);
 		
-		return (Long)_entityManager.createQuery("SELECT SUM(P.likes) AS Cl FROM Post as P JOIN Profile as U ON P.profileId = U.profileId WHERE U.profileCollege.collegeId = :collegeId")
+		return (Long)_entityManager.createQuery("SELECT SUM(P.likes) AS Cl FROM Post as P WHERE P.profile.profileCollege.collegeId = :collegeId")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();
 	}
@@ -185,7 +185,7 @@ public class PostDao {
 	public Long getClIdealAvg(long collegeId) {
 		log.info("Get ClIdealAvg - the average number of 'likes' per post from this collegeId: " + collegeId);
 		
-		return (Long)_entityManager.createQuery("SELECT SUM(P.likes) AS Cl FROM Post as P JOIN Profile as U ON P.profileId = U.profileId")
+		return (Long)_entityManager.createQuery("SELECT SUM(P.likes) AS Cl FROM Post as P")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();
 	}
@@ -199,7 +199,7 @@ public class PostDao {
 	public Long getCpn(long collegeId) {
 		log.info("Get Cpn - the number of 'post' from that school.");
 		
-		return (Long)_entityManager.createQuery("SELECT COUNT(P.postId) AS Cpn FROM Post as P JOIN Profile as U ON P.profileId = U.profileId WHERE U.profileCollege = :collegeId")
+		return (Long)_entityManager.createQuery("SELECT COUNT(P.postId) AS Cpn FROM Post as P WHERE P.profile.profileCollege.collegeId = :collegeId")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();
 	}
@@ -210,7 +210,7 @@ public class PostDao {
 	 * @return
 	 */
 	public int promotePostToNationalFeed(long postId) {
-		return _entityManager.createQuery("UPDATE Post as P SET P.postNationalPromote = true WHERE P.postId = :postId")
+		return _entityManager.createQuery("UPDATE Post as P SET P.postNationalPromote = 1 WHERE P.postId = :postId")
 				.setParameter("postId", postId)
 				.executeUpdate();
 	}

@@ -246,7 +246,7 @@ public class FeedController {
 		
 		Long likedPostId = null;
 		
-		likedPostId = _postUserLikeRepository.findPostLikeForLevel(source.getProfileId(), source.getPostId(), postType);			
+		likedPostId = _postUserLikeRepository.findPostLikeForLevel(source.getProfile().getProfileId(), source.getPostId(), postType);			
 
 		if(likedPostId != null && likedPostId > 0){
 			postDto.setLikeDone(true);
@@ -291,7 +291,7 @@ public class FeedController {
 	 */
 	@RequestMapping(value="/school_feeds", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public List<SchoolFeedDto> getSchoolFeeds(long collegeId, long profileId) {
+	public List<SchoolFeedDto> getSchoolFeeds(Long collegeId, Long profileId) {
 		
 		List<SchoolFeedDto> lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
 		
@@ -304,7 +304,7 @@ public class FeedController {
 					
 		for(int i = 0; i < posts.size(); i++) {
 			
-			User user = _userDao.getUser(posts.get(i).getProfileId());
+			User user = _userDao.getUser(posts.get(i).getProfile().getProfileId());
 			
 			SchoolFeedDto dto = new SchoolFeedDto();
 			
@@ -344,7 +344,7 @@ public class FeedController {
 	 */
 	@RequestMapping(value="/school_feed_filter", method = RequestMethod.POST, produces="application/json")
 	@ResponseBody
-	public List<SchoolFeedDto> schoolFeedFilter(@RequestBody FilterDto filter, long profileId ) {
+	public List<SchoolFeedDto> schoolFeedFilter(@RequestBody FilterDto filter, Long profileId ) {
 		
 		List<SchoolFeedDto> lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
 		
@@ -355,7 +355,7 @@ public class FeedController {
 			
 			for(int i = 0; i < feeds.size(); i++) {
 			
-				User user = _userDao.getUser(feeds.get(i).getPost().getProfileId());
+				User user = _userDao.getUser(feeds.get(i).getPost().getProfile().getProfileId());
 				
 				SchoolFeedDto dto = new SchoolFeedDto();
 				
@@ -397,7 +397,7 @@ public class FeedController {
 			
 			for(int i = 0; i < feeds.size(); i++) {
 			
-				User user = _userDao.getUser(feeds.get(i).getPost().getProfileId());
+				User user = _userDao.getUser(feeds.get(i).getPost().getProfile().getProfileId());
 				
 				SchoolFeedDto dto = new SchoolFeedDto();
 				
@@ -452,7 +452,7 @@ public class FeedController {
 			
 			NationalFeedDto dto = new NationalFeedDto();
 			
-			User user = _userDao.getUser(posts.get(i).getProfileId());
+			User user = _userDao.getUser(posts.get(i).getProfile().getProfileId());
 			
 			dto.setUserId(user.getProfileId());
 			//dto.setUserType(feeds.get(i).getUser().getIsAlumni());

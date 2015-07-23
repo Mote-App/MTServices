@@ -125,7 +125,7 @@ public class SSAJob {
 		long V = schoolPost.getViews();
 		long L = schoolPost.getLikes();
 		
-		User user = _userDao.getById(schoolPost.getProfileId());		
+		User user = _userDao.getById(schoolPost.getProfile().getProfileId());		
 		long collegeId = user.getProfileCollege().getCollegeId();
 		
 		long postId = schoolPost.getPostId();

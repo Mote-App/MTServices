@@ -13,11 +13,12 @@ public class MtException extends Exception {
 	private String message;
 	private String exception;
 	
+	
 	/**
 	 * 
 	 */
-	public MtException() {
-		// do nothing
+	public MtException(String message, Exception e) {
+		super(message, e);
 	}
 	
 	/**

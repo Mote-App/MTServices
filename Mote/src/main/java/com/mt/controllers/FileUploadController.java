@@ -158,8 +158,8 @@ public class FileUploadController {
 				
 				return "You successfully uploaded " + fileName;
 			} catch(Exception e) {
-				e.printStackTrace();
-				throw new MtException("Failed to upload post image", e.getMessage() + e.getCause());
+				//e.printStackTrace();
+				throw new MtException("Failed to upload post image", e);
 			}
 		} else {
 			throw new MtException("You failed to upload " + fileName + " because the file was empty.","User Defined message");

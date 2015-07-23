@@ -97,6 +97,7 @@ public class SSAJob {
 		}
 		
 		log.info("Completed Social Stairway Algorithm : " + new Date());
+		log.info("##############################################################################");
 	}
 	
 	/**

@@ -20,9 +20,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "profile")
 public class User {
-	// ==============
-	// PRIVATE FIELDS
-	// ==============
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="profile_id")
@@ -53,10 +50,6 @@ public class User {
 	@OneToOne
 	@JoinColumn(name="locale_locale_id")
 	private Locale locale;
-	
-	// ==============
-	// PUBLIC METHODS
-	// ==============
 	
 	/**
 	 * 
@@ -213,5 +206,25 @@ public class User {
 	 */
 	public void setLocale(Locale locale) {
 		this.locale = locale;
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append("\n profile_id: " + this.profileId);
+		sb.append("\n profile_first_name: " + this.profileFirstName);
+		sb.append("\n profile_last_name: " + this.profileLastName);
+		sb.append("\n profile_user_name: " + this.profileUserName);
+		sb.append("\n profile_password: " + this.profilePassword);
+		sb.append("\n profile_email: " + this.profileEmail);
+		sb.append("\n profile_picture_url: " + this.profilePictureUrl);
+		sb.append("\n profile_college_id: " + this.profileCollege);
+		sb.append("\n locale_locale_id: " + this.locale);
+		
+		return sb.toString();
 	}
 }

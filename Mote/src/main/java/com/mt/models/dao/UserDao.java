@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.mt.models.User;
@@ -24,17 +26,11 @@ import com.mt.models.User;
 @Repository
 @Transactional
 public class UserDao {
-	// ==============
-	// PRIVATE FIELDS
-	// ==============
-	
 	// An EntityManager will be automatically injected from entityManagerFactory setup on DatabaseConfig class.
 	@PersistenceContext
 	private EntityManager _entityManager;
 	
-	// ==============
-	// PUBLIC METHODS
-	// ==============
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	/**
 	 * Method create
@@ -42,6 +38,9 @@ public class UserDao {
 	 * Save the user in the database.
 	 */
 	public User create(User user) {
+		log.info("Please create or persist the following user:");
+		log.info(user.toString());
+		
 		_entityManager.persist(user);
 		
 		return user;
@@ -53,9 +52,13 @@ public class UserDao {
 	 * @return
 	 */
 	public User getUserbyName(String userName) {
+		log.info("Get user by profile username: " + userName);
+		
 		User user = (User)_entityManager.createQuery("SELECT P FROM User P where P.profileUserName = :userName")
 				.setParameter("userName", userName)
 				.getSingleResult();
+		
+		log.info(user.toString());
 		
 		return user;
 	}
@@ -66,9 +69,13 @@ public class UserDao {
 	 * @return
 	 */
 	public List<User> getUsersbySchool(long collegeId) {
+		log.info("Get list of users by college [collegeId]: " + collegeId);
+		
 		List<User> users = _entityManager.createQuery("SELECT P FROM User P where P.profileCollege.collegeId = :collegeId")
 				.setParameter("collegeId", collegeId)
 				.getResultList();
+		
+		log.info("List of Users: " + users);
 		
 		return users;
 	}
@@ -155,6 +162,8 @@ public class UserDao {
 	 * @return
 	 */
 	public Long getCr(long collegeId) {
+		log.info("Get Cr - the number of 'people' registered from that school [collegeId]: " + collegeId);
+		
 		return (Long)_entityManager.createQuery("SELECT COUNT(U.profileId) AS Cr FROM Profile as U WHERE U.profile_college_id = :collegeId")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();
@@ -199,6 +208,8 @@ public class UserDao {
 	 * @return
 	 */
 	public Long getCrIdealAvg() {
+		log.info("Get CrIdealAvg - the average number of 'people' registered by the total number of register schools.");
+		
 		return (Long)_entityManager.createQuery("declare cursor c_average "
 				+ "SELECT C.collegeId College, COUNT(U.profileId) ProfileTotal FROM college C JOIN profile U ON C.collegeId = U.profileCollegeId;"
 				+ ""

@@ -49,7 +49,7 @@ public class UserController {
 	private CollegeDao _collegeDao;
 	
 	@Autowired
-	private UserFriendsDao _userFriendsDao;
+	UserFriendsDao _userFriendsDao;
 	
 	@Autowired
 	UserRepository _userRepository;
@@ -139,7 +139,9 @@ public class UserController {
 	@RequestMapping(value="users/profile", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<UserDto> getUsersProfile(Long profileId) {
+
 		List<User> profiles = _userFriendsDao.getUsersProfile(profileId);
+		
 		List<UserDto> profilesDto = new ArrayList<UserDto>();
 		
 		for(int i = 0; i < profiles.size(); i ++) {

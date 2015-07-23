@@ -1,7 +1,10 @@
 package com.mt.algorithm.ssa;
 
+import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -50,6 +53,8 @@ public class SSAJob {
 	//@Autowired
 	private SSA ssa;
 	
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	public void initiate() {
 		//SSAParams ssaParams = _ssaParamsDao.getSSAParams(1);
 		SSAParams ssaParams = new SSAParams();
@@ -90,6 +95,8 @@ public class SSAJob {
 			Post schoolPost = schoolPosts.get(i);
 			examineSchoolFeedPost(Ns, schoolPost);
 		}
+		
+		log.info("Completed Social Stairway Algorithm : " + new Date());
 	}
 	
 	/**

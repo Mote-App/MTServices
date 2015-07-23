@@ -87,4 +87,18 @@ public class College {
 	public void setCollegeName(String collegeName) {
 		this.collegeName = collegeName;
 	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append("college_id: " + this.collegeId);
+		sb.append(", college_name: " + this.collegeName);
+		sb.append(", college_img_path: " + this.collegeImgPath);
+		
+		return sb.toString();
+	}
 }

@@ -35,10 +35,8 @@ public class SSAScheduledTask {
 	 */
 	@Scheduled(fixedRate=300000)
 	public synchronized void executeSSATask() {
-		log.info("Starting Algorithm : " + new Date());
+		log.info("Starting Social Stairway Algorithm : " + new Date());
 		
 		ssaJob.initiate();
-		
-		log.info("Completed Algorithm : " + new Date());
 	}
 }

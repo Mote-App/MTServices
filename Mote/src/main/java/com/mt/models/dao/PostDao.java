@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.mt.models.Post;
@@ -23,6 +25,8 @@ public class PostDao {
 	@PersistenceContext
 	private EntityManager _entityManager;
 	
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	/**
 	 * Get the posts for list of user's friends sorted by post date in descending order.
 	 * This will arrange the user list in the order of recent posting and is helpful to 
@@ -31,6 +35,8 @@ public class PostDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Long> getUserPosts(List<Long> profileIds) {
+		log.info("Get the posts for list of user's [" + profileIds + "] friends sorted by post date in descending order.");
+		
 	    return _entityManager.createQuery("SELECT DISTINCT P.profileId FROM Post as P WHERE P.profileId IN :profileIds ORDER BY postDate DESC")
 	    		.setParameter("profileIds", profileIds)
 	    		.getResultList();
@@ -43,6 +49,8 @@ public class PostDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Post> getMostRecentPost(long profileId) {
+		log.info("Get most recent post for user [profileId]: " + profileId);
+		
 		return _entityManager.createQuery("SELECT P FROM Post as P WHERE P.profileId = :profileId ORDER BY postDate DESC")
 				.setParameter("profileId", profileId)
 				.setMaxResults(2)
@@ -55,6 +63,8 @@ public class PostDao {
 	 * @return
 	 */
 	public Post getMostPopularPost(long profileId) {
+		log.info("Get most popular post for user [profileId]: " + profileId);
+		
 		return (Post)_entityManager.createQuery("SELECT P FROM Post as P WHERE P.profileId = :profileId ORDER BY likes DESC")
 				.setParameter("profileId", profileId)
 				.setMaxResults(1)
@@ -62,11 +72,13 @@ public class PostDao {
 	}
 	
 	/**
-	 * Get the list of post for user and its friends sorted by post date in descending order.
+	 * Get the list of school post for user and its friends sorted by post date in descending order.
 	 * Here Post entity is used to filter school post based on field postSchoolPromote.
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Post> getUserSchoolPosts(List<Long> profileIds, Long collegeId) {
+		log.info("Get the list of school post for user [" + profileIds + "] from college [" + collegeId + "] and its friends sorted by post date in descending order");
+		
 	    return _entityManager.createQuery("SELECT P FROM Post as P JOIN Profile as U ON P.profileId = U.profileId WHERE P.profileId IN :profileIds and U.profileCollege.collegeId = :collegeId and P.postSchoolPromote=true ORDER BY postDate DESC")
 	    		.setParameter("profileIds", profileIds)
 	    		.setParameter("collegeId", collegeId)
@@ -74,11 +86,13 @@ public class PostDao {
 	}
 	
 	/**
-	 * Get the list of post for user and its friends sorted by post date in descending order.
+	 * Get the list of national post for user and its friends sorted by post date in descending order.
 	 * Here Post entity is used to filter school post based on field postSchoolPromote.
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Post> getUserNationalPosts(List<Long> profileIds, Long collegeId) {
+		log.info("Get the list of national post for user [" + profileIds + "] from college [" + collegeId + "] and its friends sorted by post date in descending order");
+		
 	    return _entityManager.createQuery("SELECT P FROM Post as P JOIN Profile as U ON P.profileId = U.profileId WHERE P.profileId IN :profileIds and U.profileCollege.collegeId = :collegeId and P.postNationalPromote=true ORDER BY postDate DESC")
 	    		.setParameter("profileIds", profileIds)
 	    		.setParameter("collegeId", collegeId)
@@ -91,6 +105,8 @@ public class PostDao {
 	 * @return
 	 */
 	public Post getPost(long postId) {
+		log.info("Get post for postId: " + postId);
+		
 		return (Post)_entityManager.createQuery("SELECT P FROM Post as P WHERE P.postId = :postId")
 				.setParameter("postId", postId)
 				.setMaxResults(1)
@@ -119,6 +135,8 @@ public class PostDao {
 	public Long getNs() {
 		//Q. Which logic updates the school_promote? So that we can calculate Ns.
 		//Ans. See the method promotePostToSchoolFeed, which is called after algorithm calculation
+		log.info("Get Ns - the number of 'post' in School Feed.");
+		
 		return (Long)_entityManager.createQuery("SELECT COUNT(P.postSchoolPromote) AS Ns FROM Post as P WHERE P.postSchoolPromote = true")
 				.getSingleResult();
 	}
@@ -151,6 +169,8 @@ public class PostDao {
 	 * @return
 	 */
 	public Long getCl(long collegeId) {
+		log.info("Get Cl - the number of 'likes' per post from that school [collegeId]: " + collegeId);
+		
 		return (Long)_entityManager.createQuery("SELECT SUM(P.likes) AS Cl FROM Post as P JOIN Profile as U ON P.profileId = U.profileId WHERE U.profileCollege.collegeId = :collegeId")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();
@@ -163,6 +183,8 @@ public class PostDao {
 	 * @return
 	 */
 	public Long getClIdealAvg(long collegeId) {
+		log.info("Get ClIdealAvg - the average number of 'likes' per post from this collegeId: " + collegeId);
+		
 		return (Long)_entityManager.createQuery("SELECT SUM(P.likes) AS Cl FROM Post as P JOIN Profile as U ON P.profileId = U.profileId")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();
@@ -175,6 +197,8 @@ public class PostDao {
 	 * @return
 	 */
 	public Long getCpn(long collegeId) {
+		log.info("Get Cpn - the number of 'post' from that school.");
+		
 		return (Long)_entityManager.createQuery("SELECT COUNT(P.postId) AS Cpn FROM Post as P JOIN Profile as U ON P.profileId = U.profileId WHERE U.profileCollege = :collegeId")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();

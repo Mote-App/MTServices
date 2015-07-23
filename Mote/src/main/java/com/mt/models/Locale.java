@@ -82,5 +82,19 @@ public class Locale {
 	 */
 	public void setLanguage(Language language) {
 		this.language = language;
-	}	
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append("locale_id: " + this.localeId);
+		sb.append(", country_code: " + this.country);
+		sb.append(", language_code: " + this.language);
+		
+		return sb.toString();
+	}
 }

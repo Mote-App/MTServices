@@ -75,4 +75,9 @@ public class LikeDto {
 	public void setLevel(String level) {
 		this.level = level;
 	}	
+	
+	public String toString(){
+		
+		return " profileId : " + profileId + ",  postId : " + postId + ",  likeCount: " + likeCount + ",  level: " + level;
+	}
 }

@@ -8,6 +8,8 @@ import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Hours;
 import org.joda.time.Minutes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,6 +49,8 @@ import com.mt.models.repository.PostUserViewRepository;
  */
 @Controller
 public class FeedController {
+	
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private PostDao _postDao;
@@ -198,7 +202,7 @@ public class FeedController {
 		postDto.setPostId(source.getPostId());
 		postDto.setPostImg(source.getPostObjectPath());
 		postDto.setCaption(source.getPostCaption());
-		postDto.setLikes(source.getLikes());
+		//postDto.setLikes(source.getLikes());
 		postDto.setProgressInd(35);
 		
 		/*
@@ -253,6 +257,10 @@ public class FeedController {
 		}else{
 			postDto.setLikeDone(false);
 		}
+		
+		//Update the count of likes for post according to post type.
+		int likesCount = _postUserLikeRepository.countPostLikeForLevel(source.getPostId(), postType);		
+		postDto.setLikes(likesCount);
 	}
 	
 	/**
@@ -492,6 +500,8 @@ public class FeedController {
 		
 		Long likedPostId = null;
 		
+		log.info("Service Likes, parameters : " + likeDto.toString());
+		
 		likedPostId = _postUserLikeRepository.findPostLikeForLevel(likeDto.getProfileId(), likeDto.getPostId(), likeDto.getLevel());
 		
 		if( likedPostId != null && likedPostId > 0){
@@ -500,8 +510,12 @@ public class FeedController {
 			int likeCount = _postUserLikeRepository.countPostLikeForLevel(likeDto.getPostId(), likeDto.getLevel());
 			likeDto.setLikeCount(likeCount);
 			
+			log.info("User already liked the post");
+			
 		}else{
 			//User just liked the post so save and return the new total like count based on level
+			
+			log.info("User first time liked the post, so saving ");
 			
 			PostProfileLike postUser = new PostProfileLike();
 			postUser.setPostId(likeDto.getPostId());
@@ -527,6 +541,8 @@ public class FeedController {
 	@ResponseBody
 	public void updateView(@RequestBody ViewDto viewDto) {
 
+		log.info("Service views, parameters : " + viewDto.toString());
+		
 		PostProfileView postUser = new PostProfileView();
 		postUser.setPostId(viewDto.getPostId());
 		postUser.setProfileId(viewDto.getProfileId());

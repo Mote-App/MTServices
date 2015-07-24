@@ -127,6 +127,7 @@ ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `motedb`.`post`
+-- TODO : remove post_likes, post_views, likes and views from this table 
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `motedb`.`post` ;
 

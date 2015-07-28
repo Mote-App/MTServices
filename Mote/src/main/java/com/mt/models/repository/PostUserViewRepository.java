@@ -21,7 +21,7 @@ public interface PostUserViewRepository extends CrudRepository<PostProfileView, 
 	 * @return
 	 */
 	@Query("select u.postId from PostProfileView u where u.profileId = ? and u.postId = ? and level = ? ")
-	List<Long> findPostViewForLevel(long profileId, long postId, String level);
+	Long findPostViewForLevel(long profileId, long postId, String level);
 	
 	@Query("select count(u.postId) from PostProfileView u where u.postId = ? and level = ? ")
 	int countPostViewForLevel(long postId, String level);

@@ -20,6 +20,7 @@ public class PostDto {
 	List<Long> 	   tags;
 	//List<String> customTags;
 	boolean		   likeDone = false;
+	boolean		   viewDone = false;
 	
 	/**
 	 * 
@@ -178,5 +179,15 @@ public class PostDto {
 	 */
 	public void setLikeDone(boolean likeDone) {
 		this.likeDone = likeDone;
+	}
+
+	public boolean isViewDone() {
+		return viewDone;
+	}
+
+	public void setViewDone(boolean viewDone) {
+		this.viewDone = viewDone;
 	}	
+	
+	
 }

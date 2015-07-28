@@ -211,6 +211,13 @@ public class FeedController {
 		 */
 		isApplicableForLiking(postDto, source, postType);
 		
+		/*
+		 * Set the flag to check if user has already 
+		 * viewed the post. So that he is not allowed to make a second attempt
+		 */
+		isApplicableForViewUpdate(postDto, source, postType);
+		
+		
 		// Calculate the elapsed time in Hours, Minutes or Days from posting date to current date
 		postDto.setPostingDate(calculateElapsedTime(source.getPostDate()));
 		
@@ -261,6 +268,29 @@ public class FeedController {
 		//Update the count of likes for post according to post type.
 		int likesCount = _postUserLikeRepository.countPostLikeForLevel(source.getPostId(), postType);		
 		postDto.setLikes(likesCount);
+	}
+	
+	
+	/**
+	 * This logic to avoid multiple views.
+	 * @param post
+	 * @param likedPostIds
+	 */
+	private void isApplicableForViewUpdate(PostDto postDto, Post source, String postType) {
+		
+		Long viewPostId  = null;
+		
+		viewPostId  = _postUserViewRepository.findPostViewForLevel(source.getProfile().getProfileId(), source.getPostId(), postType);			
+
+		if(viewPostId  != null && viewPostId  > 0){
+			postDto.setViewDone(true);
+		}else{
+			postDto.setViewDone(false);
+		}
+		
+		//Update the count of likes for post according to post type.
+		//int likesCount = _postUserViewRepository.countPostLikeForLevel(source.getPostId(), postType);		
+		//postDto.setLikes(likesCount);
 	}
 	
 	/**

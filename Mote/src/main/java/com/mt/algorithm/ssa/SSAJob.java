@@ -14,6 +14,8 @@ import com.mt.models.User;
 import com.mt.models.dao.PostDao;
 import com.mt.models.dao.SSAParamsDao;
 import com.mt.models.dao.UserDao;
+import com.mt.models.repository.PostUserLikeRepository;
+import com.mt.models.repository.PostUserViewRepository;
 
 
 /**
@@ -49,6 +51,13 @@ public class SSAJob {
 	
 	@Autowired
 	private SSAParamsDao _ssaParamsDao;
+	
+	@Autowired
+	private PostUserViewRepository _postUserViewRepository;
+	
+	@Autowired
+	private PostUserLikeRepository _postUserLikeRepository;
+	
 	
 	//@Autowired
 	private SSA ssa;
@@ -89,12 +98,20 @@ public class SSAJob {
 		 * First I'll get the algorithm working and then I'll improve performance/memory footprint.
 		 */
 		
+		
 		for(int i = 0; i < friendPosts.size(); i++) {
 			Post friendPost = friendPosts.get(i);
-			examineFriendFeedPost(friendPost.getViews(), friendPost.getLikes(), Ns, friendPost.getPostId());
+			
+			int views = _postUserViewRepository.countPostViewForLevel(friendPost.getPostId(), "F");
+			
+			int likes = _postUserLikeRepository.countPostLikeForLevel(friendPost.getPostId(), "F");
+			
+			examineFriendFeedPost(views, likes, Ns, friendPost.getPostId());
 		}
 		
 		List<Post> schoolPosts = _postDao.getSchoolFeedPosts();
+		
+		log.info("Total School Feed Posts: " + schoolPosts.size());
 		
 		for(int i = 0; i < schoolPosts.size(); i++) {
 			Post schoolPost = schoolPosts.get(i);
@@ -135,8 +152,9 @@ public class SSAJob {
 	 */
 	public void examineSchoolFeedPost(long Ns, Post schoolPost) {
 		//TODO: Implement logic to calculate number of views on client (Javascript)
-		long V = schoolPost.getViews();
-		long L = schoolPost.getLikes();
+		
+		long V = _postUserViewRepository.countPostViewForLevel(schoolPost.getPostId(), "S");
+		long L = _postUserLikeRepository.countPostLikeForLevel(schoolPost.getPostId(), "S");
 		
 		log.info("Processing Post Id: " + schoolPost.getPostId());
 		log.info("Total Views : " + V);

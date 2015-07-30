@@ -70,6 +70,9 @@ public class SSAJob {
 		ssa = new SSA(ssaParams);
 		
 		long Ns = _postDao.getNs();
+		
+		log.info("Ns (the number of 'posts' in School Feed): " + Ns);
+		
 		List<Post> friendPosts = _postDao.getFriendFeedPosts();
 		
 		/*

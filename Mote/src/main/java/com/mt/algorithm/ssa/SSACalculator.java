@@ -1,5 +1,8 @@
 package com.mt.algorithm.ssa;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mt.models.SSAParams;
 
 /**
@@ -26,6 +29,8 @@ public class SSACalculator {
 	
 	// T1, T2, T3, and T4 are Tuning Coefficients.
 	private double T1, T2, T3, T4;
+	
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	/**
 	 * Constructs an SSACalculator instance.
@@ -72,6 +77,10 @@ public class SSACalculator {
 		
 		if(V != 0) {
 			Rf = (L / V) * Cf * this.calculateCns(Ns);
+			log.info("===============================================================");
+			log.info("Rf = (L / V) * Cf * this.calculateCns(Ns)");
+			log.info("Rf = (" + L + " / " + V + ") * " + Cf + "* Cns");
+			log.info("===============================================================");
 		}
 		
 		return Rf;
@@ -89,6 +98,8 @@ public class SSACalculator {
 		
 		if(Ns != 0) {
 			Cns = (NsIdeal / Ns) * T1;
+			log.info("Cns = (NsIdeal / Ns) * T1");
+			log.info("Cns = (" + NsIdeal + " / " + Ns + ") * " + T1);
 		}
 		
 		return Cns;
@@ -118,6 +129,10 @@ public class SSACalculator {
 		
 		if(V != 0) {
 			Rs = (L / V) * Cs * Cp * Cnn;
+			log.info("===============================================================");
+			log.info("Rs = (L / V) * Cs * Cp * Cnn");
+			log.info("Rs = (" + L + " / " + V + ") * " + Cs + " * " + Cp + " * " + Cnn);
+			log.info("===============================================================");
 		}
 		
 		return Rs;
@@ -138,6 +153,8 @@ public class SSACalculator {
 		
 		if(CrIdealAvg != 0 && ClIdealAvg != 0) {
 			Cs = ((Cr / CrIdealAvg) * (Cl / ClIdealAvg)) * T2;
+			log.info("Cs = ((Cr / CrIdealAvg) * (Cl / ClIdealAvg)) * T2");
+			log.info("Cs = ((" + Cr + " / " + CrIdealAvg + ") * ( " + Cl + " / " + ClIdealAvg + " )) * " + T2);
 		}
 		
 		return Cs;
@@ -156,6 +173,8 @@ public class SSACalculator {
 		
 		if(Cpn != 0) {
 			Cp = (CpnAvg / Cpn) * T3;
+			log.info("Cp = (CpnAvg / Cpn) * T3");
+			log.info("Cp = (" + CpnAvg + " / " + Cpn + ") * " + T3);
 		}
 		
 		return Cp;
@@ -173,6 +192,8 @@ public class SSACalculator {
 		
 		if(Ns != 0) {
 			Cnn = (NnIdeal/Ns) * T4;
+			log.info("Cnn = (NnIdeal/Ns) * T4");
+			log.info("Cnn = (" + NnIdeal + "/" + Ns + ") * " + T4);
 		}
 		
 		return Cnn;

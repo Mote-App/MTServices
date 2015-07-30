@@ -1,5 +1,8 @@
 package com.mt.algorithm.ssa;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mt.models.SSAParams;
 
 /**
@@ -9,6 +12,8 @@ import com.mt.models.SSAParams;
  */
 public class SSA {
 	private SSACalculator ssaCalculator;
+	
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	public SSA(SSAParams ssaParams) {
 		ssaCalculator = new SSACalculator(ssaParams);
@@ -30,6 +35,8 @@ public class SSA {
 		double Kf = ssaCalculator.getKf();
 		
 		boolean isRfGreaterThanKf = false;
+		
+		log.info("Rf (" + Rf + ") > Kf (" + Kf + "), if yes promote post from friend to school feed");
 		
 		if(Rf > Kf) {
 			isRfGreaterThanKf = true;
@@ -64,6 +71,8 @@ public class SSA {
 		double Ks = ssaCalculator.getKs();
 		
 		boolean isRsGreaterThanKs = false;
+		
+		log.info("Rs (" + Rs + ") > Ks (" + Ks + "), if yes promote post from school to national feed");
 		
 		if(Rs > Ks) {
 			isRsGreaterThanKs = true;

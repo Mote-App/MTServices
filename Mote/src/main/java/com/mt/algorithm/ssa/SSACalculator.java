@@ -79,7 +79,8 @@ public class SSACalculator {
 			Rf = (L / V) * Cf * this.calculateCns(Ns);
 			log.info("===============================================================");
 			log.info("Rf = (L / V) * Cf * this.calculateCns(Ns)");
-			log.info("Rf = (" + L + " / " + V + ") * " + Cf + "* Cns");
+			log.info("Rf = (" + L + " / " + V + ") * " + Cf + " * Cns");
+			log.info("Rf = " + Rf);
 			log.info("===============================================================");
 		}
 		
@@ -100,6 +101,7 @@ public class SSACalculator {
 			Cns = (NsIdeal / Ns) * T1;
 			log.info("Cns = (NsIdeal / Ns) * T1");
 			log.info("Cns = (" + NsIdeal + " / " + Ns + ") * " + T1);
+			log.info("Cns =  " + Cns);
 		}
 		
 		return Cns;
@@ -132,6 +134,7 @@ public class SSACalculator {
 			log.info("===============================================================");
 			log.info("Rs = (L / V) * Cs * Cp * Cnn");
 			log.info("Rs = (" + L + " / " + V + ") * " + Cs + " * " + Cp + " * " + Cnn);
+			log.info("Rs =  " + Rs);
 			log.info("===============================================================");
 		}
 		
@@ -155,6 +158,7 @@ public class SSACalculator {
 			Cs = ((Cr / CrIdealAvg) * (Cl / ClIdealAvg)) * T2;
 			log.info("Cs = ((Cr / CrIdealAvg) * (Cl / ClIdealAvg)) * T2");
 			log.info("Cs = ((" + Cr + " / " + CrIdealAvg + ") * ( " + Cl + " / " + ClIdealAvg + " )) * " + T2);
+			log.info("Cs =  " + Cs);
 		}
 		
 		return Cs;
@@ -175,6 +179,7 @@ public class SSACalculator {
 			Cp = (CpnAvg / Cpn) * T3;
 			log.info("Cp = (CpnAvg / Cpn) * T3");
 			log.info("Cp = (" + CpnAvg + " / " + Cpn + ") * " + T3);
+			log.info("Cp =  " + Cp);
 		}
 		
 		return Cp;
@@ -194,6 +199,7 @@ public class SSACalculator {
 			Cnn = (NnIdeal/Ns) * T4;
 			log.info("Cnn = (NnIdeal/Ns) * T4");
 			log.info("Cnn = (" + NnIdeal + "/" + Ns + ") * " + T4);
+			log.info("Cnn =  " + Cnn);
 		}
 		
 		return Cnn;

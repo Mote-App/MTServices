@@ -75,6 +75,8 @@ public class SSAJob {
 		
 		List<Post> friendPosts = _postDao.getFriendFeedPosts();
 		
+		log.info("Total Friend Feed Posts: " + friendPosts.size());
+		
 		/*
 		 * Instead of using a List<Post> what other existing Java collections data structure I could use that would do
 		 * this process more efficiently for time complexity [performance] and space complexity [memory footprint].
@@ -113,8 +115,16 @@ public class SSAJob {
 	public void examineFriendFeedPost(long V, long L, long Ns, long postId) {
 		SSAPostRatio rfPostRatio = ssa.calculateRf(V, L, Ns);
 		
+		log.info("Processing Post Id: " + postId);
+		log.info("Total Views : " + V);
+		log.info("Total Likes : " + L);
+		
+		log.info("Is Rf > Kf : " + rfPostRatio.isGreaterThan());
+		
 		if(rfPostRatio.isGreaterThan()) {
 			_postDao.promotePostToSchoolFeed(postId);
+			
+			log.info("Promoting Post Id to School feed !!!");
 		}
 	}
 	
@@ -128,8 +138,14 @@ public class SSAJob {
 		long V = schoolPost.getViews();
 		long L = schoolPost.getLikes();
 		
+		log.info("Processing Post Id: " + schoolPost.getPostId());
+		log.info("Total Views : " + V);
+		log.info("Total Likes : " + L);
+		
 		User user = _userDao.getById(schoolPost.getProfile().getProfileId());		
 		long collegeId = user.getProfileCollege().getCollegeId();
+		
+		log.info("Processing for profile Id: " + user.getProfileId() + " for college Id : " + collegeId);
 		
 		long postId = schoolPost.getPostId();
 		long Cr = _userDao.getCr(collegeId);
@@ -141,8 +157,12 @@ public class SSAJob {
 		
 		SSAPostRatio rsPostRatio = ssa.calculateRs(V, L, Cr, CrIdealAvg, Cl, ClIdealAvg, Cpn, CpnAvg, Ns);
 		
+		log.info("Is Rs > Ks : " + rsPostRatio.isGreaterThan());
+		
 		if(rsPostRatio.isGreaterThan()) {
 			_postDao.promotePostToNationalFeed(postId);
+			
+			log.info("Promoting Post Id to National feed !!!");
 		}
 	}
 }

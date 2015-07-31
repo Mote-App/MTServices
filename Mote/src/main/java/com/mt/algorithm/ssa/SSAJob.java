@@ -14,6 +14,7 @@ import com.mt.models.User;
 import com.mt.models.dao.PostDao;
 import com.mt.models.dao.SSAParamsDao;
 import com.mt.models.dao.UserDao;
+import com.mt.models.repository.PostRepository;
 import com.mt.models.repository.PostUserLikeRepository;
 import com.mt.models.repository.PostUserViewRepository;
 
@@ -51,6 +52,9 @@ public class SSAJob {
 	
 	@Autowired
 	private SSAParamsDao _ssaParamsDao;
+	
+	@Autowired
+	private PostRepository _postRepository;
 	
 	@Autowired
 	private PostUserViewRepository _postUserViewRepository;
@@ -139,7 +143,11 @@ public class SSAJob {
 		log.info("Is Rf > Kf : " + rfPostRatio.isGreaterThan());
 		
 		if(rfPostRatio.isGreaterThan()) {
-			_postDao.promotePostToSchoolFeed(friendPost);
+			//_postDao.promotePostToSchoolFeed(friendPost);
+			
+			friendPost.setPostSchoolPromote((byte)1);
+			
+			_postRepository.save(friendPost);
 			
 			log.info("Promoting Post Id to School feed !!!");
 		}
@@ -177,7 +185,12 @@ public class SSAJob {
 		log.info("Is Rs > Ks : " + rsPostRatio.isGreaterThan());
 		
 		if(rsPostRatio.isGreaterThan()) {
-			_postDao.promotePostToNationalFeed(schoolPost);
+			
+			schoolPost.setPostNationalPromote((byte)1);
+			
+			//_postDao.promotePostToNationalFeed(schoolPost);
+			
+			_postRepository.save(schoolPost);
 			
 			log.info("Promoting Post Id to National feed !!!");
 		}

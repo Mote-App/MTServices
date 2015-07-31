@@ -106,7 +106,7 @@ public class SSAJob {
 			
 			int likes = _postUserLikeRepository.countPostLikeForLevel(friendPost.getPostId(), "F");
 			
-			examineFriendFeedPost(views, likes, Ns, friendPost.getPostId());
+			examineFriendFeedPost(friendPost, views, likes, Ns, friendPost.getPostId());
 		}
 		
 		List<Post> schoolPosts = _postDao.getSchoolFeedPosts();
@@ -129,7 +129,7 @@ public class SSAJob {
 	 * @param Ns a long value that represents the number of 'posts' in School Feed.
 	 * @param postId
 	 */
-	public void examineFriendFeedPost(long V, long L, long Ns, long postId) {
+	public void examineFriendFeedPost(Post friendPost, long V, long L, long Ns, long postId) {
 		SSAPostRatio rfPostRatio = ssa.calculateRf(V, L, Ns);
 		
 		log.info("Processing Post Id: " + postId);
@@ -139,7 +139,7 @@ public class SSAJob {
 		log.info("Is Rf > Kf : " + rfPostRatio.isGreaterThan());
 		
 		if(rfPostRatio.isGreaterThan()) {
-			_postDao.promotePostToSchoolFeed(postId);
+			_postDao.promotePostToSchoolFeed(friendPost);
 			
 			log.info("Promoting Post Id to School feed !!!");
 		}
@@ -165,7 +165,6 @@ public class SSAJob {
 		
 		log.info("Processing for profile Id: " + user.getProfileId() + " for college Id : " + collegeId);
 		
-		long postId = schoolPost.getPostId();
 		long Cr = _userDao.getCr(collegeId);
 		long Cl = _postDao.getCl(collegeId);
 		long Cpn = _postDao.getCpn(collegeId);
@@ -178,7 +177,7 @@ public class SSAJob {
 		log.info("Is Rs > Ks : " + rsPostRatio.isGreaterThan());
 		
 		if(rsPostRatio.isGreaterThan()) {
-			_postDao.promotePostToNationalFeed(postId);
+			_postDao.promotePostToNationalFeed(schoolPost);
 			
 			log.info("Promoting Post Id to National feed !!!");
 		}

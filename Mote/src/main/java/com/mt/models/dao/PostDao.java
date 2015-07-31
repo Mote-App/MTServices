@@ -146,12 +146,10 @@ public class PostDao {
 	 * @param postId
 	 * @return
 	 */
-	public int promotePostToSchoolFeed(long postId) {
-		log.info("postId: " + postId);
-		
-		return _entityManager.createQuery("UPDATE Post as P SET P.postSchoolPromote = 1 WHERE P.postId = :postId")
-				.setParameter("postId", postId)
-				.executeUpdate();
+	public void promotePostToSchoolFeed(Post friendPost) {
+		byte b = 1;
+		friendPost.setPostSchoolPromote(b);
+		_entityManager.persist(friendPost);
 	}
 	
 	/**
@@ -211,11 +209,9 @@ public class PostDao {
 	 * @param postId
 	 * @return
 	 */
-	public int promotePostToNationalFeed(long postId) {
-		log.info("postId: " + postId);
-		
-		return _entityManager.createQuery("UPDATE Post as P SET P.postNationalPromote = 1 WHERE P.postId = :postId")
-				.setParameter("postId", postId)
-				.executeUpdate();
+	public void promotePostToNationalFeed(Post schoolPost) {
+		byte b = 1;
+		schoolPost.setPostNationalPromote(b);
+		_entityManager.persist(schoolPost);
 	}
 }

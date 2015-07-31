@@ -48,12 +48,6 @@ public class Post {
 	@Column(name="post_caption")
 	private String postCaption;
 	
-	@Column(name="post_views")
-	private long views;
-	
-	@Column(name="post_likes")
-	private long likes;
-	
 	@Column(name="post_school_promote")
 	private byte postSchoolPromote;
 	
@@ -167,38 +161,6 @@ public class Post {
 	 */
 	public void setPostCaption(String postCaption) {
 		this.postCaption = postCaption;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public long getViews() {
-		return views;
-	}
-	
-	/**
-	 * 
-	 * @param views
-	 */
-	public void setViews(long views) {
-		this.views = views;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public long getLikes() {
-		return likes;
-	}
-	
-	/**
-	 * 
-	 * @param likes
-	 */
-	public void setLikes(long likes) {
-		this.likes = likes;
 	}
 	
 	/**

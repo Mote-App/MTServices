@@ -104,7 +104,6 @@ public class FileUploadController {
 				post.setPostTypeCode(newPostDto.getPostType());
 				post.getProfile().setProfileId(newPostDto.getUserId());
 				post.setPostCaption(newPostDto.getCaption());
-				post.setLikes(0);
 				post.setPostDate( Calendar.getInstance());
 				post.setPostObjectPath("dummy");
 				

@@ -164,7 +164,7 @@ public class UserDao {
 	public Long getCr(long collegeId) {
 		log.info("Get Cr - the number of 'people' registered from that school [collegeId]: " + collegeId);
 		
-		return (Long)_entityManager.createQuery("SELECT COUNT(U.profileId) AS Cr FROM Profile as U WHERE U.profile_college_id = :collegeId")
+		return (Long)_entityManager.createQuery("SELECT COUNT(U.profileId) AS Cr FROM User as U WHERE U.profileCollege.collegeId = :collegeId")
 				.setParameter("collegeId", collegeId)
 				.getSingleResult();
 	}
@@ -210,7 +210,7 @@ public class UserDao {
 	public Long getCrIdealAvg() {
 		log.info("Get CrIdealAvg - the average number of 'people' registered by the total number of register schools.");
 		
-		return (Long)_entityManager.createQuery("declare cursor c_average "
+		/*return (Long)_entityManager.createQuery("declare cursor c_average "
 				+ "SELECT C.collegeId College, COUNT(U.profileId) ProfileTotal FROM college C JOIN profile U ON C.collegeId = U.profileCollegeId;"
 				+ ""
 				+ "SchoolNumber Int;"
@@ -224,6 +224,24 @@ public class UserDao {
 				+ "Average = TotalStudetns / SchoolNumber;"
 				+ ""
 				+ "Return Average")
+				.getSingleResult();*/
+		
+		List<Long> collegeCnts = _entityManager.createQuery("SELECT DISTINCT U.profileCollege.collegeId FROM User U")
+						.getResultList();
+		
+		Long userCnt = (Long) _entityManager.createQuery("SELECT COUNT(U.profileId) FROM User U")
 				.getSingleResult();
+		
+		Long CrIdealAvg = 0L;
+		
+		if( collegeCnts.size() > 0 ){
+			CrIdealAvg = (Long)(userCnt/collegeCnts.size());
+		}else{
+			log.info("Cannot calculate CrIdealAvg because all mote colleges have zero student");
+		}
+		
+		
+		return CrIdealAvg;
+		
 	}
 }

@@ -1,3 +1,4 @@
 ./target/*
 .metadata/*
 /target/
+mt_log.*

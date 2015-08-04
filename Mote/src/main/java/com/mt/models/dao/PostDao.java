@@ -63,12 +63,16 @@ public class PostDao {
 	 * @return
 	 */
 	public Post getMostPopularPost(long profileId) {
-		log.info("Get most popular post for user [profileId]: " + profileId);
+		//log.info("Get most popular post for user [profileId]: " + profileId);
 		
-		return (Post)_entityManager.createQuery("SELECT P FROM Post as P WHERE P.profile.profileId = :profileId ORDER BY P.likes DESC")
+		Object [] objects = (Object []) _entityManager.createQuery("SELECT PL.postId , COUNT(*) as likeCnt FROM PostProfileLike PL WHERE PL.profileId = :profileId GROUP BY PL.postId ORDER BY likeCnt DESC")
 				.setParameter("profileId", profileId)
 				.setMaxResults(1)
 				.getSingleResult();
+		
+		Long postId = (Long)objects[0];
+		
+		return getPost(postId);
 	}
 	
 	/**
@@ -171,8 +175,13 @@ public class PostDao {
 	public Long getCl(long collegeId) {
 		log.info("Get Cl - the number of 'likes' per post from that school [collegeId]: " + collegeId);
 		
-		return (Long)_entityManager.createQuery("SELECT SUM(P.likes) AS Cl FROM Post as P WHERE P.profile.profileCollege.collegeId = :collegeId")
+		List<Long> profileIds = (List<Long>)_entityManager.createQuery("SELECT U.profileId from User U where U.profileCollege.collegeId = :collegeId")
 				.setParameter("collegeId", collegeId)
+				.getResultList();
+		
+		
+		return (Long)_entityManager.createQuery("SELECT count(*) as Cl FROM PostProfileLike PL WHERE PL.profileId in :profileIds")
+				.setParameter("profileIds", profileIds)
 				.getSingleResult();
 	}
 	

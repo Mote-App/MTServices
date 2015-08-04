@@ -137,8 +137,6 @@ CREATE TABLE IF NOT EXISTS `motedb`.`post` (
   `post_object_path` VARCHAR(250) NOT NULL,
   `post_date` DATETIME NOT NULL DEFAULT now(),
   `post_caption` VARCHAR(45) NULL,
-  `post_likes` INT NULL DEFAULT 0,
-  `post_views` INT NULL DEFAULT 0,
   `post_school_promote` TINYINT(1) NULL DEFAULT 0,
   `post_national_promote` TINYINT(1) NULL DEFAULT 0,
   `post_profile_id` INT NOT NULL,

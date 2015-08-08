@@ -97,12 +97,16 @@ public class SSACalculator {
 	public double calculateCns(long Ns) {
 		double Cns = 0.0;
 		
-		if(Ns != 0) {
+		//To avoid algorithm failure
+		if(Ns == 0) Ns = 1;
+		
+		
+		//if(Ns != 0) {
 			Cns = (NsIdeal / Ns) * T1;
 			log.info("Cns = (NsIdeal / Ns) * T1");
 			log.info("Cns = (" + NsIdeal + " / " + Ns + ") * " + T1);
 			log.info("Cns =  " + Cns);
-		}
+		//}
 		
 		return Cns;
 	}

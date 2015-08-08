@@ -569,7 +569,7 @@ public class FeedController {
 	 */
 	@RequestMapping(value="/views", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
-	public void updateView(@RequestBody ViewDto viewDto) {
+	public ViewDto updateView(@RequestBody ViewDto viewDto) {
 
 		log.info("Service views, parameters : " + viewDto.toString());
 		
@@ -580,5 +580,6 @@ public class FeedController {
 		
 		_postUserViewRepository.save(postUser);
 		
+		return viewDto;
 	}
 }

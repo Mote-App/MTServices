@@ -139,6 +139,7 @@ public class PostDao {
 	public Long getNs() {
 		//Q. Which logic updates the school_promote? So that we can calculate Ns.
 		//Ans. See the method promotePostToSchoolFeed, which is called after algorithm calculation
+		//The Ns will be always zero unless some post is promoted to school
 		log.info("Get Ns - the number of 'post' in School Feed.");
 		
 		return (Long)_entityManager.createQuery("SELECT COUNT(P.postSchoolPromote) AS Ns FROM Post as P WHERE P.postSchoolPromote = 1")

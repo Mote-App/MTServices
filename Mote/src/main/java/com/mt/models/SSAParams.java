@@ -34,12 +34,12 @@ public class SSAParams {
 	private double Cf;
 	
 	// Ideal Number of posts in School feed.
-	@Column(name="NsIdeal")
-	private long NsIdeal;
+	@Column(name="ns_Ideal")
+	private int NsIdeal;
 	
 	// Ideal Number of posts in National feed.
-	@Column(name="NnIdeal")
-	private long NnIdeal;
+	@Column(name="nn_Ideal")
+	private int NnIdeal;
 	
 	// T1 Tuning Coefficient.
 	@Column(name="T1")
@@ -116,28 +116,28 @@ public class SSAParams {
 	/**
 	 * @return the nsIdeal
 	 */
-	public long getNsIdeal() {
+	public int getNsIdeal() {
 		return NsIdeal;
 	}
 	
 	/**
 	 * @param nsIdeal the nsIdeal to set
 	 */
-	public void setNsIdeal(long nsIdeal) {
+	public void setNsIdeal(int nsIdeal) {
 		NsIdeal = nsIdeal;
 	}
 	
 	/**
 	 * @return the nnIdeal
 	 */
-	public long getNnIdeal() {
+	public int getNnIdeal() {
 		return NnIdeal;
 	}
 	
 	/**
 	 * @param nnIdeal the nnIdeal to set
 	 */
-	public void setNnIdeal(long nnIdeal) {
+	public void setNnIdeal(int nnIdeal) {
 		NnIdeal = nnIdeal;
 	}
 	

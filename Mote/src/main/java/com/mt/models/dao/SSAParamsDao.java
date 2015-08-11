@@ -17,7 +17,6 @@ import com.mt.models.SSAParams;
  *
  */
 @Repository
-@Transactional
 public class SSAParamsDao {
 	//An EntityManager will be automatically injected from entityManagerFactory setup on DatabaseConfig class.
 	@PersistenceContext
@@ -32,13 +31,12 @@ public class SSAParamsDao {
 	 * @param ssaParamsId
 	 * @return
 	 */
-	public SSAParams getSSAParams(long ssaParamsId) {
+	public SSAParams getSSAParams(Long ssaParamsId) {
+		
 		log.info("Get SSA Coefficient Parameters " + ssaParamsId);
 		
-		return (SSAParams)_entityManager.createQuery("SELECT S FROM SSAParams as S WHERE S.id = :ssaParamsId")
-		//return (SSAParams)_entityManager.createQuery("FROM SSAParams WHERE id = :ssaParamsId")
+		return (SSAParams)_entityManager.createQuery("SELECT S FROM SSAParams S WHERE S.id = :ssaParamsId")
 				.setParameter("ssaParamsId", ssaParamsId)
-				.setMaxResults(1)
 				.getSingleResult();
 	}
 }

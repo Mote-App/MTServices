@@ -49,10 +49,10 @@ public class Post {
 	private String postCaption;
 	
 	@Column(name="post_school_promote")
-	private byte postSchoolPromote;
+	private int postSchoolPromote;
 	
 	@Column(name="post_national_promote")
-	private byte postNationalPromote;
+	private int postNationalPromote;
 	
 	@OneToMany
 	@JoinColumn(name="post_post_id")
@@ -167,7 +167,7 @@ public class Post {
 	 * 
 	 * @return
 	 */
-	public byte isPostSchoolPromote() {
+	public int getPostSchoolPromote() {
 		return postSchoolPromote;
 	}
 	
@@ -175,7 +175,7 @@ public class Post {
 	 * 
 	 * @param postSchoolPromote
 	 */
-	public void setPostSchoolPromote(byte postSchoolPromote) {
+	public void setPostSchoolPromote(int postSchoolPromote) {
 		this.postSchoolPromote = postSchoolPromote;
 	}
 	
@@ -183,7 +183,7 @@ public class Post {
 	 * 
 	 * @return
 	 */
-	public byte isPostNationalPromote() {
+	public int getPostNationalPromote() {
 		return postNationalPromote;
 	}
 	
@@ -191,7 +191,7 @@ public class Post {
 	 * 
 	 * @param postNationalPromote
 	 */
-	public void setPostNationalPromote(byte postNationalPromote) {
+	public void setPostNationalPromote(int postNationalPromote) {
 		this.postNationalPromote = postNationalPromote;
 	}
 	

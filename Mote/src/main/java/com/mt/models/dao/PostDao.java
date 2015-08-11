@@ -6,11 +6,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mt.models.Post;
+import com.mt.models.repository.PostRepository;
 
 /**
  * The <code>PostDao</code> ...
@@ -19,11 +22,13 @@ import com.mt.models.Post;
  *
  */
 @Repository
-@Transactional
 public class PostDao {
 	//An EntityManager will be automatically injected from entityManagerFactory setup on DatabaseConfig class.
 	@PersistenceContext
 	private EntityManager _entityManager;
+	
+	@Autowired
+	SessionFactory sessionFactory;
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
@@ -148,17 +153,6 @@ public class PostDao {
 	
 	/**
 	 * 
-	 * @param postId
-	 * @return
-	 */
-	public void promotePostToSchoolFeed(Post friendPost) {
-		byte b = 1;
-		friendPost.setPostSchoolPromote(b);
-		_entityManager.persist(friendPost);
-	}
-	
-	/**
-	 * 
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -214,14 +208,9 @@ public class PostDao {
 				.getSingleResult();
 	}
 	
-	/**
-	 * 
-	 * @param postId
-	 * @return
-	 */
-	public void promotePostToNationalFeed(Post schoolPost) {
-		byte b = 1;
-		schoolPost.setPostNationalPromote(b);
-		_entityManager.persist(schoolPost);
+	@Transactional
+	public void updatePost(Post post){
+		sessionFactory.getCurrentSession().saveOrUpdate(post);		
 	}
+	
 }

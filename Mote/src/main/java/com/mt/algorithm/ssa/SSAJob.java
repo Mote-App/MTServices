@@ -3,10 +3,14 @@ package com.mt.algorithm.ssa;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import com.mt.models.Post;
 import com.mt.models.SSAParams;
@@ -42,7 +46,7 @@ import com.mt.models.repository.PostUserViewRepository;
  * @author gibranecastillo
  *
  */
-@Component
+@Controller
 public class SSAJob {
 	@Autowired
 	private PostDao _postDao;
@@ -54,14 +58,10 @@ public class SSAJob {
 	private SSAParamsDao _ssaParamsDao;
 	
 	@Autowired
-	private PostRepository _postRepository;
-	
-	@Autowired
 	private PostUserViewRepository _postUserViewRepository;
 	
 	@Autowired
 	private PostUserLikeRepository _postUserLikeRepository;
-	
 	
 	//@Autowired
 	private SSA ssa;
@@ -69,9 +69,10 @@ public class SSAJob {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	public void initiate() {
-		//SSAParams ssaParams = _ssaParamsDao.getSSAParams(1);
-		SSAParams ssaParams = new SSAParams();
-		ssaParams.setKf(0.20);
+		SSAParams ssaParams = _ssaParamsDao.getSSAParams(1L);
+		
+		//SSAParams ssaParams = new SSAParams();
+		/*ssaParams.setKf(0.20);
 		ssaParams.setKs(0.20);
 		ssaParams.setCf(0.50);
 		ssaParams.setNsIdeal(800);
@@ -79,7 +80,8 @@ public class SSAJob {
 		ssaParams.setT1(0.50);
 		ssaParams.setT2(0.30);
 		ssaParams.setT3(0.30);
-		ssaParams.setT4(0.30);
+		ssaParams.setT4(0.30);*/
+		
 		ssa = new SSA(ssaParams);
 		
 		long Ns = _postDao.getNs();
@@ -133,6 +135,7 @@ public class SSAJob {
 	 * @param Ns a long value that represents the number of 'posts' in School Feed.
 	 * @param postId
 	 */
+	
 	public void examineFriendFeedPost(Post friendPost, long V, long L, long Ns, long postId) {
 		SSAPostRatio rfPostRatio = ssa.calculateRf(V, L, Ns);
 		
@@ -143,12 +146,12 @@ public class SSAJob {
 		log.info("Is Rf > Kf : " + rfPostRatio.isGreaterThan());
 		
 		if(rfPostRatio.isGreaterThan()) {
-			//_postDao.promotePostToSchoolFeed(friendPost);
 			
-			friendPost.setPostSchoolPromote((byte)1);
+			//postService.promotePostToSchoolFeed(friendPost);
 			
-			_postRepository.save(friendPost);
+			friendPost.setPostSchoolPromote(1);
 			
+			_postDao.updatePost(friendPost);
 			log.info("Promoting Post Id to School feed !!!");
 		}
 	}
@@ -186,13 +189,11 @@ public class SSAJob {
 		
 		if(rsPostRatio.isGreaterThan()) {
 			
-			schoolPost.setPostNationalPromote((byte)1);
+			//postService.promotePostToNationalFeed(schoolPost);
 			
-			//_postDao.promotePostToNationalFeed(schoolPost);
-			
-			_postRepository.save(schoolPost);
-			
-			log.info("Promoting Post Id to National feed !!!");
+			schoolPost.setPostNationalPromote(1);
+			_postDao.updatePost(schoolPost);
+			log.info("Promoting Post Id to National feed !!! ");
 		}
 	}
 }

@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import views.AggregationDto;
 import views.CollegeDto;
 import views.UserDto;
 
 import com.mt.exception.MtException;
+import com.mt.models.Aggregation;
 import com.mt.models.College;
 import com.mt.models.Locale;
 import com.mt.models.User;
@@ -96,6 +98,30 @@ public class UserController {
 			college.setCollegeName(userDto.getCollege().getCollegeName());
 			
 			user.setProfileCollege(college);
+			
+			
+			/*
+			 * Aggregation ...
+			 */
+			List<AggregationDto> aggregationList = userDto.getAggregationList();
+			
+			if(aggregationList != null) {
+				user.setAggregationList(aggregationList);
+			}
+			
+			/*List<AggregationDto> aggregationList = userDto.getAggregationList();
+			
+			if(aggregationList != null) {
+				for(AggregationDto aggregationDto : aggregationList) {
+					Aggregation aggregation = new Aggregation();
+					aggregation.setProfileId(user);
+					aggregation.setAggregationId(aggregationDto.getAggregationId());
+					//aggregation.setAggregationIsFriend("Y");  // Ignore for now in src and ask Jesus Islas in table.
+					aggregation.setAggregationName(aggregationDto.getAggregationName());
+					
+				}
+			}*/
+			
 			
 			/*try{
 	              //Generate password and send the email to created user.

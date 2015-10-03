@@ -1,5 +1,7 @@
 package views;
 
+import java.util.List;
+
 /**
  * The <code>UserDto</code> ...
  * 
@@ -8,6 +10,7 @@ package views;
  */
 public class UserDto {
 	private long 	   	profileId;
+	private List<AggregationDto> aggregationList;
 	private String 	   	firstName;
 	private String 	   	lastName;
 	private String 	   	userName;
@@ -26,7 +29,21 @@ public class UserDto {
 	public void setProfileId(long profileId) {
 		this.profileId = profileId;
 	}
-
+	
+	/**
+	 * @return the aggregationList
+	 */
+	public List<AggregationDto> getAggregationList() {
+		return aggregationList;
+	}
+	
+	/**
+	 * @param aggregationList the aggregationList to set
+	 */
+	public void setAggregationList(List<AggregationDto> aggregationList) {
+		this.aggregationList = aggregationList;
+	}
+	
 	/**
 	 * 
 	 * @return

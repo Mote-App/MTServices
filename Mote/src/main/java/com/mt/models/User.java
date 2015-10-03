@@ -1,13 +1,18 @@
 package com.mt.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import views.AggregationDto;
 
 /**
  * The <code>User</code> is the persistent class for the profile database table.
@@ -50,6 +55,10 @@ public class User {
 	@OneToOne
 	@JoinColumn(name="locale_locale_id")
 	private Locale locale;
+	
+	@OneToMany
+	@JoinColumn(name="profile_id")
+	private List<AggregationDto> aggregationList;
 	
 	/**
 	 * 
@@ -206,6 +215,20 @@ public class User {
 	 */
 	public void setLocale(Locale locale) {
 		this.locale = locale;
+	}
+	
+	/**
+	 * @return the aggregationList
+	 */
+	public List<AggregationDto> getAggregationList() {
+		return aggregationList;
+	}
+	
+	/**
+	 * @param aggregationList the aggregationList to set
+	 */
+	public void setAggregationList(List<AggregationDto> aggregationList) {
+		this.aggregationList = aggregationList;
 	}
 	
 	/**

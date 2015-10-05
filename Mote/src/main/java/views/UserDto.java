@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class UserDto {
 	private long 	   	profileId;
-	private List<AggregationDto> aggregationList;
+	private List<AggregationDto> aggregationDtoList;
 	private String 	   	firstName;
 	private String 	   	lastName;
 	private String 	   	userName;
@@ -33,15 +33,15 @@ public class UserDto {
 	/**
 	 * @return the aggregationList
 	 */
-	public List<AggregationDto> getAggregationList() {
-		return aggregationList;
+	public List<AggregationDto> getAggregationDtoList() {
+		return aggregationDtoList;
 	}
 	
 	/**
 	 * @param aggregationList the aggregationList to set
 	 */
-	public void setAggregationList(List<AggregationDto> aggregationList) {
-		this.aggregationList = aggregationList;
+	public void setAggregationDtoList(List<AggregationDto> aggregationList) {
+		this.aggregationDtoList = aggregationList;
 	}
 	
 	/**

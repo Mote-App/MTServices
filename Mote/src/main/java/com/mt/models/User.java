@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import views.AggregationDto;
 
 /**
  * The <code>User</code> is the persistent class for the profile database table.
@@ -58,7 +57,7 @@ public class User {
 	
 	@OneToMany
 	@JoinColumn(name="profile_id")
-	private List<AggregationDto> aggregationList;
+	private List<Aggregation> aggregationList;
 	
 	/**
 	 * 
@@ -220,14 +219,14 @@ public class User {
 	/**
 	 * @return the aggregationList
 	 */
-	public List<AggregationDto> getAggregationList() {
+	public List<Aggregation> getAggregationList() {
 		return aggregationList;
 	}
 	
 	/**
 	 * @param aggregationList the aggregationList to set
 	 */
-	public void setAggregationList(List<AggregationDto> aggregationList) {
+	public void setAggregationList(List<Aggregation> aggregationList) {
 		this.aggregationList = aggregationList;
 	}
 	

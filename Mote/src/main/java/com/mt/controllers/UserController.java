@@ -103,9 +103,20 @@ public class UserController {
 			/*
 			 * Aggregation ...
 			 */
-			List<AggregationDto> aggregationList = userDto.getAggregationList();
+			List<Aggregation> aggregationList = new ArrayList<Aggregation>();
+			List<AggregationDto> aggregationDtoList = userDto.getAggregationDtoList();
+			for (AggregationDto dto : aggregationDtoList) {
+				Aggregation aggregation = new Aggregation();
+				aggregation.setAggregationId(dto.getAggregationId());
+				aggregation.setAggregationName(dto.getAggregationName());
+				aggregation.setAggregationIsFriend("Y");
+				aggregation.setProfileId(user);
+				aggregationList.add(aggregation);
+				
+			}
 			
 			if(aggregationList != null) {
+				
 				user.setAggregationList(aggregationList);
 			}
 			

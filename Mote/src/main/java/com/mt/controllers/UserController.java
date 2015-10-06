@@ -3,6 +3,8 @@ package com.mt.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -39,6 +41,8 @@ public class UserController {
 	// ==============
 	// PRIVATE FIELDS
 	// ==============
+	
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	// Wire the UserDao that will be used inside this controller.
 	@Autowired
@@ -81,6 +85,7 @@ public class UserController {
 			user.setProfileFirstName(userDto.getFirstName());
 			user.setProfileLastName(userDto.getLastName());
 			user.setProfileEmail(userDto.getEmail());
+			log.info(" Username : " + userDto.getUserName());
 			user.setProfileUserName(userDto.getUserName());
 			
 			//Set the password 1234 on temporary , needs to replace with dynamic algorithm to produce unique random password.
@@ -159,11 +164,9 @@ public class UserController {
 			
 			return user;
 		} catch(Exception e) {
-			e.printStackTrace();
 			
-			throw new MtException("Error Creating new user.", e.getMessage() + e.getCause());
-			//return "Error creating the user: " + ex.toString();
-			//ex.printStackTrace();
+			log.error("Error Creating new user.", e);
+			throw new MtException("Error Creating new user.", e.getMessage());
 		}
 	}
 	

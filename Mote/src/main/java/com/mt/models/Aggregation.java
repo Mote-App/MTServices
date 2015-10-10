@@ -10,6 +10,8 @@ import javax.persistence.Table;
 /**
  * The <code>Aggregation</code> is the persistent class for the aggregation database table.
  * 
+ * It should be public when on friend feed and when promoted to school/national it should become anonymous
+ * 
  * @author gibranecastillo
  *
  */

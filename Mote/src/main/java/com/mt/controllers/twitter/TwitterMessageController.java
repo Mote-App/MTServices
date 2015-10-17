@@ -1,4 +1,4 @@
-package com.mt.controllers;
+package com.mt.controllers.twitter;
 
 import javax.inject.Inject;
 
@@ -10,23 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 /**
- * The <code>TwitterController</code> is created by injecting a Twitter object into its constructor.
+ * The <code>TwitterMessageController</code> is created by injecting a Twitter object into its constructor.
  * The Twitter object is a reference to Spring Social’s Twitter API binding.
  * 
- * @Controller marks the TwitterController.java POJO class as MVC controller
+ * @Controller marks the TwitterMessageController.java POJO class as MVC controller
  * 
  * @author gibranecastillo
  *
  */
 @Controller
-public class TwitterController {
-	private Twitter twitter;
+public class TwitterMessageController {
+	private final Twitter twitter;
 	private ConnectionRepository connectionRepository;
 	
 	@Inject
-	public TwitterController(Twitter twitter, ConnectionRepository connectionRepository) {
+	public TwitterMessageController(Twitter twitter, ConnectionRepository connectionRepository) {
 		this.twitter = twitter;
 		this.connectionRepository = connectionRepository;
 	}
@@ -72,6 +71,13 @@ public class TwitterController {
 	@RequestMapping(value="/twitter/aggregation", method = RequestMethod.GET)
 	@ResponseBody
 	public String twitterAggregation(ModelMap model) {
+		/*
+		 * Check whether the user has authorized the application to access the user’s Twitter data.
+		 * If not, the user is redirected to ConnectController with the option to kick off the authorization process.
+		 * If the user has authorized the application to access Twitter data, the application fetches the user’s profile
+		 * as well as several of the most recent entries in the user’s home feed. The data is placed into the model to be
+		 * displayed by the view identified as "friend_feed".
+		 */
 		if(connectionRepository.findPrimaryConnection(Twitter.class) == null) {
             return "redirect:/connect/twitter";
         }
@@ -80,5 +86,57 @@ public class TwitterController {
         model.addAttribute("friendFeed", "<friendFeedPost>");
 		
 		return "friend_feed";
+	}
+	
+	/**
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/twitter/messages", method=RequestMethod.GET)
+	public String inbox(ModelMap model) {
+		if(connectionRepository.findPrimaryConnection(Twitter.class) == null) {
+            return "redirect:/connect/twitter";
+        }
+		
+		model.addAttribute("directMessages", twitter.directMessageOperations().getDirectMessagesReceived());
+		model.addAttribute("dmListType", "Received");
+		model.addAttribute("messageForm", new MessageForm());
+		
+		return "twitter/messages";
+	}
+	
+	/**
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/twitter/messages/sent", method=RequestMethod.GET)
+	public String sent(ModelMap model) {
+		if(connectionRepository.findPrimaryConnection(Twitter.class) == null) {
+            return "redirect:/connect/twitter";
+        }
+		
+		model.addAttribute("directMessages", twitter.directMessageOperations().getDirectMessagesSent());
+		model.addAttribute("dmListType", "Sent");
+		model.addAttribute("messageForm", new MessageForm());
+		
+		return "twitter/messages";
+	}
+	
+	/**
+	 * 
+	 * @param message
+	 * @return
+	 */
+	@RequestMapping(value="/twitter/messages", method=RequestMethod.POST)
+	public String sent(MessageForm message) {
+		if(connectionRepository.findPrimaryConnection(Twitter.class) == null) {
+            return "redirect:/connect/twitter";
+        }
+		
+		twitter.directMessageOperations().sendDirectMessage(message.getTo(), message.getText());
+		
+		return "redirect:/twitter/messages";
 	}
 }

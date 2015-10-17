@@ -1,5 +1,7 @@
 package views;
 
+import javax.validation.constraints.Size;
+
 /**
  * The <code>LoginDto</code> ...
  * 
@@ -9,6 +11,8 @@ package views;
 public class LoginDto {
 	private int    collegeId;
 	private String userName;
+	
+	@Size(min = 8, message = "must be at least 8 characters")
 	private String password;
 	
 	/**

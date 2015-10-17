@@ -16,6 +16,10 @@
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.social">
+		<level value="info" />
+	</logger>
+	
 	<logger name="org.springframework.core">
 		<level value="info" />
 	</logger>

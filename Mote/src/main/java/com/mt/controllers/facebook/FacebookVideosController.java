@@ -1,29 +1,30 @@
-package com.mt.controllers;
+package com.mt.controllers.facebook;
 
 import javax.inject.Inject;
 
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * The <code>FacebookController</code> is created by injecting a Facebook object into its constructor.
+ * The <code>FacebookVideosController</code> is created by injecting a Facebook object into its constructor.
  * The Facebook object is a reference to Spring Social’s Facebook API binding.
  * 
- * @Controller marks the FacebookController.java POJO class as MVC controller
+ * @Controller marks the FacebookVideosController.java POJO class as MVC controller
  * 
  * @author gibranecastillo
  *
  */
 @Controller
-public class FacebookController {
-	private Facebook facebook;
+public class FacebookVideosController {
+	private final Facebook facebook;
 	
 	@Inject
-	public FacebookController(Facebook facebook) {
+	public FacebookVideosController(Facebook facebook) {
 		this.facebook = facebook;
 	}
 	
@@ -65,7 +66,7 @@ public class FacebookController {
 	 * @param profileId
 	 * @return
 	 */
-	@RequestMapping(value="/facebook/aggregation", method = RequestMethod.GET)
+	@RequestMapping(value="/facebook/aggregation", method=RequestMethod.GET)
 	@ResponseBody
 	public String facebookAggregation(ModelMap model) {
 		/*
@@ -83,5 +84,42 @@ public class FacebookController {
         model.addAttribute("friendFeed", "<friendFeedPost>");
 		
 		return "friend_feed";
+	}
+	
+	/**
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/facebook/albums", method=RequestMethod.GET)
+	public String showAlbums(ModelMap model) {
+		if(!facebook.isAuthorized()) {
+			return "redirect:/connect/facebook";
+		}
+		
+		model.addAttribute("albums", facebook.mediaOperations().getAlbums());
+		
+		return "facebook/albums";
+	}
+	
+	/**
+	 * This method...
+	 * 
+	 * @PathVariable indicates that URI template variable value is bound to method parameter
+	 * 
+	 * @param albumId
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/facebook/album/{albumId}", method=RequestMethod.GET)
+	public String showAlbum(@PathVariable("albumId") String albumId, ModelMap model) {
+		if(!facebook.isAuthorized()) {
+			return "redirect:/connect/facebook";
+		}
+		
+		model.addAttribute("album", facebook.mediaOperations().getAlbum(albumId));
+		model.addAttribute("videos", facebook.mediaOperations().getVideos(albumId));
+		
+		return "facebook/album";
 	}
 }

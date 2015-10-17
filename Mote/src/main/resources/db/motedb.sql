@@ -150,12 +150,20 @@ CREATE TABLE IF NOT EXISTS `motedb`.`post` (
     FOREIGN KEY (`post_profile_id`)
     REFERENCES `motedb`.`profile` (`profile_id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_post_source_objects1` 
+    FOREIGN KEY (`source_objects_source_objects_id`) 
+	REFERENCES `source_objects` (`source_objects_id`)
+	ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+),
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_post_type1_idx` ON `motedb`.`post` (`post_type_code` ASC);
 
 CREATE INDEX `fk_post_profile1_idx` ON `motedb`.`post` (`post_profile_id` ASC);
+
+CREATE INDEX `fk_post_source_objects1_idx` (`source_objects_source_objects_id`),
 
 
 -- -----------------------------------------------------
@@ -340,7 +348,8 @@ DROP TABLE IF EXISTS `motedb`.`source_objects`;
 CREATE TABLE IF NOT EXISTS `motedb`.`source_objects` (
   `source_objects_id` INT NOT NULL,
   `aggregation_aggregation_id` INT(11) NOT NULL,
-  `source_objects_` VARCHAR(45) NULL,
+  `source_objects_url` VARCHAR(1045) NULL COMMENT 'Photo, image, or video',
+  `source_objects_caption` VARCHAR(45) NULL,
   PRIMARY KEY (`source_objects_id`),
   INDEX `fk_source_objects_aggregation1_idx` (`aggregation_aggregation_id` ASC),
   CONSTRAINT `fk_source_objects_aggregation1`
@@ -349,6 +358,7 @@ CREATE TABLE IF NOT EXISTS `motedb`.`source_objects` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

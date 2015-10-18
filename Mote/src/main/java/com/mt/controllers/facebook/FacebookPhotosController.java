@@ -66,9 +66,9 @@ public class FacebookPhotosController {
 	 * @param profileId
 	 * @return
 	 */
-	@RequestMapping(value="/facebook/aggregation", method=RequestMethod.GET)
+	@RequestMapping(value="/facebook_photos/aggregation", method=RequestMethod.GET)
 	@ResponseBody
-	public String facebookAggregation(ModelMap model) {
+	public String facebookPhotosAggregation(ModelMap model) {
 		/*
 		 * Check whether the user has authorized the application to access the user’s Facebook data.
 		 * If not, the user is redirected to ConnectController with the option to kick off the authorization process.
@@ -91,8 +91,8 @@ public class FacebookPhotosController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/facebook/albums", method=RequestMethod.GET)
-	public String showAlbums(ModelMap model) {
+	@RequestMapping(value="/facebook_photo/albums", method=RequestMethod.GET)
+	public String showPhotoAlbums(ModelMap model) {
 		if(!facebook.isAuthorized()) {
 			return "redirect:/connect/facebook";
 		}

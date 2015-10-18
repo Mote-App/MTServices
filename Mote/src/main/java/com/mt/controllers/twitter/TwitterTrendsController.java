@@ -71,7 +71,7 @@ public class TwitterTrendsController {
 	 * @param profileId
 	 * @return
 	 */
-	@RequestMapping(value="/twitter/aggregation", method = RequestMethod.GET)
+	@RequestMapping(value="/twitter_trends/aggregation", method = RequestMethod.GET)
 	@ResponseBody
 	public String twitterAggregation(ModelMap model) {
 		/*

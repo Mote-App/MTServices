@@ -65,9 +65,9 @@ public class FacebookFriendsController {
 	 * @param profileId
 	 * @return
 	 */
-	@RequestMapping(value="/facebook/aggregation", method=RequestMethod.GET)
+	@RequestMapping(value="/facebook_friends/aggregation", method=RequestMethod.GET)
 	@ResponseBody
-	public String facebookAggregation(ModelMap model) {
+	public String facebookFriendsAggregation(ModelMap model) {
 		/*
 		 * Check whether the user has authorized the application to access the user’s Facebook data.
 		 * If not, the user is redirected to ConnectController with the option to kick off the authorization process.

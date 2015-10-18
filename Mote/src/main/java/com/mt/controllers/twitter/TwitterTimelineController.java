@@ -69,7 +69,7 @@ public class TwitterTimelineController {
 	 * @param profileId
 	 * @return
 	 */
-	@RequestMapping(value="/twitter/aggregation", method = RequestMethod.GET)
+	@RequestMapping(value="/twitter_timeline/aggregation", method = RequestMethod.GET)
 	@ResponseBody
 	public String twitterAggregation(ModelMap model) {
 		/*

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * The <code>InstagramProfileController</code> is ...
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class InstagramProfileController {
-	@Inject
+	//@Inject
 	//private ConnectionRepository connectionRepository;
 	
 	/**
@@ -29,7 +30,8 @@ public class InstagramProfileController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/instagram", method=RequestMethod.GET)
+	@RequestMapping(value="/instagram", method=RequestMethod.GET, produces="application/json")
+	@ResponseBody
 	public String home(Principal currentUser, ModelMap model) {
 		/*Connection<Instagram> connection = connectionRepository.findPrimaryConnection(Instagram.class);
 		
@@ -40,5 +42,19 @@ public class InstagramProfileController {
 		model.addAttribute("profile", connection.getApi().profileOperations().getUserProfileFull());*/
 		
 		return "instagram/profile";
+	}
+	
+	@RequestMapping(value="/instagram_friends", method = RequestMethod.GET, produces="application/json")
+	@ResponseBody
+	public String getFriends(Principal currentUser, ModelMap model) {
+		/*Connection<Instagram> connection = connectionRepository.findPrimaryConnection(Instagram.class);
+		
+		if(connection == null) {
+			return "redirect:/connect/instagram";
+		}
+		
+		model.addAttribute("profile", connection.getApi().profileOperations().getUserProfileFull());*/
+		
+		return "test test";
 	}
 }

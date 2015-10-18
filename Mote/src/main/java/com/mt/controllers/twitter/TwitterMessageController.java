@@ -68,7 +68,7 @@ public class TwitterMessageController {
 	 * @param profileId
 	 * @return
 	 */
-	@RequestMapping(value="/twitter/aggregation", method = RequestMethod.GET)
+	@RequestMapping(value="/twitter_msg/aggregation", method = RequestMethod.GET)
 	@ResponseBody
 	public String twitterAggregation(ModelMap model) {
 		/*

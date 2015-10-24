@@ -4,12 +4,16 @@ import java.security.Principal;
 
 import javax.inject.Inject;
 
+import org.springframework.http.ResponseEntity;
 //import org.springframework.social.instagram.api.Instagram;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
+
+import com.mt.vo.instagram.InstagramResponse;
 
 /**
  * The <code>InstagramProfileController</code> is ...
@@ -46,15 +50,16 @@ public class InstagramProfileController {
 	
 	@RequestMapping(value="/instagram_friends", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public String getFriends(Principal currentUser, ModelMap model) {
-		/*Connection<Instagram> connection = connectionRepository.findPrimaryConnection(Instagram.class);
+	public String getFriends(String userId, String igId, String igToken) {
 		
-		if(connection == null) {
-			return "redirect:/connect/instagram";
-		}
+		RestTemplate restTemplate = new RestTemplate();
+
+		InstagramResponse response = restTemplate.getForObject(
+		        "https://api.instagram.com/v1/users/" + igId + "/followed-by?access_token=" + igToken,
+		        InstagramResponse.class);
+
+		System.out.println(response);
 		
-		model.addAttribute("profile", connection.getApi().profileOperations().getUserProfileFull());*/
-		
-		return "test test";
+		return response.toString();
 	}
 }

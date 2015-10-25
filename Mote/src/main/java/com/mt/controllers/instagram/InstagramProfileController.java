@@ -1,9 +1,14 @@
 package com.mt.controllers.instagram;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.social.instagram.api.Instagram;
 import org.springframework.stereotype.Controller;
@@ -13,7 +18,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.mt.exception.MtException;
+import com.mt.models.Aggregation;
+import com.mt.models.College;
+import com.mt.models.Locale;
+import com.mt.models.User;
+import com.mt.models.repository.AggregationRepository;
+import com.mt.models.repository.PostRepository;
 import com.mt.vo.instagram.InstagramResponse;
+
+import views.AggregationDto;
+
 
 /**
  * The <code>InstagramProfileController</code> is ...
@@ -25,27 +40,42 @@ import com.mt.vo.instagram.InstagramResponse;
  */
 @Controller
 public class InstagramProfileController {
-	//@Inject
-	//private ConnectionRepository connectionRepository;
+	
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	private static final String INSTAGRAM = "Instagram";
+	
+	@Autowired 
+	AggregationRepository _aggregationRepo;
+
 	
 	/**
 	 * 
-	 * @param currentUser
-	 * @param model
+	 * @param userId
+	 * @param igId
+	 * @param igToken
 	 * @return
+	 * @throws MtException 
 	 */
-	@RequestMapping(value="/instagram", method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value="/instagram_add", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
-	public String home(Principal currentUser, ModelMap model) {
-		/*Connection<Instagram> connection = connectionRepository.findPrimaryConnection(Instagram.class);
+	public String home(String userId, String igId, String igToken) throws MtException {
 		
-		if(connection == null) {
-			return "redirect:/connect/instagram";
-		}
+		Aggregation aggregation = new Aggregation();
 		
-		model.addAttribute("profile", connection.getApi().profileOperations().getUserProfileFull());*/
+		try {
+			
+			//aggregation.setProfileId(userId);
+			aggregation.setAggregationName(INSTAGRAM);
+			
+			_aggregationRepo.save(aggregation);
+			
+			return aggregation.toString();
+		} catch(Exception e) {
 		
-		return "instagram/profile";
+			log.error("Error Creating Aggregation Record.", e);
+			throw new MtException("Error Creating Aggregation Record.", e.getMessage());
+	}
 	}
 	
 	@RequestMapping(value="/instagram_friends", method = RequestMethod.GET, produces="application/json")

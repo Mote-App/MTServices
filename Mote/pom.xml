@@ -100,11 +100,40 @@
         	<artifactId>spring-social</artifactId>
         	<version>1.1.2.RELEASE</version>
         </dependency> -->
+        
+        <!-- General Spring Social library -->
+        <dependency>
+        	<groupId>org.springframework.social</groupId>
+        	<artifactId>spring-social-core</artifactId>
+        	<version>1.1.2.RELEASE</version>
+        </dependency>
+        
+        <dependency>
+        	<groupId>org.springframework.social</groupId>
+        	<artifactId>spring-social-web</artifactId>
+        	<version>1.1.2.RELEASE</version>
+        </dependency>
+        
+        <dependency>
+        	<groupId>org.springframework.social</groupId>
+        	<artifactId>spring-social-config</artifactId>
+        	<version>1.1.2.RELEASE</version>
+        </dependency>
+        <!-- General Spring Social library -->
+        
+        <!-- General Spring Social Facebook library -->
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-facebook</artifactId>
 			<version>2.0.1.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-facebook-web</artifactId>
+			<version>2.0.1.RELEASE</version>
+		</dependency>
+		<!-- General Spring Social Facebook library -->
+		
 		<!-- <dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-instagram</artifactId>

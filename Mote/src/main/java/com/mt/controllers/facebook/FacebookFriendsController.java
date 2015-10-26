@@ -79,8 +79,8 @@ public class FacebookFriendsController {
 			return "redirect:/connect/facebook";
 		}
 		
-		model.addAttribute(facebook.userOperations().getUserProfile());
-        model.addAttribute("friendFeed", "<friendFeedPost>");
+		//model.addAttribute(facebook.userOperations().getUserProfile());
+        //model.addAttribute("friendFeed", "<friendFeedPost>");
 		
 		return "friend_feed";
 	}

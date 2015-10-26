@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -24,6 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableAutoConfiguration
 @EnableScheduling
+@EnableSocial
 @ComponentScan
 public class Application extends SpringBootServletInitializer {
 	

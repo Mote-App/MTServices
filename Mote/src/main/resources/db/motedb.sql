@@ -319,7 +319,7 @@ DROP TABLE IF EXISTS `motedb`.`aggregation`;
 
 CREATE TABLE IF NOT EXISTS `motedb`.`aggregation` (
   `profile_profile_id` INT(11) NOT NULL,
-  `aggregation_id` INT(15) NOT NULL COMMENT 'User’s Facebook id, Instagram id, Twitter id, etc.',
+  `aggregation_id` VARCHAR(100) NOT NULL COMMENT 'User’s Facebook id, Instagram id, Twitter id, etc.',
   `aggregation_is_friend` VARCHAR(1) NOT NULL DEFAULT 'N',
   `aggregation_source_profile` VARCHAR(45) NOT NULL COMMENT 'Userid from aggregation source like Facebook, Instagram, Twitter, etc.',
   `aggregation_source_aggregation_source_id` INT NOT NULL,
@@ -347,7 +347,7 @@ DROP TABLE IF EXISTS `motedb`.`source_objects`;
 
 CREATE TABLE IF NOT EXISTS `motedb`.`source_objects` (
   `source_objects_id` INT NOT NULL,
-  `aggregation_aggregation_id` INT(11) NOT NULL,
+  `aggregation_aggregation_id` VARCHAR(100) NOT NULL,
   `source_objects_url` VARCHAR(1045) NULL COMMENT 'Photo, image, or video',
   `source_objects_caption` VARCHAR(45) NULL,
   PRIMARY KEY (`source_objects_id`),

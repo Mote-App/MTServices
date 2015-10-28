@@ -44,6 +44,8 @@ public class InstagramProfileController {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	private static final String INSTAGRAM = "Instagram";
+	private static final String YES = "Y";
+	private static final String NO = "N";
 	
 	@Autowired 
 	AggregationRepository _aggregationRepo;
@@ -59,18 +61,25 @@ public class InstagramProfileController {
 	 */
 	@RequestMapping(value="/instagram_add", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
-	public String home(String userId, String igId, String igToken) throws MtException {
-		
-		Aggregation aggregation = new Aggregation();
+	public String home(Long userId, Long igId, String igToken) throws MtException {
 		
 		try {
 			
-			//aggregation.setProfileId(userId);
+			Aggregation aggregation = new Aggregation();
+			User user = new User();
+			
+			user.setProfileId(userId);
+
 			aggregation.setAggregationName(INSTAGRAM);
+			aggregation.setAggregationId(igId);
+			aggregation.setProfileId(user);
+			aggregation.setAggregationSourceId(1);
+			aggregation.setAggregationIsFriend(YES);
 			
 			_aggregationRepo.save(aggregation);
 			
 			return aggregation.toString();
+			
 		} catch(Exception e) {
 		
 			log.error("Error Creating Aggregation Record.", e);

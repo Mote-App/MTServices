@@ -24,13 +24,17 @@ public class Aggregation {
 	
 	@Id
 	@Column(name="aggregation_id")
-	private long aggregationId;
+	private Long aggregationId;
+	
+	@Column(name="aggregation_source_aggregation_source_id")
+	private int aggregationSourceId;
 	
 	@Column(name="aggregation_is_friend")
 	private String aggregationIsFriend;
 	
 	@Column(name="aggregation_source_profile")
 	private String aggregationName;
+
 	
 	public Aggregation() {
 		// do nothing
@@ -60,10 +64,18 @@ public class Aggregation {
 	/**
 	 * @param aggregationId the aggregationId to set
 	 */
-	public void setAggregationId(long aggregationId) {
+	public void setAggregationId(Long aggregationId) {
 		this.aggregationId = aggregationId;
 	}
 	
+	public int getAggregationSourceId() {
+		return aggregationSourceId;
+	}
+
+	public void setAggregationSourceId(int aggregationSourceId) {
+		this.aggregationSourceId = aggregationSourceId;
+	}
+
 	/**
 	 * @return the aggregationIsFriend
 	 */

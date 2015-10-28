@@ -7,20 +7,20 @@ package views;
  *
  */
 public class AggregationDto {
-	private long aggregationId;
+	private Long aggregationId;
 	private String aggregationName;
 	
 	/**
 	 * @return the aggregationId
 	 */
-	public long getAggregationId() {
+	public Long getAggregationId() {
 		return aggregationId;
 	}
 	
 	/**
 	 * @param aggregationId the aggregationId to set
 	 */
-	public void setAggregationId(long aggregationId) {
+	public void setAggregationId(Long aggregationId) {
 		this.aggregationId = aggregationId;
 	}
 	

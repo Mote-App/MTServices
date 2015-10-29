@@ -58,6 +58,11 @@ public class Post {
 	@JoinColumn(name="post_post_id")
 	private List<PostTags> listPostTags;
 	
+	@OneToOne
+	@JoinColumn(name="source_objects_source_objects_id")
+	private AggregationSourceObject aggregationSourceObject;
+	
+	
 	/**
 	 * 
 	 */
@@ -211,6 +216,15 @@ public class Post {
 		this.listPostTags = listPostTags;
 	}
 	
+	public AggregationSourceObject getAggregationSourceObject() {
+		return aggregationSourceObject;
+	}
+
+	public void setAggregationSourceObject(
+			AggregationSourceObject aggregationSourceObject) {
+		this.aggregationSourceObject = aggregationSourceObject;
+	}
+
 	/**
 	 * 
 	 */

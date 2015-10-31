@@ -105,40 +105,6 @@ public class UserController {
 			user.setProfileCollege(college);
 			
 			
-			/*
-			 * Aggregation ...
-			 */
-			List<Aggregation> aggregationList = new ArrayList<Aggregation>();
-			List<AggregationDto> aggregationDtoList = userDto.getAggregationDtoList();
-			for (AggregationDto dto : aggregationDtoList) {
-				Aggregation aggregation = new Aggregation();
-				aggregation.setAggregationId(dto.getAggregationId());
-				aggregation.setAggregationName(dto.getAggregationName());
-				aggregation.setAggregationIsFriend("Y");
-				aggregation.setProfileId(user);
-				aggregationList.add(aggregation);
-				
-			}
-			
-			if(aggregationList != null) {
-				
-				user.setAggregationList(aggregationList);
-			}
-			
-			/*List<AggregationDto> aggregationList = userDto.getAggregationList();
-			
-			if(aggregationList != null) {
-				for(AggregationDto aggregationDto : aggregationList) {
-					Aggregation aggregation = new Aggregation();
-					aggregation.setProfileId(user);
-					aggregation.setAggregationId(aggregationDto.getAggregationId());
-					//aggregation.setAggregationIsFriend("Y");  // Ignore for now in src and ask Jesus Islas in table.
-					aggregation.setAggregationName(aggregationDto.getAggregationName());
-					
-				}
-			}*/
-			
-			
 			/*try{
 	              //Generate password and send the email to created user.
 	              SimpleMailMessage mailMessage = new SimpleMailMessage();

@@ -104,7 +104,7 @@ public class UserController {
 			
 			user.setProfileCollege(college);
 			
-			
+
 			/*try{
 	              //Generate password and send the email to created user.
 	              SimpleMailMessage mailMessage = new SimpleMailMessage();

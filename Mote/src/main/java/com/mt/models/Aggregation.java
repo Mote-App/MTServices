@@ -35,6 +35,8 @@ public class Aggregation {
 	@Column(name="aggregation_source_profile")
 	private String aggregationName;
 
+	@Column(name="access_token")
+	private String accessToken;
 	
 	public Aggregation() {
 		// do nothing
@@ -103,4 +105,13 @@ public class Aggregation {
 	public void setAggregationName(String aggregationName) {
 		this.aggregationName = aggregationName;
 	}
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+	
 }

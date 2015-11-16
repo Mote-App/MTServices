@@ -183,12 +183,18 @@ insert into tag values ( 41, 'Coolest outfit');
 insert into type values('username', 'display username');
 insert into type values('name', 'display first and last name');
 insert into type values('anonymous', 'display user name as anonymous');
-
+insert into type values('public', 'available to every one');
 
 
 /* Locale Default Settings */
 insert into country values('US','United States Of America');
 insert into language values('en', 'English');
 insert into locale values('US','en', 1);
+
+/* Algorithm coeffcients */
+insert into ssa_coefficient_parameters(id) values(1);
+
+insert into aggregation_source values(1, 'Instagram');
+insert into aggregation_source values(2, 'Facebook');
 
 commit;

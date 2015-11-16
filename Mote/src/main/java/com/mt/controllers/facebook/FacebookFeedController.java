@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -69,7 +70,7 @@ public class FacebookFeedController {
 	 */
 	@RequestMapping(value="/facebook_feed/aggregation", method=RequestMethod.GET)
 	@ResponseBody
-	public String facebookFeedAggregation(ModelMap model) {
+	public String facebookFeedAggregation(@RequestParam("userId") String moteUserId) {
 		/*
 		 * Check whether the user has authorized the application to access the user’s Facebook data.
 		 * If not, the user is redirected to ConnectController with the option to kick off the authorization process.
@@ -81,8 +82,8 @@ public class FacebookFeedController {
 			return "redirect:/connect/facebook";
 		}
 		
-		model.addAttribute(facebook.userOperations().getUserProfile());
-        model.addAttribute("friendFeed", "<friendFeedPost>");
+		//model.addAttribute(facebook.userOperations().getUserProfile());
+        //model.addAttribute("friendFeed", "<friendFeedPost>");
 		
 		return "friend_feed";
 	}

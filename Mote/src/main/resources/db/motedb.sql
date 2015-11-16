@@ -93,6 +93,7 @@ CREATE TABLE IF NOT EXISTS `motedb`.`profile` (
   `profile_picture_url` VARCHAR(250) NOT NULL,
   `profile_college_id` INT NOT NULL,
   `locale_locale_id` INT NOT NULL,
+  `fb_access_token` VARCHAR(255),
   PRIMARY KEY (`profile_id`),
   CONSTRAINT `fk_profile_college1`
     FOREIGN KEY (`profile_college_id`)
@@ -126,6 +127,68 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `motedb`.`aggregation_source`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `motedb`.`aggregation_source` ;
+
+CREATE TABLE IF NOT EXISTS `motedb`.`aggregation_source` (
+  `aggregation_source_id` INT NOT NULL,
+  `aggregation_source_name` VARCHAR(45) NOT NULL COMMENT 'Facebook, Instagram, Twitter, LinkedIn, Pinterest, G+, etc.',
+  PRIMARY KEY (`aggregation_source_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `motedb`.`aggregation`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `motedb`.`aggregation`;
+
+CREATE TABLE IF NOT EXISTS `motedb`.`aggregation` (
+  `profile_profile_id` INT(11) NOT NULL,
+  `aggregation_id` VARCHAR(100) NOT NULL COMMENT 'User’s Facebook id, Instagram id, Twitter id, etc.',
+  `aggregation_is_friend` VARCHAR(1) NOT NULL DEFAULT 'N',
+  `aggregation_source_profile` VARCHAR(45) NOT NULL COMMENT 'Userid from aggregation source like Facebook, Instagram, Twitter, etc.',
+  `aggregation_source_aggregation_source_id` INT NOT NULL,
+  `access_token` VARCHAR(500),
+  INDEX `fk_aggregation_profile1_idx` (`profile_profile_id` ASC),
+  PRIMARY KEY (`aggregation_id`),
+  INDEX `fk_aggregation_aggregation_source1_idx` (`aggregation_source_aggregation_source_id` ASC),
+  CONSTRAINT `fk_aggregation_profile1`
+    FOREIGN KEY (`profile_profile_id`)
+    REFERENCES `motedb`.`profile` (`profile_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_aggregation_aggregation_source1`
+    FOREIGN KEY (`aggregation_source_aggregation_source_id`)
+    REFERENCES `motedb`.`aggregation_source` (`aggregation_source_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `motedb`.`source_objects`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `motedb`.`source_objects`;
+
+CREATE TABLE IF NOT EXISTS `motedb`.`source_objects` (
+  `source_objects_id` INT AUTO_INCREMENT,
+  `aggregation_aggregation_id` VARCHAR(100) NOT NULL,
+  `source_objects_url` VARCHAR(1045) NULL COMMENT 'Photo, image, or video',
+  `source_objects_caption` VARCHAR(1045) NULL,
+  PRIMARY KEY (`source_objects_id`),
+  INDEX `fk_source_objects_aggregation1_idx` (`aggregation_aggregation_id` ASC),
+  CONSTRAINT `fk_source_objects_aggregation1`
+    FOREIGN KEY (`aggregation_aggregation_id`)
+    REFERENCES `motedb`.`aggregation` (`aggregation_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
 -- Table `motedb`.`post`
 -- TODO : remove post_likes, post_views, likes and views from this table 
 -- -----------------------------------------------------
@@ -140,30 +203,25 @@ CREATE TABLE IF NOT EXISTS `motedb`.`post` (
   `post_school_promote` TINYINT(1) NULL DEFAULT 0,
   `post_national_promote` TINYINT(1) NULL DEFAULT 0,
   `post_profile_id` INT NOT NULL,
+  `source_objects_source_objects_id` INT NULL,  
   PRIMARY KEY (`post_id`),
   CONSTRAINT `fk_post_type1`
     FOREIGN KEY (`post_type_code`)
-    REFERENCES `motedb`.`type` (`type_code`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `motedb`.`type` (`type_code`),
   CONSTRAINT `fk_post_profile1`
     FOREIGN KEY (`post_profile_id`)
-    REFERENCES `motedb`.`profile` (`profile_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `motedb`.`profile` (`profile_id`),
   CONSTRAINT `fk_post_source_objects1` 
     FOREIGN KEY (`source_objects_source_objects_id`) 
-	REFERENCES `source_objects` (`source_objects_id`)
-	ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-),
+	REFERENCES `motedb`.`source_objects` (`source_objects_id`)
+)
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_post_type1_idx` ON `motedb`.`post` (`post_type_code` ASC);
 
 CREATE INDEX `fk_post_profile1_idx` ON `motedb`.`post` (`post_profile_id` ASC);
 
-CREATE INDEX `fk_post_source_objects1_idx` (`source_objects_source_objects_id`),
+CREATE INDEX `fk_post_source_objects1_idx` ON `motedb`.`post`(`source_objects_source_objects_id` ASC);
 
 
 -- -----------------------------------------------------
@@ -248,9 +306,6 @@ ENGINE = InnoDB;
 
 CREATE INDEX `fk_post_user_like_profile_id_idx` ON `motedb`.`post_user_like` (`profile_id` ASC);
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 -- -----------------------------------------------------
@@ -270,10 +325,6 @@ CREATE TABLE IF NOT EXISTS `motedb`.`post_user_view` (
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_post_user_view_profile_id_idx` ON `motedb`.`post_user_view` (`profile_id` ASC);
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 -- -----------------------------------------------------
@@ -298,66 +349,7 @@ CREATE TABLE IF NOT EXISTS `motedb`.`ssa_coefficient_parameters` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `motedb`.`aggregation_source`
--- -----------------------------------------------------
 
-DROP TABLE IF EXISTS `motedb`.`aggregation_source` ;
-
-CREATE TABLE IF NOT EXISTS `motedb`.`aggregation_source` (
-  `aggregation_source_id` INT NOT NULL,
-  `aggregation_source_name` VARCHAR(45) NOT NULL COMMENT 'Facebook, Instagram, Twitter, LinkedIn, Pinterest, G+, etc.',
-  PRIMARY KEY (`aggregation_source_id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `motedb`.`aggregation`
--- -----------------------------------------------------
-
-DROP TABLE IF EXISTS `motedb`.`aggregation`;
-
-CREATE TABLE IF NOT EXISTS `motedb`.`aggregation` (
-  `profile_profile_id` INT(11) NOT NULL,
-  `aggregation_id` VARCHAR(100) NOT NULL COMMENT 'User’s Facebook id, Instagram id, Twitter id, etc.',
-  `aggregation_is_friend` VARCHAR(1) NOT NULL DEFAULT 'N',
-  `aggregation_source_profile` VARCHAR(45) NOT NULL COMMENT 'Userid from aggregation source like Facebook, Instagram, Twitter, etc.',
-  `aggregation_source_aggregation_source_id` INT NOT NULL,
-  INDEX `fk_aggregation_profile1_idx` (`profile_profile_id` ASC),
-  PRIMARY KEY (`aggregation_id`),
-  INDEX `fk_aggregation_aggregation_source1_idx` (`aggregation_source_aggregation_source_id` ASC),
-  CONSTRAINT `fk_aggregation_profile1`
-    FOREIGN KEY (`profile_profile_id`)
-    REFERENCES `motedb`.`profile` (`profile_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_aggregation_aggregation_source1`
-    FOREIGN KEY (`aggregation_source_aggregation_source_id`)
-    REFERENCES `motedb`.`aggregation_source` (`aggregation_source_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `motedb`.`source_objects`
--- -----------------------------------------------------
-
-DROP TABLE IF EXISTS `motedb`.`source_objects`;
-
-CREATE TABLE IF NOT EXISTS `motedb`.`source_objects` (
-  `source_objects_id` INT NOT NULL,
-  `aggregation_aggregation_id` VARCHAR(100) NOT NULL,
-  `source_objects_url` VARCHAR(1045) NULL COMMENT 'Photo, image, or video',
-  `source_objects_caption` VARCHAR(45) NULL,
-  PRIMARY KEY (`source_objects_id`),
-  INDEX `fk_source_objects_aggregation1_idx` (`aggregation_aggregation_id` ASC),
-  CONSTRAINT `fk_source_objects_aggregation1`
-    FOREIGN KEY (`aggregation_aggregation_id`)
-    REFERENCES `motedb`.`aggregation` (`aggregation_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 
 

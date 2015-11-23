@@ -206,7 +206,9 @@ public class FeedController {
 		}
 		
 		//Decision to decide if Post is from Mote App or other Media like Facebook, Instagram etc.
-		if( source.getAggregationSourceObject()== null || source.getAggregationSourceObject().getSourceObjectId()> 0 ){
+		if( source.getAggregationSourceObject()== null || source.getAggregationSourceObject().getSourceObjectId()== 0 ){
+			postDto.setMediaPost(false);
+		}else{
 			postDto.setMediaPost(true);
 		}
 		

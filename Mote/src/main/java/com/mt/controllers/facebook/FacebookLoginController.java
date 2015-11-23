@@ -19,14 +19,8 @@ import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import views.FBSuccessDto;
 
 import com.mt.models.Aggregation;
 import com.mt.models.AggregationSourceObject;
@@ -67,10 +61,11 @@ public class FacebookLoginController {
 		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
 		
 		OAuth2Parameters params = new OAuth2Parameters();
-		//params.setRedirectUri("http://54.149.27.205:8080/fb/callback");
-		params.setRedirectUri("http://localhost:8080/fb/callback");
+		params.setRedirectUri("http://54.149.27.205:8080/fb/callback");
+		//params.setRedirectUri("http://localhost:8080/fb/callback");
 		params.setScope("public_profile, email, user_friends, user_posts, user_photos, user_videos");
-		params.setState(request.getParameter("userId"));
+		//Store user Id and client address and port, to be made available in callback, otherwise it gets lost redirection.
+		params.setState(request.getParameter("userId") + "," + request.getHeader("Referer"));
 		
 		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
 		
@@ -80,6 +75,7 @@ public class FacebookLoginController {
 		
 		log.info(" fb/login URL " + authorizeUrl);
 		
+		log.info("Login Referer : " + request.getHeader("Referer"));
 		response.sendRedirect(authorizeUrl);
 		
 	}
@@ -90,63 +86,38 @@ public class FacebookLoginController {
 	 */
 	
 	@RequestMapping("/fb/callback")
-	public String callback(@RequestParam("code") String authorizationCode, @RequestParam("state") String moteUserId, HttpServletRequest request){
+	//@ResponseStatus(value=HttpStatus.OK)
+	public String callback(@RequestParam("code") String authorizationCode, @RequestParam("state") String callbackParam, HttpServletRequest request){
 		
 		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
 		
 		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
 		
-		//AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, "http://54.149.27.205:8080/fb/callback", null);
-		AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, "http://localhost:8080/fb/callback", null);
+		AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, "http://54.149.27.205:8080/fb/callback", null);
+		//AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, "http://localhost:8080/fb/callback", null);
 		String token = accessGrant.getAccessToken();
 		
-		//request.setAttribute("facebookToken", token);
 		//request.getSession().setAttribute("facebookToken", token);
+		
+		String arr[] = callbackParam.split(",");
+		
+		String moteUserId = arr[0];
 		log.info("redirect User ID " + moteUserId);
 		
 		Facebook facebook = new FacebookTemplate(token);
 		
 		persistFBAggregationContent(facebook, moteUserId,token);
 		
-		return "redirect:/fb_login_success?facebookToken=" + token;
+		//return "redirect:/fb_login_success?facebookToken=" + token;
+		//return "redirect:/fb_login_success?facebookToken=" + token;
+		log.info("Client URL required for redirect : " + arr[1]);
+		return "redirect:" + arr[1]+ "/#/app/aggregation";
+		
 	}
-	
-	
-	/*@RequestMapping("/fb")
-	public String fb(HttpServletRequest request){
-		
-		String accessToken = (String)request.getSession().getAttribute("facebookToken");
-		
-		//String accessToken = (String)request.getAttribute("facebookToken");
-		
-		Facebook facebook = new FacebookTemplate(accessToken);
-		
-		if(facebook.isAuthorized()){
-			log.info("/fb : Is already authorized");
-			request.setAttribute("facebookToken", accessToken);
-			return "redirect:/fb_login_success";
-		}else{
-			log.info("/fb : Not authorized");
-			return "redirect:/fb/login";
-		}
-		
-	}*/
-	
-	@RequestMapping(value="/fb_login_success", method = RequestMethod.GET, produces="application/json")
-	@ResponseBody
-	public FBSuccessDto fbLoginSuccess(@RequestParam("facebookToken") String accessToken){
-					
-		FBSuccessDto fbSuccessDto = new FBSuccessDto();
-		fbSuccessDto.setFBAccessToken(accessToken);
-		fbSuccessDto.setFbSuccess(true);
-		return fbSuccessDto;
-	}
-	
 	
 	private void persistFBAggregationContent(Facebook facebook, String moteUserId, String accessToken){
 		
 		try{
-			
 		
 			User user = facebook.userOperations().getUserProfile();
 			
@@ -196,7 +167,7 @@ public class FacebookLoginController {
 				
 			}
 			
-			log.info("FB Persistance success:");
+			log.info("FB Persistance success.");
 			
 		}catch(Exception e){
 			log.error("FB Persistance Failure :" , e);

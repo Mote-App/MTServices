@@ -171,7 +171,7 @@ public class FeedController {
 				friendFeeds.add(friendFeed);
 			}
 		} catch(Exception ex) {
-			ex.printStackTrace();
+			log.error("Freind Feed Controller Error", ex);
 		}
 		
 		return friendFeeds;
@@ -200,6 +200,16 @@ public class FeedController {
 	 * @param likedPostIds
 	 */
 	private void populatePostDto(PostDto postDto, Post source, String postType) {
+		
+		if( source.getProfile().getProfileId() == null){
+			return;
+		}
+		
+		//Decision to decide if Post is from Mote App or other Media like Facebook, Instagram etc.
+		if( source.getAggregationSourceObject()== null || source.getAggregationSourceObject().getSourceObjectId()> 0 ){
+			postDto.setMediaPost(true);
+		}
+		
 		postDto.setPostId(source.getPostId());
 		postDto.setPostImg(source.getPostObjectPath());
 		postDto.setCaption(source.getPostCaption());
@@ -258,6 +268,11 @@ public class FeedController {
 		
 		Long likedPostId = null;
 		
+		if( _postUserLikeRepository == null){
+			
+			log.error("Unexcpected instance error : _postUserLikeRepository");
+		}
+		
 		likedPostId = _postUserLikeRepository.findPostLikeForLevel(source.getProfile().getProfileId(), source.getPostId(), postType);			
 
 		if(likedPostId != null && likedPostId > 0){
@@ -282,7 +297,7 @@ public class FeedController {
 		Long viewPostId  = null;
 		
 		viewPostId  = _postUserViewRepository.findPostViewForLevel(source.getProfile().getProfileId(), source.getPostId(), postType);			
-
+		
 		if(viewPostId  != null && viewPostId  > 0){
 			postDto.setViewDone(true);
 		}else{

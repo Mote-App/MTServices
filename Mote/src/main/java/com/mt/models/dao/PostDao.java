@@ -3,6 +3,7 @@ package com.mt.models.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
@@ -68,15 +69,21 @@ public class PostDao {
 	 * @return
 	 */
 	public Post getMostPopularPost(long profileId) {
-		//log.info("Get most popular post for user [profileId]: " + profileId);
 		
+		log.info("Get most popular post for user [profileId]: " + profileId);
+		
+		Long postId = 0L;
+		
+		try{
 		Object [] objects = (Object []) _entityManager.createQuery("SELECT PL.postId , COUNT(*) as likeCnt FROM PostProfileLike PL WHERE PL.profileId = :profileId GROUP BY PL.postId ORDER BY likeCnt DESC")
 				.setParameter("profileId", profileId)
 				.setMaxResults(1)
 				.getSingleResult();
 		
-		Long postId = (Long)objects[0];
-		
+			postId = (Long)objects[0];
+		}catch(NoResultException e){
+			log.info("No record found for most popular post for profileId : " + profileId);
+		}
 		return getPost(postId);
 	}
 	
@@ -116,10 +123,20 @@ public class PostDao {
 	public Post getPost(long postId) {
 		log.info("Get post for postId: " + postId);
 		
-		return (Post)_entityManager.createQuery("SELECT P FROM Post as P WHERE P.postId = :postId")
+		try{
+		
+			return (Post)_entityManager.createQuery("SELECT P FROM Post as P WHERE P.postId = :postId")
 				.setParameter("postId", postId)
 				.setMaxResults(1)
 				.getSingleResult();
+		
+		}catch(NoResultException e){
+			log.info("No record found for post : " + postId);
+		}
+		
+		Post post = new Post();
+		
+		return post;
 	}
 	
 	/*

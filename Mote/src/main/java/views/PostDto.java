@@ -21,6 +21,7 @@ public class PostDto {
 	//List<String> customTags;
 	boolean		   likeDone = false;
 	boolean		   viewDone = false;
+	boolean 	   isMediaPost = false;
 	
 	/**
 	 * 
@@ -187,7 +188,17 @@ public class PostDto {
 
 	public void setViewDone(boolean viewDone) {
 		this.viewDone = viewDone;
-	}	
+	}
+
+	public boolean isMediaPost() {
+		return isMediaPost;
+	}
+
+	public void setMediaPost(boolean isMediaPost) {
+		this.isMediaPost = isMediaPost;
+	}
+	
+	
 	
 	
 }

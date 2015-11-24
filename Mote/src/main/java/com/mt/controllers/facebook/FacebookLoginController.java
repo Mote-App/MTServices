@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Photo;
@@ -56,8 +57,6 @@ public class FacebookLoginController {
 	 */
 	@RequestMapping("/fb/login")
 	public void login (HttpServletRequest request, HttpServletResponse response) throws IOException{
-		
-				
 		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
 		
 		OAuth2Parameters params = new OAuth2Parameters();
@@ -65,19 +64,20 @@ public class FacebookLoginController {
 		//params.setRedirectUri("http://localhost:8080/fb/callback");
 		params.setScope("public_profile, email, user_friends, user_posts, user_photos, user_videos");
 		//Store user Id and client address and port, to be made available in callback, otherwise it gets lost redirection.
-		params.setState(request.getParameter("userId") + "," + request.getHeader("Referer"));
+		//params.setState(request.getParameter("userId") + "," + request.getHeader("Referer"));
+		params.setState(request.getParameter("userId") + "," + "http://localhost:8100/");
+		//params.setState(request.getParameter("userId") + "," + request.getHeader(HttpHeaders.REFERER));
 		
 		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
 		
 		String authorizeUrl = oauthOperations.buildAuthorizeUrl(params);
 		
 		log.info(" fb/login User ID " + request.getParameter("userId"));
-		
-		log.info(" fb/login URL " + authorizeUrl);
-		
+		log.info(" fb/login Authorize URL " + authorizeUrl);
 		log.info("Login Referer : " + request.getHeader("Referer"));
-		response.sendRedirect(authorizeUrl);
+		log.info("Login HttpHeaders.REFERER : " + request.getHeader(HttpHeaders.REFERER));
 		
+		response.sendRedirect(authorizeUrl);
 	}
 	
 	/*
@@ -88,7 +88,6 @@ public class FacebookLoginController {
 	@RequestMapping("/fb/callback")
 	//@ResponseStatus(value=HttpStatus.OK)
 	public String callback(@RequestParam("code") String authorizationCode, @RequestParam("state") String callbackParam, HttpServletRequest request){
-		
 		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
 		
 		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
@@ -106,11 +105,12 @@ public class FacebookLoginController {
 		
 		Facebook facebook = new FacebookTemplate(token);
 		
-		persistFBAggregationContent(facebook, moteUserId,token);
+		persistFBAggregationContent(facebook, moteUserId, token);
 		
 		//return "redirect:/fb_login_success?facebookToken=" + token;
 		//return "redirect:/fb_login_success?facebookToken=" + token;
 		log.info("Client URL required for redirect : " + arr[1]);
+		
 		return "redirect:" + arr[1]+ "/#/app/aggregation";
 		
 	}
@@ -119,7 +119,7 @@ public class FacebookLoginController {
 		
 		try{
 		
-			User user = facebook.userOperations().getUserProfile();
+			User facebookUser = facebook.userOperations().getUserProfile();
 			
 			com.mt.models.User moteUser = new com.mt.models.User();
 			
@@ -131,7 +131,7 @@ public class FacebookLoginController {
 			
 			Aggregation aggregation = new Aggregation();
 			
-			aggregation.setAggregationId(Long.parseLong(user.getId()));
+			aggregation.setAggregationId(Long.parseLong(facebookUser.getId()));
 			aggregation.setAggregationIsFriend(YES);
 			aggregation.setAggregationName(FACEBOOK);
 			aggregation.setAggregationSourceId(2);
@@ -141,13 +141,13 @@ public class FacebookLoginController {
 			_aggregationRepo.save(aggregation);
 			
 			
-			PagedList<Photo> photos = facebook.mediaOperations().getPhotos(user.getId());
+			PagedList<Photo> photos = facebook.mediaOperations().getPhotos(facebookUser.getId());
 			
 			for (Photo photo : photos) {
 				
 				AggregationSourceObject sourceObject = new AggregationSourceObject();
 				
-				sourceObject.setAggregationId(Long.parseLong(user.getId()));
+				sourceObject.setAggregationId(Long.parseLong(facebookUser.getId()));
 				sourceObject.setSourceObjectUrl(photo.getPicture());
 				sourceObject.setSourceObjectCaption(photo.getName());
 				
@@ -159,17 +159,15 @@ public class FacebookLoginController {
 				post.setPostTypeCode("public");
 				post.setPostObjectPath(FACEBOOK);
 				post.getProfile().setProfileId(Long.parseLong(moteUserId));
-				post.setPostDate( Calendar.getInstance());
+				post.setPostDate(Calendar.getInstance());
 				post.setPostObjectPath(sourceObject.getSourceObjectUrl());
 				post.setAggregationSourceObject(sourceObject);
 				
 				_postRepository.save(post);
-				
 			}
 			
 			log.info("FB Persistance success.");
-			
-		}catch(Exception e){
+		} catch(Exception e) {
 			log.error("FB Persistance Failure :" , e);
 		}
 	}

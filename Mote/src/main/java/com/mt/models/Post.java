@@ -28,7 +28,6 @@ public class Post {
 	@Column(name="post_id")
 	private long postId;
 	
-	
 	@Column(name="post_type_code")
 	private String postTypeCode;
 	
@@ -61,7 +60,6 @@ public class Post {
 	@OneToOne
 	@JoinColumn(name="source_objects_source_objects_id")
 	private AggregationSourceObject aggregationSourceObject;
-	
 	
 	/**
 	 * 
@@ -239,5 +237,38 @@ public class Post {
 		if(this.getProfile().getProfileId() != other.getProfile().getProfileId()) return false;
 		
 		return true;
+	}
+	
+	/**
+	 * Allows you to get some meaningful representation of the Aggregation.java object.
+	 * This is the "spill-your-guts method," because it simply spits out the object's
+	 * state; in other words, the current values of the important instance variables.
+	 *  
+	 * @return a "text representation" of the StringBuilder object that invoked the method call as a String.
+	 */
+	@Override
+	public String toString() {
+		/*
+		 * The StringBuilder class (added in Java 1.5) has exactly the same API as
+		 * the StringBuffer class, except StringBuilder is not thread safe (methods are not synchronized);
+		 * therefore, StringBuilder will run faster.
+		 */
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		sb.append("\n*                                          Mote Post toString()                                              ");
+		sb.append("\n* Post.java -> The persistent class for the post database table. @Entity and @Table(name=\"post\")");
+		sb.append("\n* long postId -> [@Id, @GeneratedValue(strategy = GenerationType.AUTO) and Column(name=\"post_id\")]: " + this.postId);
+		sb.append("\n* String postTypeCode -> Mote uid or anonymour or public [@Column(name=\"post_type_code\")]: " + this.postTypeCode);
+		sb.append("\n* User profile -> Mote's User object [@OneToOne and @Join@Column(name=\"post_profile_id\")]: " + this.profile);
+		sb.append("\n* String postObjectPath -> Mote's media (photos and videos) URL in CDN [@Column(name=\"post_object_path\")]: " + this.postObjectPath);
+		sb.append("\n* Calendar postDate -> [@Column(name=\"post_date\")]: " + this.postDate);
+		sb.append("\n* String postCaption -> [@Column(name=\"post_caption\")]: " + this.postCaption);
+		sb.append("\n* int postSchoolPromote -> ** deprecated ** [@Column(name=\"post_school_promote\")]: " + this.postSchoolPromote);
+		sb.append("\n* int postNationalPromote -> ** deprecated ** [@Column(name=\"post_national_promote\")]: " + this.postNationalPromote);
+		sb.append("\n* List<PostTags> listPostTags -> [@OneToMany and @JoinColumn(name=\"post_post_id\")]: " + this.listPostTags);
+		sb.append("\n* AggregationSourceObject aggregationSourceObject -> [@OneToOne and @Join@Column(name=\"source_objects_source_objects_id\")]: " + this.aggregationSourceObject);
+		sb.append("\n* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+		return sb.toString();
 	}
 }

@@ -114,4 +114,32 @@ public class Aggregation {
 		this.accessToken = accessToken;
 	}
 	
+	/**
+	 * Allows you to get some meaningful representation of the Aggregation.java object.
+	 * This is the "spill-your-guts method," because it simply spits out the object's
+	 * state; in other words, the current values of the important instance variables.
+	 *  
+	 * @return a "text representation" of the StringBuilder object that invoked the method call as a String.
+	 */
+	@Override
+	public String toString() {
+		/*
+		 * The StringBuilder class (added in Java 1.5) has exactly the same API as
+		 * the StringBuffer class, except StringBuilder is not thread safe (methods are not synchronized);
+		 * therefore, StringBuilder will run faster.
+		 */
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		sb.append("\n*                                      Mote Aggregation toString()                                           ");
+		sb.append("\n* Aggregation.java -> The persistent class for the aggregation database table. @Entity and @Table(name=\"aggregation\")");
+		sb.append("\n* User profileId -> Mote User's object [@OneToOne and @JoinColumn(name=\"profile_profile_id\")]: " + this.profileId);
+		sb.append("\n* Long aggregationId -> Social Platform user's Id [@Id and @Column(name=\"aggregation_id\")]: " + this.aggregationId);
+		sb.append("\n* int aggregationSourceId -> Social Platform id in Mote [@Column(name=\"aggregation_source_aggregation_source_id\")]: " + this.aggregationSourceId);
+		sb.append("\n* String aggregationIsFriend -> ** not sure yet ** [@Column(name=\"aggregation_is_friend\")]: " + this.aggregationIsFriend);
+		sb.append("\n* String aggregationName -> Social Platform name [@Column(name=\"aggregation_source_profile\")]: " + this.aggregationName);
+		sb.append("\n* String accessToken -> Facebook user's OAuth 2.0 access token [@Column(name=\"access_token\")]: " + this.accessToken);
+		sb.append("\n* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+		return sb.toString();
+	}
 }

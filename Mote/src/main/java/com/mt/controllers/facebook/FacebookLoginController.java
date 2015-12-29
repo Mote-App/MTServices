@@ -72,8 +72,9 @@ public class FacebookLoginController {
 		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
 		
 		OAuth2Parameters params = new OAuth2Parameters();
-		params.setRedirectUri("http://54.149.27.205:8080/fb/callback");
-		//params.setRedirectUri("http://localhost:8080/fb/callback");
+		
+		// AWS EC2 URL http://54.149.27.205     Account was closed 28th December 2015
+		params.setRedirectUri("http://127.0.0.1:8080/fb/callback");
 		params.setScope("public_profile, email, user_friends, user_posts, user_photos, user_videos");
 		//Store user Id and client address and port, to be made available in callback, otherwise it gets lost redirection.
 		//params.setState(request.getParameter("userId") + "," + request.getHeader("Referer"));
@@ -111,8 +112,7 @@ public class FacebookLoginController {
 		
 		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
 		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
-		AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, "http://54.149.27.205:8080/fb/callback", null);
-		//AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, "http://localhost:8080/fb/callback", null);
+		AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, "http://127.0.0.1:8080/fb/callback", null);
 		String token = accessGrant.getAccessToken();
 		
 		//request.getSession().setAttribute("facebookToken", token);

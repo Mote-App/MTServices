@@ -68,13 +68,16 @@ public class FacebookLoginController {
 	 * This REST api will redirect the user to a Facebook authorization page.
 	 */
 	@RequestMapping("/fb/login")
-	public void login (HttpServletRequest request, HttpServletResponse response) throws IOException{
-		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
+	public void login (HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// Mote Facebook Test App, to be able to use localhost
+		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("1105685566108143", "0b4b69914152837f9978611d84629e66");
+		// Mote Facebook Production App
+		//FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
 		
 		OAuth2Parameters params = new OAuth2Parameters();
 		
 		// AWS EC2 URL http://54.149.27.205     Account was closed 28th December 2015
-		params.setRedirectUri("http://127.0.0.1:8080/fb/callback");
+		params.setRedirectUri("http://localhost:8100/fb/callback");
 		params.setScope("public_profile, email, user_friends, user_posts, user_photos, user_videos");
 		//Store user Id and client address and port, to be made available in callback, otherwise it gets lost redirection.
 		//params.setState(request.getParameter("userId") + "," + request.getHeader("Referer"));
@@ -110,9 +113,13 @@ public class FacebookLoginController {
 		log.info("authorizationCode: " + authorizationCode);
 		log.info("callbackParam: " + callbackParam);
 		
-		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
+		// Mote Facebook Test App, to be able to use localhost
+		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("1105685566108143", "0b4b69914152837f9978611d84629e66");
+		// Mote Facebook Production App
+		//FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
+		
 		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
-		AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, "http://127.0.0.1:8080/fb/callback", null);
+		AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, "http://localhost:8100/fb/callback", null);
 		String token = accessGrant.getAccessToken();
 		
 		//request.getSession().setAttribute("facebookToken", token);

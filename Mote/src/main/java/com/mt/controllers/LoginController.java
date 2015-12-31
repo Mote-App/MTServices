@@ -1,5 +1,7 @@
 package com.mt.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +24,7 @@ import views.TokenDto;
  */
 @Controller
 public class LoginController {
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	UserDao _userDao;
 	
@@ -37,6 +40,8 @@ public class LoginController {
 		try {
 			String userName = login.getUserName();
 			User user = _userDao.getUserbyName(userName);
+			
+			log.info("userName:  " + userName + " | login.getPassword():  " + login.getPassword() + " user.getProfilePassword(): " + user.getProfilePassword());
 			
 			if(user.getProfilePassword().equals(login.getPassword())) {
 				TokenDto dto = new TokenDto("To Be Implemented", user.getProfileId(), user.getProfileCollege().getCollegeId());

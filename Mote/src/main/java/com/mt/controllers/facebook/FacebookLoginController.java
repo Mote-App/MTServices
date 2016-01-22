@@ -81,6 +81,7 @@ public class FacebookLoginController {
 		params.setScope("public_profile, email, user_friends, user_posts, user_photos, user_videos");
 		//Store user Id and client address and port, to be made available in callback, otherwise it gets lost redirection.
 		//params.setState(request.getParameter("userId") + "," + request.getHeader("Referer"));
+		// localhost:8100 means redirect request back to front-end (Mote app).
 		params.setState(request.getParameter("userId") + "," + "http://localhost:8100/");
 		//params.setState(request.getParameter("userId") + "," + request.getHeader(HttpHeaders.REFERER));
 		
@@ -192,6 +193,8 @@ public class FacebookLoginController {
 			User facebookUser = facebook.userOperations().getUserProfile();
 			PagedList<String> friendIds = facebook.friendOperations().getFriendIds(facebookUser.getId());
 			
+			log.info("friendIds.size(): " + friendIds.size());
+			
 			for(String friendId : friendIds) {
 				/*
 				 * If friendId (Facebook User's Friend fb id) is found in motedb.aggregation table (aggregation_id),
@@ -282,7 +285,8 @@ public class FacebookLoginController {
 				log.info(sourceObject.toString());
 				
 				_aggregationSourceObjectRepository.save(sourceObject);
-
+				
+				log.info("video.getSource(): " + video.getSource());
 				log.info("video.getDescription(): " + video.getDescription());
 				log.info("video.getEmbedHtml(): " + video.getEmbedHtml());
 				log.info("video.toString(): " + video.toString());

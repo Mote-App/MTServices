@@ -115,7 +115,44 @@ public class FeedController {
 			// Get the userId order by posting date DESC means latest first
 			List<Long> postUserIds = _postDao.getUserPosts(friends);
 			
+			/*
+			 * Changes for Facebook to display 10 vertical images
+			 */
 			for(int i = 0; i < postUserIds.size(); i++) {
+				
+				Long postUserId = postUserIds.get(i);
+				User user = _userDao.getUser(postUserId);
+				
+				FriendFeedDto friendFeed = new FriendFeedDto();
+				friendFeed.setUserId(postUserId);
+				friendFeed.setName(user.getProfileFirstName() + " " + user.getProfileLastName());
+				//friendFeed.setFacebookName(user.getFa);
+				friendFeed.setProfileImg(user.getProfilePictureUrl());
+				friendFeed.setSchoolId(user.getProfileCollege().getCollegeId());
+				friendFeed.setSchoolImg(user.getProfileCollege().getCollegeImgPath());
+				friendFeed.setSchoolName(user.getProfileCollege().getCollegeName());
+				
+				// Find the current and most recent post
+				List<Post> posts = _postDao.getMostRecentPost(user.getProfileId());
+				
+				for (int j=0; j < posts.size(); j++) {
+					
+					PostsDto postsDto = new PostsDto();
+					
+					// Get the current post
+					PostDto currentPost = new PostDto();
+					
+					populatePostDto(currentPost, posts.get(j), "F");
+					postsDto.setCurrentPost(currentPost);
+					
+					friendFeed.setPosts(postsDto);
+					friendFeeds.add(friendFeed);
+				}
+				
+			}
+			
+			/* Original Code 
+			 * for(int i = 0; i < postUserIds.size(); i++) {
 				Long postUserId = postUserIds.get(i);
 				User user = _userDao.getUser(postUserId);
 				
@@ -158,6 +195,7 @@ public class FeedController {
 				
 				// Find most popular post
 				PostDto mostPopularPost = new PostDto();
+				
 				Post post = _postDao.getMostPopularPost(user.getProfileId());
 				
 				if(post != null) {
@@ -169,7 +207,9 @@ public class FeedController {
 				postsDto.setPopularPost(mostPopularPost);
 				friendFeed.setPosts(postsDto);
 				friendFeeds.add(friendFeed);
-			}
+			}*/
+			
+			
 		} catch(Exception ex) {
 			log.error("Freind Feed Controller Error", ex);
 		}

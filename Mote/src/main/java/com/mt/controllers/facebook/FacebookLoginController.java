@@ -81,7 +81,7 @@ public class FacebookLoginController {
 		params.setScope("public_profile, email, user_friends, user_posts, user_photos, user_videos");
 		//Store user Id and client address and port, to be made available in callback, otherwise it gets lost redirection.
 		//params.setState(request.getParameter("userId") + "," + request.getHeader("Referer"));
-		params.setState(request.getParameter("userId") + "," + "http://localhost:8080/");
+		params.setState(request.getParameter("userId") + "," + "http://localhost:8100/");
 		//params.setState(request.getParameter("userId") + "," + request.getHeader(HttpHeaders.REFERER));
 		
 		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
@@ -137,9 +137,9 @@ public class FacebookLoginController {
 		
 		//return "redirect:/fb_login_success?facebookToken=" + token;
 		log.info("Client URL required for redirect : " + arr[1]);
-		log.info("return to 'redirect:" + arr[1]+ "/#/app/aggregation'");
+		log.info("return to 'redirect:" + arr[1]+ "#/app/aggregation'");
 		
-		return "redirect:" + arr[1]+ "/#/app/aggregation";
+		return "redirect:" + arr[1]+ "#/app/aggregation";
 		
 	}
 	

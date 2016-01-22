@@ -59,7 +59,7 @@ public class PostDao {
 		
 		return _entityManager.createQuery("SELECT P FROM Post as P WHERE P.profile.profileId = :profileId ORDER BY P.postDate DESC")
 				.setParameter("profileId", profileId)
-				.setMaxResults(2)
+				.setMaxResults(10) //changed from 2 to 10 to support Facebook
 				.getResultList();
 	}
 	

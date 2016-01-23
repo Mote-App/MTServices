@@ -123,19 +123,21 @@ public class FeedController {
 				Long postUserId = postUserIds.get(i);
 				User user = _userDao.getUser(postUserId);
 				
-				FriendFeedDto friendFeed = new FriendFeedDto();
-				friendFeed.setUserId(postUserId);
-				friendFeed.setName(user.getProfileFirstName() + " " + user.getProfileLastName());
-				//friendFeed.setFacebookName(user.getFa);
-				friendFeed.setProfileImg(user.getProfilePictureUrl());
-				friendFeed.setSchoolId(user.getProfileCollege().getCollegeId());
-				friendFeed.setSchoolImg(user.getProfileCollege().getCollegeImgPath());
-				friendFeed.setSchoolName(user.getProfileCollege().getCollegeName());
-				
 				// Find the current and most recent post
 				List<Post> posts = _postDao.getMostRecentPost(user.getProfileId());
 				
 				for (int j=0; j < posts.size(); j++) {
+					
+					
+					FriendFeedDto friendFeed = new FriendFeedDto();
+					friendFeed.setUserId(postUserId);
+					friendFeed.setName(user.getProfileFirstName() + " " + user.getProfileLastName());
+					//friendFeed.setFacebookName(user.getFa);
+					friendFeed.setProfileImg(user.getProfilePictureUrl());
+					friendFeed.setSchoolId(user.getProfileCollege().getCollegeId());
+					friendFeed.setSchoolImg(user.getProfileCollege().getCollegeImgPath());
+					friendFeed.setSchoolName(user.getProfileCollege().getCollegeName());
+					
 					
 					PostsDto postsDto = new PostsDto();
 					

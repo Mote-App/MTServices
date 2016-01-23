@@ -134,7 +134,7 @@ public class FacebookLoginController {
 		persistFacebookUserProfile(facebook, moteUserId, token);
 		autoFriendFacebookUserProfileFriends(facebook, moteUserId);
 		postFacebookUserProfilePhotos(facebook, moteUserId);
-		postFacebookUserProfileVideos(facebook, moteUserId);
+		//postFacebookUserProfileVideos(facebook, moteUserId);
 		
 		//return "redirect:/fb_login_success?facebookToken=" + token;
 		log.info("Client URL required for redirect : " + arr[1]);
@@ -167,6 +167,7 @@ public class FacebookLoginController {
 			aggregation.setAggregationId(Long.parseLong(facebookUser.getId()));
 			aggregation.setAggregationIsFriend(YES);
 			aggregation.setAggregationName(FACEBOOK);
+			//Hardcoded aggregation platform to be 2
 			aggregation.setAggregationSourceId(2);
 			aggregation.setProfileId(moteUser);
 			aggregation.setAccessToken(accessToken);
@@ -225,37 +226,46 @@ public class FacebookLoginController {
 	private void postFacebookUserProfilePhotos(Facebook facebook, long moteUserId) {
 		try {
 			User facebookUser = facebook.userOperations().getUserProfile();
-			PagedList<Photo> photos = facebook.mediaOperations().getPhotos(facebookUser.getId());
+			//PagedList<Photo> photos = facebook.mediaOperations().getPhotos(facebookUser.getId());
+			PagedList<org.springframework.social.facebook.api.Post> fbPosts = facebook.feedOperations().getFeed(facebookUser.getId());
 			
-			for(Photo photo : photos) {
-				AggregationSourceObject sourceObject = new AggregationSourceObject();
+			
+			for(org.springframework.social.facebook.api.Post fbPost : fbPosts) {
+				//Only process post type PhotoPost
+				if(fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.PHOTO || 
+						fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.VIDEO)
+				{
+					AggregationSourceObject sourceObject = new AggregationSourceObject();
+					
+					sourceObject.setAggregationId(Long.parseLong(facebookUser.getId()));
+					sourceObject.setSourceObjectUrl(fbPost.getPicture());
+					sourceObject.setSourceObjectCaption(fbPost.getCaption());
+					
+					log.info(sourceObject.toString());
+					
+					Long existingSourceObjectId = _aggregationSourceObjectRepository.findExistingAggregationSourceObject(sourceObject.getAggregationId(), sourceObject.getSourceObjectUrl()); 
+					
+					if( existingSourceObjectId != null && existingSourceObjectId > 0 ){
+						//Facebook content already exist so continue with next content
+						continue;
+					}
+					_aggregationSourceObjectRepository.save(sourceObject);
+									
+					//For each source object create new Post entry with reference to source_id
+					Post post = new Post();
+					
+					post.setPostTypeCode("public");
+					post.setPostObjectPath(FACEBOOK);
+					post.getProfile().setProfileId(moteUserId);
+					post.setPostDate(Calendar.getInstance());
+					post.setPostObjectPath(sourceObject.getSourceObjectUrl());
+					post.setPostCaption(sourceObject.getSourceObjectCaption());
+					post.setAggregationSourceObject(sourceObject);
+					
+					log.info(post.toString());
 				
-				sourceObject.setAggregationId(Long.parseLong(facebookUser.getId()));
-				sourceObject.setSourceObjectUrl(photo.getPicture());
-				sourceObject.setSourceObjectCaption(photo.getName());
-				
-				log.info(sourceObject.toString());
-				
-				_aggregationSourceObjectRepository.save(sourceObject);
-				
-				log.info("photo.getHeight(): " + photo.getHeight());
-				log.info("photo.getIcon(): " + photo.getIcon());
-				log.info("photo.toString(): " + photo.toString());
-				//log.info(": " + );
-				
-				//For each source object create new Post entry with reference to source_id
-				Post post = new Post();
-				
-				post.setPostTypeCode("public");
-				post.setPostObjectPath(FACEBOOK);
-				post.getProfile().setProfileId(moteUserId);
-				post.setPostDate(Calendar.getInstance());
-				post.setPostObjectPath(sourceObject.getSourceObjectUrl());
-				post.setAggregationSourceObject(sourceObject);
-				
-				log.info(post.toString());
-				
-				_postRepository.save(post);
+					_postRepository.save(post);
+				}
 			}
 			
 			log.info("The Facebook user profile photos Persistance was successfull.");
@@ -273,38 +283,37 @@ public class FacebookLoginController {
 	private void postFacebookUserProfileVideos(Facebook facebook, long moteUserId) {
 		try {
 			User facebookUser = facebook.userOperations().getUserProfile();
-			PagedList<Video> videos = facebook.mediaOperations().getVideos(facebookUser.getId());
+			//PagedList<Video> videos = facebook.mediaOperations().getVideos(facebookUser.getId());
+			PagedList<org.springframework.social.facebook.api.Post> fbPosts = facebook.feedOperations().getFeed(facebookUser.getId());
 			
-			for(Video video : videos) {
-				AggregationSourceObject sourceObject = new AggregationSourceObject();
-				
-				sourceObject.setAggregationId(Long.parseLong(facebookUser.getId()));
-				sourceObject.setSourceObjectUrl(video.getSource());
-				sourceObject.setSourceObjectCaption(video.getName());
-				
-				log.info(sourceObject.toString());
-				
-				_aggregationSourceObjectRepository.save(sourceObject);
-				
-				log.info("video.getSource(): " + video.getSource());
-				log.info("video.getDescription(): " + video.getDescription());
-				log.info("video.getEmbedHtml(): " + video.getEmbedHtml());
-				log.info("video.toString(): " + video.toString());
-				//log.info(": " + );
-				
-				//For each source object create new Post entry with reference to source_id
-				Post post = new Post();
-				
-				post.setPostTypeCode("public");
-				post.setPostObjectPath(FACEBOOK);
-				post.getProfile().setProfileId(moteUserId);
-				post.setPostDate(Calendar.getInstance());
-				post.setPostObjectPath(sourceObject.getSourceObjectUrl());
-				post.setAggregationSourceObject(sourceObject);
-				
-				log.info(post.toString());
-				
-				_postRepository.save(post);
+			for(org.springframework.social.facebook.api.Post fbPost : fbPosts) {
+				//Only process post type VideoPost
+				if( fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.VIDEO){
+					
+					AggregationSourceObject sourceObject = new AggregationSourceObject();
+					
+					sourceObject.setAggregationId(Long.parseLong(facebookUser.getId()));
+					sourceObject.setSourceObjectUrl(fbPost.getSource());
+					sourceObject.setSourceObjectCaption(fbPost.getCaption());
+					
+					log.info(sourceObject.toString());
+					
+					_aggregationSourceObjectRepository.save(sourceObject);
+					
+					//For each source object create new Post entry with reference to source_id
+					Post post = new Post();
+					
+					post.setPostTypeCode("public");
+					post.setPostObjectPath(FACEBOOK);
+					post.getProfile().setProfileId(moteUserId);
+					post.setPostDate(Calendar.getInstance());
+					post.setPostObjectPath(sourceObject.getSourceObjectUrl());
+					post.setAggregationSourceObject(sourceObject);
+					
+					log.info(post.toString());
+					
+					_postRepository.save(post);
+				}
 			}
 			
 			log.info("The Facebook user profile videos Persistance was successfull.");

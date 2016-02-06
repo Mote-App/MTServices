@@ -205,6 +205,9 @@ public class FacebookLoginController {
 				
 				if(fbFriendMoteUser != null) {
 					log.info("friendId '" + friendId + "' (Facebook User's Friend fb id) is register with Mote, found in motedb.aggregation table (aggregation_id) " + fbFriendMoteUser.toString());
+					
+					//TODO add logic to check if they are both already friends in Mote, that is, motedb.profile_has_friend
+					
 					_userFriendsDao.addFriend(moteUserId, fbFriendMoteUser.getProfileId());
 				} else {
 					log.info("friendId '" + friendId + "' (Facebook User's Friend fb id) has not register with Mote, not found in motedb.aggregation table (aggregation_id)");

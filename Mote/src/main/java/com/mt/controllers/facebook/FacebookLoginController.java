@@ -209,7 +209,7 @@ public class FacebookLoginController {
 				com.mt.models.User fbFriendMoteUser = _aggregationRepo.findUserAggregationFriend(Long.parseLong(fbFriendId), FACEBOOK);
 				
 				if(fbFriendMoteUser != null) {
-					log.info("friendId '" + fbFriendId + "' (Facebook User's Friend fb id) is register with Mote, found in motedb.aggregation table (aggregation_id) " + fbFriendMoteUser.toString());
+					log.info("friendId '" + fbFriendId + "' (Facebook User's Friend fb id) is register with Mote, found in motedb.aggregation table (aggregation_id: '" + fbFriendMoteUser.getProfileId().longValue() + "')" + fbFriendMoteUser.toString());
 					
 					Long mtFriendId = _userFriendRepository.findUserFriend(moteUserId, fbFriendMoteUser.getProfileId().longValue());
 					

@@ -165,6 +165,7 @@ public class FacebookLoginController {
 			Aggregation aggregation = new Aggregation();
 			
 			aggregation.setAggregationId(Long.parseLong(facebookUser.getId()));
+			//This field should be removed from Aggregation table because its not used. Instead existing table profile_has_friend directly.
 			aggregation.setAggregationIsFriend(YES);
 			aggregation.setAggregationName(FACEBOOK);
 			//Hardcoded aggregation platform to be 2
@@ -230,19 +231,26 @@ public class FacebookLoginController {
 		try {
 			User facebookUser = facebook.userOperations().getUserProfile();
 			//PagedList<Photo> photos = facebook.mediaOperations().getPhotos(facebookUser.getId());
-			PagedList<org.springframework.social.facebook.api.Post> fbPosts = facebook.feedOperations().getFeed(facebookUser.getId());
+			PagedList<org.springframework.social.facebook.api.Post> fbPosts = facebook.feedOperations().getFeed();
 			
 			
 			for(org.springframework.social.facebook.api.Post fbPost : fbPosts) {
 				//Only process post type PhotoPost
-				if(fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.PHOTO || 
-						fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.VIDEO)
-				{
+				
 					AggregationSourceObject sourceObject = new AggregationSourceObject();
 					
 					sourceObject.setAggregationId(Long.parseLong(facebookUser.getId()));
-					sourceObject.setSourceObjectUrl(fbPost.getPicture());
-					sourceObject.setSourceObjectCaption(fbPost.getCaption());
+					if(fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.PHOTO )
+					{
+						sourceObject.setSourceObjectUrl(fbPost.getPicture());
+						sourceObject.setSourceObjectCaption(fbPost.getCaption());
+					}
+					else if(fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.VIDEO){
+						
+						Video video = facebook.mediaOperations().getVideo(fbPost.getObjectId());
+						sourceObject.setSourceObjectUrl(video.getSource());
+						sourceObject.setSourceObjectCaption(fbPost.getCaption());
+					}
 					
 					log.info(sourceObject.toString());
 					
@@ -268,7 +276,6 @@ public class FacebookLoginController {
 					log.info(post.toString());
 				
 					_postRepository.save(post);
-				}
 			}
 			
 			log.info("The Facebook user profile photos Persistance was successfull.");

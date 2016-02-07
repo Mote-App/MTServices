@@ -244,26 +244,33 @@ public class FacebookLoginController {
 			//PagedList<Photo> photos = facebook.mediaOperations().getPhotos(facebookUser.getId());
 			PagedList<org.springframework.social.facebook.api.Post> fbPosts = facebook.feedOperations().getFeed();
 			
+			log.info("Total posts obtained : " + fbPosts.size());
 			
 			for(org.springframework.social.facebook.api.Post fbPost : fbPosts) {
 				//Only process post type PhotoPost
 				
+				if(fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.PHOTO || 
+						fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.VIDEO) {
+					
 					AggregationSourceObject sourceObject = new AggregationSourceObject();
+					
+					log.info("Processing facebook post's type: " + fbPost.getType());
 					
 					sourceObject.setAggregationId(Long.parseLong(facebookUser.getId()));
 					if(fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.PHOTO )
 					{
+						log.info("Processing facebook post's photo");
 						sourceObject.setSourceObjectUrl(fbPost.getPicture());
 						sourceObject.setSourceObjectCaption(fbPost.getCaption());
 					}
 					else if(fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.VIDEO){
-						
+						log.info("Processing facebook post's video ");
 						Video video = facebook.mediaOperations().getVideo(fbPost.getObjectId());
 						sourceObject.setSourceObjectUrl(video.getSource());
 						sourceObject.setSourceObjectCaption(fbPost.getCaption());
 					}
 					
-					log.info(sourceObject.toString());
+					//log.info(sourceObject.toString());
 					
 					Long existingSourceObjectId = _aggregationSourceObjectRepository.findExistingAggregationSourceObject(sourceObject.getAggregationId(), sourceObject.getSourceObjectUrl()); 
 					
@@ -284,9 +291,10 @@ public class FacebookLoginController {
 					post.setPostCaption(sourceObject.getSourceObjectCaption());
 					post.setAggregationSourceObject(sourceObject);
 					
-					log.info(post.toString());
+					//log.info(post.toString());
 				
 					_postRepository.save(post);
+				}
 			}
 			
 			log.info("The Facebook user profile photos Persistance was successfull.");

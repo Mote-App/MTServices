@@ -31,6 +31,7 @@ import com.mt.models.dao.UserFriendsDao;
 import com.mt.models.repository.AggregationRepository;
 import com.mt.models.repository.AggregationSourceObjectRepository;
 import com.mt.models.repository.PostRepository;
+import com.mt.models.repository.UserFriendRepository;
 import com.mt.models.repository.UserRepository;
 
 /**
@@ -56,7 +57,10 @@ public class FacebookLoginController {
 	AggregationSourceObjectRepository _aggregationSourceObjectRepository;
 	
 	@Autowired
-	UserRepository _userRepository;
+	UserFriendRepository _userFriendRepository;
+	
+	//@Autowired
+	//UserRepository _userRepository;
 	
 	@Autowired
 	UserFriendsDao _userFriendsDao;
@@ -193,25 +197,32 @@ public class FacebookLoginController {
 	private void autoFriendFacebookUserProfileFriends(Facebook facebook, long moteUserId) {
 		try {
 			User facebookUser = facebook.userOperations().getUserProfile();
-			PagedList<String> friendIds = facebook.friendOperations().getFriendIds(facebookUser.getId());
+			PagedList<String> fbFriendIds = facebook.friendOperations().getFriendIds(facebookUser.getId());
 			
-			log.info("friendIds.size(): " + friendIds.size());
+			log.info("fbFriendIds.size(): " + fbFriendIds.size());
 			
-			for(String friendId : friendIds) {
+			for(String fbFriendId : fbFriendIds) {
 				/*
 				 * If friendId (Facebook User's Friend fb id) is found in motedb.aggregation table (aggregation_id),
 				 * then this Facebook user has a Mote profile; therefore, auto friend if they are not friends already with Mote user.
 				 */
-				com.mt.models.User fbFriendMoteUser = _aggregationRepo.findUserAggregationFriend(Long.parseLong(friendId), FACEBOOK);
+				com.mt.models.User fbFriendMoteUser = _aggregationRepo.findUserAggregationFriend(Long.parseLong(fbFriendId), FACEBOOK);
 				
 				if(fbFriendMoteUser != null) {
-					log.info("friendId '" + friendId + "' (Facebook User's Friend fb id) is register with Mote, found in motedb.aggregation table (aggregation_id) " + fbFriendMoteUser.toString());
+					log.info("friendId '" + fbFriendId + "' (Facebook User's Friend fb id) is register with Mote, found in motedb.aggregation table (aggregation_id) " + fbFriendMoteUser.toString());
 					
-					//TODO add logic to check if they are both already friends in Mote, that is, motedb.profile_has_friend
+					Long mtFriendId = _userFriendRepository.findUserFriend(moteUserId, fbFriendMoteUser.getProfileId());
 					
-					_userFriendsDao.addFriend(moteUserId, fbFriendMoteUser.getProfileId());
+					log.info("mtFriendId: " + mtFriendId);
+					
+					if(mtFriendId != null &&  mtFriendId > 0) {
+						log.info("Already friends in Mote; therefore, to avoid adding duplicate record do nothing.");
+					} else {
+						log.info("Both register in Mote but they are not friends in Mote; therefore, auto-friend.");
+						_userFriendsDao.addFriend(moteUserId, fbFriendMoteUser.getProfileId());
+					}
 				} else {
-					log.info("friendId '" + friendId + "' (Facebook User's Friend fb id) has not register with Mote, not found in motedb.aggregation table (aggregation_id)");
+					log.info("friendId '" + fbFriendId + "' (Facebook User's Friend fb id) has not register with Mote, not found in motedb.aggregation table (aggregation_id)");
 				}
 			}
 			

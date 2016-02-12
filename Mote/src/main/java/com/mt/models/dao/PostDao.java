@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mt.models.Post;
-import com.mt.models.repository.PostRepository;
 
 /**
  * The <code>PostDao</code> ...

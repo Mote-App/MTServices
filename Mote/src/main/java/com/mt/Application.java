@@ -12,7 +12,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.social.config.annotation.EnableSocial;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * The <code>Application</code> is the Social Stairway Algorithm application entry point.

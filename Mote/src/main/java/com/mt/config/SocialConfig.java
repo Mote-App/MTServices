@@ -9,7 +9,6 @@ import org.springframework.social.config.annotation.ConnectionFactoryConfigurer;
 import org.springframework.social.config.annotation.SocialConfigurer;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 
 @Configuration
 public class SocialConfig implements SocialConfigurer {

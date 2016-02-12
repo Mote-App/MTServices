@@ -122,9 +122,9 @@ public class FileUploadController {
 				}
 				
 				//post.setLstPostTags(lstPostTags);
-				String csvCustomTags = newPostDto.getCustomTags();
+				/*String csvCustomTags = newPostDto.getCustomTags();
 				
-				/*if(csvCustomTags != null) {
+				if(csvCustomTags != null) {
 					//List<PostCustomTags> lstPostCustomTags = new ArrayList<PostCustomTags>();
 					String arr[] = csvCustomTags.split(",");
 					

@@ -3,13 +3,9 @@ package com.mt.algorithm.ssa;
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import com.mt.models.Post;
@@ -18,7 +14,6 @@ import com.mt.models.User;
 import com.mt.models.dao.PostDao;
 import com.mt.models.dao.SSAParamsDao;
 import com.mt.models.dao.UserDao;
-import com.mt.models.repository.PostRepository;
 import com.mt.models.repository.PostUserLikeRepository;
 import com.mt.models.repository.PostUserViewRepository;
 

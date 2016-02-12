@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
-import org.springframework.social.facebook.api.Photo;
 import org.springframework.social.facebook.api.User;
 import org.springframework.social.facebook.api.Video;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
@@ -32,7 +31,6 @@ import com.mt.models.repository.AggregationRepository;
 import com.mt.models.repository.AggregationSourceObjectRepository;
 import com.mt.models.repository.PostRepository;
 import com.mt.models.repository.UserFriendRepository;
-import com.mt.models.repository.UserRepository;
 
 /**
  * The <code>FacebookLoginController</code> is ...
@@ -58,9 +56,6 @@ public class FacebookLoginController {
 	
 	@Autowired
 	UserFriendRepository _userFriendRepository;
-	
-	//@Autowired
-	//UserRepository _userRepository;
 	
 	@Autowired
 	UserFriendsDao _userFriendsDao;
@@ -257,13 +252,11 @@ public class FacebookLoginController {
 					log.info("Processing facebook post's type: " + fbPost.getType());
 					
 					sourceObject.setAggregationId(Long.parseLong(facebookUser.getId()));
-					if(fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.PHOTO )
-					{
+					if(fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.PHOTO) {
 						log.info("Processing facebook post's photo");
 						sourceObject.setSourceObjectUrl(fbPost.getPicture());
 						sourceObject.setSourceObjectCaption(fbPost.getCaption());
-					}
-					else if(fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.VIDEO){
+					} else if(fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.VIDEO){
 						log.info("Processing facebook post's video ");
 						Video video = facebook.mediaOperations().getVideo(fbPost.getObjectId());
 						sourceObject.setSourceObjectUrl(video.getSource());
@@ -271,15 +264,15 @@ public class FacebookLoginController {
 					}
 					
 					//log.info(sourceObject.toString());
-					
 					Long existingSourceObjectId = _aggregationSourceObjectRepository.findExistingAggregationSourceObject(sourceObject.getAggregationId(), sourceObject.getSourceObjectUrl()); 
 					
 					if( existingSourceObjectId != null && existingSourceObjectId > 0 ){
 						//Facebook content already exist so continue with next content
 						continue;
 					}
+					
 					_aggregationSourceObjectRepository.save(sourceObject);
-									
+							
 					//For each source object create new Post entry with reference to source_id
 					Post post = new Post();
 					
@@ -292,7 +285,6 @@ public class FacebookLoginController {
 					post.setAggregationSourceObject(sourceObject);
 					
 					//log.info(post.toString());
-				
 					_postRepository.save(post);
 				}
 			}
@@ -308,7 +300,7 @@ public class FacebookLoginController {
 	 * 
 	 * @param facebook an interface specifying a basic set of operations for interacting with Facebook.
 	 * @param moteUserId a long value that represents the Mote User Id.
-	 */
+	 *
 	private void postFacebookUserProfileVideos(Facebook facebook, long moteUserId) {
 		try {
 			User facebookUser = facebook.userOperations().getUserProfile();
@@ -349,5 +341,5 @@ public class FacebookLoginController {
 		} catch(Exception e) {
 			log.error("The Facebook user profile videos Persistance was a failure" , e);
 		}
-	}
+	}*/
 }

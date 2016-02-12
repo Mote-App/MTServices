@@ -1,18 +1,10 @@
 package com.mt.controllers.instagram;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 //import org.springframework.social.instagram.api.Instagram;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,15 +12,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.mt.exception.MtException;
 import com.mt.models.Aggregation;
-import com.mt.models.College;
-import com.mt.models.Locale;
 import com.mt.models.User;
 import com.mt.models.repository.AggregationRepository;
-import com.mt.models.repository.PostRepository;
 import com.mt.vo.instagram.InstagramResponse;
-
-import views.AggregationDto;
-
 
 /**
  * The <code>InstagramProfileController</code> is ...
@@ -45,7 +31,7 @@ public class InstagramProfileController {
 	
 	private static final String INSTAGRAM = "Instagram";
 	private static final String YES = "Y";
-	private static final String NO = "N";
+	//private static final String NO = "N";
 	
 	@Autowired 
 	AggregationRepository _aggregationRepo;

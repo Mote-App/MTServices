@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import views.AggregationDto;
 import views.CollegeDto;
 import views.UserDto;
 
 import com.mt.exception.MtException;
-import com.mt.models.Aggregation;
 import com.mt.models.College;
 import com.mt.models.Locale;
 import com.mt.models.User;

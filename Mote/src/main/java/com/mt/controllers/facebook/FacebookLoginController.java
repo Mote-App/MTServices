@@ -132,7 +132,7 @@ public class FacebookLoginController {
 		
 		persistFacebookUserProfile(facebook, moteUserId, token);
 		autoFriendFacebookUserProfileFriends(facebook, moteUserId);
-		postFacebookUserProfilePhotos(facebook, moteUserId);
+		postFacebookUserProfileMedia(facebook, moteUserId);
 		//postFacebookUserProfileVideos(facebook, moteUserId);
 		
 		//return "redirect:/fb_login_success?facebookToken=" + token;
@@ -233,7 +233,7 @@ public class FacebookLoginController {
 	 * @param facebook an interface specifying a basic set of operations for interacting with Facebook.
 	 * @param moteUserId a long value that represents the Mote User Id.
 	 */
-	private void postFacebookUserProfilePhotos(Facebook facebook, long moteUserId) {
+	private void postFacebookUserProfileMedia(Facebook facebook, long moteUserId) {
 		try {
 			User facebookUser = facebook.userOperations().getUserProfile();
 			//PagedList<Photo> photos = facebook.mediaOperations().getPhotos(facebookUser.getId());
@@ -253,14 +253,17 @@ public class FacebookLoginController {
 					
 					sourceObject.setAggregationId(Long.parseLong(facebookUser.getId()));
 					if(fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.PHOTO) {
-						log.info("Processing facebook post's photo");
+						log.info("Processing facebook post's photo - fbPost.getPicture(): " + fbPost.getPicture());
 						sourceObject.setSourceObjectUrl(fbPost.getPicture());
 						sourceObject.setSourceObjectCaption(fbPost.getCaption());
 					} else if(fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.VIDEO){
-						log.info("Processing facebook post's video ");
-						Video video = facebook.mediaOperations().getVideo(fbPost.getObjectId());
-						sourceObject.setSourceObjectUrl(video.getSource());
-						sourceObject.setSourceObjectCaption(fbPost.getCaption());
+						log.info("Processing facebook post's video - fbPost.getObjectId(): " + fbPost.getObjectId());
+						
+						if(fbPost.getObjectId() != null) {
+							Video video = facebook.mediaOperations().getVideo(fbPost.getObjectId());
+							sourceObject.setSourceObjectUrl(video.getSource());
+							sourceObject.setSourceObjectCaption(fbPost.getCaption());
+						}
 					}
 					
 					//log.info(sourceObject.toString());

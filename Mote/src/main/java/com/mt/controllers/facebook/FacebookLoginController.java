@@ -284,8 +284,8 @@ public class FacebookLoginController {
 						
 						sourceObject.setAggregationId(Long.parseLong(facebookUser.getId()));
 						
-						Video video = facebook.mediaOperations().getVideo(fbPost.getObjectId());
-						sourceObject.setSourceObjectUrl(video.getSource());
+						//Video video = facebook.mediaOperations().getVideo(fbPost.getObjectId());
+						sourceObject.setSourceObjectUrl(fbPost.getSource());
 						sourceObject.setSourceObjectCaption(fbPost.getCaption());
 						
 						//log.info(sourceObject.toString());

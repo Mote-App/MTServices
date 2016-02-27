@@ -12,7 +12,6 @@ import com.mt.models.PostProfileView;
  *
  */
 public interface PostUserViewRepository extends CrudRepository<PostProfileView, Long> {
-
 	/**
 	 * 
 	 * @param profileId

@@ -68,7 +68,6 @@ public class PostDao {
 	 * @return
 	 */
 	public Post getMostPopularPost(long profileId) {
-		
 		log.info("Get most popular post for user [profileId]: " + profileId);
 		
 		Long postId = 0L;
@@ -190,7 +189,6 @@ public class PostDao {
 				.setParameter("collegeId", collegeId)
 				.getResultList();
 		
-		
 		return (Long)_entityManager.createQuery("SELECT count(*) as Cl FROM PostProfileLike PL WHERE PL.profileId in :profileIds")
 				.setParameter("profileIds", profileIds)
 				.getSingleResult();
@@ -228,5 +226,4 @@ public class PostDao {
 	public void updatePost(Post post){
 		sessionFactory.getCurrentSession().saveOrUpdate(post);		
 	}
-	
 }

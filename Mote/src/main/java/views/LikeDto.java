@@ -77,7 +77,6 @@ public class LikeDto {
 	}	
 	
 	public String toString(){
-		
 		return " profileId : " + profileId + ",  postId : " + postId + ",  likeCount: " + likeCount + ",  level: " + level;
 	}
 }

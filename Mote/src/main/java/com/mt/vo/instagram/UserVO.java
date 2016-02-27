@@ -1,7 +1,6 @@
 package com.mt.vo.instagram;
 
 public class UserVO {
-
     private Long id;
     private String username;
     private String profile_picture;
@@ -38,12 +37,9 @@ public class UserVO {
 	public void setFull_name(String full_name) {
 		this.full_name = full_name;
 	}
-
-
+	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", profile_picture=" + profile_picture + ", full_name="
-				+ full_name + "]";
+		return "User [id=" + id + ", username=" + username + ", profile_picture=" + profile_picture + ", full_name=" + full_name + "]";
 	}
-
 }

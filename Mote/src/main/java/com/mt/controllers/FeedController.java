@@ -127,8 +127,6 @@ public class FeedController {
 				List<Post> posts = _postDao.getMostRecentPost(user.getProfileId());
 				
 				for (int j=0; j < posts.size(); j++) {
-					
-					
 					FriendFeedDto friendFeed = new FriendFeedDto();
 					friendFeed.setUserId(postUserId);
 					friendFeed.setName(user.getProfileFirstName() + " " + user.getProfileLastName());
@@ -137,7 +135,6 @@ public class FeedController {
 					friendFeed.setSchoolId(user.getProfileCollege().getCollegeId());
 					friendFeed.setSchoolImg(user.getProfileCollege().getCollegeImgPath());
 					friendFeed.setSchoolName(user.getProfileCollege().getCollegeName());
-					
 					
 					PostsDto postsDto = new PostsDto();
 					
@@ -152,66 +149,6 @@ public class FeedController {
 				}
 				
 			}
-			
-			/* Original Code 
-			 * for(int i = 0; i < postUserIds.size(); i++) {
-				Long postUserId = postUserIds.get(i);
-				User user = _userDao.getUser(postUserId);
-				
-				FriendFeedDto friendFeed = new FriendFeedDto();
-				friendFeed.setUserId(postUserId);
-				friendFeed.setName(user.getProfileFirstName() + " " + user.getProfileLastName());
-				//friendFeed.setFacebookName(user.getFa);
-				friendFeed.setProfileImg(user.getProfilePictureUrl());
-				friendFeed.setSchoolId(user.getProfileCollege().getCollegeId());
-				friendFeed.setSchoolImg(user.getProfileCollege().getCollegeImgPath());
-				friendFeed.setSchoolName(user.getProfileCollege().getCollegeName());
-				//TODO:  Remove .getId() if getCollegeId() works, add getCollegeLanguageCode() and getCollegeCountryCode()
-				//friendFeed.setUserType(user.getIsAlumni());
-				
-				PostsDto postsDto = new PostsDto();
-				
-				// Find the current and most recent post
-				List<Post> posts = _postDao.getMostRecentPost(user.getProfileId());
-				
-				// Get the current post
-				PostDto currentPost = new PostDto();
-				
-				if(posts != null && posts.size() > 0) {
-					Post post = posts.get(0);
-					populatePostDto(currentPost, post, "F");
-					postsDto.setCurrentPost(currentPost);
-				}
-				
-				// The count should be 2 to get the most recent post, else current post is treated as most recent post
-				PostDto mostRecentPost = new PostDto();
-				
-				if(posts != null && posts.size() == 2) {
-					Post post = posts.get(1);
-					populatePostDto(mostRecentPost, post, "F");
-				} else {
-					copyPostDto(mostRecentPost, currentPost);	
-				}
-				
-				postsDto.setMostRecentPost(mostRecentPost);
-				
-				// Find most popular post
-				PostDto mostPopularPost = new PostDto();
-				
-				Post post = _postDao.getMostPopularPost(user.getProfileId());
-				
-				if(post != null) {
-					populatePostDto(mostPopularPost, post, "F");
-				} else {
-					copyPostDto(mostPopularPost, currentPost);
-				}
-				
-				postsDto.setPopularPost(mostPopularPost);
-				friendFeed.setPosts(postsDto);
-				friendFeeds.add(friendFeed);
-			}*/
-			
-			
 		} catch(Exception ex) {
 			log.error("Freind Feed Controller Error", ex);
 		}
@@ -242,15 +179,14 @@ public class FeedController {
 	 * @param likedPostIds
 	 */
 	private void populatePostDto(PostDto postDto, Post source, String postType) {
-		
-		if( source.getProfile().getProfileId() == null){
+		if(source.getProfile().getProfileId() == null) {
 			return;
 		}
 		
 		//Decision to decide if Post is from Mote App or other Media like Facebook, Instagram etc.
-		if( source.getAggregationSourceObject()== null || source.getAggregationSourceObject().getSourceObjectId()== 0 ){
+		if(source.getAggregationSourceObject()== null || source.getAggregationSourceObject().getSourceObjectId()== 0){
 			postDto.setMediaPost(false);
-		}else{
+		} else {
 			postDto.setMediaPost(true);
 		}
 		
@@ -272,7 +208,6 @@ public class FeedController {
 		 */
 		isApplicableForViewUpdate(postDto, source, postType);
 		
-		
 		// Calculate the elapsed time in Hours, Minutes or Days from posting date to current date
 		postDto.setPostingDate(calculateElapsedTime(source.getPostDate()));
 		
@@ -284,23 +219,9 @@ public class FeedController {
 			Tag tag = _tagDao.getTag(postTag.getTagId());
 			
 			lstTags.add(tag.getTagId());
-			
-			//destination.setTagCategory(tag.getTagType());
 		}
 		
 		postDto.setTags(lstTags);
-		
-		/*
-		 * Discarded
-		 * // Populate custom tags
-		List<String> lstCustomTags = new ArrayList<String>();
-		
-		for(int i = 0; i < source.getListPostCustomTags().size(); i++) {
-			PostCustomTags customPostTag = source.getListPostCustomTags().get(i);
-			lstCustomTags.add(customPostTag.getTagName());
-		}
-		
-		destination.setCustomTags(lstCustomTags);*/
 	}
 	
 	/**
@@ -309,16 +230,14 @@ public class FeedController {
 	 * @param likedPostIds
 	 */
 	private void isApplicableForLiking(PostDto postDto, Post source, String postType) {
-		
 		Long likedPostId = null;
 		
-		if( _postUserLikeRepository == null){
-			
+		if(_postUserLikeRepository == null) {
 			log.error("Unexcpected instance error : _postUserLikeRepository");
 		}
 		
-		likedPostId = _postUserLikeRepository.findPostLikeForLevel(source.getProfile().getProfileId(), source.getPostId(), postType);			
-
+		likedPostId = _postUserLikeRepository.findPostLikeForLevel(source.getProfile().getProfileId(), source.getPostId(), postType);
+		
 		if(likedPostId != null && likedPostId > 0){
 			postDto.setLikeDone(true);
 		}else{
@@ -330,16 +249,13 @@ public class FeedController {
 		postDto.setLikes(likesCount);
 	}
 	
-	
 	/**
 	 * This logic to avoid multiple views.
 	 * @param post
 	 * @param likedPostIds
 	 */
 	private void isApplicableForViewUpdate(PostDto postDto, Post source, String postType) {
-		
 		Long viewPostId  = null;
-		
 		viewPostId  = _postUserViewRepository.findPostViewForLevel(source.getProfile().getProfileId(), source.getPostId(), postType);			
 		
 		if(viewPostId  != null && viewPostId  > 0){
@@ -347,10 +263,6 @@ public class FeedController {
 		}else{
 			postDto.setViewDone(false);
 		}
-		
-		//Update the count of likes for post according to post type.
-		//int likesCount = _postUserViewRepository.countPostLikeForLevel(source.getPostId(), postType);		
-		//postDto.setLikes(likesCount);
 	}
 	
 	/**
@@ -390,10 +302,9 @@ public class FeedController {
 	@RequestMapping(value="/school_feeds", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<SchoolFeedDto> getSchoolFeeds(Long collegeId, Long profileId) {
-		
 		List<SchoolFeedDto> lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
-		
 		List<Long> friends  = _userFriendsDao.getFriends(profileId);
+		
 		// To include logged user id along with their friends and fetch all their post in descending order by post date
 		friends.add(profileId); 
 		
@@ -401,11 +312,9 @@ public class FeedController {
 		List<Post> posts = _postDao.getUserSchoolPosts(friends, collegeId);
 					
 		for(int i = 0; i < posts.size(); i++) {
-			
 			User user = _userDao.getUser(posts.get(i).getProfile().getProfileId());
 			
 			SchoolFeedDto dto = new SchoolFeedDto();
-			
 			dto.setUserId(user.getProfileId());
 			//dto.setUserType(feeds.get(i).getUser().getIsAlumni());
 			dto.setName(user.getProfileUserName());
@@ -422,12 +331,6 @@ public class FeedController {
 			dto.setPost(postDto);
 			
 			lstSchoolFeedDto.add(dto);
-			
-			/*postDto.setPostId(feeds.get(i).getPost().getId());
-			 postDto.setPostImg(feeds.get(i).getPost().getPostImgPath());
-			 postDto.setCaption(feeds.get(i).getPost().getCaption());
-			 postDto.setPostingDate(calculateElapsedTime(feeds.get(i).getPost().getPostDate()));
-			 postDto.setLikes(feeds.get(i).getPost().getLikes());*/
 		}
 		
 		return lstSchoolFeedDto;
@@ -476,21 +379,17 @@ public class FeedController {
 	 */
 	@RequestMapping(value="/school_feed_filter", method = RequestMethod.POST, produces="application/json")
 	@ResponseBody
-	public List<SchoolFeedDto> schoolFeedFilter(@RequestBody FilterDto filter, Long profileId ) {
-		
+	public List<SchoolFeedDto> schoolFeedFilter(@RequestBody FilterDto filter, Long profileId) {
 		List<SchoolFeedDto> lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
 		
 		// Filter posts specific to College and tags
 		if(filter.getCollegeIds().size() > 0 && filter.getLstTags().size() > 0) {
-			
 			List<PostTags> feeds = _schoolFeedDao.getSchoolFeedsByCollegeAndTags(filter.getCollegeIds() , filter.getLstTags());
 			
 			for(int i = 0; i < feeds.size(); i++) {
-			
 				User user = _userDao.getUser(feeds.get(i).getPost().getProfile().getProfileId());
 				
 				SchoolFeedDto dto = new SchoolFeedDto();
-				
 				dto.setUserId(user.getProfileId());
 				//dto.setUserType(feeds.get(i).getUser().getIsAlumni());
 				dto.setName(user.getProfileUserName());
@@ -507,32 +406,22 @@ public class FeedController {
 				dto.setPost(postDto);
 				
 				lstSchoolFeedDto.add(dto);
-				
-				/*postDto.setPostId(feeds.get(i).getPost().getId());
-				postDto.setPostImg(feeds.get(i).getPost().getPostImgPath());
-				postDto.setCaption(feeds.get(i).getPost().getCaption());
-				postDto.setPostingDate(calculateElapsedTime(feeds.get(i).getPost().getPostDate()));
-				postDto.setLikes(feeds.get(i).getPost().getLikes());*/
 
 			}
 		} else if(filter.getCollegeIds().size() > 0) {
 			// Filter posts specific to a list of colleges only
 			for(int i = 0; i < filter.getCollegeIds().size(); i++){
-				
 				lstSchoolFeedDto.addAll(getSchoolFeeds(filter.getCollegeIds().get(i), profileId));
 			}
-			
 		} else if(filter.getLstTags().size() > 0) {
 			// Filter posts specific to tags only
 			List<PostTags> feeds = _schoolFeedDao.getSchoolFeedsByTags(filter.getLstTags());
 			lstSchoolFeedDto = new ArrayList<SchoolFeedDto>();
 			
 			for(int i = 0; i < feeds.size(); i++) {
-			
 				User user = _userDao.getUser(feeds.get(i).getPost().getProfile().getProfileId());
 				
 				SchoolFeedDto dto = new SchoolFeedDto();
-				
 				dto.setUserId(user.getProfileId());
 				//dto.setUserType(feeds.get(i).getUser().getIsAlumni());
 				dto.setName(user.getProfileUserName());
@@ -549,12 +438,6 @@ public class FeedController {
 				dto.setPost(postDto);
 				
 				lstSchoolFeedDto.add(dto);
-				
-				/*postDto.setPostId(feeds.get(i).getPost().getId());
-				postDto.setPostImg(feeds.get(i).getPost().getPostImgPath());
-				postDto.setCaption(feeds.get(i).getPost().getCaption());
-				postDto.setPostingDate(calculateElapsedTime(feeds.get(i).getPost().getPostDate()));
-				postDto.setLikes(feeds.get(i).getPost().getLikes());*/
 			}
 		}
 		
@@ -570,10 +453,9 @@ public class FeedController {
 	@RequestMapping(value="/national_feeds", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<NationalFeedDto> getNationalFeeds(Long collegeId, long profileId) {
-		
 		List<NationalFeedDto> lstNationalFeedDto = new ArrayList<NationalFeedDto>();
-		
 		List<Long> friends  = _userFriendsDao.getFriends(profileId);
+		
 		// To include logged user id along with their friends and fetch all their post in descending order by post date
 		friends.add(profileId); 
 		
@@ -581,7 +463,6 @@ public class FeedController {
 		List<Post> posts = _postDao.getUserNationalPosts(friends, collegeId);
 		
 		for(int i = 0; i < posts.size(); i++) {
-			
 			NationalFeedDto dto = new NationalFeedDto();
 			
 			User user = _userDao.getUser(posts.get(i).getProfile().getProfileId());
@@ -602,12 +483,6 @@ public class FeedController {
 			dto.setPost(postDto);
 			
 			lstNationalFeedDto.add(dto);
-			
-			/*postDto.setPostId(feeds.get(i).getPost().getId());
-			 postDto.setPostImg(feeds.get(i).getPost().getPostImgPath());
-			 postDto.setCaption(feeds.get(i).getPost().getCaption());
-			 postDto.setPostingDate(calculateElapsedTime(feeds.get(i).getPost().getPostDate()));
-			 postDto.setLikes(feeds.get(i).getPost().getLikes());*/
 		}
 		
 		return lstNationalFeedDto;
@@ -621,24 +496,19 @@ public class FeedController {
 	@RequestMapping(value="/likes", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
 	public LikeDto updateLike(@RequestBody LikeDto likeDto) {
-		
 		Long likedPostId = null;
 		
 		log.info("Service Likes, parameters : " + likeDto.toString());
 		
 		likedPostId = _postUserLikeRepository.findPostLikeForLevel(likeDto.getProfileId(), likeDto.getPostId(), likeDto.getLevel());
 		
-		if( likedPostId != null && likedPostId > 0){
+		if(likedPostId != null && likedPostId > 0){
 			//Like already done for the post by user id at particular feed level
-			
 			int likeCount = _postUserLikeRepository.countPostLikeForLevel(likeDto.getPostId(), likeDto.getLevel());
 			likeDto.setLikeCount(likeCount);
-			
 			log.info("User already liked the post");
-			
 		}else{
 			//User just liked the post so save and return the new total like count based on level
-			
 			log.info("User first time liked the post, so saving ");
 			
 			PostProfileLike postUser = new PostProfileLike();
@@ -650,7 +520,6 @@ public class FeedController {
 			
 			int likeCount = _postUserLikeRepository.countPostLikeForLevel(likeDto.getPostId(), likeDto.getLevel());
 			likeDto.setLikeCount(likeCount);
-			
 		}
 		
 		return likeDto;
@@ -664,7 +533,6 @@ public class FeedController {
 	@RequestMapping(value="/views", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
 	public ViewDto updateView(@RequestBody ViewDto viewDto) {
-
 		log.info("Service views, parameters : " + viewDto.toString());
 		
 		PostProfileView postUser = new PostProfileView();

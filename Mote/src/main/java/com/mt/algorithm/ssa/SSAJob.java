@@ -66,17 +66,6 @@ public class SSAJob {
 	public void initiate() {
 		SSAParams ssaParams = _ssaParamsDao.getSSAParams(1L);
 		
-		//SSAParams ssaParams = new SSAParams();
-		/*ssaParams.setKf(0.20);
-		ssaParams.setKs(0.20);
-		ssaParams.setCf(0.50);
-		ssaParams.setNsIdeal(800);
-		ssaParams.setNnIdeal(800);
-		ssaParams.setT1(0.50);
-		ssaParams.setT2(0.30);
-		ssaParams.setT3(0.30);
-		ssaParams.setT4(0.30);*/
-		
 		ssa = new SSA(ssaParams);
 		
 		long Ns = _postDao.getNs();
@@ -98,7 +87,6 @@ public class SSAJob {
 		 *  
 		 * First I'll get the algorithm working and then I'll improve performance/memory footprint.
 		 */
-		
 		
 		for(int i = 0; i < friendPosts.size(); i++) {
 			Post friendPost = friendPosts.get(i);
@@ -141,11 +129,7 @@ public class SSAJob {
 		log.info("Is Rf > Kf : " + rfPostRatio.isGreaterThan());
 		
 		if(rfPostRatio.isGreaterThan()) {
-			
-			//postService.promotePostToSchoolFeed(friendPost);
-			
 			friendPost.setPostSchoolPromote(1);
-			
 			_postDao.updatePost(friendPost);
 			log.info("Promoting Post Id to School feed !!!");
 		}
@@ -183,9 +167,6 @@ public class SSAJob {
 		log.info("Is Rs > Ks : " + rsPostRatio.isGreaterThan());
 		
 		if(rsPostRatio.isGreaterThan()) {
-			
-			//postService.promotePostToNationalFeed(schoolPost);
-			
 			schoolPost.setPostNationalPromote(1);
 			_postDao.updatePost(schoolPost);
 			log.info("Promoting Post Id to National feed !!! ");

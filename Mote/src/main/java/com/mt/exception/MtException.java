@@ -13,7 +13,6 @@ public class MtException extends Exception {
 	private String message;
 	private String exception;
 	
-	
 	/**
 	 * 
 	 */
@@ -31,15 +30,6 @@ public class MtException extends Exception {
 		this.message = message;
 		this.exception = exception;
 	}
-	
-	/*	public String getStatus() {
-		return status;
-	}
-	
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	 */	
 	
 	/**
 	 * 

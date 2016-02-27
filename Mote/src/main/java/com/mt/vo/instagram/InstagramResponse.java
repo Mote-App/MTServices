@@ -9,11 +9,9 @@ package com.mt.vo.instagram;
 import java.util.List;
 
 public class InstagramResponse {
-	
 	private PaginationVO pagination;
 	private MetaVO meta;
 	private List<?> data;
-	
 	
 	public PaginationVO getPagination() {
 		return pagination;
@@ -34,11 +32,8 @@ public class InstagramResponse {
 		this.data = data;
 	}
 	
-	
 	@Override
 	public String toString() {
 		return "InstagramResponse [pagination=" + pagination + ", meta=" + meta + ", data=" + data + "]";
 	}
-	
-
 }

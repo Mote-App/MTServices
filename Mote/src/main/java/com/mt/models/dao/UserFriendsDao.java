@@ -28,8 +28,6 @@ public class UserFriendsDao {
 	@PersistenceContext
 	private EntityManager _entityManager;
 	
-	//private final Logger log = LoggerFactory.getLogger(this.getClass());
-	
 	@Autowired
 	UserDao _userDao;
 	

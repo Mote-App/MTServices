@@ -36,10 +36,6 @@ import com.mt.models.repository.UserRepository;
  */
 @Controller
 public class UserController {
-	// ==============
-	// PRIVATE FIELDS
-	// ==============
-	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	// Wire the UserDao that will be used inside this controller.
@@ -63,10 +59,6 @@ public class UserController {
 	
 	@Autowired
 	JavaMailSender javaMailSender;
-	
-	// ===============
-	// PRIVATE METHODS
-	// ===============
 	
 	/**
 	 * Create a new user with an auto-generated id and email and name as passed values.
@@ -102,21 +94,6 @@ public class UserController {
 			
 			user.setProfileCollege(college);
 			
-
-			/*try{
-	              //Generate password and send the email to created user.
-	              SimpleMailMessage mailMessage = new SimpleMailMessage();
-	              mailMessage.setTo(userDto.getEmail());
-	              mailMessage.setSubject("Mote Verification");
-	              
-	              String emailMessage = "Hi " + userDto.getFirstName() + "\n Thank You for signing up for Mote App, here is your temporary password 1234 "  ;
-	              mailMessage.setText(emailMessage);
-	              
-	              javaMailSender.send(mailMessage);
-              } catch(Exception e){
-    	          e.printStackTrace();
-    	          throw new ClException("Invalid Email. ", e.getMessage() + e.getCause());
-              }*/
 			/*
 			 * Hard coded locale to en_US
 			 */
@@ -128,7 +105,6 @@ public class UserController {
 			
 			return user;
 		} catch(Exception e) {
-			
 			log.error("Error Creating new user.", e);
 			throw new MtException("Error Creating new user.", e.getMessage());
 		}
@@ -175,9 +151,7 @@ public class UserController {
 	@RequestMapping(value="users/profile", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<UserDto> getUsersProfile(Long profileId) {
-
 		List<User> profiles = _userFriendsDao.getUsersProfile(profileId);
-		
 		List<UserDto> profilesDto = new ArrayList<UserDto>();
 		
 		for(int i = 0; i < profiles.size(); i ++) {
@@ -281,8 +255,6 @@ public class UserController {
 			_userFriendRepository.delete(id);
 		}
 		
-		//_userFriendsDao.removeFriend(profileId, friendId);
-		
 		return 1;
 	}
 	
@@ -336,8 +308,6 @@ public class UserController {
 	public String updateName(long id, String email, String name) {
 		try {
 			User user = _userDao.getById(id);
-			//user.setEmail(email);
-			//user.setName(name);
 			_userDao.update(user);
 		} catch(Exception ex) {
 			return "Error updating the user: " + ex.toString();

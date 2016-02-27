@@ -16,39 +16,30 @@ import javax.persistence.Table;
 @Entity
 @Table(name="aggregation_source")
 public class AggregationSource {
-
-	
 	@Id
 	@Column(name="aggregation_source_id")
 	private String aggregationSourceId;
 	
 	@Column(name="aggregation_source_name")
 	private String aggregationSourceName;
-
 	
 	public AggregationSource() {
 		// do nothing
 	}
-
-
+	
 	public String getAggregationSourceId() {
 		return aggregationSourceId;
 	}
-
-
+	
 	public void setAggregationSourceId(String aggregationSourceId) {
 		this.aggregationSourceId = aggregationSourceId;
 	}
-
-
+	
 	public String getAggregationSourceName() {
 		return aggregationSourceName;
 	}
-
-
+	
 	public void setAggregationSourceName(String aggregationSourceName) {
 		this.aggregationSourceName = aggregationSourceName;
 	}
-	
-
 }

@@ -21,6 +21,5 @@ public interface PostUserLikeRepository extends CrudRepository<PostProfileLike, 
 	Long findPostLikeForLevel(long profileId, long postId, String level);
 	
 	@Query("select count(u.postId) from PostProfileLike u where u.postId = ? and level = ? ")
-	int countPostLikeForLevel(long postId, String level);
-	
+	int countPostLikeForLevel(long postId, String level);	
 }

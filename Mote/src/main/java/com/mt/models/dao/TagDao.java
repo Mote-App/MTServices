@@ -29,18 +29,6 @@ public class TagDao {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	/**
-	 * Method getAll
-	 * <br/>
-	 * 
-	 */
-	/*@SuppressWarnings("unchecked")
-	public List<Tag> getTags(String type) {
-	    return _entityManager.createQuery("from Tag where tagType = :tagType")
-	    		.setParameter("tagType", type)
-	    		.getResultList();
-	}*/
-	
-	/**
 	 * 
 	 * @return
 	 */

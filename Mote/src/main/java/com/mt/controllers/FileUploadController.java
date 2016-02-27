@@ -109,38 +109,13 @@ public class FileUploadController {
 				
 				_postRepo.save(post);
 				
-				//List<PostTags> lstPostTags = new ArrayList<PostTags>();
-				
 				for(int i = 0; i < newPostDto.getTags().size(); i++) {
 					PostTags postTag = new PostTags();
 					postTag.setPostId(post.getPostId());
 					postTag.setTagId(newPostDto.getTags().get(i));
 					
 					_postTagsRepository.save(postTag);
-					//_postTagsRepository.save(postTag);
-					//lstPostTags.add(postTag);
 				}
-				
-				//post.setLstPostTags(lstPostTags);
-				/*String csvCustomTags = newPostDto.getCustomTags();
-				
-				if(csvCustomTags != null) {
-					//List<PostCustomTags> lstPostCustomTags = new ArrayList<PostCustomTags>();
-					String arr[] = csvCustomTags.split(",");
-					
-					for(int i = 0; i < arr.length; i++) {
-						PostCustomTags postCustomTag = new PostCustomTags();
-						postCustomTag.setPostId(post.getPostId());
-						postCustomTag.setUserId(newPostDto.getUserId());
-						postCustomTag.setTagName(arr[i]);
-						
-						_postCustomTagsRepository.save(postCustomTag);
-						//_postCustomTagsRepository.save(postCustomTag);
-						//lstPostCustomTags.add(postCustomTag);
-					}
-					
-					//post.setLstPostCustomTags(lstPostCustomTags);
-				}*/
 				
 				//post = _postRepo.save(post);
 				fileName = post.getProfile().getProfileId() + "_" + post.getPostId() + ".png";

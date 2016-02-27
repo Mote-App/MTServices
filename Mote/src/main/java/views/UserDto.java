@@ -20,8 +20,6 @@ public class UserDto {
 	private CollegeDto 	college;
 	private byte 	   	isFriend = 0;
 	
-	
-	
 	public long getProfileId() {
 		return profileId;
 	}

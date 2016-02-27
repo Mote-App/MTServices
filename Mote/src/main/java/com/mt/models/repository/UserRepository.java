@@ -12,9 +12,6 @@ import com.mt.models.User;
  *
  */
 public interface UserRepository extends CrudRepository<User, Long> {
-	
 	@Query("select u from User u where u.profileId = ?")
-	User findProfileById(Long profileId);
-	
-	
+	User findProfileById(Long profileId);	
 }

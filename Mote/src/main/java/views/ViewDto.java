@@ -76,8 +76,7 @@ public class ViewDto {
 		this.level = level;
 	}	
 	
-	public String toString(){
-		
+	public String toString() {
 		return " profileId : " + profileId + ",  postId : " + postId + ",  viewCount: " + viewCount + ",  level: " + level;
 	}
 }

@@ -142,14 +142,6 @@ public class PostDto {
 		this.tagCategory = tagCategory;
 	}
 	
-	/*public List<String> getCustomTags() {
-		return customTags;
-	}
-	
-	public void setCustomTags(List<String> customTags) {
-		this.customTags = customTags;
-	}*/
-	
 	/**
 	 * 
 	 * @return
@@ -181,24 +173,20 @@ public class PostDto {
 	public void setLikeDone(boolean likeDone) {
 		this.likeDone = likeDone;
 	}
-
+	
 	public boolean isViewDone() {
 		return viewDone;
 	}
-
+	
 	public void setViewDone(boolean viewDone) {
 		this.viewDone = viewDone;
 	}
-
+	
 	public boolean isMediaPost() {
 		return isMediaPost;
 	}
-
+	
 	public void setMediaPost(boolean isMediaPost) {
 		this.isMediaPost = isMediaPost;
-	}
-	
-	
-	
-	
+	}	
 }

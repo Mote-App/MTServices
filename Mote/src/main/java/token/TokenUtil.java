@@ -7,6 +7,8 @@ package token;
  *
  */
 public class TokenUtil {
+	//TODO Planning to use this class for security
+	
 	/*public static final String MAGIC_KEY = "obfuscate";
 	
 	public static String createToken(UserDetails userDetails) {

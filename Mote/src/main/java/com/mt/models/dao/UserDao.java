@@ -173,36 +173,6 @@ public class UserDao {
 	 * CrIdealAvg - the average number of 'people' registered per school.
 	 * CrIdealAvg - the average number of 'people' registered by the total number of register schools.
 	 * 
-	 * New Data Model
-	 * SELECT A.idcollege, COUNT(B.idprofile) FROM college A JOIN profile B ON A.idprofile = B.idprofile GROUP BY A.idcollege
-	 * 
-	 * select sum(TempTable.ProfileTotal)/TempTable.count(*) From (select a.idcollege College, count(b.idprofile) ProfileTotal from college A join profile B on a.idcollege=b.college) TempTable
-	 * 
-	 * declare cursor c_average
-	 * select a.collegeId College, count(b.profileId) ProfileTotal from college A join profile B on a.collegeId=b.profileCollegeId;
-	 * 
-	 * SchoolNumber Int;
-	 * TotalStudents int;
-	 * 
-	 * For each row in c_average
-	 *   SchoolNumber ++;
-	 *   TotalStudents=  profileTotal + TotalStudents;
-	 * End For
-	 * 
-	 * Average= TotalStudetns/SchoolNumber;
-	 * 
-	 * Return Average
-	 * 
-	 * 
-	 * collegeID      profile total
-	 *    FSU             1,500
-	 *    UVA             500
-	 *    NCSU            500
-	 *    
-	 * SchoolNumber = 3
-	 * TotalStudents = 2,000
-	 * 
-	 * Average = 2,000 / 3
 	 * 
 	 * @param collegeId
 	 * @return
@@ -210,38 +180,16 @@ public class UserDao {
 	public Long getCrIdealAvg() {
 		log.info("Get CrIdealAvg - the average number of 'people' registered by the total number of register schools.");
 		
-		/*return (Long)_entityManager.createQuery("declare cursor c_average "
-				+ "SELECT C.collegeId College, COUNT(U.profileId) ProfileTotal FROM college C JOIN profile U ON C.collegeId = U.profileCollegeId;"
-				+ ""
-				+ "SchoolNumber Int;"
-				+ "TotalStudents int;"
-				+ ""
-				+ "For each row in c_average"
-				+ "  SchoolNumber ++;"
-				+ "  TotalStudents=  profileTotal + TotalStudents;"
-				+ "End For"
-				+ ""
-				+ "Average = TotalStudetns / SchoolNumber;"
-				+ ""
-				+ "Return Average")
-				.getSingleResult();*/
-		
-		List<Long> collegeCnts = _entityManager.createQuery("SELECT DISTINCT U.profileCollege.collegeId FROM User U")
-						.getResultList();
-		
-		Long userCnt = (Long) _entityManager.createQuery("SELECT COUNT(U.profileId) FROM User U")
-				.getSingleResult();
-		
+		List<Long> collegeCnts = _entityManager.createQuery("SELECT DISTINCT U.profileCollege.collegeId FROM User U").getResultList();
+		Long userCnt = (Long) _entityManager.createQuery("SELECT COUNT(U.profileId) FROM User U").getSingleResult();
 		Long CrIdealAvg = 0L;
 		
-		if( collegeCnts.size() > 0 ){
+		if(collegeCnts.size() > 0) {
 			CrIdealAvg = (Long)(userCnt/collegeCnts.size());
-		}else{
+		} else {
 			log.info("Cannot calculate CrIdealAvg because all mote colleges have zero student");
 		}
 		
-		
 		return CrIdealAvg;
-		
 	}
 }

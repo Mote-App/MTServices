@@ -65,14 +65,6 @@ public class UserFriends {
 		this.profileId = profileId;
 	}
 	
-	/*public long getProfileFriendId() {
-		return profileFriendId;
-	}
-	
-	public void setProfileFriendId(long profileFriendId) {
-		this.profileFriendId = profileFriendId;
-	}*/
-	
 	/**
 	 * 
 	 * @return

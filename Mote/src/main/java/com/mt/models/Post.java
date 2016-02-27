@@ -35,9 +35,6 @@ public class Post {
 	@JoinColumn(name="post_profile_id")
 	private User profile;
 	
-	//@Column(name="post_tag_id")
-	//private long postTagId;
-	
 	@Column(name="post_object_path")
 	private String postObjectPath;
 	
@@ -101,23 +98,14 @@ public class Post {
 		this.postTypeCode = postTypeCode;
 	}
 	
-	
-	/*public long getPostTagId() {
-		return postTagId;
-	}
-	
-	public void setPostTagId(long postTagId) {
-		this.postTagId = postTagId;
-	}*/
-	
 	public User getProfile() {
 		return profile;
 	}
-
+	
 	public void setProfile(User profile) {
 		this.profile = profile;
 	}
-
+	
 	/**
 	 * 
 	 * @return

@@ -159,11 +159,6 @@ CREATE TABLE IF NOT EXISTS `motedb`.`aggregation` (
     FOREIGN KEY (`profile_profile_id`)
     REFERENCES `motedb`.`profile` (`profile_id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_aggregation_aggregation_source1`
-    FOREIGN KEY (`aggregation_source_aggregation_source_id`)
-    REFERENCES `motedb`.`aggregation_source` (`aggregation_source_id`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 

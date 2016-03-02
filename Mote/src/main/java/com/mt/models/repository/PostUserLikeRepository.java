@@ -2,6 +2,7 @@ package com.mt.models.repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import com.mt.models.PostProfileLike;
 
@@ -17,9 +18,9 @@ public interface PostUserLikeRepository extends CrudRepository<PostProfileLike, 
 	 * @param profileId
 	 * @return
 	 */
-	@Query("select u.postId from PostProfileLike u where u.profileId = ? and u.postId = ? and level = ? ")
-	Long findPostLikeForLevel(long profileId, long postId, String level);
+	@Query("select u.postId from PostProfileLike u where u.profileId = :profileId and u.postId = :postId and level = :level ")
+	Long findPostLikeForLevel(@Param("profileId") long profileId, @Param("postId") long postId, @Param("level") String level);
 	
-	@Query("select count(u.postId) from PostProfileLike u where u.postId = ? and level = ? ")
-	int countPostLikeForLevel(long postId, String level);	
+	@Query("select count(u.postId) from PostProfileLike u where u.postId = :postId and level = :level ")
+	int countPostLikeForLevel(@Param("postId") long postId, @Param("level") String level);	
 }

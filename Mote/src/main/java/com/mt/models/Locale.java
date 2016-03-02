@@ -24,11 +24,11 @@ public class Locale {
 	Long localeId;
 	
 	@OneToOne
-	@JoinColumn(name="country_code")
+	@JoinColumn(name="locale_country_code")
 	Country country;
 	
 	@OneToOne
-	@JoinColumn(name="language_code")
+	@JoinColumn(name="locale_language_code")
 	Language language;
 	
 	/**

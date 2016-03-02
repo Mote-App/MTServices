@@ -1,5 +1,5 @@
 use motedb;
-
+SET FOREIGN_KEY_CHECKS=0;
 delete from country;
 delete from language;
 delete from college;
@@ -14,5 +14,8 @@ delete from post_user_like;
 delete from post_user_view;
 delete from profile_has_friend;
 delete from locale;
+delete from ssa_coefficient_parameters;
+delete from post_has_tag;
 
 commit;
+SET FOREIGN_KEY_CHECKS=1;

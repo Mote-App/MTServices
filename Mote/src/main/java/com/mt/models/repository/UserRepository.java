@@ -2,6 +2,7 @@ package com.mt.models.repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import com.mt.models.User;
 
@@ -12,6 +13,6 @@ import com.mt.models.User;
  *
  */
 public interface UserRepository extends CrudRepository<User, Long> {
-	@Query("select u from User u where u.profileId = ?")
-	User findProfileById(Long profileId);	
+	@Query("select u from User u where u.profileId = :profileId")
+	User findProfileById(@Param("profileId") Long profileId);	
 }

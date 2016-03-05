@@ -115,9 +115,9 @@ public class FacebookLoginController {
 		log.info("callbackParam: " + callbackParam);
 		
 		// Mote Facebook Test App, to be able to use localhost
-		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("1105685566108143", "0b4b69914152837f9978611d84629e66");
+		//FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("1105685566108143", "0b4b69914152837f9978611d84629e66");
 		// Mote Facebook Production App
-		//FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
+		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
 		
 		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
 		AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, "http://54.200.159.155:8080/fb/callback", null);

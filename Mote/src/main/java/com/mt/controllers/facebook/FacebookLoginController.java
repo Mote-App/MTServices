@@ -82,8 +82,8 @@ public class FacebookLoginController {
 		//Store user Id and client address and port, to be made available in callback, otherwise it gets lost redirection.
 		//params.setState(request.getParameter("userId") + "," + request.getHeader("Referer"));
 		// localhost:8100 means redirect request back to front-end (Mote app).
-		//params.setState(request.getParameter("userId") + "," + "http://localhost:8100/");
-		params.setState(request.getParameter("userId") + "," + request.getHeader(HttpHeaders.REFERER));
+		params.setState(request.getParameter("userId") + "," + "http://54.200.159.155:8100/");
+		//params.setState(request.getParameter("userId") + "," + request.getHeader(HttpHeaders.REFERER));
 		
 		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
 		

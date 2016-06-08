@@ -72,9 +72,9 @@ public class FacebookLoginController {
 	@Autowired
 	PostRepository _postRepository;
 	
-	//FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
+	FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
 	
-	private Facebook facebook;
+	/*private Facebook facebook;	
 	private ConnectionRepository connectionRepository;
 	
 	@Inject
@@ -99,12 +99,12 @@ public class FacebookLoginController {
 	public  String callback(HttpServletRequest request){
 		 		 
 		 return "success : FB " ;
-	}
+	}*/
 	
 	/*
 	 * This REST api will redirect the user to a Facebook authorization page.
 	 */
-	/*@RequestMapping("/fb/login")
+	@RequestMapping("/fb/login")
 	public void login (HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// Mote Facebook Test App, to be able to use localhost
 		//FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("1105685566108143", "0b4b69914152837f9978611d84629e66");
@@ -120,8 +120,8 @@ public class FacebookLoginController {
 		//Store user Id and client address and port, to be made available in callback, otherwise it gets lost redirection.
 		//params.setState(request.getParameter("userId") + "," + request.getHeader("Referer"));
 		// localhost:8100 means redirect request back to front-end (Mote app).
-		params.setState(request.getParameter("userId") + "," + "http://localhost:8100/");
-		//params.setState(request.getParameter("userId") + "," + request.getHeader(HttpHeaders.REFERER));
+		//params.setState(request.getParameter("userId") + "," + "http://localhost:8100/");
+		params.setState(request.getParameter("userId") + "," + request.getHeader(HttpHeaders.REFERER));
 		
 		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
 		
@@ -135,7 +135,7 @@ public class FacebookLoginController {
 		log.info("Login Host : " + request.getRemoteHost());
 		log.info("Login Port : " + request.getRemotePort());
 		response.sendRedirect(authorizeUrl);
-	}*/
+	}
 	
 	/**
 	 * This REST api is the method for the callback URL, where the user will be redirected after logging into Facebook.
@@ -148,7 +148,7 @@ public class FacebookLoginController {
 	 * @param request
 	 * @return
 	 */
-	/*@RequestMapping("/fb/callback")
+	@RequestMapping("/fb/callback")
 	public String callback(@RequestParam("code") String authorizationCode, @RequestParam("state") String callbackParam, HttpServletRequest request) {
 		log.info("authorizationCode: " + authorizationCode);
 		log.info("callbackParam: " + callbackParam);
@@ -157,13 +157,13 @@ public class FacebookLoginController {
 		//FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("1105685566108143", "0b4b69914152837f9978611d84629e66");
 		// Mote Facebook Production App
 
-		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
+		//FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
 		
 		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
 		AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, "http://54.200.159.155:8080/fb/callback", null);
 		
 		
-		AccessGrant accessGrant = new AccessGrant(authorizationCode);
+		//AccessGrant accessGrant = new AccessGrant(authorizationCode);
 		Connection<Facebook> connection = connectionFactory.createConnection(accessGrant);
 		String token = accessGrant.getAccessToken();
 
@@ -186,7 +186,7 @@ public class FacebookLoginController {
 		
 		return "redirect:" + arr[1]+ "/#/app/aggregation";
 		//return "/aggregation";
-	}*/
+	}
 	
 	/**
 	 * Persist Mote user's basic Facebook user profile aggregation content into motedb.

@@ -170,10 +170,12 @@ public class FacebookLoginController {
 		//postFacebookUserProfileVideos(facebook, moteUserId);
 		
 		//return "redirect:/fb_login_success?facebookToken=" + token;
-		log.info("Client URL required for redirect: " + arr[1]);
-		log.info("Redirect client back to aggregation page; return to 'redirect:" + arr[1]+ "#/app/aggregation'");
+		//log.info("Client URL required for redirect: " + arr[1]);
+		//log.info("Redirect client back to aggregation page; return to 'redirect:" + arr[1]+ "#/app/aggregation'");
+		log.info("Redirect client back to aggregation page; return to 'redirect:file://www/templates/login_to_aggregate.html'");
 		
-		return "redirect:" + arr[1]+ "#/app/aggregation";
+		return "redirect:file://www/templates/login_to_aggregate.html";
+		//return "redirect:" + arr[1]+ "#/app/aggregation";
 	}
 	
 	/**

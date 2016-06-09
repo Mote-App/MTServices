@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.User;
-import org.springframework.social.facebook.api.Video;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.oauth2.AccessGrant;
@@ -74,58 +72,17 @@ public class FacebookLoginController {
 		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
 		
 		OAuth2Parameters params = new OAuth2Parameters();
-		
-		// AWS EC2 URL http://54.149.27.205     Account was closed 28th December 2015
-		// New AWS EC2 URL http://54.200.159.155
 		params.setRedirectUri("http://54.200.159.155:8080/fb/callback");
 		params.setScope("public_profile, email, user_friends, user_posts, user_photos, user_videos");
-		
-		//Store Mote user Id and client address and port, to be made available in callback, otherwise it gets lost redirection.
-		// localhost:8100 means redirect request back to front-end (Mote app) when testing locally with ionic server.
-		//params.setState(request.getParameter("userId") + "," + "http://localhost:8100/");
-		
-		String protocolScheme = request.getScheme() + "://";
-		String remoteAddrHostname = request.getRemoteHost() + ":";
-		String remoteAddrPort = String.valueOf(request.getRemotePort());
-		params.setState(request.getParameter("userId") + "," + protocolScheme + remoteAddrHostname + remoteAddrPort);
+		params.setState(request.getParameter("userId"));
 		
 		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
-		
 		String authorizeUrl = oauthOperations.buildAuthorizeUrl(params);
 		
+		log.info("\n*************************************************************************");
 		log.info("Mote User ID: " + request.getParameter("userId"));
-		log.info("OAuth 2.0 Token - Authorize URL: " + authorizeUrl);
-		
-		log.info("*************************************************************************");
-		log.info("** HttpServletRequest.getRequestURL(): " + request.getRequestURL());
-		log.info("** HttpServletRequest.getRequestURI(): " + request.getRequestURI());
-		log.info("** HttpServletRequest.getScheme(): " + request.getScheme());
-		log.info("** HttpServletRequest.getServerName(): " + request.getServerName());
-		log.info("** HttpServletRequest.getServerPort(): " + request.getServerPort());
-		log.info("** HttpServletRequest.getServletPath(): " + request.getServletPath());
-		log.info("** HttpServletRequest.getServletContext().getContextPath(): " + request.getServletContext().getContextPath());
-		log.info("** HttpServletRequest.getContextPath(): " + request.getContextPath());
-		log.info("** HttpServletRequest.getQueryString(): " + request.getQueryString());
-		log.info("** HttpServletRequest.getAuthType(): " + request.getAuthType());
-		log.info("** HttpServletRequest.getLocalAddr(): " + request.getLocalAddr());
-		log.info("** HttpServletRequest.getLocalName(): " + request.getLocalName());
-		log.info("** HttpServletRequest.getLocalPort(): " + request.getLocalPort());
-		log.info("** HttpServletRequest.getPathInfo(): " + request.getPathInfo());
-		log.info("** HttpServletRequest.getProtocol(): " + request.getProtocol());
-		log.info("** HttpServletRequest.getRemoteAddr(): " + request.getRemoteAddr());
-		log.info("** HttpServletRequest.getRemoteHost(): " + request.getRemoteHost());
-		log.info("** HttpServletRequest.getRemotePort(): " + request.getRemotePort());
-		log.info("** HttpServletRequest.getRemoteUser(): " + request.getRemoteUser());
-		log.info("** HttpServletRequest.getServletContext().getContextPath(): " + request.getSession().getServletContext().getContextPath());
-		//log.info("** HttpServletRequest.getUserPrincipal().getName(): " + request.getUserPrincipal().getName());
-		log.info("*************************************************************************");
-		log.info("***** Mote Aggregation - Facebook Login HttpServletRequest Header fields ******");
-		log.info("** HttpHeaders.CONNECTION: " + request.getHeader(HttpHeaders.CONNECTION));
-		log.info("** HttpHeaders.FROM: " + request.getHeader(HttpHeaders.FROM));
-		log.info("** HttpHeaders.HOST: " + request.getHeader(HttpHeaders.HOST));
-		log.info("** HttpHeaders.ORIGIN: " + request.getHeader(HttpHeaders.ORIGIN));
-		log.info("** HttpHeaders.REFERER: " + request.getHeader(HttpHeaders.REFERER));
-		log.info("*************************************************************************");
+		log.info("OAuth 2.0 Token - Authorize URL: \n" + authorizeUrl);
+		log.info("*************************************************************************\n");
 		
 		response.sendRedirect(authorizeUrl);
 	}
@@ -142,7 +99,6 @@ public class FacebookLoginController {
 	 * @return
 	 */
 	@RequestMapping("/fb/callback")
-	//@ResponseStatus(value=HttpStatus.OK)
 	public String callback(@RequestParam("code") String authorizationCode, @RequestParam("state") String callbackParam, HttpServletRequest request) {
 		log.info("authorizationCode: " + authorizationCode);
 		log.info("callbackParam: " + callbackParam);
@@ -156,26 +112,17 @@ public class FacebookLoginController {
 		AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, "http://54.200.159.155:8080/fb/callback", null);
 		String token = accessGrant.getAccessToken();
 		
-		//request.getSession().setAttribute("facebookToken", token);
-		
-		String arr[] = callbackParam.split(",");
-		long moteUserId = Long.parseLong(arr[0]);
-		log.info("Redirect to Mote UserID: " + moteUserId);
+		long moteUserId = Long.parseLong(callbackParam);
+		log.info("Mote UserID: " + moteUserId);
 		
 		Facebook facebook = new FacebookTemplate(token);
-		
 		persistFacebookUserProfile(facebook, moteUserId, token);
 		autoFriendFacebookUserProfileFriends(facebook, moteUserId);
 		postFacebookUserProfileMedia(facebook, moteUserId);
-		//postFacebookUserProfileVideos(facebook, moteUserId);
 		
-		//return "redirect:/fb_login_success?facebookToken=" + token;
-		//log.info("Client URL required for redirect: " + arr[1]);
-		//log.info("Redirect client back to aggregation page; return to 'redirect:" + arr[1]+ "#/app/aggregation'");
 		log.info("Redirect client back to aggregation page; return to 'redirect:file://www/templates/login_to_aggregate.html'");
 		
 		return "redirect:file://www/templates/login_to_aggregate.html";
-		//return "redirect:" + arr[1]+ "#/app/aggregation";
 	}
 	
 	/**
@@ -312,9 +259,24 @@ public class FacebookLoginController {
 					//log.info(post.toString());
 					_postRepository.save(post);
 				} else if(fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.VIDEO) {
-					log.info("Processing facebook post's video - fbPost.getObjectId(): " + fbPost.getObjectId());
+					log.info("******************  Processing facebook post's video  *******************");
+					log.info("** fbPost.getCaption(): " + fbPost.getCaption());
+					log.info("** fbPost.getDescription(): " + fbPost.getDescription());
+					log.info("** fbPost.getIcon(): " + fbPost.getIcon());
+					log.info("** fbPost.getId(): " + fbPost.getId());
+					log.info("** fbPost.getLink(): " + fbPost.getLink());
+					log.info("** fbPost.getMessage(): " + fbPost.getMessage());
+					log.info("** fbPost.getName(): " + fbPost.getName());
+					log.info("** fbPost.getObjectId(): " + fbPost.getObjectId());
+					log.info("** fbPost.getPicture(): " + fbPost.getPicture());
+					log.info("** fbPost.getShares(): " + fbPost.getShares());
+					log.info("||||||||||||||||||||||||||||||||||||||||||||");
+					log.info("** fbPost.getSource(): " + fbPost.getSource());
+					log.info("||||||||||||||||||||||||||||||||||||||||||||");
+					log.info("** fbPost.getStory(): " + fbPost.getStory());
+					log.info("*************************************************************************");
 					
-					if(fbPost.getObjectId() != null) {
+					if(fbPost.getSource() != null) {
 						AggregationSourceObject sourceObject = new AggregationSourceObject();
 						
 						sourceObject.setAggregationId(Long.parseLong(facebookUser.getId()));

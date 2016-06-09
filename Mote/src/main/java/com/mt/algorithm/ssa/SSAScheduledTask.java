@@ -36,7 +36,7 @@ public class SSAScheduledTask {
 	 * 1440000 Milliseconds equal to 24 Minutes
 	 * 3600000 Milliseconds equal to 60 Minutes (1 hour)
 	 */
-	@Scheduled(fixedRate=300000)
+	@Scheduled(fixedRate=3600000)
 	public synchronized void executeSSATask() {
 		log.info("##############################################################################");
 		log.info("Starting Social Stairway Algorithm : " + new Date());

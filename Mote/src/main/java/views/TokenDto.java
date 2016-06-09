@@ -11,10 +11,6 @@ public class TokenDto {
 	private long userId;
 	private long collegeId;
 	
-	public TokenDto(){
-		
-	}
-	
 	/**
 	 * 
 	 * @param token

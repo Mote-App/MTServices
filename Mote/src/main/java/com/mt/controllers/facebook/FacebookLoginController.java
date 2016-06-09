@@ -3,34 +3,23 @@ package com.mt.controllers.facebook;
 import java.io.IOException;
 import java.util.Calendar;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.User;
-import org.springframework.social.facebook.api.Video;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import views.TokenDto;
 
 import com.mt.models.Aggregation;
 import com.mt.models.AggregationSourceObject;
@@ -72,35 +61,6 @@ public class FacebookLoginController {
 	@Autowired
 	PostRepository _postRepository;
 	
-	FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
-	
-	/*private Facebook facebook;	
-	private ConnectionRepository connectionRepository;
-	
-	@Inject
-	public FacebookLoginController(Facebook facebook, ConnectionRepository connectionRepository, ConnectController connectController){
-		this.facebook = facebook;
-		this.connectionRepository = connectionRepository;
-		connectController.setApplicationUrl("http://54.200.159.155:8080/fb/callback");
-	}
-	
-	@RequestMapping(value="/fb/login" , method = RequestMethod.POST, produces="application/json")
-	@ResponseBody
-	public  String login(@RequestBody TokenDto tokenDto){
-		 if (connectionRepository.findPrimaryConnection(Facebook.class) == null) {
-	            return "redirect:/connect/facebook";
-	     }
-		 
-		 return "success : " + tokenDto.getUserId();
-	}
-	
-	@RequestMapping("/fb/callback")
-	@ResponseBody
-	public  String callback(HttpServletRequest request){
-		 		 
-		 return "success : FB " ;
-	}*/
-	
 	/*
 	 * This REST api will redirect the user to a Facebook authorization page.
 	 */
@@ -109,31 +69,21 @@ public class FacebookLoginController {
 		// Mote Facebook Test App, to be able to use localhost
 		//FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("1105685566108143", "0b4b69914152837f9978611d84629e66");
 		// Mote Facebook Production App
-		
+		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
 		
 		OAuth2Parameters params = new OAuth2Parameters();
-		
-		// AWS EC2 URL http://54.149.27.205     Account was closed 28th December 2015
-		// New AWS EC2 URL http://54.200.159.155
 		params.setRedirectUri("http://54.200.159.155:8080/fb/callback");
 		params.setScope("public_profile, email, user_friends, user_posts, user_photos, user_videos");
-		//Store user Id and client address and port, to be made available in callback, otherwise it gets lost redirection.
-		//params.setState(request.getParameter("userId") + "," + request.getHeader("Referer"));
-		// localhost:8100 means redirect request back to front-end (Mote app).
-		//params.setState(request.getParameter("userId") + "," + "http://localhost:8100/");
-		params.setState(request.getParameter("userId") + "," + request.getHeader(HttpHeaders.REFERER));
+		params.setState(request.getParameter("userId"));
 		
 		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
-		
 		String authorizeUrl = oauthOperations.buildAuthorizeUrl(params);
 		
-		log.info(" fb/login User ID " + request.getParameter("userId"));
-		log.info(" fb/login Authorize URL " + authorizeUrl);
-		log.info("Login Referer : " + request.getHeader("Referer"));
-		log.info("Login HttpHeaders.REFERER : " + request.getHeader(HttpHeaders.REFERER));
-		log.info("Login Address : " + request.getRemoteAddr());
-		log.info("Login Host : " + request.getRemoteHost());
-		log.info("Login Port : " + request.getRemotePort());
+		log.info("\n*************************************************************************");
+		log.info("Mote User ID: " + request.getParameter("userId"));
+		log.info("OAuth 2.0 Token - Authorize URL: \n" + authorizeUrl);
+		log.info("*************************************************************************\n");
+		
 		response.sendRedirect(authorizeUrl);
 	}
 	
@@ -156,36 +106,23 @@ public class FacebookLoginController {
 		// Mote Facebook Test App, to be able to use localhost
 		//FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("1105685566108143", "0b4b69914152837f9978611d84629e66");
 		// Mote Facebook Production App
-
-		//FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
+		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
 		
 		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
 		AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, "http://54.200.159.155:8080/fb/callback", null);
-		
-		
-		//AccessGrant accessGrant = new AccessGrant(authorizationCode);
-		Connection<Facebook> connection = connectionFactory.createConnection(accessGrant);
 		String token = accessGrant.getAccessToken();
-
-		//request.getSession().setAttribute("facebookToken", token);
 		
-		String arr[] = callbackParam.split(",");
-		long moteUserId = Long.parseLong(arr[0]);
-		log.info("redirect User ID " + moteUserId);
+		long moteUserId = Long.parseLong(callbackParam);
+		log.info("Mote UserID: " + moteUserId);
 		
 		Facebook facebook = new FacebookTemplate(token);
-		
 		persistFacebookUserProfile(facebook, moteUserId, token);
 		autoFriendFacebookUserProfileFriends(facebook, moteUserId);
 		postFacebookUserProfileMedia(facebook, moteUserId);
-		//postFacebookUserProfileVideos(facebook, moteUserId);
 		
-		//return "redirect:/fb_login_success?facebookToken=" + token;
-		log.info("Client URL required for redirect : " + arr[1]);
-		//log.info("return to 'redirect:" + arr[1]+ "#/app/aggregation'");
+		log.info("Redirect client back to aggregation page; return to 'redirect:file://www/templates/login_to_aggregate.html'");
 		
-		return "redirect:" + arr[1]+ "/#/app/aggregation";
-		//return "/aggregation";
+		return "redirect:file://www/templates/login_to_aggregate.html";
 	}
 	
 	/**
@@ -322,9 +259,24 @@ public class FacebookLoginController {
 					//log.info(post.toString());
 					_postRepository.save(post);
 				} else if(fbPost.getType() == org.springframework.social.facebook.api.Post.PostType.VIDEO) {
-					log.info("Processing facebook post's video - fbPost.getObjectId(): " + fbPost.getObjectId());
+					log.info("******************  Processing facebook post's video  *******************");
+					log.info("** fbPost.getCaption(): " + fbPost.getCaption());
+					log.info("** fbPost.getDescription(): " + fbPost.getDescription());
+					log.info("** fbPost.getIcon(): " + fbPost.getIcon());
+					log.info("** fbPost.getId(): " + fbPost.getId());
+					log.info("** fbPost.getLink(): " + fbPost.getLink());
+					log.info("** fbPost.getMessage(): " + fbPost.getMessage());
+					log.info("** fbPost.getName(): " + fbPost.getName());
+					log.info("** fbPost.getObjectId(): " + fbPost.getObjectId());
+					log.info("** fbPost.getPicture(): " + fbPost.getPicture());
+					log.info("** fbPost.getShares(): " + fbPost.getShares());
+					log.info("||||||||||||||||||||||||||||||||||||||||||||");
+					log.info("** fbPost.getSource(): " + fbPost.getSource());
+					log.info("||||||||||||||||||||||||||||||||||||||||||||");
+					log.info("** fbPost.getStory(): " + fbPost.getStory());
+					log.info("*************************************************************************");
 					
-					if(fbPost.getObjectId() != null) {
+					if(fbPost.getSource() != null) {
 						AggregationSourceObject sourceObject = new AggregationSourceObject();
 						
 						sourceObject.setAggregationId(Long.parseLong(facebookUser.getId()));

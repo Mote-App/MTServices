@@ -67,7 +67,7 @@ public class FacebookLoginController {
 	public void login (HttpServletRequest request, HttpServletResponse response) throws IOException {
 		log.info("\n*************************************************************************");
 		long moteUserId = Long.parseLong(request.getParameter("userId"));
-		String token = request.getParameter("fbtoken");
+		String token = request.getParameter("accessToken");
 		log.info("Mote User ID: " + moteUserId);
 		log.info("OAuth 2.0 Token:  " + token);
 		log.info("OAuth 2.0 Token - Authorize URL: \n");

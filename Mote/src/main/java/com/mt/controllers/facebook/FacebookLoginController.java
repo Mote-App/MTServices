@@ -16,7 +16,6 @@ import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.OAuth2Operations;
-import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -66,25 +65,21 @@ public class FacebookLoginController {
 	 */
 	@RequestMapping("/fb/login")
 	public void login (HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// Mote Facebook Test App, to be able to use localhost
-		//FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("1105685566108143", "0b4b69914152837f9978611d84629e66");
-		// Mote Facebook Production App
-		FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory("956170854392949", "5724c20e501b3d770370f04fecffbb2c");
-		
-		OAuth2Parameters params = new OAuth2Parameters();
-		params.setRedirectUri("http://54.200.159.155:8080/fb/callback");
-		params.setScope("public_profile, email, user_friends, user_posts, user_photos, user_videos");
-		params.setState(request.getParameter("userId"));
-		
-		OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
-		String authorizeUrl = oauthOperations.buildAuthorizeUrl(params);
-		
 		log.info("\n*************************************************************************");
-		log.info("Mote User ID: " + request.getParameter("userId"));
-		log.info("OAuth 2.0 Token - Authorize URL: \n" + authorizeUrl);
-		log.info("*************************************************************************\n");
+		long moteUserId = Long.parseLong(request.getParameter("userId"));
+		String token = request.getParameter("fbtoken");
+		log.info("Mote User ID: " + moteUserId);
+		log.info("OAuth 2.0 Token:  " + token);
+		log.info("OAuth 2.0 Token - Authorize URL: \n");
 		
-		response.sendRedirect(authorizeUrl);
+		Facebook facebook = new FacebookTemplate(token);
+		persistFacebookUserProfile(facebook, moteUserId, token);
+		autoFriendFacebookUserProfileFriends(facebook, moteUserId);
+		postFacebookUserProfileMedia(facebook, moteUserId);
+		
+		log.info("Redirect client back to aggregation page; return to 'redirect:file://www/templates/login_to_aggregate.html'");
+		
+		log.info("*************************************************************************\n");
 	}
 	
 	/**
